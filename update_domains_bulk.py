@@ -37,7 +37,7 @@ def main():
         "https://novustelltravel.com": "https://mbuganiluxeadventures.com",
         "https://wwww.novustelltravel.com": "https://www.mbuganiluxeadventures.com",  # Fix typo too
         "www.novustelltravel.com": "www.mbuganiluxeadventures.com",
-        "novustelltravel.onrender.com": "mbuganiluxeadventures.onrender.com",
+        "novustelltravel.onrender.com": "mbuganiapp.onrender.com",
         "novustelltravel.com": "mbuganiluxeadventures.com"
     }
     

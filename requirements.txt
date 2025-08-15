@@ -24,6 +24,10 @@ whitenoise>=6.6.0
 python-decouple>=3.8
 python-dotenv>=1.0.1
 
+# CORS & Security
+django-cors-headers>=4.3.1
+sentry-sdk>=1.40.0
+
 # HTTP/API
 requests>=2.31.0
 

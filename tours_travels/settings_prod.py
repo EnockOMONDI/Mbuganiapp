@@ -8,6 +8,11 @@ import os
 import dj_database_url
 
 # Production-specific settings
+
+# Add CORS headers to installed apps
+INSTALLED_APPS = INSTALLED_APPS + [
+    'corsheaders',
+]
 DEBUG = False
 
 # Production database - Supabase PostgreSQL
@@ -41,7 +46,7 @@ NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL', 'news@mbuganiluxeadventures.com
 
 # Production allowed hosts
 ALLOWED_HOSTS = [
-    'mbuganiluxeadventures.onrender.com',
+    'mbuganiapp.onrender.com',
     'www.mbuganiluxeadventures.com',
     'mbuganiluxeadventures.com',
     '.onrender.com',
@@ -172,7 +177,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
 # Production CORS settings
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-    "https://mbuganiluxeadventures.onrender.com",
+    "https://mbuganiapp.onrender.com",
     "https://www.mbuganiluxeadventures.com",
     "https://mbuganiluxeadventures.com",
 ]

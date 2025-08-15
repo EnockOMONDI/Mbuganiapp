@@ -15,7 +15,7 @@
 - ✅ Updated service name: `novustell-travel` → `mbuganiluxeadventures`
 - ✅ Updated build message: "Starting Novustell Travel build process" → "Starting Mbugani Luxe Adventures build process"
 - ✅ Updated server message: "Starting Novustell Travel web server" → "Starting Mbugani Luxe Adventures web server"
-- ✅ Updated DEFAULT_FROM_EMAIL: "Novustell Travel <novustellke@gmail.com>" → "Mbugani Luxe Adventures <novustellke@gmail.com>"
+- ✅ Updated DEFAULT_FROM_EMAIL: "Mbugani Luxe Adventures <novustellke@gmail.com>" → "Mbugani Luxe Adventures <novustellke@gmail.com>"
 
 **Lines Modified:** 4 lines
 **Impact:** Deployment configuration now uses new brand name
@@ -34,7 +34,7 @@
 **Changes Made:**
 - ✅ Updated file header: "Production settings for Novustell Travel" → "Production settings for Mbugani Luxe Adventures"
 - ✅ Updated database comment: "Uses NeonDB PostgreSQL" → "Uses Supabase PostgreSQL"
-- ✅ Updated DEFAULT_FROM_EMAIL: 'Novustell Travel <novustellke@gmail.com>' → 'Mbugani Luxe Adventures <novustellke@gmail.com>'
+- ✅ Updated DEFAULT_FROM_EMAIL: 'Mbugani Luxe Adventures <novustellke@gmail.com>' → 'Mbugani Luxe Adventures <novustellke@gmail.com>'
 - ✅ Updated log filename: '/tmp/novustell.log' → '/tmp/mbugani.log'
 - ✅ Updated email subject prefix: '[Novustell Travel]' → '[Mbugani Luxe Adventures]'
 

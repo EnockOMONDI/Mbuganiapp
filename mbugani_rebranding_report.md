@@ -32,7 +32,7 @@
 **render.yaml** (61 brand references found):
 - name: novustell-travel
 - echo "🚀 Starting Novustell Travel build process..."
-- value: Novustell Travel <novustellke@gmail.com>
+- value: Mbugani Luxe Adventures <novustellke@gmail.com>
 
 **Action Required:**
 - Update service names in render.yaml

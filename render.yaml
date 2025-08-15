@@ -5,7 +5,7 @@ services:
     env: python
     region: oregon
     plan: starter
-    branch: wearelive
+    branch: main2
     buildCommand: |
       echo "🚀 Starting Mbugani Luxe Adventures build process..."
       pip install --upgrade pip
@@ -43,7 +43,7 @@ services:
       - key: DEBUG
         value: False
       - key: ALLOWED_HOSTS
-        value: mbuganiluxeadventures.onrender.com,.onrender.com,mbuganiluxeadventures.com,www.mbuganiluxeadventures.com
+        value: mbuganiapp.onrender.com,.onrender.com,mbuganiluxeadventures.com,www.mbuganiluxeadventures.com
 
       # Database Configuration - Supabase PostgreSQL
       - key: DATABASE_URL
