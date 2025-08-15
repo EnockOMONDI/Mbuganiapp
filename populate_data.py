@@ -803,7 +803,7 @@ def create_sample_bookings(packages):
     test_user, created = User.objects.get_or_create(
         username='testuser',
         defaults={
-            'email': 'test@novustelltravel.com',
+            'email': 'test@mbuganiluxeadventures.com',
             'first_name': 'Test',
             'last_name': 'User'
         }

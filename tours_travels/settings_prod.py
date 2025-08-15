@@ -1,6 +1,6 @@
 """
-Production settings for Novustell Travel
-Uses NeonDB PostgreSQL for production
+Production settings for Mbugani Luxe Adventures
+Uses Supabase PostgreSQL for production
 """
 
 from .settings import *
@@ -34,16 +34,16 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'novustellke@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Novustell Travel <novustellke@gmail.com>')
-ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@novustelltravel.com')
-JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@novustelltravel.com')
-NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL', 'news@novustelltravel.com')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <novustellke@gmail.com>')
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
+JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
+NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL', 'news@mbuganiluxeadventures.com')
 
 # Production allowed hosts
 ALLOWED_HOSTS = [
-    'novustelltravel.onrender.com',
-    'www.novustelltravel.com',
-    'novustelltravel.com',
+    'mbuganiluxeadventures.onrender.com',
+    'www.mbuganiluxeadventures.com',
+    'mbuganiluxeadventures.com',
     '.onrender.com',
     os.getenv('RENDER_EXTERNAL_HOSTNAME', ''),
 ]
@@ -80,7 +80,7 @@ LOGGING = {
         },
         'file': {
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/tmp/novustell.log',
+            'filename': '/tmp/mbugani.log',
             'maxBytes': 1024*1024*10,  # 10MB
             'backupCount': 5,
             'formatter': 'verbose',
@@ -150,7 +150,7 @@ UPLOADCARE = {
 }
 
 # Production site URL
-SITE_URL = os.getenv('SITE_URL', 'https://www.novustelltravel.com')
+SITE_URL = os.getenv('SITE_URL', 'https://www.mbuganiluxeadventures.com')
 
 # Production WhatsApp settings
 WHATSAPP_PHONE = os.getenv('WHATSAPP_PHONE', '+254701363551')
@@ -172,9 +172,9 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
 # Production CORS settings
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-    "https://novustelltravel.onrender.com",
-    "https://www.novustelltravel.com",
-    "https://novustelltravel.com",
+    "https://mbuganiluxeadventures.onrender.com",
+    "https://www.mbuganiluxeadventures.com",
+    "https://mbuganiluxeadventures.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -188,7 +188,7 @@ CSP_CONNECT_SRC = ("'self'", "https://api.uploadcare.com")
 
 # Production error reporting
 ADMINS = [
-    ('Admin', os.getenv('ADMIN_EMAIL', 'info@novustelltravel.com')),
+    ('Admin', os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')),
 ]
 MANAGERS = ADMINS
 
@@ -223,7 +223,7 @@ TEMPLATES[0]['OPTIONS']['debug'] = False
 
 # Production email error reporting
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
-EMAIL_SUBJECT_PREFIX = '[Novustell Travel] '
+EMAIL_SUBJECT_PREFIX = '[Mbugani Luxe Adventures] '
 
 # Production health check
 HEALTH_CHECK_URL = '/health/'

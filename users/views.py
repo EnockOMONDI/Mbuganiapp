@@ -128,7 +128,7 @@ def micepage(request):
 
                 # Email headers
                 msg['From'] = f"Novustell Travel <{sender_email}>"
-                msg['To'] = "info@novustelltravel.com"
+                msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New MICE Inquiry from {inquiry.company_name}"
 
                 # Create HTML content with better formatting
@@ -192,7 +192,7 @@ def student_travel(request):
 
                 # Email headers
                 msg['From'] = f"Novustell Travel <{sender_email}>"
-                msg['To'] = "info@novustelltravel.com"
+                msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New Student Travel Inquiry from {inquiry.school_name}"
 
                 # Create HTML content with better formatting
@@ -256,7 +256,7 @@ def ngo_travel(request):
 
                 # Email headers
                 msg['From'] = f"Novustell Travel <{sender_email}>"
-                msg['To'] = "info@novustelltravel.com"
+                msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New NGO Travel Inquiry from {inquiry.organization_name}"
 
                 # Create HTML content with better formatting
@@ -326,8 +326,8 @@ def send_job_application_emails(job_application):
     })
 
     # Send to both careers and info email addresses
-    careers_email = getattr(settings, 'JOBS_EMAIL', 'careers@novustelltravel.com')
-    info_email = getattr(settings, 'ADMIN_EMAIL', 'info@novustelltravel.com')
+    careers_email = getattr(settings, 'JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
+    info_email = getattr(settings, 'ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
     recipient_list = [careers_email, info_email]
 
     send_mail(
@@ -374,7 +374,7 @@ def send_newsletter_subscription_emails(subscription):
         'subscription': subscription
     })
 
-    newsletter_email = getattr(settings, 'NEWSLETTER_EMAIL', 'news@novustelltravel.com')
+    newsletter_email = getattr(settings, 'NEWSLETTER_EMAIL', 'news@mbuganiluxeadventures.com')
 
     send_mail(
         subject=admin_subject,
@@ -790,7 +790,7 @@ def send_booking_email(booking):
         # Email content
         msg = MIMEMultipart()
         msg['From'] = f"Novustell Travel <{sender_email}>"
-        msg['To'] = "info@novustelltravel.com"
+        msg['To'] = "info@mbuganiluxeadventures.com"
         msg['Subject'] = f"New Booking: {booking.full_name} for {booking.package.name}"
 
         message = f"""

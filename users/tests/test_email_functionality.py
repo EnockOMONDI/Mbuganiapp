@@ -15,7 +15,7 @@ from adminside.models import Package, Destination
 
 @override_settings(
     EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend',
-    DEFAULT_FROM_EMAIL='test@novustelltravel.com'
+    DEFAULT_FROM_EMAIL='test@mbuganiluxeadventures.com'
 )
 class EmailFunctionalityTest(TestCase):
     """Test email sending functionality"""
@@ -284,7 +284,7 @@ class EmailFunctionalityTest(TestCase):
         self.assertIn('254701363551', html_content)  # Phone number
         
         # Should contain proper mailto links
-        self.assertIn('info@novustelltravel.com', html_content)
+        self.assertIn('info@mbuganiluxeadventures.com', html_content)
     
     def test_multiple_email_sending(self):
         """Test sending multiple emails in sequence"""

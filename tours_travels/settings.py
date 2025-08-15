@@ -219,16 +219,16 @@ EMAIL_USE_TLS = True
 # Novustell Travel email credentials
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'novustellke@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'iagt yans hoyd pavg')
-DEFAULT_FROM_EMAIL = 'NOVUSTELL TRAVEL'
+DEFAULT_FROM_EMAIL = 'MBUGANI LUXE ADVENTURES'
 
 # Admin email for notifications
-ADMIN_EMAIL = 'info@novustelltravel.com'
+ADMIN_EMAIL = 'info@mbuganiluxeadventures.com'
 
 # Jobs email for career applications
-JOBS_EMAIL = 'careers@novustelltravel.com'
+JOBS_EMAIL = 'careers@mbuganiluxeadventures.com'
 
 # Newsletter email for subscriptions
-NEWSLETTER_EMAIL = 'news@novustelltravel.com'
+NEWSLETTER_EMAIL = 'news@mbuganiluxeadventures.com'
 
 # Cart session configuration
 CART_SESSION_ID = 'cart'
@@ -265,7 +265,7 @@ UNFOLD = {
             "200": "233 213 255",
             "300": "196 181 253",
             "400": "147 51 234",
-            "500": "15 35 141",  # Novustell primary blue
+            "500": "15 35 141",  # Mbugani primary blue
             "600": "12 28 113",
             "700": "10 23 94",
             "800": "8 18 75",
@@ -370,12 +370,12 @@ customColorPalette = [
         'label': 'Blue'
     },
     {
-        'color': '#0f238d',  # Novustell primary color
-        'label': 'Novustell Primary'
+        'color': '#0f238d',  # Mbugani primary color
+        'label': 'Mbugani Primary'
     },
     {
-        'color': '#ff9d00',  # Novustell accent color
-        'label': 'Novustell Accent'
+        'color': '#ff9d00',  # Mbugani accent color
+        'label': 'Mbugani Accent'
     },
 ]
 

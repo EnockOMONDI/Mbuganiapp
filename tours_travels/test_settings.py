@@ -1,5 +1,5 @@
 """
-Test settings for Novustell Travel
+Test settings for Mbugani Luxe Adventures
 Uses SQLite for faster testing and avoids PostgreSQL connection issues
 """
 
@@ -65,11 +65,11 @@ CACHES = {
 }
 
 # Media files for testing
-MEDIA_ROOT = '/tmp/novustell_test_media'
+MEDIA_ROOT = '/tmp/mbugani_test_media'
 MEDIA_URL = '/test_media/'
 
 # Static files for testing
-STATIC_ROOT = '/tmp/novustell_test_static'
+STATIC_ROOT = '/tmp/mbugani_test_static'
 
 # Uploadcare settings for testing
 UPLOADCARE = {

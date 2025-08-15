@@ -1,5 +1,5 @@
 """
-Development settings for Novustell Travel
+Development settings for Mbugani Luxe Adventures
 Uses SQLite for local development
 """
 
