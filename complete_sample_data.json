@@ -1,0 +1,2205 @@
+[
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add accommodation",
+    "content_type": 7,
+    "codename": "add_accommodation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change accommodation",
+    "content_type": 7,
+    "codename": "change_accommodation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete accommodation",
+    "content_type": 7,
+    "codename": "delete_accommodation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view accommodation",
+    "content_type": 7,
+    "codename": "view_accommodation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add destination",
+    "content_type": 8,
+    "codename": "add_destination"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change destination",
+    "content_type": 8,
+    "codename": "change_destination"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete destination",
+    "content_type": 8,
+    "codename": "delete_destination"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view destination",
+    "content_type": 8,
+    "codename": "view_destination"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add itinerary",
+    "content_type": 9,
+    "codename": "add_itinerary"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change itinerary",
+    "content_type": 9,
+    "codename": "change_itinerary"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete itinerary",
+    "content_type": 9,
+    "codename": "delete_itinerary"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view itinerary",
+    "content_type": 9,
+    "codename": "view_itinerary"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add package",
+    "content_type": 10,
+    "codename": "add_package"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change package",
+    "content_type": 10,
+    "codename": "change_package"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete package",
+    "content_type": 10,
+    "codename": "delete_package"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view package",
+    "content_type": 10,
+    "codename": "view_package"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add travel mode",
+    "content_type": 11,
+    "codename": "add_travelmode"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change travel mode",
+    "content_type": 11,
+    "codename": "change_travelmode"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete travel mode",
+    "content_type": 11,
+    "codename": "delete_travelmode"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view travel mode",
+    "content_type": 11,
+    "codename": "view_travelmode"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add package booking",
+    "content_type": 12,
+    "codename": "add_packagebooking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change package booking",
+    "content_type": 12,
+    "codename": "change_packagebooking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete package booking",
+    "content_type": 12,
+    "codename": "delete_packagebooking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view package booking",
+    "content_type": 12,
+    "codename": "view_packagebooking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add itinerary day",
+    "content_type": 13,
+    "codename": "add_itineraryday"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change itinerary day",
+    "content_type": 13,
+    "codename": "change_itineraryday"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete itinerary day",
+    "content_type": 13,
+    "codename": "delete_itineraryday"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view itinerary day",
+    "content_type": 13,
+    "codename": "view_itineraryday"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add mice inquiry",
+    "content_type": 14,
+    "codename": "add_miceinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change mice inquiry",
+    "content_type": 14,
+    "codename": "change_miceinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete mice inquiry",
+    "content_type": 14,
+    "codename": "delete_miceinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view mice inquiry",
+    "content_type": 14,
+    "codename": "view_miceinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add ngo travel inquiry",
+    "content_type": 15,
+    "codename": "add_ngotravelinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change ngo travel inquiry",
+    "content_type": 15,
+    "codename": "change_ngotravelinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete ngo travel inquiry",
+    "content_type": 15,
+    "codename": "delete_ngotravelinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view ngo travel inquiry",
+    "content_type": 15,
+    "codename": "view_ngotravelinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add student travel inquiry",
+    "content_type": 16,
+    "codename": "add_studenttravelinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change student travel inquiry",
+    "content_type": 16,
+    "codename": "change_studenttravelinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete student travel inquiry",
+    "content_type": 16,
+    "codename": "delete_studenttravelinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view student travel inquiry",
+    "content_type": 16,
+    "codename": "view_studenttravelinquiry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add user bookings",
+    "content_type": 17,
+    "codename": "add_userbookings"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change user bookings",
+    "content_type": 17,
+    "codename": "change_userbookings"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete user bookings",
+    "content_type": 17,
+    "codename": "delete_userbookings"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view user bookings",
+    "content_type": 17,
+    "codename": "view_userbookings"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add booking",
+    "content_type": 18,
+    "codename": "add_booking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change booking",
+    "content_type": 18,
+    "codename": "change_booking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete booking",
+    "content_type": 18,
+    "codename": "delete_booking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view booking",
+    "content_type": 18,
+    "codename": "view_booking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 73,
+  "fields": {
+    "name": "Can add guest booking",
+    "content_type": 19,
+    "codename": "add_guestbooking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 74,
+  "fields": {
+    "name": "Can change guest booking",
+    "content_type": 19,
+    "codename": "change_guestbooking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 75,
+  "fields": {
+    "name": "Can delete guest booking",
+    "content_type": 19,
+    "codename": "delete_guestbooking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 76,
+  "fields": {
+    "name": "Can view guest booking",
+    "content_type": 19,
+    "codename": "view_guestbooking"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 77,
+  "fields": {
+    "name": "Can add user profile",
+    "content_type": 20,
+    "codename": "add_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 78,
+  "fields": {
+    "name": "Can change user profile",
+    "content_type": 20,
+    "codename": "change_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 79,
+  "fields": {
+    "name": "Can delete user profile",
+    "content_type": 20,
+    "codename": "delete_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 80,
+  "fields": {
+    "name": "Can view user profile",
+    "content_type": 20,
+    "codename": "view_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 81,
+  "fields": {
+    "name": "Can add bucket list",
+    "content_type": 21,
+    "codename": "add_bucketlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 82,
+  "fields": {
+    "name": "Can change bucket list",
+    "content_type": 21,
+    "codename": "change_bucketlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 83,
+  "fields": {
+    "name": "Can delete bucket list",
+    "content_type": 21,
+    "codename": "delete_bucketlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 84,
+  "fields": {
+    "name": "Can view bucket list",
+    "content_type": 21,
+    "codename": "view_bucketlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 85,
+  "fields": {
+    "name": "Can add Job Application",
+    "content_type": 22,
+    "codename": "add_jobapplication"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 86,
+  "fields": {
+    "name": "Can change Job Application",
+    "content_type": 22,
+    "codename": "change_jobapplication"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 87,
+  "fields": {
+    "name": "Can delete Job Application",
+    "content_type": 22,
+    "codename": "delete_jobapplication"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 88,
+  "fields": {
+    "name": "Can view Job Application",
+    "content_type": 22,
+    "codename": "view_jobapplication"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 89,
+  "fields": {
+    "name": "Can add Newsletter Subscription",
+    "content_type": 23,
+    "codename": "add_newslettersubscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 90,
+  "fields": {
+    "name": "Can change Newsletter Subscription",
+    "content_type": 23,
+    "codename": "change_newslettersubscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 91,
+  "fields": {
+    "name": "Can delete Newsletter Subscription",
+    "content_type": 23,
+    "codename": "delete_newslettersubscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 92,
+  "fields": {
+    "name": "Can view Newsletter Subscription",
+    "content_type": 23,
+    "codename": "view_newslettersubscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 93,
+  "fields": {
+    "name": "Can add Job Listing",
+    "content_type": 24,
+    "codename": "add_joblisting"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 94,
+  "fields": {
+    "name": "Can change Job Listing",
+    "content_type": 24,
+    "codename": "change_joblisting"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 95,
+  "fields": {
+    "name": "Can delete Job Listing",
+    "content_type": 24,
+    "codename": "delete_joblisting"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 96,
+  "fields": {
+    "name": "Can view Job Listing",
+    "content_type": 24,
+    "codename": "view_joblisting"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 97,
+  "fields": {
+    "name": "Can add Category",
+    "content_type": 25,
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 98,
+  "fields": {
+    "name": "Can change Category",
+    "content_type": 25,
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 99,
+  "fields": {
+    "name": "Can delete Category",
+    "content_type": 25,
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 100,
+  "fields": {
+    "name": "Can view Category",
+    "content_type": 25,
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 101,
+  "fields": {
+    "name": "Can add Posts",
+    "content_type": 26,
+    "codename": "add_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 102,
+  "fields": {
+    "name": "Can change Posts",
+    "content_type": 26,
+    "codename": "change_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 103,
+  "fields": {
+    "name": "Can delete Posts",
+    "content_type": 26,
+    "codename": "delete_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 104,
+  "fields": {
+    "name": "Can view Posts",
+    "content_type": 26,
+    "codename": "view_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 105,
+  "fields": {
+    "name": "Can add comment",
+    "content_type": 27,
+    "codename": "add_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 106,
+  "fields": {
+    "name": "Can change comment",
+    "content_type": 27,
+    "codename": "change_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 107,
+  "fields": {
+    "name": "Can delete comment",
+    "content_type": 27,
+    "codename": "delete_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 108,
+  "fields": {
+    "name": "Can view comment",
+    "content_type": 27,
+    "codename": "view_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 109,
+  "fields": {
+    "name": "Can add tag",
+    "content_type": 28,
+    "codename": "add_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 110,
+  "fields": {
+    "name": "Can change tag",
+    "content_type": 28,
+    "codename": "change_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 111,
+  "fields": {
+    "name": "Can delete tag",
+    "content_type": 28,
+    "codename": "delete_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 112,
+  "fields": {
+    "name": "Can view tag",
+    "content_type": 28,
+    "codename": "view_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 113,
+  "fields": {
+    "name": "Can add tagged item",
+    "content_type": 29,
+    "codename": "add_taggeditem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 114,
+  "fields": {
+    "name": "Can change tagged item",
+    "content_type": 29,
+    "codename": "change_taggeditem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 115,
+  "fields": {
+    "name": "Can delete tagged item",
+    "content_type": 29,
+    "codename": "delete_taggeditem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 116,
+  "fields": {
+    "name": "Can view tagged item",
+    "content_type": 29,
+    "codename": "view_taggeditem"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$TdKlr37SfiJ883URwdBx7z$D14cjhi2IaycieSaPccvNIy1VQBxBEz9hJ/aSYbyVX4=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "mbuganiluxeadventures",
+    "first_name": "",
+    "last_name": "",
+    "email": "mbuganiluxeadventures@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-08-15T17:40:49.599Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "adminside",
+    "model": "accommodation"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "adminside",
+    "model": "destination"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "adminside",
+    "model": "itinerary"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "adminside",
+    "model": "package"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "adminside",
+    "model": "travelmode"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "adminside",
+    "model": "packagebooking"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "adminside",
+    "model": "itineraryday"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "users",
+    "model": "miceinquiry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "users",
+    "model": "ngotravelinquiry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "users",
+    "model": "studenttravelinquiry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "users",
+    "model": "userbookings"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "users",
+    "model": "booking"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 19,
+  "fields": {
+    "app_label": "users",
+    "model": "guestbooking"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 20,
+  "fields": {
+    "app_label": "users",
+    "model": "userprofile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 21,
+  "fields": {
+    "app_label": "users",
+    "model": "bucketlist"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 22,
+  "fields": {
+    "app_label": "users",
+    "model": "jobapplication"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 23,
+  "fields": {
+    "app_label": "users",
+    "model": "newslettersubscription"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 24,
+  "fields": {
+    "app_label": "users",
+    "model": "joblisting"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 25,
+  "fields": {
+    "app_label": "blog",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 26,
+  "fields": {
+    "app_label": "blog",
+    "model": "post"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 27,
+  "fields": {
+    "app_label": "blog",
+    "model": "comment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 28,
+  "fields": {
+    "app_label": "taggit",
+    "model": "tag"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 29,
+  "fields": {
+    "app_label": "taggit",
+    "model": "taggeditem"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 1,
+  "fields": {
+    "name": "Kenya",
+    "slug": "kenya",
+    "destination_type": "country",
+    "description": "<p>Kenya is a country in East Africa renowned for its diverse landscapes, abundant wildlife, and rich cultural heritage. From the iconic savannas of the Maasai Mara to the pristine beaches of the Indian Ocean coast, Kenya offers unforgettable experiences for every traveler.</p>\n        \n        <p>The country is home to the Great Migration, one of nature's most spectacular events, where millions of wildebeest and zebras cross the Mara River. Kenya's national parks and reserves protect an incredible array of wildlife including the Big Five: lions, elephants, buffalo, leopards, and rhinos.</p>\n        \n        <p>Beyond wildlife, Kenya boasts vibrant cultures, with over 40 different ethnic groups, each with unique traditions, languages, and customs. The warm hospitality of the Kenyan people, combined with the country's natural beauty, makes it a premier safari destination in Africa.</p>",
+    "image": null,
+    "parent": null,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 1,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.661Z",
+    "updated_at": "2025-08-15T17:44:21.661Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 2,
+  "fields": {
+    "name": "Tanzania",
+    "slug": "tanzania",
+    "destination_type": "country",
+    "description": "<p>Tanzania is home to some of Africa's most famous national parks and natural wonders. The country encompasses the legendary Serengeti National Park, the magnificent Ngorongoro Crater, and Africa's highest peak, Mount Kilimanjaro.</p>\n        \n        <p>The Serengeti ecosystem hosts the Great Migration, where over two million wildebeest, zebras, and gazelles move in an endless cycle of life. Tanzania's diverse landscapes range from vast savannas and volcanic highlands to tropical coastlines along the Indian Ocean.</p>\n        \n        <p>The country is also rich in cultural diversity, with over 120 ethnic groups living harmoniously. From the Maasai warriors of the northern plains to the Swahili culture of the coast, Tanzania offers authentic cultural experiences alongside world-class wildlife viewing.</p>",
+    "image": null,
+    "parent": null,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 2,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.663Z",
+    "updated_at": "2025-08-15T17:44:21.663Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 3,
+  "fields": {
+    "name": "Rwanda",
+    "slug": "rwanda",
+    "destination_type": "country",
+    "description": "<p>Rwanda, known as the \"Land of a Thousand Hills,\" is a small but remarkable country in East Africa. Despite its tragic history, Rwanda has emerged as one of Africa's most progressive and safest destinations, offering unique wildlife experiences and stunning landscapes.</p>\n        \n        <p>The country is world-famous for mountain gorilla trekking in Volcanoes National Park, where visitors can encounter these magnificent creatures in their natural habitat. Rwanda's commitment to conservation has made it a model for sustainable tourism in Africa.</p>\n        \n        <p>Beyond gorillas, Rwanda offers beautiful lakes, rolling hills, and vibrant culture. The capital, Kigali, is one of Africa's cleanest and most organized cities, serving as a gateway to the country's natural wonders.</p>",
+    "image": null,
+    "parent": null,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 3,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.664Z",
+    "updated_at": "2025-08-15T17:44:21.664Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 4,
+  "fields": {
+    "name": "Uganda",
+    "slug": "uganda",
+    "destination_type": "country",
+    "description": "<p>Uganda, the \"Pearl of Africa,\" is a landlocked country blessed with incredible biodiversity, stunning landscapes, and warm, welcoming people. From the source of the Nile River to the snow-capped Rwenzori Mountains, Uganda offers diverse experiences for adventurous travelers.</p>\n        \n        <p>The country is renowned for its primate experiences, including mountain gorilla trekking in Bwindi Impenetrable Forest and chimpanzee tracking in Kibale Forest. Uganda is home to over half of the world's remaining mountain gorillas, making it a premier destination for wildlife enthusiasts.</p>\n        \n        <p>Uganda's landscapes are incredibly varied, featuring tropical rainforests, vast savannas, crater lakes, and the mighty Nile River. The country's rich cultural heritage includes over 50 different ethnic groups, each contributing to Uganda's vibrant tapestry of traditions and customs.</p>",
+    "image": null,
+    "parent": null,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 4,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.665Z",
+    "updated_at": "2025-08-15T17:44:21.665Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 5,
+  "fields": {
+    "name": "Nairobi",
+    "slug": "nairobi",
+    "destination_type": "city",
+    "description": "<p>Nairobi, Kenya's vibrant capital city, is a unique blend of urban sophistication and wild nature. Known as the \"Green City in the Sun,\" Nairobi serves as the gateway to Kenya's incredible safari destinations while offering its own attractions.</p>\n        \n        <p>The city is home to Nairobi National Park, the only national park in the world located within a capital city, where visitors can see lions, rhinos, and giraffes against the backdrop of city skyscrapers. The David Sheldrick Wildlife Trust and Giraffe Centre offer intimate wildlife encounters and conservation education.</p>",
+    "image": null,
+    "parent": 1,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 1,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.666Z",
+    "updated_at": "2025-08-15T17:44:21.666Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 6,
+  "fields": {
+    "name": "Maasai Mara",
+    "slug": "maasai-mara",
+    "destination_type": "place",
+    "description": "<p>The Maasai Mara National Reserve is Kenya's most famous safari destination and one of Africa's greatest wildlife reserves. This vast expanse of savanna grassland is home to an incredible concentration of wildlife and hosts the spectacular Great Migration.</p>\n        \n        <p>From July to October, millions of wildebeest, zebras, and gazelles cross the Mara River from Tanzania's Serengeti, creating one of nature's most dramatic spectacles. The reserve is also home to the Big Five and offers excellent opportunities to see lions, leopards, elephants, buffalo, and rhinos.</p>",
+    "image": null,
+    "parent": 5,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 1,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.667Z",
+    "updated_at": "2025-08-15T17:44:21.667Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 7,
+  "fields": {
+    "name": "Amboseli National Park",
+    "slug": "amboseli-national-park",
+    "destination_type": "place",
+    "description": "<p>Amboseli National Park offers some of the best views of Mount Kilimanjaro and is famous for its large herds of elephants. The park's diverse ecosystem includes wetlands, savanna, and woodlands, supporting a wide variety of wildlife.</p>\n        \n        <p>The park is particularly renowned for its elephant research and conservation efforts. Visitors can observe these magnificent creatures up close while enjoying the stunning backdrop of Africa's highest mountain.</p>",
+    "image": null,
+    "parent": 5,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 2,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.669Z",
+    "updated_at": "2025-08-15T17:44:21.669Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 8,
+  "fields": {
+    "name": "Arusha",
+    "slug": "arusha",
+    "destination_type": "city",
+    "description": "<p>Arusha is Tanzania's safari capital and the gateway to the country's most famous national parks. Located at the foot of Mount Meru, this bustling city serves as the starting point for most northern Tanzania safari circuits.</p>\n\n        <p>The city offers a perfect blend of African culture and modern amenities, with vibrant markets, cultural heritage sites, and excellent restaurants. Arusha is also home to the East African Community headquarters and serves as a major conference destination.</p>",
+    "image": null,
+    "parent": 2,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 1,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.670Z",
+    "updated_at": "2025-08-15T17:44:21.670Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 9,
+  "fields": {
+    "name": "Serengeti National Park",
+    "slug": "serengeti-national-park",
+    "destination_type": "place",
+    "description": "<p>The Serengeti National Park is Tanzania's oldest and most popular national park, famous for the annual Great Migration. This vast ecosystem covers 14,750 square kilometers of endless plains, making it larger than Connecticut.</p>\n\n        <p>The park is home to over 2 million wildebeest, 200,000 zebras, and 300,000 Thomson's gazelles. The Serengeti also boasts the largest population of lions in Africa and offers exceptional game viewing year-round.</p>",
+    "image": null,
+    "parent": 8,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 1,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.671Z",
+    "updated_at": "2025-08-15T17:44:21.671Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 10,
+  "fields": {
+    "name": "Mount Kilimanjaro",
+    "slug": "mount-kilimanjaro",
+    "destination_type": "place",
+    "description": "<p>Mount Kilimanjaro, Africa's highest peak at 5,895 meters, is a dormant volcano and one of the world's most iconic mountains. Known as the \"Roof of Africa,\" Kilimanjaro attracts climbers from around the globe seeking to reach its summit, Uhuru Peak.</p>\n\n        <p>The mountain features three volcanic cones and five distinct climate zones, from tropical rainforest at the base to arctic conditions at the summit. The climb typically takes 5-9 days and offers breathtaking views and diverse ecosystems.</p>",
+    "image": null,
+    "parent": 8,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 2,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.676Z",
+    "updated_at": "2025-08-15T17:44:21.676Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 11,
+  "fields": {
+    "name": "Kigali",
+    "slug": "kigali",
+    "destination_type": "city",
+    "description": "<p>Kigali, Rwanda's capital and largest city, is renowned as one of Africa's cleanest and safest cities. Built on rolling hills, Kigali offers stunning views and a well-organized urban environment that reflects Rwanda's remarkable transformation.</p>\n\n        <p>The city serves as the country's economic and cultural hub, featuring modern infrastructure, excellent restaurants, and important historical sites including the Kigali Genocide Memorial. Kigali is the perfect base for exploring Rwanda's natural wonders.</p>",
+    "image": null,
+    "parent": 3,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 1,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.678Z",
+    "updated_at": "2025-08-15T17:44:21.678Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 12,
+  "fields": {
+    "name": "Volcanoes National Park",
+    "slug": "volcanoes-national-park",
+    "destination_type": "place",
+    "description": "<p>Volcanoes National Park is Rwanda's premier destination for mountain gorilla trekking. Located in the Virunga Mountains, this park protects the Rwandan portion of the Virunga Massif, home to several habituated gorilla families.</p>\n\n        <p>The park covers 160 square kilometers of rainforest and bamboo forest, providing habitat for mountain gorillas, golden monkeys, and over 200 bird species. Gorilla trekking here offers an intimate and life-changing wildlife experience.</p>",
+    "image": null,
+    "parent": 11,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 1,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.679Z",
+    "updated_at": "2025-08-15T17:44:21.679Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 13,
+  "fields": {
+    "name": "Nyungwe Forest National Park",
+    "slug": "nyungwe-forest-national-park",
+    "destination_type": "place",
+    "description": "<p>Nyungwe Forest National Park is one of Africa's oldest rainforests and Rwanda's largest protected area. This pristine montane rainforest is home to 13 primate species, including chimpanzees and colobus monkeys.</p>\n\n        <p>The park features an impressive canopy walkway, offering visitors a unique perspective of the forest from 50 meters above the ground. Nyungwe is also a birder's paradise with over 300 bird species recorded.</p>",
+    "image": null,
+    "parent": 11,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 2,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.681Z",
+    "updated_at": "2025-08-15T17:44:21.681Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 14,
+  "fields": {
+    "name": "Kampala",
+    "slug": "kampala",
+    "destination_type": "city",
+    "description": "<p>Kampala, Uganda's vibrant capital, is built on seven hills and serves as the country's political, economic, and cultural center. The city offers a fascinating blend of traditional African culture and modern urban life.</p>\n\n        <p>Key attractions include the Kasubi Tombs (a UNESCO World Heritage Site), bustling markets, and the source of the Nile at Jinja nearby. Kampala provides an excellent introduction to Ugandan culture and serves as the gateway to the country's national parks.</p>",
+    "image": null,
+    "parent": 4,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 1,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.684Z",
+    "updated_at": "2025-08-15T17:44:21.684Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 15,
+  "fields": {
+    "name": "Bwindi Impenetrable Forest",
+    "slug": "bwindi-impenetrable-forest",
+    "destination_type": "place",
+    "description": "<p>Bwindi Impenetrable Forest National Park is Uganda's premier gorilla trekking destination and a UNESCO World Heritage Site. This ancient rainforest is home to almost half of the world's remaining mountain gorillas.</p>\n\n        <p>The park's dense, misty forest covers 331 square kilometers and harbors an incredible diversity of flora and fauna. Besides gorillas, Bwindi is home to over 120 mammal species and 350 bird species, making it one of Africa's most biodiverse forests.</p>",
+    "image": null,
+    "parent": 14,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 1,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.686Z",
+    "updated_at": "2025-08-15T17:44:21.686Z"
+  }
+},
+{
+  "model": "adminside.destination",
+  "pk": 16,
+  "fields": {
+    "name": "Queen Elizabeth National Park",
+    "slug": "queen-elizabeth-national-park",
+    "destination_type": "place",
+    "description": "<p>Queen Elizabeth National Park is Uganda's most popular savanna park and a UNESCO Biosphere Reserve. The park offers diverse ecosystems including savanna, wetlands, lowland forest, and crater lakes.</p>\n\n        <p>Famous for its tree-climbing lions in the Ishasha sector and boat safaris on the Kazinga Channel, the park is home to over 95 mammal species and 600 bird species. The dramatic backdrop of the Rwenzori Mountains adds to the park's spectacular scenery.</p>",
+    "image": null,
+    "parent": 14,
+    "meta_title": "",
+    "meta_description": "",
+    "starting_price": null,
+    "display_order": 2,
+    "is_featured": true,
+    "is_active": true,
+    "created_at": "2025-08-15T17:44:21.690Z",
+    "updated_at": "2025-08-15T17:44:21.690Z"
+  }
+},
+{
+  "model": "adminside.accommodation",
+  "pk": 1,
+  "fields": {
+    "name": "Nairobi Serena Hotel",
+    "slug": "nairobi-serena-hotel",
+    "accommodation_type": "hotel",
+    "description": "<p>The Nairobi Serena Hotel is a luxury 5-star hotel located in the heart of Nairobi's business district. This elegant hotel combines modern amenities with traditional African hospitality, offering guests a sophisticated urban retreat.</p>\n\n        <p>The hotel features beautifully appointed rooms and suites, multiple dining options, a fitness center, and conference facilities. Its central location provides easy access to Nairobi's attractions, shopping centers, and business districts.</p>",
+    "destination": 5,
+    "address": "Kenyatta Avenue, Nairobi, Kenya",
+    "price_per_room_per_night": 250,
+    "max_occupancy_per_room": 2,
+    "total_rooms": 183,
+    "image": "",
+    "amenities": "Free WiFi, Restaurant, Bar, Fitness Center, Conference Rooms, 24-hour Room Service, Laundry Service, Airport Shuttle",
+    "is_active": true,
+    "is_featured": true,
+    "rating": "4.5",
+    "total_reviews": 245,
+    "created_at": "2025-08-15T17:44:21.692Z",
+    "updated_at": "2025-08-15T17:44:21.692Z"
+  }
+},
+{
+  "model": "adminside.accommodation",
+  "pk": 2,
+  "fields": {
+    "name": "Mara Serena Safari Lodge",
+    "slug": "mara-serena-safari-lodge",
+    "accommodation_type": "lodge",
+    "description": "<p>Mara Serena Safari Lodge is perched high on a hill overlooking the vast plains of the Maasai Mara. This award-winning lodge offers panoramic views of the reserve and provides an authentic safari experience with luxury amenities.</p>\n\n        <p>The lodge features traditional Maasai-inspired architecture and décor, with comfortable rooms offering stunning views. Guests can enjoy game drives, cultural visits to Maasai villages, and world-class dining while experiencing the Great Migration.</p>",
+    "destination": 6,
+    "address": "Maasai Mara National Reserve, Kenya",
+    "price_per_room_per_night": 450,
+    "max_occupancy_per_room": 3,
+    "total_rooms": 74,
+    "image": "",
+    "amenities": "All Meals Included, Game Drives, Cultural Visits, Swimming Pool, Spa, Gift Shop, Laundry Service",
+    "is_active": true,
+    "is_featured": true,
+    "rating": "4.7",
+    "total_reviews": 189,
+    "created_at": "2025-08-15T17:44:21.704Z",
+    "updated_at": "2025-08-15T17:44:21.704Z"
+  }
+},
+{
+  "model": "adminside.accommodation",
+  "pk": 3,
+  "fields": {
+    "name": "Arusha Coffee Lodge",
+    "slug": "arusha-coffee-lodge",
+    "accommodation_type": "lodge",
+    "description": "<p>Arusha Coffee Lodge is a boutique safari lodge set on one of Tanzania's largest coffee plantations. This unique property offers an authentic taste of Tanzanian coffee culture combined with luxury accommodations.</p>\n        \n        <p>Each plantation-style room is elegantly furnished and offers views of the coffee plantation and Mount Meru. The lodge provides an excellent base for exploring the northern Tanzania safari circuit.</p>",
+    "destination": 8,
+    "address": "Arusha Coffee Plantation, Tanzania",
+    "price_per_room_per_night": 380,
+    "max_occupancy_per_room": 2,
+    "total_rooms": 18,
+    "image": "",
+    "amenities": "Coffee Plantation Tours, Restaurant, Bar, WiFi, Laundry Service, Airport Transfers, Cultural Activities",
+    "is_active": true,
+    "is_featured": true,
+    "rating": "4.6",
+    "total_reviews": 156,
+    "created_at": "2025-08-15T17:46:01.229Z",
+    "updated_at": "2025-08-15T17:46:01.229Z"
+  }
+},
+{
+  "model": "adminside.accommodation",
+  "pk": 4,
+  "fields": {
+    "name": "Serengeti Serena Safari Lodge",
+    "slug": "serengeti-serena-safari-lodge",
+    "accommodation_type": "lodge",
+    "description": "<p>Serengeti Serena Safari Lodge is strategically positioned in the heart of the Serengeti, offering front-row seats to the Great Migration. The lodge's unique design blends seamlessly with the surrounding landscape.</p>\n        \n        <p>Built to resemble a traditional African village, the lodge offers comfortable accommodations with stunning views of the endless plains. Guests can enjoy exceptional game viewing right from the lodge.</p>",
+    "destination": 9,
+    "address": "Central Serengeti, Tanzania",
+    "price_per_room_per_night": 520,
+    "max_occupancy_per_room": 3,
+    "total_rooms": 66,
+    "image": "",
+    "amenities": "All Meals, Game Drives, Swimming Pool, Spa, Cultural Center, Gift Shop, Laundry Service",
+    "is_active": true,
+    "is_featured": true,
+    "rating": "4.8",
+    "total_reviews": 203,
+    "created_at": "2025-08-15T17:46:01.231Z",
+    "updated_at": "2025-08-15T17:46:01.231Z"
+  }
+},
+{
+  "model": "adminside.accommodation",
+  "pk": 5,
+  "fields": {
+    "name": "Kigali Serena Hotel",
+    "slug": "kigali-serena-hotel",
+    "accommodation_type": "hotel",
+    "description": "<p>Kigali Serena Hotel is Rwanda's premier luxury hotel, located in the heart of Kigali with panoramic views over the city's rolling hills. This 5-star hotel offers world-class amenities and service.</p>\n        \n        <p>The hotel features elegantly appointed rooms, multiple dining options, conference facilities, and a fitness center. Its central location provides easy access to Kigali's business district and cultural attractions.</p>",
+    "destination": 11,
+    "address": "KN 3 Ave, Kigali, Rwanda",
+    "price_per_room_per_night": 280,
+    "max_occupancy_per_room": 2,
+    "total_rooms": 148,
+    "image": "",
+    "amenities": "Free WiFi, Restaurant, Bar, Fitness Center, Spa, Conference Rooms, Business Center, Airport Shuttle",
+    "is_active": true,
+    "is_featured": true,
+    "rating": "4.4",
+    "total_reviews": 187,
+    "created_at": "2025-08-15T17:46:01.233Z",
+    "updated_at": "2025-08-15T17:46:01.233Z"
+  }
+},
+{
+  "model": "adminside.accommodation",
+  "pk": 6,
+  "fields": {
+    "name": "Mountain Gorilla View Lodge",
+    "slug": "mountain-gorilla-view-lodge",
+    "accommodation_type": "lodge",
+    "description": "<p>Mountain Gorilla View Lodge is perfectly positioned for gorilla trekking adventures in Volcanoes National Park. This eco-friendly lodge offers stunning views of the Virunga Mountains and comfortable accommodations.</p>\n        \n        <p>The lodge features stone cottages with fireplaces, a restaurant serving local and international cuisine, and a bar with panoramic mountain views. It's the ideal base for gorilla trekking and golden monkey tracking.</p>",
+    "destination": 12,
+    "address": "Kinigi, Volcanoes National Park, Rwanda",
+    "price_per_room_per_night": 420,
+    "max_occupancy_per_room": 2,
+    "total_rooms": 30,
+    "image": "",
+    "amenities": "Gorilla Trekking Arrangements, Restaurant, Bar, Cultural Performances, Guided Nature Walks, Laundry Service",
+    "is_active": true,
+    "is_featured": true,
+    "rating": "4.5",
+    "total_reviews": 142,
+    "created_at": "2025-08-15T17:46:01.236Z",
+    "updated_at": "2025-08-15T17:46:01.236Z"
+  }
+},
+{
+  "model": "adminside.accommodation",
+  "pk": 7,
+  "fields": {
+    "name": "Kampala Serena Hotel",
+    "slug": "kampala-serena-hotel",
+    "accommodation_type": "hotel",
+    "description": "<p>Kampala Serena Hotel is Uganda's premier luxury hotel, located on Nakasero Hill with commanding views over the city and Lake Victoria. This 5-star hotel combines modern luxury with traditional Ugandan hospitality.</p>\n        \n        <p>The hotel offers elegantly furnished rooms, multiple dining venues, extensive conference facilities, and recreational amenities. Its prime location provides easy access to Kampala's business and cultural districts.</p>",
+    "destination": 14,
+    "address": "Nakasero Hill, Kampala, Uganda",
+    "price_per_room_per_night": 220,
+    "max_occupancy_per_room": 2,
+    "total_rooms": 152,
+    "image": "",
+    "amenities": "Free WiFi, Multiple Restaurants, Bar, Fitness Center, Swimming Pool, Spa, Conference Facilities, Business Center",
+    "is_active": true,
+    "is_featured": true,
+    "rating": "4.3",
+    "total_reviews": 198,
+    "created_at": "2025-08-15T17:46:01.238Z",
+    "updated_at": "2025-08-15T17:46:01.238Z"
+  }
+},
+{
+  "model": "adminside.accommodation",
+  "pk": 8,
+  "fields": {
+    "name": "Bwindi Lodge",
+    "slug": "bwindi-lodge",
+    "accommodation_type": "lodge",
+    "description": "<p>Bwindi Lodge is an exclusive eco-lodge located on the edge of Bwindi Impenetrable Forest. This intimate lodge offers luxury accommodations in one of Africa's most pristine wilderness areas.</p>\n        \n        <p>The lodge features spacious bandas (traditional huts) with private verandas overlooking the forest. Guests enjoy gourmet meals, guided forest walks, and easy access to gorilla trekking starting points.</p>",
+    "destination": 15,
+    "address": "Bwindi Impenetrable Forest, Uganda",
+    "price_per_room_per_night": 480,
+    "max_occupancy_per_room": 2,
+    "total_rooms": 8,
+    "image": "",
+    "amenities": "Gorilla Trekking Permits, All Meals, Guided Forest Walks, Cultural Visits, Laundry Service, Airport Transfers",
+    "is_active": true,
+    "is_featured": true,
+    "rating": "4.7",
+    "total_reviews": 89,
+    "created_at": "2025-08-15T17:46:01.240Z",
+    "updated_at": "2025-08-15T17:46:01.240Z"
+  }
+},
+{
+  "model": "adminside.package",
+  "pk": 1,
+  "fields": {
+    "name": "Ultimate Kenya Safari Adventure",
+    "slug": "ultimate-kenya-safari-adventure",
+    "description": "<p>Experience the best of Kenya with this comprehensive 7-day safari adventure that takes you through the country's most iconic destinations. Witness the Great Migration in the Maasai Mara and enjoy close encounters with elephants against the backdrop of Mount Kilimanjaro in Amboseli.</p>\n\n        <p>This carefully crafted itinerary combines thrilling game drives, cultural experiences with the Maasai people, and comfortable accommodations. You'll have the opportunity to see the Big Five and experience one of nature's greatest spectacles - the annual wildebeest migration.</p>\n\n        <p>Our expert guides will ensure you have the best wildlife viewing opportunities while learning about Kenya's diverse ecosystems and conservation efforts. This safari is perfect for first-time visitors to Africa and seasoned travelers alike.</p>",
+    "main_destination": 1,
+    "duration_days": 7,
+    "duration_nights": 6,
+    "adult_price": 2850,
+    "child_price": 2280,
+    "inclusions": "<ul>\n            <li>6 nights accommodation in luxury safari lodges</li>\n            <li>All meals during the safari (breakfast, lunch, dinner)</li>\n            <li>Professional English-speaking safari guide</li>\n            <li>4WD safari vehicle with pop-up roof for game viewing</li>\n            <li>All park entrance fees and conservancy fees</li>\n            <li>Game drives in Maasai Mara and Amboseli National Parks</li>\n            <li>Cultural visit to a traditional Maasai village</li>\n            <li>Airport transfers in Nairobi</li>\n            <li>Bottled water during game drives</li>\n            <li>Emergency evacuation insurance</li>\n        </ul>",
+    "exclusions": "<ul>\n            <li>International flights to/from Kenya</li>\n            <li>Kenya visa fees (USD 50 for most nationalities)</li>\n            <li>Travel insurance (highly recommended)</li>\n            <li>Personal expenses and souvenirs</li>\n            <li>Alcoholic beverages and soft drinks</li>\n            <li>Tips for guides and lodge staff</li>\n            <li>Optional activities not mentioned in the itinerary</li>\n            <li>Laundry services</li>\n        </ul>",
+    "featured_image": "",
+    "total_bookings": 0,
+    "rating": "0.0",
+    "total_reviews": 0,
+    "status": "published",
+    "is_featured": true,
+    "meta_title": "Ultimate Kenya Safari Adventure - 7 Days Maasai Mara & Amboseli",
+    "meta_description": "Experience Kenya's best wildlife destinations on this 7-day safari adventure. See the Great Migration, Big Five, and enjoy luxury accommodations.",
+    "created_at": "2025-08-15T17:44:21.707Z",
+    "updated_at": "2025-08-15T17:44:21.707Z",
+    "published_at": "2025-08-15T17:44:21.705Z",
+    "available_accommodations": [
+      2,
+      1
+    ],
+    "available_travel_modes": []
+  }
+},
+{
+  "model": "adminside.package",
+  "pk": 2,
+  "fields": {
+    "name": "Tanzania Great Migration Safari",
+    "slug": "tanzania-great-migration-safari",
+    "description": "<p>Witness one of nature's most spectacular events with this 8-day Tanzania Great Migration safari. Experience the dramatic river crossings and vast herds of wildebeest in the world-famous Serengeti ecosystem.</p>\n        \n        <p>This comprehensive safari includes the Serengeti National Park, Ngorongoro Crater, and Tarangire National Park. You'll stay in luxury lodges and enjoy expert guiding while experiencing the best wildlife viewing Tanzania has to offer.</p>\n        \n        <p>The timing of this safari is carefully planned to coincide with the Great Migration, ensuring you witness this incredible natural phenomenon. From dramatic river crossings to endless herds stretching to the horizon, this safari offers unforgettable memories.</p>",
+    "main_destination": 2,
+    "duration_days": 8,
+    "duration_nights": 7,
+    "adult_price": 3200,
+    "child_price": 2560,
+    "inclusions": "<ul>\n            <li>7 nights accommodation in luxury safari lodges</li>\n            <li>All meals during the safari</li>\n            <li>Professional English-speaking safari guide</li>\n            <li>4WD safari vehicle with pop-up roof</li>\n            <li>All park entrance fees</li>\n            <li>Game drives in Serengeti, Ngorongoro, and Tarangire</li>\n            <li>Ngorongoro Crater tour</li>\n            <li>Airport transfers</li>\n            <li>Bottled water during game drives</li>\n            <li>Emergency evacuation insurance</li>\n        </ul>",
+    "exclusions": "<ul>\n            <li>International flights</li>\n            <li>Tanzania visa fees</li>\n            <li>Travel insurance</li>\n            <li>Personal expenses</li>\n            <li>Alcoholic beverages</li>\n            <li>Tips for guides and staff</li>\n            <li>Optional activities</li>\n        </ul>",
+    "featured_image": "",
+    "total_bookings": 0,
+    "rating": "0.0",
+    "total_reviews": 0,
+    "status": "published",
+    "is_featured": true,
+    "meta_title": "Tanzania Great Migration Safari - 8 Days Serengeti & Ngorongoro",
+    "meta_description": "Experience the Great Migration in Tanzania with this 8-day luxury safari. Serengeti, Ngorongoro Crater, and Tarangire National Park.",
+    "created_at": "2025-08-15T17:46:01.246Z",
+    "updated_at": "2025-08-15T17:46:01.246Z",
+    "published_at": "2025-08-15T17:46:01.244Z",
+    "available_accommodations": [
+      4,
+      3
+    ],
+    "available_travel_modes": []
+  }
+},
+{
+  "model": "adminside.package",
+  "pk": 3,
+  "fields": {
+    "name": "Rwanda Gorilla Trekking Experience",
+    "slug": "rwanda-gorilla-trekking-experience",
+    "description": "<p>Embark on a life-changing adventure with this 4-day Rwanda gorilla trekking experience. Come face-to-face with mountain gorillas in their natural habitat in the pristine Volcanoes National Park.</p>\n        \n        <p>Rwanda offers one of the world's most exclusive wildlife experiences. With only a limited number of permits available daily, gorilla trekking in Rwanda is an intimate and unforgettable encounter with these magnificent creatures.</p>\n        \n        <p>This package includes comfortable accommodations, expert guides, and all necessary permits. You'll also have the opportunity to learn about Rwanda's remarkable conservation success story and visit local communities.</p>",
+    "main_destination": 3,
+    "duration_days": 4,
+    "duration_nights": 3,
+    "adult_price": 2800,
+    "child_price": 2240,
+    "inclusions": "<ul>\n            <li>3 nights accommodation in luxury lodge</li>\n            <li>All meals during the stay</li>\n            <li>Gorilla trekking permit (USD 1,500 value)</li>\n            <li>Professional English-speaking guide</li>\n            <li>4WD vehicle for transfers</li>\n            <li>Kigali city tour</li>\n            <li>Cultural village visit</li>\n            <li>Airport transfers</li>\n            <li>Bottled water</li>\n            <li>Emergency evacuation insurance</li>\n        </ul>",
+    "exclusions": "<ul>\n            <li>International flights</li>\n            <li>Rwanda visa fees (USD 50)</li>\n            <li>Travel insurance</li>\n            <li>Personal expenses</li>\n            <li>Alcoholic beverages</li>\n            <li>Tips for guides and staff</li>\n            <li>Optional activities</li>\n            <li>Laundry services</li>\n        </ul>",
+    "featured_image": "",
+    "total_bookings": 0,
+    "rating": "0.0",
+    "total_reviews": 0,
+    "status": "published",
+    "is_featured": true,
+    "meta_title": "Rwanda Gorilla Trekking Experience - 4 Days Volcanoes National Park",
+    "meta_description": "Experience mountain gorilla trekking in Rwanda's Volcanoes National Park. 4-day luxury package with permits included.",
+    "created_at": "2025-08-15T17:47:14.173Z",
+    "updated_at": "2025-08-15T17:47:14.173Z",
+    "published_at": "2025-08-15T17:47:14.166Z",
+    "available_accommodations": [
+      6,
+      5
+    ],
+    "available_travel_modes": []
+  }
+},
+{
+  "model": "adminside.package",
+  "pk": 4,
+  "fields": {
+    "name": "Uganda Gorilla and Wildlife Safari",
+    "slug": "uganda-gorilla-and-wildlife-safari",
+    "description": "<p>Discover the \"Pearl of Africa\" with this comprehensive 7-day Uganda safari combining gorilla trekking in Bwindi Impenetrable Forest with classic wildlife viewing in Queen Elizabeth National Park.</p>\n        \n        <p>Uganda offers incredible diversity - from mountain gorillas and chimpanzees to tree-climbing lions and boat safaris on the Kazinga Channel. This safari showcases the best of Uganda's wildlife and landscapes.</p>\n        \n        <p>Experience the thrill of tracking mountain gorillas through dense forest, enjoy game drives in search of the Big Five, and take a memorable boat safari while staying in comfortable accommodations throughout your journey.</p>",
+    "main_destination": 4,
+    "duration_days": 7,
+    "duration_nights": 6,
+    "adult_price": 3400,
+    "child_price": 2720,
+    "inclusions": "<ul>\n            <li>6 nights accommodation in lodges and hotels</li>\n            <li>All meals during the safari</li>\n            <li>Gorilla trekking permit (USD 800 value)</li>\n            <li>Professional English-speaking guide</li>\n            <li>4WD safari vehicle</li>\n            <li>Game drives in Queen Elizabeth National Park</li>\n            <li>Boat safari on Kazinga Channel</li>\n            <li>Chimpanzee tracking in Kibale Forest</li>\n            <li>All park entrance fees</li>\n            <li>Airport transfers</li>\n            <li>Bottled water during activities</li>\n        </ul>",
+    "exclusions": "<ul>\n            <li>International flights</li>\n            <li>Uganda visa fees (USD 50)</li>\n            <li>Travel insurance</li>\n            <li>Personal expenses</li>\n            <li>Alcoholic beverages</li>\n            <li>Tips for guides and staff</li>\n            <li>Optional activities</li>\n            <li>Laundry services</li>\n        </ul>",
+    "featured_image": "",
+    "total_bookings": 0,
+    "rating": "0.0",
+    "total_reviews": 0,
+    "status": "published",
+    "is_featured": true,
+    "meta_title": "Uganda Gorilla and Wildlife Safari - 7 Days Bwindi & Queen Elizabeth",
+    "meta_description": "Combine gorilla trekking with classic wildlife safari in Uganda. 7-day adventure through Bwindi Forest and Queen Elizabeth National Park.",
+    "created_at": "2025-08-15T17:47:14.178Z",
+    "updated_at": "2025-08-15T17:47:14.178Z",
+    "published_at": "2025-08-15T17:47:14.177Z",
+    "available_accommodations": [
+      8,
+      7
+    ],
+    "available_travel_modes": []
+  }
+},
+{
+  "model": "users.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "phone_number": null,
+    "date_of_birth": null,
+    "nationality": null,
+    "passport_number": null,
+    "emergency_contact_name": null,
+    "emergency_contact_phone": null,
+    "preferred_travel_style": null,
+    "dietary_requirements": null,
+    "special_needs": null,
+    "email_notifications": true,
+    "marketing_emails": false,
+    "created_at": "2025-08-15T17:40:49.863Z",
+    "updated_at": "2025-08-15T17:40:49.864Z"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 1,
+  "fields": {
+    "title": "Safari Destinations",
+    "slug": "safari-destinations",
+    "description": "Explore the best safari destinations in East Africa",
+    "active": true,
+    "created": "2025-08-15T17:47:14.182Z"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 2,
+  "fields": {
+    "title": "Wildlife & Conservation",
+    "slug": "wildlife-conservation",
+    "description": "Learn about African wildlife and conservation efforts",
+    "active": true,
+    "created": "2025-08-15T17:47:14.184Z"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 3,
+  "fields": {
+    "title": "Travel Tips",
+    "slug": "travel-tips",
+    "description": "Essential tips for traveling in East Africa",
+    "active": true,
+    "created": "2025-08-15T17:47:14.185Z"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 4,
+  "fields": {
+    "title": "Cultural Experiences",
+    "slug": "cultural-experiences",
+    "description": "Discover the rich cultures of East Africa",
+    "active": true,
+    "created": "2025-08-15T17:47:14.186Z"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 5,
+  "fields": {
+    "title": "Adventure Activities",
+    "slug": "adventure-activities",
+    "description": "Thrilling adventures and activities in East Africa",
+    "active": true,
+    "created": "2025-08-15T17:47:14.188Z"
+  }
+},
+{
+  "model": "blog.post",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "image": null,
+    "title": "The Ultimate Guide to Kenya Safari: Maasai Mara vs Amboseli",
+    "slug": "ultimate-guide-kenya-safari-maasai-mara-vs-amboseli",
+    "excerpt": "Discover the differences between Kenya's two most famous safari destinations and choose the perfect one for your African adventure.",
+    "content": "<p>Kenya offers some of the world's most spectacular safari experiences, with the Maasai Mara and Amboseli National Park standing out as the country's premier wildlife destinations. Each offers unique experiences and stunning wildlife viewing opportunities.</p>\n\n<h2>Maasai Mara National Reserve</h2>\n<p>The Maasai Mara is Kenya's most famous safari destination, renowned for the Great Migration and exceptional year-round wildlife viewing. From July to October, millions of wildebeest and zebras cross the Mara River, creating one of nature's most dramatic spectacles.</p>\n\n<p>The reserve is home to an abundance of predators, including lions, leopards, and cheetahs. The open savanna grasslands provide excellent game viewing, and the Maasai people add a rich cultural dimension to any visit.</p>\n\n<h2>Amboseli National Park</h2>\n<p>Amboseli offers a completely different but equally rewarding experience. Famous for its large elephant herds and stunning views of Mount Kilimanjaro, Amboseli provides some of the most iconic African landscapes.</p>\n\n<p>The park's diverse ecosystem includes wetlands, savanna, and woodlands, supporting a wide variety of wildlife. The elephants here are particularly well-studied and habituated, allowing for incredible close-up encounters.</p>\n\n<h2>Which Should You Choose?</h2>\n<p>Both destinations offer exceptional experiences. Choose Maasai Mara if you want to witness the Great Migration and see high concentrations of predators. Choose Amboseli for elephant encounters and Mount Kilimanjaro views. Better yet, visit both for the complete Kenya safari experience!</p>",
+    "category": 1,
+    "status": "published",
+    "featured": true,
+    "trending": true,
+    "date": "2025-08-15T17:47:14.190Z",
+    "updated": "2025-08-15T17:47:14.190Z",
+    "views": 0,
+    "pid": "bpnnhhyyii"
+  }
+},
+{
+  "model": "blog.post",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "image": null,
+    "title": "Mountain Gorilla Conservation: A Success Story in Rwanda",
+    "slug": "mountain-gorilla-conservation-success-story-rwanda",
+    "excerpt": "Learn how Rwanda transformed from tragedy to become a world leader in gorilla conservation and sustainable tourism.",
+    "content": "<p>Rwanda's mountain gorilla conservation program represents one of the most remarkable wildlife conservation success stories in Africa. From fewer than 250 individuals in the 1980s, the mountain gorilla population has steadily increased thanks to dedicated conservation efforts.</p>\n\n<h2>The Conservation Challenge</h2>\n<p>Mountain gorillas face numerous threats including habitat loss, poaching, and human encroachment. These magnificent creatures are found only in the Virunga Mountains, shared between Rwanda, Uganda, and the Democratic Republic of Congo.</p>\n\n<p>Rwanda's approach to conservation has been comprehensive, involving local communities, international partnerships, and sustainable tourism. The country has invested heavily in anti-poaching efforts, habitat protection, and community development.</p>\n\n<h2>Community Involvement</h2>\n<p>One of the key factors in Rwanda's success has been involving local communities in conservation efforts. Revenue from gorilla tourism is shared with communities, providing economic incentives for conservation.</p>\n\n<p>Local people are employed as guides, trackers, and in various tourism-related businesses. This creates a direct link between conservation success and community prosperity.</p>\n\n<h2>The Future</h2>\n<p>Today, Rwanda's mountain gorilla population continues to grow, and the country serves as a model for conservation efforts across Africa. Visitors to Rwanda not only experience incredible wildlife encounters but also contribute directly to conservation efforts.</p>",
+    "category": 2,
+    "status": "published",
+    "featured": true,
+    "trending": false,
+    "date": "2025-08-15T17:47:14.208Z",
+    "updated": "2025-08-15T17:47:14.208Z",
+    "views": 0,
+    "pid": "bjmoyydzxf"
+  }
+},
+{
+  "model": "taggit.tag",
+  "pk": 1,
+  "fields": {
+    "name": "kenya",
+    "slug": "kenya"
+  }
+},
+{
+  "model": "taggit.tag",
+  "pk": 2,
+  "fields": {
+    "name": "safari",
+    "slug": "safari"
+  }
+},
+{
+  "model": "taggit.tag",
+  "pk": 3,
+  "fields": {
+    "name": "maasai-mara",
+    "slug": "maasai-mara"
+  }
+},
+{
+  "model": "taggit.tag",
+  "pk": 4,
+  "fields": {
+    "name": "amboseli",
+    "slug": "amboseli"
+  }
+},
+{
+  "model": "taggit.tag",
+  "pk": 5,
+  "fields": {
+    "name": "wildlife",
+    "slug": "wildlife"
+  }
+},
+{
+  "model": "taggit.tag",
+  "pk": 6,
+  "fields": {
+    "name": "rwanda",
+    "slug": "rwanda"
+  }
+},
+{
+  "model": "taggit.tag",
+  "pk": 7,
+  "fields": {
+    "name": "gorillas",
+    "slug": "gorillas"
+  }
+},
+{
+  "model": "taggit.tag",
+  "pk": 8,
+  "fields": {
+    "name": "conservation",
+    "slug": "conservation"
+  }
+},
+{
+  "model": "taggit.tag",
+  "pk": 9,
+  "fields": {
+    "name": "sustainability",
+    "slug": "sustainability"
+  }
+},
+{
+  "model": "taggit.taggeditem",
+  "pk": 1,
+  "fields": {
+    "tag": 1,
+    "content_type": 26,
+    "object_id": 1
+  }
+},
+{
+  "model": "taggit.taggeditem",
+  "pk": 2,
+  "fields": {
+    "tag": 2,
+    "content_type": 26,
+    "object_id": 1
+  }
+},
+{
+  "model": "taggit.taggeditem",
+  "pk": 3,
+  "fields": {
+    "tag": 3,
+    "content_type": 26,
+    "object_id": 1
+  }
+},
+{
+  "model": "taggit.taggeditem",
+  "pk": 4,
+  "fields": {
+    "tag": 4,
+    "content_type": 26,
+    "object_id": 1
+  }
+},
+{
+  "model": "taggit.taggeditem",
+  "pk": 5,
+  "fields": {
+    "tag": 5,
+    "content_type": 26,
+    "object_id": 1
+  }
+},
+{
+  "model": "taggit.taggeditem",
+  "pk": 6,
+  "fields": {
+    "tag": 6,
+    "content_type": 26,
+    "object_id": 2
+  }
+},
+{
+  "model": "taggit.taggeditem",
+  "pk": 7,
+  "fields": {
+    "tag": 7,
+    "content_type": 26,
+    "object_id": 2
+  }
+},
+{
+  "model": "taggit.taggeditem",
+  "pk": 8,
+  "fields": {
+    "tag": 8,
+    "content_type": 26,
+    "object_id": 2
+  }
+},
+{
+  "model": "taggit.taggeditem",
+  "pk": 9,
+  "fields": {
+    "tag": 5,
+    "content_type": 26,
+    "object_id": 2
+  }
+},
+{
+  "model": "taggit.taggeditem",
+  "pk": 10,
+  "fields": {
+    "tag": 9,
+    "content_type": 26,
+    "object_id": 2
+  }
+}
+]

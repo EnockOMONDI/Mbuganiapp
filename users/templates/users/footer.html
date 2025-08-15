@@ -1,0 +1,176 @@
+{% load static %}
+   
+   <!--====== Start Footer ======-->
+        <footer class="main-footer black-bg">
+            <div class="container">
+                <!--=== Footer CTA ===-->
+                <div class="footer-cta pt-80 pb-40">
+                 
+                </div>
+                <!--=== Footer Widget ===-->
+                <div class="footer-widget-area footer-cta pt-75 pb-30">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <!--=== Footer Widget ===-->
+                            <div class="footer-widget about-company-widget mb-40">
+                                <h4 class="widget-title">About</h4>
+                                <div class="footer-content">
+                                    <p>Novustell Travel is a travel consultancy with over 20 years of experience, aiming to provide comprehensive and cost-effective travel solutions. We offer a wide range of services including corporate travel, MICE (Meetings, Incentives, Conferences, and Exhibitions), student travel, NGO travel, holiday packages, accommodation, car/van rentals, and corporate gifting.
+                                        
+                                        At Novustell Travel, we're more than just travel experts; we are your strategic partner committed to elevating your travel experiences. We aim to alleviate the burdens of travel logistics, with a genuine commitment to delivering exceptional solutions.</p>
+                                    <a href="#" class="footer-logo"><img src="{% static 'assets/images/logo/websitelogo.png' %}" alt="Site Logo"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6">
+                            <!--=== Footer Widget ===-->
+                            <div class="footer-widget service-nav-widget mb-40 pl-lg-70">
+                                <h4 class="widget-title">Services</h4>
+                                <div class="footer-content">
+                                    <ul class="footer-widget-nav">
+                                        <li><a href="{% url 'adminside:destination_list' %}">Destinations</a></li>
+                                        <li><a href="{% url 'adminside:user_package_list' %}">Travel Packages</a></li>
+                                        <li><a href="{% url 'adminside:accommodation_list' %}">Accommodations</a></li>
+                                        <li><a href="{% url 'users:corporatepage' %}">Corporate Travel</a></li>
+                                        <li><a href="{% url 'users:micepage' %}">MICE Services</a></li>
+                                        <li><a href="{% url 'users:student-travel' %}">Student Travel</a></li>
+                                        <li><a href="{% url 'users:ngo-travel' %}">NGO Travel</a></li>
+                                    </ul>
+                                    <ul class="footer-widget-nav">
+                                        <li><a href="{% url 'users:aboutus' %}">About Us</a></li>
+                                        <li><a href="{% url 'users:contactus' %}">Contact Us</a></li>
+                                        <li><a href="{% url 'blog:blog-list' %}">Travel Blog</a></li>
+                                        <li><a href="{% url 'users:careers' %}">Careers</a></li>
+                                        <li><a href="{% url 'users:documentation' %}">Documentation</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!--=== Footer Widget ===-->
+                            <div class="footer-widget footer-newsletter-widget mb-40 pl-lg-100">
+                                <h4 class="widget-title">Newsletter</h4>
+                                <div class="footer-content">
+                                    <p>Stay in the loop with the latest travel tips, exclusive offers, and expert insights delivered directly to your inbox.</p>
+
+                                    <!-- Newsletter Subscription Messages -->
+                                    <div id="newsletter-messages" class="mb-3" style="display: none;">
+                                        <div id="newsletter-success" class="alert alert-success" style="display: none;">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <span id="success-message"></span>
+                                        </div>
+                                        <div id="newsletter-error" class="alert alert-danger" style="display: none;">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            <span id="error-message"></span>
+                                        </div>
+                                    </div>
+
+                                    <form id="newsletter-form" method="post" action="{% url 'users:newsletter_subscribe' %}">
+                                        {% csrf_token %}
+                                        <div class="form_group">
+                                            <label><i class="far fa-paper-plane"></i></label>
+                                            <input type="email" class="form_control" placeholder="Email Address" name="email" required id="newsletter-email">
+                                            <button type="submit" class="btn btn-primary" id="newsletter-submit" style="margin-top: 10px; background: linear-gradient(135deg, #0f238d, #ff9d00); border: none; padding: 10px 20px; border-radius: 25px;">
+                                                <i class="fas fa-paper-plane me-2"></i>Subscribe
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--=== Footer Copyright ===-->
+                <div class="footer-copyright">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!--=== Footer Text ===-->
+                            <div class="footer-text">
+                                <p>Copy@ 2023 <span style="color: #F7921E;">Novustell travel </span> | Registration PVT-EYUB3KZP</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <!--=== Footer Nav ===-->
+                            <div class="footer-nav float-lg-end">
+                                <ul>
+                                    <li><a href="{% url 'users:contactus' %}">Support</a></li>
+                                    <li><a href="#privacy">Privacy Policy</a></li>
+                                    <li><a href="#terms">Terms of Service</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer><!--====== End Footer ======-->
+
+        <!-- Newsletter Subscription JavaScript -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const newsletterForm = document.getElementById('newsletter-form');
+                const messagesDiv = document.getElementById('newsletter-messages');
+                const successDiv = document.getElementById('newsletter-success');
+                const errorDiv = document.getElementById('newsletter-error');
+                const successMessage = document.getElementById('success-message');
+                const errorMessage = document.getElementById('error-message');
+                const submitButton = document.getElementById('newsletter-submit');
+                const emailInput = document.getElementById('newsletter-email');
+
+                if (newsletterForm) {
+                    newsletterForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+
+                        // Show loading state
+                        const originalText = submitButton.innerHTML;
+                        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Subscribing...';
+                        submitButton.disabled = true;
+
+                        // Hide previous messages
+                        messagesDiv.style.display = 'none';
+                        successDiv.style.display = 'none';
+                        errorDiv.style.display = 'none';
+
+                        // Get form data
+                        const formData = new FormData(newsletterForm);
+
+                        // Send AJAX request
+                        fetch(newsletterForm.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            messagesDiv.style.display = 'block';
+
+                            if (data.success) {
+                                successMessage.textContent = data.message;
+                                successDiv.style.display = 'block';
+                                emailInput.value = ''; // Clear the form
+                            } else {
+                                errorMessage.textContent = data.message;
+                                errorDiv.style.display = 'block';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            messagesDiv.style.display = 'block';
+                            errorMessage.textContent = 'An error occurred. Please try again later.';
+                            errorDiv.style.display = 'block';
+                        })
+                        .finally(() => {
+                            // Restore button state
+                            submitButton.innerHTML = originalText;
+                            submitButton.disabled = false;
+                        });
+                    });
+                }
+            });
+        </script>
+
+        <!--====== Back To Top  ======-->
+        <a href="#" class="back-to-top" ><i class="far fa-angle-up"></i></a>
+        <!--====== Jquery js ======-->
