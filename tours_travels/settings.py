@@ -185,13 +185,13 @@ UPLOADCARE = {
 # Default Image Configuration
 DEFAULT_IMAGES = {
     # Primary default image for most content types
-    'DEFAULT': 'assets/images/logo/defaultimagenovustell.png',
+    'DEFAULT': 'assets/images/logo/websitelogo.png',
 
     # Category-specific default images
-    'DESTINATIONS': 'assets/images/logo/defaultimagenovustell.png',
-    'ACCOMMODATIONS': 'assets/images/logo/defaultimagenovustell.png',
-    'PACKAGES': 'assets/images/logo/defaultimagenovustell.png',
-    'BLOG_POSTS': 'assets/images/logo/defaultimagenovustell.png',
+    'DESTINATIONS': 'assets/images/logo/websitelogo.png',
+    'ACCOMMODATIONS': 'assets/images/logo/websitelogo.png',
+    'PACKAGES': 'assets/images/logo/websitelogo.png',
+    'BLOG_POSTS': 'assets/images/logo/websitelogo.png',
 
     # Keep existing job thumbnail (do not change)
     'JOB_LISTINGS': 'images/jobsthumbnail.png',

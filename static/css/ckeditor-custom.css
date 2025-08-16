@@ -119,7 +119,7 @@ img {
 }
 
 /* Custom Novustell styles */
-.novustell-highlight {
+.mbugani-highlight {
     background-color: #ff9d00;
     color: white;
     padding: 2px 8px;
@@ -127,7 +127,7 @@ img {
     font-weight: 600;
 }
 
-.novustell-primary {
+.mbugani-primary {
     color: #0f238d;
     font-weight: 700;
 }

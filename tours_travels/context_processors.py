@@ -65,7 +65,7 @@ def default_images(request):
         if config_key in default_images_urls:
             return default_images_urls[config_key]
         else:
-            return default_images_urls.get('DEFAULT', static('assets/images/logo/defaultimagenovustell.png'))
+            return default_images_urls.get('DEFAULT', static('assets/images/logo/websitelogo.png'))
     
     # Helper function to get image URL with fallback
     def get_image_url_with_fallback(image_field, content_type='default', use_placeholder=False):

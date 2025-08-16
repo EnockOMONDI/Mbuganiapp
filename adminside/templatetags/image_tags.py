@@ -147,7 +147,7 @@ def image_with_default(image_field, content_type="default", css_class="", alt_te
             if config_key in default_images_config:
                 default_path = default_images_config[config_key]
             else:
-                default_path = default_images_config.get('DEFAULT', 'assets/images/logo/defaultimagenovustell.png')
+                default_path = default_images_config.get('DEFAULT', 'assets/images/logo/websitelogo.png')
 
             image_url = static(default_path)
 
@@ -240,7 +240,7 @@ def image_url_with_default(image_field, content_type="default", use_placeholder=
         if config_key in default_images_config:
             default_path = default_images_config[config_key]
         else:
-            default_path = default_images_config.get('DEFAULT', 'assets/images/logo/defaultimagenovustell.png')
+            default_path = default_images_config.get('DEFAULT', 'assets/images/logo/websitelogo.png')
 
         return static(default_path)
 
