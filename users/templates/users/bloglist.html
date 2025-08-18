@@ -47,7 +47,7 @@
 {% block content %}
 <!-- Hero Section -->
 <section class="blog-hero-section" style="
-    background: linear-gradient(135deg, rgba(15, 35, 141, 0.9) 0%, rgba(255, 157, 0, 0.8) 100%),
+    background: linear-gradient(135deg, rgba(93, 0, 0, 0.9) 0%, rgba(255, 157, 0, 0.8) 100%),
                 url('{% static "assets/images/bg/page-bg.jpg" %}');
     background-size: cover;
     background-position: center;
@@ -99,7 +99,7 @@
                                            placeholder="Search articles, destinations, tips..."
                                            style="border-radius: 25px 0 0 25px; border: 2px solid #e9ecef;">
                                     <button class="btn btn-primary" type="submit"
-                                            style="border-radius: 0 25px 25px 0; background: #0f238d; border-color: #0f238d;">
+                                            style="border-radius: 0 25px 25px 0; background: #5d0000; border-color: #5d0000;">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
@@ -457,7 +457,7 @@
         display: block;
         font-size: 2rem;
         font-weight: 700;
-        color: #ff9d00;
+        color: #fb9300;
     }
 
     .stat-label {
@@ -476,15 +476,15 @@
     }
 
     .search-form .form-control:focus {
-        border-color: #0f238d;
-        box-shadow: 0 0 0 0.2rem rgba(15, 35, 141, 0.25);
+        border-color: #5d0000;
+        box-shadow: 0 0 0 0.2rem rgba(93, 0, 0, 0.25);
     }
 
     /* Section Headings */
     .section-heading {
         font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: 700;
-        color: #0f238d;
+        color: #5d0000;
         font-size: 1.8rem;
         margin-bottom: 2rem;
     }
@@ -527,7 +527,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(45deg, rgba(15, 35, 141, 0.8), rgba(255, 157, 0, 0.8));
+        background: linear-gradient(45deg, rgba(93, 0, 0, 0.8), rgba(255, 157, 0, 0.8));
         opacity: 0;
         transition: opacity 0.3s ease;
         display: flex;
@@ -543,7 +543,7 @@
         position: absolute;
         top: 15px;
         left: 15px;
-        background: #ff9d00;
+        background: #fb9300;
         color: white;
         padding: 5px 12px;
         border-radius: 20px;
@@ -564,8 +564,8 @@
     }
 
     .category-tag {
-        background: rgba(15, 35, 141, 0.1);
-        color: #0f238d;
+        background: rgba(93, 0, 0, 0.1);
+        color: #5d0000;
         padding: 4px 10px;
         border-radius: 12px;
         font-size: 0.8rem;
@@ -578,7 +578,7 @@
     }
 
     .featured-post-card .post-title a {
-        color: #0f238d;
+        color: #5d0000;
         text-decoration: none;
         font-weight: 600;
         line-height: 1.4;
@@ -586,7 +586,7 @@
     }
 
     .featured-post-card .post-title a:hover {
-        color: #ff9d00;
+        color: #fb9300;
     }
 
     /* Modern Blog Cards */
@@ -629,7 +629,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(45deg, rgba(15, 35, 141, 0.9), rgba(255, 157, 0, 0.9));
+        background: linear-gradient(45deg, rgba(93, 0, 0, 0.9), rgba(255, 157, 0, 0.9));
         opacity: 0;
         transition: opacity 0.4s ease;
         display: flex;
@@ -657,7 +657,7 @@
         top: 15px;
         right: 15px;
         background: rgba(255, 255, 255, 0.95);
-        color: #0f238d;
+        color: #5d0000;
         padding: 6px 14px;
         border-radius: 20px;
         font-size: 0.8rem;
@@ -691,7 +691,7 @@
     }
 
     .meta-item i {
-        color: #ff9d00;
+        color: #fb9300;
         font-size: 0.9rem;
     }
 
@@ -701,7 +701,7 @@
     }
 
     .modern-blog-card .post-title a {
-        color: #0f238d;
+        color: #5d0000;
         text-decoration: none;
         font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: 700;
@@ -715,7 +715,7 @@
     }
 
     .modern-blog-card .post-title a:hover {
-        color: #ff9d00;
+        color: #fb9300;
     }
 
     .post-excerpt {
@@ -746,11 +746,11 @@
     }
 
     .author-info i {
-        color: #ff9d00;
+        color: #fb9300;
     }
 
     .read-more-btn {
-        color: #0f238d;
+        color: #5d0000;
         text-decoration: none;
         font-weight: 600;
         font-size: 0.9rem;
@@ -761,7 +761,7 @@
     }
 
     .read-more-btn:hover {
-        color: #ff9d00;
+        color: #fb9300;
         transform: translateX(5px);
     }
 
@@ -780,7 +780,7 @@
 
     .modern-pagination .page-link {
         border: 2px solid #e9ecef;
-        color: #0f238d;
+        color: #5d0000;
         padding: 0.75rem 1rem;
         border-radius: 10px;
         font-weight: 600;
@@ -789,15 +789,15 @@
     }
 
     .modern-pagination .page-link:hover {
-        background: #0f238d;
-        border-color: #0f238d;
+        background: #5d0000;
+        border-color: #5d0000;
         color: white;
         transform: translateY(-2px);
     }
 
     .modern-pagination .page-item.active .page-link {
-        background: #ff9d00;
-        border-color: #ff9d00;
+        background: #fb9300;
+        border-color: #fb9300;
         color: white;
     }
 
@@ -829,7 +829,7 @@
     .sidebar-widget .widget-title {
         font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: 700;
-        color: #0f238d;
+        color: #5d0000;
         font-size: 1.3rem;
         margin-bottom: 1.5rem;
         padding-bottom: 1rem;
@@ -844,7 +844,7 @@
         left: 0;
         width: 50px;
         height: 2px;
-        background: #ff9d00;
+        background: #fb9300;
     }
 
     /* Search Widget */
@@ -861,13 +861,13 @@
     }
 
     .search-input-group .form-control:focus {
-        border-color: #0f238d;
+        border-color: #5d0000;
         box-shadow: none;
     }
 
     .search-submit-btn {
-        background: #0f238d;
-        border: 2px solid #0f238d;
+        background: #5d0000;
+        border: 2px solid #5d0000;
         color: white;
         padding: 0.75rem 1.5rem;
         border-radius: 0 25px 25px 0;
@@ -875,8 +875,8 @@
     }
 
     .search-submit-btn:hover {
-        background: #ff9d00;
-        border-color: #ff9d00;
+        background: #fb9300;
+        border-color: #fb9300;
     }
 
     /* Categories Widget */
@@ -900,14 +900,14 @@
     }
 
     .category-item:hover {
-        background: #0f238d;
+        background: #5d0000;
         color: white;
         transform: translateX(5px);
     }
 
     .category-count {
         background: rgba(255, 157, 0, 0.2);
-        color: #ff9d00;
+        color: #fb9300;
         padding: 0.25rem 0.5rem;
         border-radius: 12px;
         font-size: 0.8rem;
@@ -965,7 +965,7 @@
     }
 
     .recent-post-item .post-title a {
-        color: #0f238d;
+        color: #5d0000;
         text-decoration: none;
         font-weight: 600;
         font-size: 0.9rem;
@@ -974,7 +974,7 @@
     }
 
     .recent-post-item .post-title a:hover {
-        color: #ff9d00;
+        color: #fb9300;
     }
 
     .recent-post-item .post-meta {
@@ -986,7 +986,7 @@
 
     /* Newsletter Widget */
     .newsletter-widget {
-        background: linear-gradient(135deg, #0f238d 0%, #ff9d00 100%);
+        background: linear-gradient(135deg, #5d0000 0%, #fb9300 100%);
         color: white;
     }
 
@@ -1026,7 +1026,7 @@
     .newsletter-form .btn-primary {
         background: white;
         border-color: white;
-        color: #0f238d;
+        color: #5d0000;
         font-weight: 600;
     }
 
@@ -1045,7 +1045,7 @@
 
     .tag-item {
         background: #f8f9fa;
-        color: #0f238d;
+        color: #5d0000;
         padding: 0.5rem 1rem;
         border-radius: 20px;
         text-decoration: none;
@@ -1056,10 +1056,10 @@
     }
 
     .tag-item:hover {
-        background: #0f238d;
+        background: #5d0000;
         color: white;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(15, 35, 141, 0.3);
+        box-shadow: 0 4px 12px rgba(93, 0, 0, 0.3);
     }
 
     /* No Posts Found */
@@ -1073,13 +1073,13 @@
     .view-toggle-btn {
         background: #f8f9fa;
         border: 1px solid #e9ecef;
-        color: #0f238d;
+        color: #5d0000;
         transition: all 0.3s ease;
     }
 
     .view-toggle-btn:hover {
-        background: #0f238d;
-        border-color: #0f238d;
+        background: #5d0000;
+        border-color: #5d0000;
         color: white;
     }
 
@@ -1222,7 +1222,7 @@
         height: 20px;
         margin: -10px 0 0 -10px;
         border: 2px solid #f3f3f3;
-        border-top: 2px solid #0f238d;
+        border-top: 2px solid #5d0000;
         border-radius: 50%;
         animation: spin 1s linear infinite;
     }
@@ -1311,5 +1311,4 @@
     });
 </script>
 
-{% include 'users/footer.html' %}
 {% endblock %}

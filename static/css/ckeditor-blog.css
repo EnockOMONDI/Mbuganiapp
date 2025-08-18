@@ -83,7 +83,7 @@ blockquote p {
 
 /* Travel-specific content blocks */
 .destination-highlight {
-    background: linear-gradient(135deg, #0f238d 0%, #1a3a9e 100%);
+    background: linear-gradient(135deg, #5d0000 0%, #1a3a9e 100%);
     color: white;
     padding: 1.5em;
     border-radius: 10px;
@@ -108,7 +108,7 @@ blockquote p {
 .travel-tip::before {
     content: "💡 Pro Tip: ";
     font-weight: 700;
-    color: #0f238d;
+    color: #5d0000;
     display: block;
     margin-bottom: 0.5em;
 }
@@ -145,7 +145,7 @@ ol.itinerary li {
     margin-bottom: 1em;
     background: #f8f9fa;
     border-radius: 8px;
-    border-left: 4px solid #0f238d;
+    border-left: 4px solid #5d0000;
 }
 
 ol.itinerary li::before {
@@ -154,7 +154,7 @@ ol.itinerary li::before {
     left: 1em;
     top: 1em;
     font-weight: 700;
-    color: #0f238d;
+    color: #5d0000;
     font-size: 0.9em;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -213,7 +213,7 @@ table.travel-info {
 }
 
 table.travel-info th {
-    background: linear-gradient(135deg, #0f238d 0%, #1a3a9e 100%);
+    background: linear-gradient(135deg, #5d0000 0%, #1a3a9e 100%);
     color: white;
     padding: 1em;
     font-weight: 700;

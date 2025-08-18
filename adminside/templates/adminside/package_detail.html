@@ -79,7 +79,7 @@
 
     .package-pricing {
         background: rgba(255, 255, 255, 0.95);
-        color: #0f238d;
+        color: #5d0000;
         padding: 20px 25px;
         border-radius: 12px;
         display: inline-block;
@@ -88,7 +88,7 @@
     .price-main {
         font-size: 2rem;
         font-weight: 700;
-        color: #ff9d00;
+        color: #fb9300;
     }
 
     .price-period {
@@ -120,12 +120,12 @@
     
     .stat-item i {
         font-size: 2rem;
-        color: #ff9d00;
+        color: #fb9300;
         margin-bottom: 0.5rem;
     }
     
     .stat-item h4 {
-        color: #0f238d;
+        color: #5d0000;
         margin-bottom: 0.5rem;
     }
     
@@ -135,7 +135,7 @@
     }
     
     .price-tag {
-        background: linear-gradient(135deg, #ff9d00, #ffb347);
+        background: linear-gradient(135deg, #fb9300, #ffb347);
         color: white;
         padding: 1rem 2rem;
         border-radius: 50px;
@@ -157,7 +157,7 @@
     }
     
     .content-section h3 {
-        color: #0f238d;
+        color: #5d0000;
         margin-bottom: 1.5rem;
         font-weight: 600;
     }
@@ -167,11 +167,11 @@
         border-radius: 10px;
         padding: 1.5rem;
         margin-bottom: 1rem;
-        border-left: 4px solid #ff9d00;
+        border-left: 4px solid #fb9300;
     }
     
     .itinerary-day h5 {
-        color: #0f238d;
+        color: #5d0000;
         margin-bottom: 1rem;
     }
     
@@ -193,7 +193,7 @@
     }
     
     .book-now-btn {
-        background: linear-gradient(135deg, #0f238d, #2d1b4e);
+        background: linear-gradient(135deg, #5d0000, #2d1b4e);
         color: white;
         padding: 1rem 3rem;
         border: none;
@@ -220,13 +220,13 @@
     }
 
     .breadcrumb-nav a {
-        color: #0f238d;
+        color: #5d0000;
         text-decoration: none;
         font-weight: 500;
     }
 
     .breadcrumb-nav a:hover {
-        color: #ff9d00;
+        color: #fb9300;
     }
 
     @media (max-width: 768px) {
@@ -350,7 +350,7 @@
         </div>
 
         <!-- Booking Call-to-Action -->
-        <div class="content-section" style="background: linear-gradient(135deg, #0f238d, #ff9d00); color: white; border-radius: 15px; padding: 40px; text-align: center; margin: 30px 0;">
+        <div class="content-section" style="background: linear-gradient(135deg, #5d0000, #fb9300); color: white; border-radius: 15px; padding: 40px; text-align: center; margin: 30px 0;">
             <h2 style="color: white; margin-bottom: 20px; font-family: 'TAN-Garland-Regular', sans-serif;">
                 <i class="fas fa-star"></i> Ready for Your Adventure?
             </h2>
@@ -359,19 +359,19 @@
             </p>
             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
                 <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px;">
-                    <i class="fas fa-shield-alt" style="color: #ff9d00; margin-right: 8px;"></i>
+                    <i class="fas fa-shield-alt" style="color: #fb9300; margin-right: 8px;"></i>
                     <span>Secure Booking</span>
                 </div>
                 <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px;">
-                    <i class="fas fa-headset" style="color: #ff9d00; margin-right: 8px;"></i>
+                    <i class="fas fa-headset" style="color: #fb9300; margin-right: 8px;"></i>
                     <span>24/7 Support</span>
                 </div>
                 <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px;">
-                    <i class="fas fa-award" style="color: #ff9d00; margin-right: 8px;"></i>
+                    <i class="fas fa-award" style="color: #fb9300; margin-right: 8px;"></i>
                     <span>Best Price Guarantee</span>
                 </div>
             </div>
-            <a href="{% url 'users:add_to_cart' package.id %}" style="background: white; color: #0f238d; padding: 20px 50px; border-radius: 50px; font-size: 1.3rem; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)'">
+            <a href="{% url 'users:add_to_cart' package.id %}" style="background: white; color: #5d0000; padding: 20px 50px; border-radius: 50px; font-size: 1.3rem; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)'">
                 <i class="fas fa-rocket" style="margin-right: 10px;"></i>
                 Start Your Journey - Book Now
             </a>

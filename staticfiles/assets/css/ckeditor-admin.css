@@ -34,7 +34,7 @@
 }
 
 .cke_button_on {
-    background-color: #0f238d !important;
+    background-color: #5d0000 !important;
     color: white !important;
 }
 
@@ -120,7 +120,7 @@
 }
 
 .cke_dialog_title {
-    background: linear-gradient(135deg, #0f238d 0%, #0f238d 100%) !important;
+    background: linear-gradient(135deg, #5d0000 0%, #5d0000 100%) !important;
     color: white !important;
     font-weight: bold !important;
     padding: 15px !important;
@@ -132,7 +132,7 @@
 }
 
 .cke_dialog_ui_button {
-    background: #0f238d !important;
+    background: #5d0000 !important;
     color: white !important;
     border: none !important;
     border-radius: 5px !important;
@@ -173,7 +173,7 @@
 }
 
 .cke_editable table th {
-    background-color: #0f238d !important;
+    background-color: #5d0000 !important;
     color: white !important;
     font-weight: bold !important;
 }
@@ -196,7 +196,7 @@
 
 /* Link styling */
 .cke_editable a {
-    color: #0f238d !important;
+    color: #5d0000 !important;
     text-decoration: underline !important;
     transition: color 0.3s ease !important;
 }
@@ -249,13 +249,13 @@
 }
 
 .unfold-admin .cke_button:hover {
-    background-color: #0f238d !important;
+    background-color: #5d0000 !important;
 }
 
 /* Focus states */
 .django-ckeditor-widget:focus-within {
     box-shadow: 0 0 0 3px rgba(15, 35, 141, 0.1);
-    border-color: #0f238d;
+    border-color: #5d0000;
 }
 
 /* Loading state */

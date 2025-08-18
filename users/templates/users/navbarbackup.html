@@ -290,12 +290,54 @@
 
 /* Menu item hover effects optimization */
 .main-menu > ul > li > a:hover {
-    color: #0f238d !important;
+    color: #5d0000 !important;
     transition: all 0.3s ease !important;
 }
 
 .main-btn:hover {
     transform: translateY(-1px) !important;
     transition: all 0.3s ease !important;
+}
+
+/* === ENHANCED STICKY NAVBAR STYLING === */
+
+/* Force sticky navbar background color */
+.header-navigation.sticky {
+    background-color: var(--navbar-primary) !important;
+    box-shadow: 0 2px 20px var(--navbar-shadow) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Ensure sticky navbar text remains visible */
+.header-navigation.sticky .main-menu > ul > li > a {
+    color: var(--navbar-text-light) !important;
+    text-shadow: none !important;
+}
+
+.header-navigation.sticky .main-menu > ul > li > a:hover {
+    color: var(--navbar-secondary) !important;
+}
+
+/* Sticky navbar logo adjustment */
+.header-navigation.sticky .site-branding .brand-logo img {
+    max-height: 40px !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Force override any conflicting styles */
+.header-two .header-navigation.sticky,
+.header-one .header-navigation.sticky {
+    background-color: var(--navbar-primary) !important;
+}
+
+/* Mobile sticky navbar */
+@media (max-width: 991px) {
+    .header-navigation.sticky {
+        background-color: var(--navbar-primary) !important;
+    }
+
+    .header-navigation.sticky .navbar-toggler span {
+        background-color: var(--navbar-text-light) !important;
+    }
 }
 </style>

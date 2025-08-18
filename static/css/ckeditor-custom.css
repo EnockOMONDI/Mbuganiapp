@@ -100,7 +100,7 @@ th, td {
 }
 
 th {
-    background-color: #0f238d;
+    background-color: #5d0000;
     color: white;
     font-weight: 700;
 }
@@ -128,13 +128,13 @@ img {
 }
 
 .mbugani-primary {
-    color: #0f238d;
+    color: #5d0000;
     font-weight: 700;
 }
 
 .travel-tip {
     background-color: #e8f4fd;
-    border-left: 4px solid #0f238d;
+    border-left: 4px solid #5d0000;
     padding: 1em 1.5em;
     margin: 1.5em 0;
     border-radius: 0 8px 8px 0;
@@ -143,7 +143,7 @@ img {
 .travel-tip::before {
     content: "💡 Travel Tip: ";
     font-weight: 700;
-    color: #0f238d;
+    color: #5d0000;
 }
 
 /* Code blocks */
@@ -168,7 +168,7 @@ code {
 hr {
     border: none;
     height: 2px;
-    background: linear-gradient(90deg, #0f238d, #ff9d00);
+    background: linear-gradient(90deg, #5d0000, #ff9d00);
     margin: 2em 0;
     border-radius: 1px;
 }
@@ -176,7 +176,7 @@ hr {
 /* Strong and emphasis */
 strong, b {
     font-weight: 700;
-    color: #0f238d;
+    color: #5d0000;
 }
 
 em, i {

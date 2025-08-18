@@ -43,7 +43,7 @@
         }
         
         .alert-badge {
-            background: #ff9d00;
+            background: #fb9300;
             color: white;
             padding: 8px 20px;
             border-radius: 20px;
@@ -58,7 +58,7 @@
         }
         
         .booking-summary {
-            background: linear-gradient(135deg, #0f238d, #2a1a4a);
+            background: linear-gradient(135deg, #5d0000, #2a1a4a);
             color: white;
             padding: 25px;
             border-radius: 10px;
@@ -68,7 +68,7 @@
         .booking-ref {
             font-size: 20px;
             font-weight: 700;
-            color: #ff9d00;
+            color: #fb9300;
             text-align: center;
             margin-bottom: 20px;
             letter-spacing: 1px;
@@ -91,7 +91,7 @@
         .stat-value {
             font-size: 18px;
             font-weight: 700;
-            color: #ff9d00;
+            color: #fb9300;
         }
         
         .stat-label {
@@ -105,11 +105,11 @@
         }
         
         .section-title {
-            color: #0f238d;
+            color: #5d0000;
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 15px;
-            border-bottom: 2px solid #ff9d00;
+            border-bottom: 2px solid #fb9300;
             padding-bottom: 5px;
         }
         
@@ -129,7 +129,7 @@
         .details-table th {
             background: #f8f9fa;
             font-weight: 600;
-            color: #0f238d;
+            color: #5d0000;
             width: 30%;
         }
         
@@ -145,7 +145,7 @@
         }
         
         .package-title {
-            color: #0f238d;
+            color: #5d0000;
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 10px;
@@ -429,7 +429,7 @@
                 <div class="section-title">🎯 Selected Add-ons</div>
                 
                 {% if booking.selected_accommodations.exists %}
-                <h4 style="color: #0f238d; margin: 15px 0 10px 0;">🏨 Accommodations:</h4>
+                <h4 style="color: #5d0000; margin: 15px 0 10px 0;">🏨 Accommodations:</h4>
                 <ul style="margin: 0 0 15px 20px; color: #666;">
                     {% for accommodation in booking.selected_accommodations.all %}
                     <li>{{ accommodation.name }} - ${{ accommodation.price_per_room_per_night }}/night</li>
@@ -438,7 +438,7 @@
                 {% endif %}
                 
                 {% if booking.selected_travel_modes.exists %}
-                <h4 style="color: #0f238d; margin: 15px 0 10px 0;">✈️ Travel Services:</h4>
+                <h4 style="color: #5d0000; margin: 15px 0 10px 0;">✈️ Travel Services:</h4>
                 <ul style="margin: 0 0 15px 20px; color: #666;">
                     {% for travel_mode in booking.selected_travel_modes.all %}
                     <li>{{ travel_mode.name }} - ${{ travel_mode.price_per_person }}/person</li>
@@ -451,7 +451,7 @@
             {% if booking.special_requests %}
             <div class="details-section">
                 <div class="section-title">📝 Special Requests</div>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; color: #666; border-left: 4px solid #ff9d00;">
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; color: #666; border-left: 4px solid #fb9300;">
                     {{ booking.special_requests|safe }}
                 </div>
             </div>

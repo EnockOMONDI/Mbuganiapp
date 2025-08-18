@@ -50,7 +50,7 @@
 .ck-editor__editable h1,
 .ck-editor__editable h2,
 .ck-editor__editable h3 {
-    color: #0f238d;
+    color: #5d0000;
     font-weight: bold;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .ck-editor__editable table th {
-    background-color: #0f238d;
+    background-color: #5d0000;
     color: white;
     padding: 8px;
 }
