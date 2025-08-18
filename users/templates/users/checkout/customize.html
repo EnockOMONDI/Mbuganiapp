@@ -342,7 +342,7 @@
                                 <input type="checkbox" name="accommodations" value="{{ accommodation.id }}" class="addon-checkbox" id="acc_{{ accommodation.id }}">
                                 
                                 <div class="addon-image">
-                                    {% image_with_placeholder accommodation.image "" accommodation.name %}
+                                    {% image_with_default accommodation.image "accommodations" "" accommodation.name %}
                                 </div>
                                 
                                 <h3 class="addon-title">{{ accommodation.name }}</h3>

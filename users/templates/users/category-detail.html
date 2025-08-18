@@ -136,7 +136,8 @@
                             <article class="modern-blog-card">
                                 <div class="post-image-wrapper">
                                     <a href="{% url 'blog:blog-detail' slug=post.slug %}">
-                                        <img src="{{ post.image.cdn_url }}" alt="{{ post.title }}" class="post-image">
+                                        {% load image_tags %}
+                                        {% image_with_default post.image "blog_posts" "post-image" post.title %}
                                         <div class="image-overlay">
                                             <div class="overlay-content">
                                                 <i class="fas fa-arrow-right"></i>

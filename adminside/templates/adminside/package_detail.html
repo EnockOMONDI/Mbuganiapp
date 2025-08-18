@@ -404,7 +404,7 @@
             <h3><i class="fas fa-bed me-2"></i>Accommodations</h3>
             {% for accommodation in package.available_accommodations.all %}
             <div class="accommodation-item">
-                {% image_with_placeholder accommodation.image "" accommodation.name %}
+                {% image_with_default accommodation.image "accommodations" "" accommodation.name %}
                 <div>
                     <h5>{{ accommodation.name }}</h5>
                     <p>{{ accommodation.description|truncatewords:20 }}</p>

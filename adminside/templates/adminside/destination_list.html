@@ -521,7 +521,7 @@
         {% for city in country.children.all %}
         <div class="col-lg-4 col-md-6">
             <div class="destination-card">
-                <div class="destination-image" style="background-image: url('{{ city.image.cdn_url }}');">
+                <div class="destination-image" style="background-image: url('{{ city.get_image_url }}');">
                     {% if city.is_featured %}
                     <div class="featured-badge">
                         <i class="fas fa-star me-1"></i>Featured

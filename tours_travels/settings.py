@@ -187,11 +187,11 @@ DEFAULT_IMAGES = {
     # Primary default image for most content types
     'DEFAULT': 'assets/images/logo/websitelogo.png',
 
-    # Category-specific default images
-    'DESTINATIONS': 'assets/images/logo/websitelogo.png',
-    'ACCOMMODATIONS': 'assets/images/logo/websitelogo.png',
-    'PACKAGES': 'assets/images/logo/websitelogo.png',
-    'BLOG_POSTS': 'assets/images/logo/websitelogo.png',
+    # Category-specific default images - Updated for Mbugani Luxe Adventures
+    'DESTINATIONS': 'assets/images/about/about-1.png',
+    'ACCOMMODATIONS': 'assets/images/about/accomodationdefault.png',
+    'PACKAGES': 'assets/images/hero/2.png',
+    'BLOG_POSTS': 'assets/images/about/about-2.jpg',
 
     # Keep existing job thumbnail (do not change)
     'JOB_LISTINGS': 'images/jobsthumbnail.png',
