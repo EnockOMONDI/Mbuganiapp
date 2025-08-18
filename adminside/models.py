@@ -119,6 +119,12 @@ class Destination(models.Model):
             children.extend(child.get_all_children())
         return children
 
+    def get_image_url(self):
+        """Get the image URL with fallback to default destination image"""
+        if self.image:
+            return self.image.cdn_url
+        return '/static/assets/images/about/about-1.png'
+
 
 class Accommodation(models.Model):
     """
@@ -193,6 +199,12 @@ class Accommodation(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.destination.name}"
+
+    def get_image_url(self):
+        """Get the image URL with fallback to default accommodation image"""
+        if self.image:
+            return self.image.cdn_url
+        return '/static/assets/images/about/accomodationdefault.png'
 
     def get_absolute_url(self):
         return reverse('accommodation_detail', kwargs={'slug': self.slug})

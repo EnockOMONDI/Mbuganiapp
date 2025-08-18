@@ -334,7 +334,7 @@ def booking_confirmation(request, booking_reference):
     
     # Generate WhatsApp link
     whatsapp_message = f"Booking made for {booking.package.name} - Reference: {booking.booking_reference}"
-    whatsapp_link = f"https://api.whatsapp.com/send?phone=254701363551&text={whatsapp_message}"
+    whatsapp_link = f"https://api.whatsapp.com/send?phone=254798197430&text={whatsapp_message}"
     
     context = {
         'booking': booking,
@@ -479,7 +479,7 @@ def send_booking_confirmation_email(booking, is_new_user=False):
         # URL encode the WhatsApp message
         from urllib.parse import quote
         whatsapp_message = f"Booking made for {booking.package.name} - Reference: {booking.booking_reference}"
-        whatsapp_link = f"https://api.whatsapp.com/send?phone=254701363551&text={quote(whatsapp_message)}"
+        whatsapp_link = f"https://api.whatsapp.com/send?phone=254798197430&text={quote(whatsapp_message)}"
 
         # Generate dashboard URL
         dashboard_url = f"{getattr(settings, 'SITE_URL', 'https://mbuganiluxeadventures.com')}/profile/"
