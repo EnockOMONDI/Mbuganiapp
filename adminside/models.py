@@ -496,3 +496,71 @@ class PackageBooking(models.Model):
 
     def __str__(self):
         return f"Booking {self.id} - {self.package.name} by {self.user.username}"
+
+
+class HeroSlider(models.Model):
+    """
+    Dynamic hero slider model for homepage management
+    """
+    title = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True,
+        help_text="Optional caption/title for the hero slide"
+    )
+    subtitle = models.CharField(
+        max_length=300,
+        blank=True,
+        null=True,
+        help_text="Optional subtitle for the hero slide"
+    )
+    image = ImageField(
+        manual_crop="16:9",
+        help_text="Hero slider image (recommended size: 1920x1080px)"
+    )
+    is_active = models.BooleanField(
+        default=True,
+        help_text="Enable/disable this slide"
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+        help_text="Order of appearance (lower numbers appear first)"
+    )
+
+    # Optional call-to-action
+    cta_text = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        help_text="Call-to-action button text (e.g., 'Book Now', 'Explore')"
+    )
+    cta_url = models.URLField(
+        blank=True,
+        null=True,
+        help_text="URL for the call-to-action button"
+    )
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['order', '-created_at']
+        verbose_name = "Hero Slider"
+        verbose_name_plural = "Hero Sliders"
+
+    def __str__(self):
+        if self.title:
+            return f"Hero Slide: {self.title}"
+        return f"Hero Slide {self.id}"
+
+    @classmethod
+    def get_active_slides(cls):
+        """Get all active slides ordered by their order field"""
+        return cls.objects.filter(is_active=True).order_by('order')
+
+    def get_image_url(self):
+        """Get the image URL with fallback to default"""
+        if self.image:
+            return self.image.cdn_url
+        return '/static/assets/images/hero/2.png'

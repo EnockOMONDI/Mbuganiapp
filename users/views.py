@@ -585,7 +585,7 @@ def home(request):
     Fully optimized homepage view with efficient database queries, caching, and featured accommodations
     """
     from django.core.cache import cache
-    from adminside.models import Accommodation
+    from adminside.models import Accommodation, HeroSlider
     import logging
 
     logger = logging.getLogger(__name__)
@@ -650,6 +650,9 @@ def home(request):
             except Exception as e:
                 continue
 
+        # Get active hero slider images
+        hero_slides = HeroSlider.get_active_slides()
+
         # Create optimized context
         context = {
             'featured_destinations': featured_destinations,
@@ -659,6 +662,7 @@ def home(request):
             'packages': package_data,  # For backward compatibility with template
             'dests1': all_destinations,  # For backward compatibility
             'package1': packages_queryset,  # For backward compatibility
+            'hero_slides': hero_slides,  # Dynamic hero slider data
         }
 
         return render(request, 'users/indexbackup.html', context)
@@ -675,6 +679,7 @@ def home(request):
                 'packages': [],
                 'dests1': [],
                 'package1': [],
+                'hero_slides': [],  # Empty hero slides for fallback
             }
             logger.debug("Using basic context fallback")
             return render(request, 'users/indexbackup.html', basic_context)

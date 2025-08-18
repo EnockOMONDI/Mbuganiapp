@@ -1,3 +1,6 @@
+<!-- 
+ indesbackup.html
+  -->
 {% extends 'users/basebackup.html' %}
 {% load static %}
 {% load image_tags %}
@@ -13,76 +16,64 @@
         <div class="hero-wrapper-two">
             <!--=== Hero Slider ===-->
             <div class="hero-slider-two">
-                {% if hero_slides %}
-                    {% for slide in hero_slides %}
-                        <!--=== Dynamic Slider ===-->
-                        <div class="single-slider">
-                            <div class="image-layer bg_cover" style="background-image: url({% if slide.image %}{{ slide.image.cdn_url }}{% else %}{% static 'assets/images/hero/2.png' %}{% endif %});"></div>
-                            <div class="container-fluid">
-                                <div class="row justify-content-center">
-                                    <div class="col-xl-9">
-                                        <!--=== Hero Content ===-->
-                                        <div class="hero-content text-white text-center">
-                                            <span class="ribbon" style="background: rgba(251, 147, 0, 0.9); color: #ffffff; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; margin-bottom: 20px; display: inline-block;">Mbugani Luxe Adventures</span>
-
-                                            {% if slide.title %}
-                                                <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif; font-size: 3.5rem; margin-bottom: 20px;" data-animation="fadeInDown" data-delay=".4s">{{ slide.title }}</h1>
-                                            {% else %}
-                                                <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif; font-size: 3.5rem; margin-bottom: 20px;" data-animation="fadeInDown" data-delay=".4s">Untamed. Unmatched. Unforgettable.</h1>
-                                            {% endif %}
-
-                                            {% if slide.subtitle %}
-                                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;" data-animation="fadeInUp" data-delay=".5s">
-                                                    {{ slide.subtitle }}
-                                                </p>
-                                            {% else %}
-                                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;" data-animation="fadeInUp" data-delay=".5s">
-                                                    Experience Kenya's wild beauty through luxury safari adventures that blend untamed wilderness with refined elegance.
-                                                </p>
-                                            {% endif %}
-
-                                            <div class="hero-button" data-animation="fadeInRight" data-delay=".6s">
-                                                {% if slide.cta_text and slide.cta_url %}
-                                                    <a href="{{ slide.cta_url }}" class="view-all-destinations-btn wow fadeInUp" data-wow-delay="0.7s">
-                                                        <i class="fas fa-binoculars"></i> {{ slide.cta_text }}
-                                                    </a>
-                                                {% else %}
-                                                    <a href="{% url 'adminside:package_list' %}" class="view-all-destinations-btn wow fadeInUp" data-wow-delay="0.7s">
-                                                        <i class="fas fa-binoculars"></i> Explore Our Safaris
-                                                    </a>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <!--=== Default Slider (Fallback) ===-->
-                    <div class="single-slider">
-                        <div class="image-layer bg_cover" style="background-image: url({% static 'assets/images/hero/2.png' %});"></div>
-                        <div class="container-fluid">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-9">
-                                    <!--=== Hero Content ===-->
-                                    <div class="hero-content text-white text-center">
-                                        <span class="ribbon" style="background: rgba(251, 147, 0, 0.9); color: #ffffff; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; margin-bottom: 20px; display: inline-block;">Mbugani Luxe Adventures</span>
-                                        <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif; font-size: 3.5rem; margin-bottom: 20px;" data-animation="fadeInDown" data-delay=".4s">Untamed. Unmatched. Unforgettable.</h1>
-                                        <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;" data-animation="fadeInUp" data-delay=".5s">
-                                            Experience Kenya's wild beauty through luxury safari adventures that blend untamed wilderness with refined elegance.
-                                        </p>
-                                        <div class="hero-button" data-animation="fadeInRight" data-delay=".6s">
-                                            <a href="{% url 'adminside:package_list' %}" class="view-all-destinations-btn wow fadeInUp" data-wow-delay="0.7s">
-                                                <i class="fas fa-binoculars"></i> Explore Our Safaris
-                                            </a>
-                                        </div>
+                <!--=== Single Slider ===-->
+                <div class="single-slider">
+                    <div class="image-layer bg_cover" style="background-image: url({% static 'assets/images/hero/hero1.png' %});"></div>
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-9">
+                                <!--=== Hero Content ===-->
+                                <div class="hero-content text-white text-center">
+                                    <span class="ribbon" style="background: rgba(251, 147, 0, 0.9); color: #ffffff; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; margin-bottom: 20px; display: inline-block;">Mbugani Luxe Adventures</span>
+                                    <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif; font-size: 3.5rem; margin-bottom: 20px;" data-animation="fadeInDown" data-delay=".4s">Untamed. Unmatched. Unforgettable.</h1>
+                                    <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;" data-animation="fadeInUp" data-delay=".5s">
+                                        Experience Kenya's wild beauty through luxury safari adventures that blend untamed wilderness with refined elegance.
+                                    </p>
+                                    <div class="hero-button" data-animation="fadeInRight" data-delay=".6s">
+                                        <a href="{% url 'adminside:package_list' %}"class="view-all-destinations-btn wow fadeInUp" data-wow-delay="0.7s"> <i class="fas fa-binoculars"></i> Explore Our Safaris</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endif %}
+                </div>
+                <!--=== Single Slider ===-->
+                <div class="single-slider">
+                    <div class="image-layer bg_cover" style="background-image: url({% static 'assets/images/hero/2.png' %});"></div>
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-9">
+                                <!--=== Hero Content ===-->
+                                <div class="hero-content text-white text-center">
+                                    <!-- <span class="ribbon">Luxury Safari & Adventure</span> -->
+                                    <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif;" data-animation="fadeInDown" data-delay=".4s">Discover East Africa's Hidden Treasures</h1>
+                                    <div class="hero-button" data-animation="fadeInRight" data-delay=".6s"> 
+                                        <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Explore Safaris<i class="fas fa-paper-plane"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--=== Single Slider ===-->
+                <div class="single-slider">
+                    <div class="image-layer bg_cover" style="background-image: url({% static 'assets/images/hero/2.png' %});"></div>
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-9">
+                                <!--=== Hero Content ===-->
+                                <div class="hero-content text-white text-center">
+                                    <!-- <span class="ribbon">Luxury Safari & Adventure</span> -->
+                                    <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif;" data-animation="fadeInDown" data-delay=".4s">Experience Wildlife Like Never Before</h1>
+                                    <div class="hero-button" data-animation="fadeInRight" data-delay=".6s"> 
+                                        <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Book Safari<i class="fas fa-paper-plane"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
             </div>
         </div>
     </section>
@@ -1172,3 +1163,4 @@
     </style>
 
 {% endblock %}
+  <!-- end of indexbackup.html -->

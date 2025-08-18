@@ -8,7 +8,8 @@ from .models import (
     Package,
     Itinerary,
     ItineraryDay,
-    PackageBooking
+    PackageBooking,
+    HeroSlider
 )
 # CKEditor5Field automatically handles CKEditor 5 widgets based on config_name
 # No need for explicit widget overrides
@@ -314,6 +315,46 @@ class PackageBookingAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+@admin.register(HeroSlider)
+class HeroSliderAdmin(admin.ModelAdmin):
+    list_display = ('display_image_thumbnail', 'title', 'subtitle', 'is_active', 'order', 'created_at')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('title', 'subtitle', 'cta_text')
+    list_editable = ('is_active', 'order')
+    ordering = ('order', '-created_at')
+
+    fieldsets = (
+        ('Slide Content', {
+            'fields': ('title', 'subtitle', 'image')
+        }),
+        ('Call to Action', {
+            'fields': ('cta_text', 'cta_url'),
+            'classes': ('collapse',)
+        }),
+        ('Display Settings', {
+            'fields': ('is_active', 'order')
+        }),
+    )
+
+    def display_image_thumbnail(self, obj):
+        """Display image thumbnail in admin list"""
+        if obj.image:
+            return format_html(
+                '<img src="{}" style="width: 100px; height: 60px; object-fit: cover; border-radius: 4px;" />',
+                obj.image.cdn_url
+            )
+        return format_html(
+            '<div style="width: 100px; height: 60px; background: #f0f0f0; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">No Image</div>'
+        )
+    display_image_thumbnail.short_description = 'Image'
+    display_image_thumbnail.allow_tags = True
+
+    class Media:
+        css = {
+            'all': ('assets/css/unfold-custom.css',)
+        }
+        js = ('assets/js/unfold-custom.js',)
 
 # Customize admin site header and title
 admin.site.site_header = 'Mbugani Luxe Adventures Administration'
