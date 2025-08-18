@@ -15,6 +15,27 @@
             <div class="hero-slider-two">
                 <!--=== Single Slider ===-->
                 <div class="single-slider">
+                    <div class="image-layer bg_cover" style="background-image: url({% static 'assets/images/hero/hero1.png' %});"></div>
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-9">
+                                <!--=== Hero Content ===-->
+                                <div class="hero-content text-white text-center">
+                                    <span class="ribbon" style="background: rgba(251, 147, 0, 0.9); color: #ffffff; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; margin-bottom: 20px; display: inline-block;">Mbugani Luxe Adventures</span>
+                                    <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif; font-size: 3.5rem; margin-bottom: 20px;" data-animation="fadeInDown" data-delay=".4s">Untamed. Unmatched. Unforgettable.</h1>
+                                    <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;" data-animation="fadeInUp" data-delay=".5s">
+                                        Experience Kenya's wild beauty through luxury safari adventures that blend untamed wilderness with refined elegance.
+                                    </p>
+                                    <div class="hero-button" data-animation="fadeInRight" data-delay=".6s">
+                                        <a href="{% url 'adminside:package_list' %}"class="view-all-destinations-btn wow fadeInUp" data-wow-delay="0.7s"> <i class="fas fa-binoculars"></i> Explore Our Safaris</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--=== Single Slider ===-->
+                <div class="single-slider">
                     <div class="image-layer bg_cover" style="background-image: url({% static 'assets/images/hero/hero-two_img-1.jpg' %});"></div>
                     <div class="container-fluid">
                         <div class="row justify-content-center">
@@ -49,27 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <!--=== Single Slider ===-->
-                <div class="single-slider">
-                    <div class="image-layer bg_cover" style="background-image: url({% static 'assets/images/hero/hero1.png' %});"></div>
-                    <div class="container-fluid">
-                        <div class="row justify-content-center">
-                            <div class="col-xl-9">
-                                <!--=== Hero Content ===-->
-                                <div class="hero-content text-white text-center">
-                                    <span class="ribbon" style="background: rgba(251, 147, 0, 0.9); color: #ffffff; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; margin-bottom: 20px; display: inline-block;">Mbugani Luxe Adventures</span>
-                                    <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif; font-size: 3.5rem; margin-bottom: 20px;" data-animation="fadeInDown" data-delay=".4s">Untamed. Unmatched. Unforgettable.</h1>
-                                    <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;" data-animation="fadeInUp" data-delay=".5s">
-                                        Experience Kenya's wild beauty through luxury safari adventures that blend untamed wilderness with refined elegance.
-                                    </p>
-                                    <div class="hero-button" data-animation="fadeInRight" data-delay=".6s">
-                                        <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Explore Our Safaris<i class="fas fa-binoculars"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+             
             </div>
         </div>
     </section>
@@ -629,7 +630,7 @@
             display: inline-flex;
             align-items: center;
             padding: 18px 40px;
-            background: linear-gradient(135deg, #5d0000 0%, #5d0000 100%);
+            background: linear-gradient(135deg, #5d0000 0%, #fb9300 100%);
             color: white;
             text-decoration: none;
             border-radius: 50px;
@@ -637,7 +638,7 @@
             font-size: 1.1rem;
             transition: all 0.4s ease;
             box-shadow: 0 8px 25px rgba(23, 11, 44, 0.3);
-            border: 3px solid transparent;
+            border: 0px solid transparent;
         }
 
         .view-all-destinations-btn:hover {
