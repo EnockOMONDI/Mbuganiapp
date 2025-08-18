@@ -9,6 +9,27 @@ import os
 # Development-specific settings
 DEBUG = True
 
+# Enhanced template debugging for development
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'debug': True,  # Enable template debugging
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+                'tours_travels.context_processors.default_images',
+                'tours_travels.context_processors.site_settings',
+            ],
+        },
+    },
+]
+
 # Development database - SQLite
 DATABASES = {
     'default': {
@@ -23,6 +44,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Development allowed hosts
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
+# Enhanced debugging settings for template troubleshooting
+INTERNAL_IPS = ['127.0.0.1', 'localhost']
+
+# Show detailed error pages
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
+# Template string if invalid
+TEMPLATE_STRING_IF_INVALID = "TEMPLATE_ERROR: %s"
+
 # Development static files
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles_dev'
@@ -31,7 +61,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles_dev'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media_dev'
 
-# Development logging
+# Development logging with enhanced template debugging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -42,6 +72,10 @@ LOGGING = {
         },
         'simple': {
             'format': '{levelname} {message}',
+            'style': '{',
+        },
+        'template_debug': {
+            'format': 'TEMPLATE DEBUG: {levelname} {asctime} {message}',
             'style': '{',
         },
     },
@@ -72,6 +106,11 @@ LOGGING = {
             'propagate': False,
         },
         'adminside': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.template': {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False,

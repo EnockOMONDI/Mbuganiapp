@@ -586,6 +586,10 @@ def home(request):
     """
     from django.core.cache import cache
     from adminside.models import Accommodation
+    import logging
+
+    logger = logging.getLogger(__name__)
+    logger.debug("Starting home view")
 
     try:
         # Get featured destinations with optimized query (limit to 8 for performance)
@@ -657,24 +661,27 @@ def home(request):
             'package1': packages_queryset,  # For backward compatibility
         }
 
-        return render(request, 'users/index.html', context)
+        return render(request, 'users/indexbackup.html', context)
 
     except Exception as e:
+        logger.error(f"Error in home view main try block: {e}")
         # Fallback to basic context to prevent complete failure
         try:
             basic_context = {
-                'featured_destinations': Destination.objects.filter(is_featured=True, is_active=True)[:4],
+                'featured_destinations': [],
                 'featured_accommodations': [],
-                'all_destinations': Destination.objects.filter(is_active=True)[:20],
+                'all_destinations': [],
                 'package_data': [],
                 'packages': [],
                 'dests1': [],
                 'package1': [],
             }
-            return render(request, 'users/index.html', basic_context)
-        except:
+            logger.debug("Using basic context fallback")
+            return render(request, 'users/indexbackup.html', basic_context)
+        except Exception as e2:
+            logger.error(f"Error in home view fallback: {e2}")
             from django.http import HttpResponse
-            return HttpResponse("Homepage temporarily unavailable. Please try again later.", status=503)
+            return HttpResponse(f"Homepage temporarily unavailable. Error: {e2}", status=503)
 
 
 

@@ -1,80 +1,208 @@
-<section class="hero-section">
-            <!--=== Hero Wrapper ===-->
-            <div class="hero-wrapper-two">
-                <!--=== Hero Slider ===-->
-                <div class="hero-slider-two slick-initialized slick-slider">
-                    <!--=== Single Slider ===-->
-                    
-                    <!--=== Single Slider ===-->
-                    
-                    <!--=== Single Slider ===-->
-                    
-                    <!--=== Single Slider ===-->
-                    
-                <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 1720px;"><div class="single-slider slick-slide" tabindex="-1" style="width: 430px; position: relative; left: 0px; top: 0px; z-index: 998; opacity: 0;" data-slick-index="0" aria-hidden="true">
-                        <div class="image-layer bg_cover" style="background-image: url(assets/images/hero/hero-two_img-1.jpg);"></div>
-                        <div class="container-fluid">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-9">
-                                    <!--=== Hero Content ===-->
-                                    <div class="hero-content text-white text-center">
-                                        <span class="ribbon">Tour &amp; Travels</span>
-                                        <h1 data-animation="fadeInDown" data-delay=".4s" class="" style="animation-delay: 0.4s;">Tour Travel &amp; Adventure Camping</h1>
-                                        <div class="hero-button" data-animation="fadeInRight" data-delay=".6s" style="animation-delay: 0.6s;"> 
-                                            <a href="about.html" class="main-btn primary-btn" tabindex="-1">Explore More<i class="fas fa-paper-plane"></i></a>
-                                        </div>
+{% extends 'users/basebackup.html' %}
+{% load static %}
+
+{% block title %}Mbugani Luxe Adventures | Premium Safari & Adventure Tourism | East Africa Travel Experts{% endblock %}
+
+{% block meta_description %}Experience luxury safari adventures with Mbugani Luxe Adventures. Premium East Africa travel, wildlife safaris, cultural tours, and adventure tourism. Expert guides, luxury accommodations, unforgettable experiences.{% endblock %}
+
+{% block content %}
+    <!--====== Start Hero Section ======-->
+    <section class="hero-section">
+        <!--=== Hero Wrapper ===-->
+        <div class="hero-wrapper-two">
+            <!--=== Hero Slider ===-->
+            <div class="hero-slider-two">
+                <!--=== Single Slider ===-->
+                <div class="single-slider">
+                    <div class="image-layer bg_cover" style="background-image: url({% static 'assets/images/hero/hero-two_img-1.jpg' %});"></div>
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-9">
+                                <!--=== Hero Content ===-->
+                                <div class="hero-content text-white text-center">
+                                    <span class="ribbon">Luxury Safari & Adventure</span>
+                                    <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif;" data-animation="fadeInDown" data-delay=".4s">Discover East Africa's Hidden Treasures</h1>
+                                    <div class="hero-button" data-animation="fadeInRight" data-delay=".6s"> 
+                                        <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Explore Safaris<i class="fas fa-paper-plane"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div><div class="single-slider slick-slide" tabindex="-1" style="width: 430px; position: relative; left: -430px; top: 0px; z-index: 998; opacity: 0;" data-slick-index="1" aria-hidden="true">
-                        <div class="image-layer bg_cover" style="background-image: url(assets/images/hero/hero-two_img-2.jpg);"></div>
-                        <div class="container-fluid">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-9">
-                                    <!--=== Hero Content ===-->
-                                    <div class="hero-content text-white text-center">
-                                        <span class="ribbon">Tour &amp; Travels</span>
-                                        <h1 data-animation="fadeInDown" data-delay=".4s" class="" style="animation-delay: 0.4s;">Tour Travel &amp; Adventure Camping</h1>
-                                        <div class="hero-button" data-animation="fadeInRight" data-delay=".6s" style="animation-delay: 0.6s;"> 
-                                            <a href="about.html" class="main-btn primary-btn" tabindex="-1">Explore More<i class="fas fa-paper-plane"></i></a>
-                                        </div>
+                    </div>
+                </div>
+                <!--=== Single Slider ===-->
+                <div class="single-slider">
+                    <div class="image-layer bg_cover" style="background-image: url({% static 'assets/images/hero/hero-two_img-2.jpg' %});"></div>
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-9">
+                                <!--=== Hero Content ===-->
+                                <div class="hero-content text-white text-center">
+                                    <span class="ribbon">Luxury Safari & Adventure</span>
+                                    <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif;" data-animation="fadeInDown" data-delay=".4s">Experience Wildlife Like Never Before</h1>
+                                    <div class="hero-button" data-animation="fadeInRight" data-delay=".6s"> 
+                                        <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Book Safari<i class="fas fa-paper-plane"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div><div class="single-slider slick-slide" tabindex="-1" style="width: 430px; position: relative; left: -860px; top: 0px; z-index: 998; opacity: 0;" data-slick-index="2" aria-hidden="true">
-                        <div class="image-layer bg_cover" style="background-image: url(assets/images/hero/hero-two_img-3.jpg);"></div>
-                        <div class="container-fluid">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-9">
-                                    <!--=== Hero Content ===-->
-                                    <div class="hero-content text-white text-center">
-                                        <span class="ribbon">Tour &amp; Travels</span>
-                                        <h1 data-animation="fadeInDown" data-delay=".4s" class="" style="animation-delay: 0.4s;">Tour Travel &amp; Adventure Camping</h1>
-                                        <div class="hero-button" data-animation="fadeInRight" data-delay=".6s" style="animation-delay: 0.6s;"> 
-                                            <a href="about.html" class="main-btn primary-btn" tabindex="-1">Explore More<i class="fas fa-paper-plane"></i></a>
-                                        </div>
+                    </div>
+                </div>
+                <!--=== Single Slider ===-->
+                <div class="single-slider">
+                    <div class="image-layer bg_cover" style="background-image: url({% static 'assets/images/hero/hero-three_img-1.jpg' %});"></div>
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-9">
+                                <!--=== Hero Content ===-->
+                                <div class="hero-content text-white text-center">
+                                    <span class="ribbon">Luxury Safari & Adventure</span>
+                                    <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif;" data-animation="fadeInDown" data-delay=".4s">Luxury Meets Adventure</h1>
+                                    <div class="hero-button" data-animation="fadeInRight" data-delay=".6s"> 
+                                        <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Discover More<i class="fas fa-paper-plane"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div><div class="single-slider slick-slide slick-current slick-active" tabindex="0" style="width: 430px; position: relative; left: -1290px; top: 0px; z-index: 999; opacity: 1;" data-slick-index="3" aria-hidden="false">
-                        <div class="image-layer bg_cover" style="background-image: url(assets/images/hero/hero-two_img-4.jpg);"></div>
-                        <div class="container-fluid">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-9">
-                                    <!--=== Hero Content ===-->
-                                    <div class="hero-content text-white text-center">
-                                        <span class="ribbon">Tour &amp; Travels</span>
-                                        <h1 data-animation="fadeInDown" data-delay=".4s" class="" style="animation-delay: 0.4s;">Tour Travel &amp; Adventure Camping</h1>
-                                        <div class="hero-button" data-animation="fadeInRight" data-delay=".6s" style="animation-delay: 0.6s;"> 
-                                            <a href="about.html" class="main-btn primary-btn" tabindex="0">Explore More<i class="fas fa-paper-plane"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div></div></div></div>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
+    <!--====== End Hero Section ======-->
+
+    <!--====== Start Featured Destinations Section ======-->
+    <section class="destinations-section pt-100 pb-50">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7">
+                    <div class="section-title text-center mb-45 wow fadeInDown">
+                        <h1 class="display-4 fw-bold mb-4" style="color: #0f238d; font-family: 'TAN-Garland-Regular', sans-serif;">
+                            Featured Destinations
+                        </h1>
+                        <p class="lead">Discover the most breathtaking destinations in East Africa with our expertly curated safari experiences.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-6">
+                    <div class="single-destination-item mb-50 wow fadeInUp">
+                        <div class="destination-img">
+                            <img src="{% static 'assets/images/place/place-1.jpg' %}" alt="Serengeti National Park">
+                            <div class="destination-overlay">
+                                <div class="destination-content">
+                                    <h3 class="destination-title" style="font-family: 'TAN-Garland-Regular', sans-serif;">Serengeti National Park</h3>
+                                    <p class="destination-text">Experience the Great Migration and witness millions of wildebeest crossing the plains.</p>
+                                    <a href="{% url 'adminside:package_list' %}" class="destination-btn">Explore <i class="far fa-long-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single-destination-item mb-50 wow fadeInUp">
+                        <div class="destination-img">
+                            <img src="{% static 'assets/images/place/place-2.jpg' %}" alt="Masai Mara">
+                            <div class="destination-overlay">
+                                <div class="destination-content">
+                                    <h3 class="destination-title" style="font-family: 'TAN-Garland-Regular', sans-serif;">Masai Mara</h3>
+                                    <p class="destination-text">Home to the Big Five and the spectacular wildebeest migration.</p>
+                                    <a href="{% url 'adminside:package_list' %}" class="destination-btn">Explore <i class="far fa-long-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single-destination-item mb-50 wow fadeInUp">
+                        <div class="destination-img">
+                            <img src="{% static 'assets/images/place/place-3.jpg' %}" alt="Ngorongoro Crater">
+                            <div class="destination-overlay">
+                                <div class="destination-content">
+                                    <h3 class="destination-title" style="font-family: 'TAN-Garland-Regular', sans-serif;">Ngorongoro Crater</h3>
+                                    <p class="destination-text">A UNESCO World Heritage site with incredible wildlife density.</p>
+                                    <a href="{% url 'adminside:package_list' %}" class="destination-btn">Explore <i class="far fa-long-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--====== End Featured Destinations Section ======-->
+
+    <!--====== Start About Section ======-->
+    <section class="about-section pt-100 pb-50">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-6">
+                    <div class="about-content-box mb-50 wow fadeInLeft">
+                        <div class="section-title mb-30">
+                            <span class="sub-title">About Mbugani Luxe Adventures</span>
+                            <h2 style="font-family: 'TAN-Garland-Regular', sans-serif;">Your Gateway to Extraordinary East African Adventures</h2>
+                        </div>
+                        <p class="mb-30">At Mbugani Luxe Adventures, we bring over 20 years of trusted expertise to help you explore the world's most incredible destinations. From luxury safari experiences to cultural immersions, we create unforgettable journeys tailored to your dreams.</p>
+                        <div class="about-list mb-40">
+                            <ul>
+                                <li><i class="fas fa-badge-check"></i>Expert local guides with deep cultural knowledge</li>
+                                <li><i class="fas fa-badge-check"></i>Luxury accommodations in pristine locations</li>
+                                <li><i class="fas fa-badge-check"></i>Sustainable tourism practices</li>
+                                <li><i class="fas fa-badge-check"></i>24/7 support throughout your journey</li>
+                            </ul>
+                        </div>
+                        <a href="{% url 'users:aboutus' %}" class="main-btn primary-btn">Learn More<i class="fas fa-paper-plane"></i></a>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="about-img mb-50 wow fadeInRight">
+                        <img src="{% static 'assets/images/about/about-1.jpg' %}" alt="About Mbugani Luxe Adventures">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--====== End About Section ======-->
+
+    <!--====== Start CTA Section ======-->
+    <section class="cta-section">
+        <div class="cta-wrapper bg_cover" style="background-image: url({% static 'assets/images/bg/cta-bg.jpg' %});">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8">
+                        <div class="cta-content text-center text-white">
+                            <h2 style="font-family: 'TAN-Garland-Regular', sans-serif;">Ready for Your Next Adventure?</h2>
+                            <p>Let us create a personalized safari experience that exceeds your wildest dreams. Contact our expert team today.</p>
+                            <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Start Planning<i class="fas fa-paper-plane"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--====== End CTA Section ======-->
+
+    <style>
+        .destination-title {
+            font-family: 'TAN-Garland-Regular', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+
+{% endblock %}
