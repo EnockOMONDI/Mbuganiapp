@@ -59,7 +59,7 @@
     <!--====== End Company Overview Section ======-->
 
     <!--====== Start Our Inspiration Section ======-->
-    <section class="inspiration-section pt-100 pb-100" style="background: linear-gradient(135deg, #5d0000 0%, #8b0000 100%); position: relative;">
+    <section class="inspiration-section pt-100 pb-100" style="background: linear-gradient(135deg, rgba(93, 0, 0, 0.8), rgba(251, 147, 0, 0.6)), url('{% static 'assets/images/hero/3.png' %}') center/cover; position: relative;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -287,6 +287,62 @@
 
     <!-- Custom Styles for About Page -->
     <style>
+        /* H2 Heading Fixes */
+        h2 {
+            font-family: 'TAN-Garland-Regular', 'Georgia', 'Times New Roman', serif !important;
+            font-weight: normal !important;
+            text-rendering: optimizeLegibility !important;
+        }
+
+        /* CTA Section H2 Specific Styling */
+        .cta-section h2 {
+            color: #ffffff !important;
+            font-family: 'TAN-Garland-Regular', 'Georgia', 'Times New Roman', serif !important;
+            font-size: 3rem !important;
+            line-height: 1.3 !important;
+            margin-bottom: 25px !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* Our Inspiration Section Background Enhancement */
+        .inspiration-section {
+            background-attachment: fixed !important;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            min-height: 600px;
+        }
+
+        /* Ensure text readability over background */
+        .inspiration-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced text contrast for mobile */
+        @media (max-width: 768px) {
+            .inspiration-section {
+                background-attachment: scroll !important;
+                min-height: 500px;
+            }
+
+            .inspiration-content .mbugani-meaning {
+                background: rgba(251, 147, 0, 0.15) !important;
+                backdrop-filter: blur(5px);
+            }
+
+            /* Mobile H2 adjustments */
+            .cta-section h2 {
+                font-size: 2.2rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 20px !important;
+            }
+
+            h2 {
+                font-size: 2rem !important;
+            }
+        }
+
         /* Shape overlay fallback for browsers that don't support clip-path */
         .shape-overlay {
             background: #ffffff !important;
