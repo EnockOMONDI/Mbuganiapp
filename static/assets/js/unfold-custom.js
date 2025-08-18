@@ -1,8 +1,8 @@
-/* Novustell Travel - Custom Unfold Admin JavaScript */
+/* Mbugani Luxe Adventures - Custom Unfold Admin JavaScript */
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize custom functionality
-    initializeNovustellAdmin();
+    initializeMbuganiAdmin();
     
     // Add travel-themed enhancements
     enhanceTravelInterface();
@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
     handleResponsiveNavigation();
 });
 
-function initializeNovustellAdmin() {
-    console.log('Novustell Travel Admin Interface Initialized');
+function initializeMbuganiAdmin() {
+    console.log('Mbugani Luxe Adventures Admin Interface Initialized');
     
     // Add fade-in animation to main content
     const mainContent = document.querySelector('.main-content');
@@ -239,7 +239,7 @@ function showSuccessMessage(message) {
 }
 
 // Utility functions for admin interface
-window.NovustellAdmin = {
+window.MbuganiAdmin = {
     showLoading: function(element) {
         const spinner = document.createElement('div');
         spinner.className = 'loading-spinner';
