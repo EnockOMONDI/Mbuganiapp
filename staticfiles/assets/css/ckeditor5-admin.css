@@ -82,7 +82,7 @@
 
 /* Heading styles within editor */
 .ck-editor__editable h1 {
-    color: #0f238d;
+    color: #5d0000;
     font-family: 'TAN-Garland-Regular', sans-serif;
     font-size: 2.5em;
     font-weight: bold;
@@ -90,7 +90,7 @@
 }
 
 .ck-editor__editable h2 {
-    color: #0f238d;
+    color: #5d0000;
     font-family: 'TAN-Garland-Regular', sans-serif;
     font-size: 2em;
     font-weight: bold;
@@ -299,7 +299,7 @@
 }
 
 .destination-name {
-    color: #0f238d;
+    color: #5d0000;
     font-weight: bold;
     font-size: 1.1em;
 }

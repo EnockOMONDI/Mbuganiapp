@@ -191,7 +191,7 @@
 
 /* CKEditor maximized mode */
 .cke_maximized .cke_top {
-    background: linear-gradient(135deg, #0f238d 0%, #1a3a9e 100%) !important;
+    background: linear-gradient(135deg, #5d0000 0%, #1a3a9e 100%) !important;
 }
 
 /* Custom styles for Django admin integration */
@@ -200,7 +200,7 @@
 }
 
 .form-row label {
-    color: #0f238d !important;
+    color: #5d0000 !important;
     font-weight: 600 !important;
 }
 

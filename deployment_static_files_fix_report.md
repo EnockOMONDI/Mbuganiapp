@@ -82,11 +82,11 @@ path('favicon.ico', RedirectView.as_view(url='/static/assets/images/favicon_io/f
 
 ```css
 /* Before */
---novustell-primary: #0f238d;
+--novustell-primary: #5d0000;
 var(--novustell-secondary)
 
 /* After */
---mbugani-primary: #0f238d;
+--mbugani-primary: #5d0000;
 var(--mbugani-secondary)
 ```
 

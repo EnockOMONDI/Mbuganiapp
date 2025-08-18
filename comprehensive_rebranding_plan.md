@@ -71,7 +71,7 @@
 **Replacement Mapping:**
 ```css
 /* Current → New */
-#0f238d → [NEW_PRIMARY_COLOR]
+#5d0000 → [NEW_PRIMARY_COLOR]
 #ff9d00 → [NEW_ACCENT_COLOR]
 #1C231F → [NEW_TEXT_COLOR]
 #f8f3fc → [NEW_LIGHT_BG]
@@ -162,7 +162,7 @@
    ```python
    # color_replacement.py
    color_mapping = {
-       '#0f238d': '[NEW_PRIMARY]',
+       '#5d0000': '[NEW_PRIMARY]',
        '#ff9d00': '[NEW_ACCENT]',
        '#1C231F': '[NEW_TEXT]',
        # ... complete mapping

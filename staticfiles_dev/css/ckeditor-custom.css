@@ -100,7 +100,7 @@ th, td {
 }
 
 th {
-    background-color: #0f238d;
+    background-color: #5d0000;
     color: white;
     font-weight: 700;
 }
@@ -176,7 +176,7 @@ hr {
 /* Strong and emphasis */
 strong, b {
     font-weight: 700;
-    color: #0f238d;
+    color: #5d0000;
 }
 
 em, i {

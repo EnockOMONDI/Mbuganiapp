@@ -119,7 +119,7 @@
 
 3. **Update CSS variable names**
    ```css
-   --mbugani-primary: #0f238d;
+   --mbugani-primary: #5d0000;
    --mbugani-secondary: #ff9d00;
    ```
 
