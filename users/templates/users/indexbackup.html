@@ -57,10 +57,13 @@
                             <div class="col-xl-9">
                                 <!--=== Hero Content ===-->
                                 <div class="hero-content text-white text-center">
-                                    <!-- <span class="ribbon">Luxury Safari & Adventure</span> -->
-                                    <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif;" data-animation="fadeInDown" data-delay=".4s">Luxury Meets Adventure</h1>
-                                    <div class="hero-button" data-animation="fadeInRight" data-delay=".6s"> 
-                                        <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Discover More<i class="fas fa-paper-plane"></i></a>
+                                    <span class="ribbon" style="background: rgba(251, 147, 0, 0.9); color: #ffffff; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; margin-bottom: 20px; display: inline-block;">Mbugani Luxe Adventures</span>
+                                    <h1 style="color: #ffffff; font-family: 'TAN-Garland-Regular', sans-serif; font-size: 3.5rem; margin-bottom: 20px;" data-animation="fadeInDown" data-delay=".4s">Untamed. Unmatched. Unforgettable.</h1>
+                                    <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;" data-animation="fadeInUp" data-delay=".5s">
+                                        Experience Kenya's wild beauty through luxury safari adventures that blend untamed wilderness with refined elegance.
+                                    </p>
+                                    <div class="hero-button" data-animation="fadeInRight" data-delay=".6s">
+                                        <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Explore Our Safaris<i class="fas fa-binoculars"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -78,14 +81,13 @@
         <div class="container">
             <!-- Section Header -->
             <div class="row justify-content-center mb-5">
-                <div class="col-lg-8 text-center">
+                <div class="col-lg-8 ">
                     <div class="section-header wow fadeInUp">
                         <h1 class="display-4 fw-bold mb-4" style="color: #5d0000; font-family: 'TAN-Garland-Regular', sans-serif;">
-                            Featured Destinations
+                            Signature Safari Destinations
                         </h1>
                         <p class="lead mb-0" style="color: #333;">
-                            Discover breathtaking destinations around the world with our carefully curated travel packages.
-
+                            Explore Kenya's most iconic wilderness areas through our luxury safari experiences, where untamed beauty meets unmatched comfort.
                         </p>
                     </div>
                 </div>
@@ -1130,21 +1132,7 @@
     <!--====== End About Section ======-->
 
     <!--====== Start CTA Section ======-->
-    <section class="cta-section">
-        <div class="cta-wrapper bg_cover" style="background-image: url({% static 'assets/images/bg/cta-bg.jpg' %});">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-8">
-                        <div class="cta-content text-center text-white">
-                            <h2 style="font-family: 'TAN-Garland-Regular', sans-serif;">Ready for Your Next Adventure?</h2>
-                            <p>Let us create a personalized safari experience that exceeds your wildest dreams. Contact our expert team today.</p>
-                            <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Start Planning<i class="fas fa-paper-plane"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+ 
     <!--====== End CTA Section ======-->
 
     <style>

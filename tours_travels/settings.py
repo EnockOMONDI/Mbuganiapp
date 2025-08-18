@@ -197,7 +197,7 @@ DEFAULT_IMAGES = {
     'JOB_LISTINGS': 'images/jobsthumbnail.png',
 
     # Legacy placeholder (maintain for backward compatibility)
-    'PLACEHOLDER_SVG': 'images/novustelltravelplaceholder.svg',
+    'PLACEHOLDER_SVG': 'images/mbuganiluxeadventuresplaceholder.svg',
 
     # Fallback images for specific use cases
     'HERO_BACKGROUND': 'assets/images/place/place-1.jpg',
@@ -210,13 +210,13 @@ TEMPLATE_DIRS = (
 )
 
 
-# Email settings for Novustell Travel
+# Email settings for Mbugani Luxe Adventures
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-# Novustell Travel email credentials
+# Mbugani Luxe Adventures email credentials
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'novustellke@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'iagt yans hoyd pavg')
 DEFAULT_FROM_EMAIL = 'MBUGANI LUXE ADVENTURES'
@@ -238,8 +238,8 @@ from django.templatetags.static import static
 from django.urls import reverse_lazy
 
 UNFOLD = {
-    "SITE_TITLE": "Novustell Travel Admin",
-    "SITE_HEADER": "Novustell Travel Administration",
+    "SITE_TITLE": "Mbugani Luxe Adventures Admin",
+    "SITE_HEADER": "Mbugani Luxe Adventures Administration",
     "SITE_URL": "/",
     "SITE_ICON": lambda request: static("assets/images/favicon_io/favicon-32x32.png"),
     "SITE_LOGO": lambda request: static("assets/images/logo/websitelogo.png"),

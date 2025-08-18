@@ -15,7 +15,7 @@ def analyze_color_usage():
     print("=" * 50)
     
     color_patterns = {
-        'Novustell Blue': r'#0f238d',
+        'Novustell Blue': r'#5d0000',
         'Novustell Orange': r'#ff9d00',
         'Dark Text': r'#1[CD]231F',
         'Gray Text': r'#484848',
@@ -149,7 +149,7 @@ import glob
 
 # Color mapping: Current Novustell → New Mbugani
 COLOR_MAPPING = {
-    '#0f238d': '[NEW_PRIMARY_COLOR]',      # Novustell Blue → New Primary
+    '#5d0000': '[NEW_PRIMARY_COLOR]',      # Novustell Blue → New Primary
     '#ff9d00': '[NEW_ACCENT_COLOR]',       # Novustell Orange → New Accent
     '#1C231F': '[NEW_TEXT_COLOR]',         # Dark Text → New Text
     '#1D231F': '[NEW_TEXT_COLOR]',         # Dark Text Variant → New Text

@@ -2,10 +2,10 @@
 
 /* Brand Colors */
 :root {
-    --mbugani-primary: #0f238d;
-    --mbugani-secondary: #ff9d00;
+    --mbugani-primary: #5d0000;
+    --mbugani-secondary: #fb9300;
     --mbugani-light: #f8f9fa;
-    --mbugani-dark: #0f238d;
+    --mbugani-dark: #5d0000;
 }
 
 /* Custom branding for admin interface */
