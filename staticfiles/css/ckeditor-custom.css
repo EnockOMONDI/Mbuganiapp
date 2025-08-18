@@ -2,24 +2,24 @@
 
 /* Custom font loading */
 @font-face {
-    font-family: 'Fonarto';
+    font-family: 'TAN-Garland-Regular';
     font-style: normal;
     font-weight: 400;
-    src: url('../fonts/FonartoRegular-8Mon2.woff') format('woff');
+    src: url('../fonts/TAN-Garland-Regular.woff2') format('woff');
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Fonarto';
+    font-family: 'TAN-Garland-Regular';
     font-style: normal;
     font-weight: 700;
-    src: url('../fonts/FonartoBold-RpYOo.woff') format('woff');
+    src: url('../fonts/TAN-Garland-Bold.woff2') format('woff');
     font-display: swap;
 }
 
 /* Base styling for CKEditor content */
 body {
-    font-family: 'Fonarto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
     background: #fff;
@@ -28,7 +28,7 @@ body {
 
 /* Headings with Novustell branding */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Fonarto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 700;
     color: #0f238d;
     margin-top: 1.5em;

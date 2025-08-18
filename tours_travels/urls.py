@@ -32,6 +32,9 @@ urlpatterns = [
     # Favicon handling
     path('favicon.ico', RedirectView.as_view(url='/static/assets/images/favicon_io/favicon.ico', permanent=True)),
 
+    # Font testing (development only)
+    path('font-test/', tours_travels_views.font_test, name='font_test'),
+
     #path('',tours_travels_views.home,name = 'home'),
 
     path('', include(('users.urls', 'users'), namespace='home')),

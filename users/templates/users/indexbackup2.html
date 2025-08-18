@@ -16,38 +16,38 @@
             <style>
                 /* Custom Font Declarations with Performance Optimization */
                 @font-face {
-                    font-family: 'Fonarto';
+                    font-family: 'TAN-Garland-Regular';
                     font-style: normal;
                     font-weight: 400;
-                    src: local('Fonarto Regular'),
-                         local('FonartoRegular-8Mon2'),
-                         url('{% static "fonts/FonartoRegular-8Mon2.woff" %}') format('woff');
+                    src: local('TAN-Garland-Regular'),
+                         local('TAN-Garland-Regular'),
+                         url('{% static "fonts/TAN-Garland-Regular.woff2" %}') format('woff');
                     font-display: swap;
                 }
 
                 @font-face {
-                    font-family: 'Fonarto';
+                    font-family: 'TAN-Garland-Regular';
                     font-style: normal;
                     font-weight: 300;
-                    src: local('Fonarto Light'),
-                         local('FonartoLight-BWxv3'),
-                         url('{% static "fonts/FonartoLight-BWxv3.woff" %}') format('woff');
+                    src: local('TAN-Garland-Light'),
+                         local('TAN-Garland-Light'),
+                         url('{% static "fonts/TAN-Garland-Light.woff2" %}') format('woff');
                     font-display: swap;
                 }
 
                 @font-face {
-                    font-family: 'Fonarto';
+                    font-family: 'TAN-Garland-Regular';
                     font-style: normal;
                     font-weight: 700;
-                    src: local('Fonarto Bold'),
-                         local('FonartoBold-RpYOo'),
-                         url('{% static "fonts/FonartoBold-RpYOo.woff" %}') format('woff');
+                    src: local('TAN-Garland-Bold'),
+                         local('TAN-Garland-Bold'),
+                         url('{% static "fonts/TAN-Garland-Bold.woff2" %}') format('woff');
                     font-display: swap;
                 }
 
                 /* H1 Custom Font Styling with Enhanced Typography */
                 h1 {
-                    font-family: 'Fonarto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+                    font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
                     font-weight: 700 !important;
                     letter-spacing: -0.02em;
                     line-height: 1.2;
@@ -58,7 +58,7 @@
                 }
 
                 .section-header h1 {
-                    font-family: 'Fonarto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+                    font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
                     font-weight: 500 !important;
                     text-rendering: optimizeLegibility;
                     -webkit-font-smoothing: antialiased;
@@ -74,14 +74,14 @@
 
                 /* Enhanced H1 styling for better visual impact */
                 h1.display-4 {
-                    font-family: 'Fonarto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+                    font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
                     font-weight: 700 !important;
                     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 }
 
                 /* Ensure consistent styling across all H1 elements */
                 .section-title h1 {
-                    font-family: 'Fonarto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+                    font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
                     font-weight: 700 !important;
                     text-rendering: optimizeLegibility;
                     -webkit-font-smoothing: antialiased;
@@ -388,7 +388,7 @@
 
             /* H1 responsive styling for tablets */
             h1 {
-                font-family: 'Fonarto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+                font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
                 font-weight: 700 !important;
             }
         }
@@ -400,7 +400,7 @@
 
             .section-header h1 {
                 font-size: 2rem;
-                font-family: 'Fonarto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+                font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
                 font-weight: 700 !important;
                 line-height: 1.1;
             }
@@ -411,7 +411,7 @@
 
             /* H1 responsive styling for mobile */
             h1 {
-                font-family: 'Fonarto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+                font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
                 font-weight: 700 !important;
                 letter-spacing: -0.01em;
             }
@@ -442,9 +442,9 @@
         // Check if fonts are loaded
         if ('fonts' in document) {
             Promise.all([
-                document.fonts.load('700 1em Fonarto'),
-                document.fonts.load('400 1em Fonarto'),
-                document.fonts.load('300 1em Fonarto')
+                document.fonts.load('700 1em TAN-Garland-Bold'),
+                document.fonts.load('400 1em TAN-Garland-Regular'),
+                document.fonts.load('300 1em TAN-Garland-Light')
             ]).then(function() {
                 document.documentElement.classList.remove('font-loading');
                 document.documentElement.classList.add('font-loaded');
@@ -752,7 +752,7 @@
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-8 text-center">
                     <div class="section-header wow fadeInUp">
-                        <h1 class="display-4 fw-bold mb-4" style="color: #0f238d; font-family: 'Fonarto', sans-serif;">
+                        <h1 class="display-4 fw-bold mb-4" style="color: #0f238d; font-family: 'TAN-Garland-Regular', sans-serif;">
                             Featured Destinations
                         </h1>
                         <p class="lead mb-0" style="color: #333;">
@@ -1310,7 +1310,7 @@
         }
 
         .destination-title {
-            font-family: 'Fonarto', sans-serif;
+            font-family: 'TAN-Garland-Regular', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 10px;

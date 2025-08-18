@@ -1,94 +1,92 @@
 {% load static %}
-
-<header class="main_header_area">
-    <div class="header-content py-1 bg-theme">
-    <div class="container d-flex align-items-center justify-content-between">
-    <div class="links">
-    <ul>
-    <!-- <li><a href="#" class="white"><i class="icon-location-pin white"></i> Nairobi, Kenya | Eagle house Kilimani, off Ngong Rd</a></li> -->
-    <li><a href="#" class="white"><i class="icon-clock white"></i> Mon-Fri: 10 AM – 5 PM</a></li>
-    <li><a href="#" class="white"><i class="icon-phone white"></i> +49 163 8767374</a></li>
-    <li><a href="#" class="white"><i class="icon-phone white"></i>+49 177 5377023</a></li>
-    </ul>
-    </div>
-    <div class="links float-right">
-    <ul>
-    <li><a href="#" class="white"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-    <li><a href="#" class="white"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-    <li><a href="#" class="white"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-    <li><a href="#" class="white"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-    </ul>
-    </div>
-    </div>
-    </div>
-
-    <div class="header_menu" id="header_menu">
-    <nav class="navbar navbar-default">
-    <div class="container">
-    <div class="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
-    
-    <div class="navbar-header">
-    <a class="navbar-brand" href="">
-    <img src="{% static 'assets2/images/logo.png' %}"  style="  width: 110%;" alt="image">
-    </a>
-    </div>
-    
-    <div class="navbar-collapse1 d-flex align-items-center" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav" id="responsive-menu">
-     <li><a href="">Home</a></li>
-    
-    <li><a href="">About Us</a></li>
-    
-    <li class="submenu dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Destinations <i class="icon-arrow-down" aria-hidden="true"></i></a>
-    <ul class="dropdown-menu">
-    <li><a href="">Nakuru</a></li>
-    <li><a href="">Mombasa</a></li>
-    <li><a href="">Diani</a></li>
-    <li><a href="">Samburu</a></li>
-    
-    </ul>
-    </li>
-    <li class="submenu dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tours<i class="icon-arrow-down" aria-hidden="true"></i></a>
-    <ul class="dropdown-menu">
-        
-    <li><a href="">Sightseeing Tours</a></li>
-    <li><a href="">Wildlife Safaris</a></li>
-    <li><a href="">Adventure Tours</a></li>
-    <li><a href="">Historical Tours</a></li>
-    <li><a href="">Multi-Day Tours</a></li>
-    
-    </ul>
-    </li>
-    <li><a href="">Blogs</a></li>
-    <li><a href="">Contact Us</a></li>
-    
-    
-    <li >
-                        
-        <div id="google_translate_element"></div>
-    
-    </li>
-    </ul>
-    </div>
-       
-    
-    <div class="register-login d-flex align-items-center">
-        {% if user.is_authenticated %}
-  <a href="/logout" class="login-btn">  Logout 
-  </a>
-      {% else %}
-    <a href="/login" class="me-3">
-    <i class="icon-user"></i> Login
-    </a>
-    {% endif %}  
-    <!-- <a href="#" class="nir-btn white">Book Now</a> -->
-    </div>
-    <div id="slicknav-mobile"></div>
-    </div>
-    </div>
-    </nav>
-    </div>
-    
-    </header>
+<header class="header-area header-two transparent-header">
+            <!--====== Header Navigation ======-->
+            <div class="header-navigation navigation-white breakpoint-on">
+                <div class="nav-overlay"></div>
+                <div class="container-fluid">
+                    <div class="primary-menu">
+                        <!--====== Site Branding ======-->
+                        <div class="site-branding">
+<a href="{% url 'users:users-home'%}" class="brand-logo"><img src="{% static 'assets/images/logo/websitelogo.png' %}" alt="Logo"></a>                        </div>
+                        <!--====== Nav Menu ======-->
+                        <div class="nav-menu">
+                            <!--====== Site Branding ======-->
+                            <div class="mobile-logo mb-30 d-block d-xl-none">
+<a href="{% url 'users:users-home'%}" class="brand-logo"><img src="{% static 'assets/images/logo/websitelogo.png' %}" alt="Logo"></a>                            </div>
+                            <!--=== Nav Search ===-->
+                            <div class="nav-search mb-30 d-block d-xl-none ">
+                                <form>
+                                    <div class="form_group">
+                                        <input type="email" class="form_control" placeholder="Search Here" name="email" required="">
+                                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--====== Main Menu ======-->
+                            <nav class="main-menu">
+                                <ul>
+                                    <li class="menu-item has-children"><a href="#">Home<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="index.html">Home 01</a></li>
+                                            <li><a href="index-2.html">Home 02</a></li>
+                                            <li><a href="index-3.html">Home 03</a></li>
+                                            <li><a href="index-4.html">Home 04</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item has-children"><a href="#">Tours<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="tour.html">Tours</a></li>
+                                            <li><a href="tour-details.html">Tours Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item has-children"><a href="#">Destination<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="destination.html">Destination</a></li>
+                                            <li><a href="destination-details.html">Destination Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item has-children"><a href="#">Blog<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="blog-list.html">Blog List</a></li>
+                                            <li><a href="blog-details.html">Blog Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item has-children"><a href="#">Pages<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="gallery.html">Our Gallery</a></li>
+                                            <li><a href="events.html">Our Events</a></li>
+                                            <li><a href="shop.html">Our Shop</a></li>
+                                            <li><a href="product-details.html">Product Details</a></li>
+                                            <li><a href="contact.html">Contact</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <!--====== Menu Button ======-->
+                            <div class="menu-button mt-40 d-xl-none">
+                                <a href="contact.html" class="main-btn secondary-btn">Book Now<i class="fas fa-paper-plane"></i></a>
+                            </div>
+                        </div>
+                        <!--====== Nav Right Item ======-->
+                        <div class="nav-right-item">
+                            <div class="search-btn" data-bs-toggle="modal" data-bs-target="#search-modal"><i class="far fa-search"></i></div>
+                            <div class="lang-dropdown">
+                                <select class="wide" style="display: none;">
+                                    <option value="English">English</option>
+                                    <option value="French">French</option>
+                                </select><div class="nice-select wide" tabindex="0"><span class="current">English</span><ul class="list"><li data-value="English" class="option selected">English</li><li data-value="French" class="option">French</li></ul></div>
+                            </div>
+                            <div class="menu-button d-xl-block d-none">
+                                <a href="contact.html" class="main-btn primary-btn">Book Now<i class="fas fa-paper-plane"></i></a>
+                            </div>
+                            <div class="navbar-toggler">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
