@@ -7,20 +7,20 @@
 
 {% block extra_head %}
 <!-- SEO Meta Tags -->
-<meta name="keywords" content="{{ category.title }}, travel blog, travel tips, destination guides, Novustell Travel">
-<meta name="author" content="Novustell Travel">
+<meta name="keywords" content="{{ category.title }}, travel blog, travel tips, destination guides, Mbugani Luxe Adventures">
+<meta name="author" content="Mbugani Luxe Adventures">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph Tags -->
-<meta property="og:title" content="{{ category.title }} - Novustell Travel Blog">
+<meta property="og:title" content="{{ category.title }} - Mbugani Luxe Adventures Blog">
 <meta property="og:description" content="{{ category.description|default:'Explore articles and guides about '|add:category.title }}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
-<meta property="og:site_name" content="Novustell Travel">
+<meta property="og:site_name" content="Mbugani Luxe Adventures">
 
 <!-- Twitter Card Tags -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{ category.title }} - Novustell Travel Blog">
+<meta name="twitter:title" content="{{ category.title }} - Mbugani Luxe Adventures Blog">
 <meta name="twitter:description" content="{{ category.description|default:'Explore articles and guides about '|add:category.title }}">
 
 <!-- Canonical URL -->
@@ -36,7 +36,7 @@
   "url": "{{ request.build_absolute_uri }}",
   "isPartOf": {
     "@type": "Blog",
-    "name": "Novustell Travel Blog",
+    "name": "Mbugani Luxe Adventures Blog",
     "url": "{% url 'blog:blog-list' %}"
   }
 }

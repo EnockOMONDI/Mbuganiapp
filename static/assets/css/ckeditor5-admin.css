@@ -1,4 +1,4 @@
-/* CKEditor 5 Admin Interface Styling for Novustell Travel */
+/* CKEditor 5 Admin Interface Styling for Mbugani Luxe Adventures */
 
 /* Main CKEditor 5 container styling */
 .ck-editor {
@@ -13,7 +13,7 @@
     box-shadow: 0 4px 12px rgba(255, 157, 0, 0.2);
 }
 
-/* Toolbar styling with Novustell colors */
+/* Toolbar styling with Mbugani Luxe Adventures colors */
 .ck-toolbar {
     background: linear-gradient(135deg, #5d0000 0%, #5d0000 100%);
     border-radius: 8px 8px 0 0;
@@ -289,7 +289,7 @@
     pointer-events: none;
 }
 
-/* Custom Novustell travel-themed styles */
+/* Custom Mbugani Luxe Adventures travel-themed styles */
 .travel-highlight {
     background-color: #ff9d00;
     color: white;

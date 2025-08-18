@@ -1,4 +1,4 @@
-/* CKEditor Custom Styling for Novustell Travel */
+/* CKEditor Custom Styling for Mbugani Luxe Adventures */
 
 /* Custom font loading */
 @font-face {
@@ -26,7 +26,7 @@ body {
     margin: 15px;
 }
 
-/* Headings with Novustell branding */
+/* Headings with Mbugani branding */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'TAN-Garland-Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 700;
@@ -118,7 +118,7 @@ img {
     margin: 1em 0;
 }
 
-/* Custom Novustell styles */
+/* Custom Mbugani styles */
 .mbugani-highlight {
     background-color: #ff9d00;
     color: white;

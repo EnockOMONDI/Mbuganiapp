@@ -127,7 +127,7 @@ def micepage(request):
                 msg = MIMEMultipart()
 
                 # Email headers
-                msg['From'] = f"Novustell Travel <{sender_email}>"
+                msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
                 msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New MICE Inquiry from {inquiry.company_name}"
 
@@ -147,7 +147,7 @@ def micepage(request):
                         <p style="white-space: pre-wrap;">{inquiry.event_details}</p>
                     </div>
                     <p style="color: #666; font-size: 12px; margin-top: 20px;">
-                        This inquiry was submitted through the MICE form on Novustell Travel website.
+                        This inquiry was submitted through the MICE form on Mbugani Luxe Adventures website.
                     </p>
                 </body>
                 </html>
@@ -191,7 +191,7 @@ def student_travel(request):
                 msg = MIMEMultipart()
 
                 # Email headers
-                msg['From'] = f"Novustell Travel <{sender_email}>"
+                msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
                 msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New Student Travel Inquiry from {inquiry.school_name}"
 
@@ -211,7 +211,7 @@ def student_travel(request):
                         <p style="white-space: pre-wrap;">{inquiry.travel_details}</p>
                     </div>
                     <p style="color: #666; font-size: 12px; margin-top: 20px;">
-                        This inquiry was submitted through the Student Travel form on Novustell Travel website.
+                        This inquiry was submitted through the Student Travel form on Mbugani Luxe Adventures website.
                     </p>
                 </body>
                 </html>
@@ -255,7 +255,7 @@ def ngo_travel(request):
                 msg = MIMEMultipart()
 
                 # Email headers
-                msg['From'] = f"Novustell Travel <{sender_email}>"
+                msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
                 msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New NGO Travel Inquiry from {inquiry.organization_name}"
 
@@ -277,7 +277,7 @@ def ngo_travel(request):
                         <p style="white-space: pre-wrap;">{inquiry.travel_details}</p>
                     </div>
                     <p style="color: #666; font-size: 12px; margin-top: 20px;">
-                        This inquiry was submitted through the NGO Travel form on Novustell Travel website.
+                        This inquiry was submitted through the NGO Travel form on Mbugani Luxe Adventures website.
                     </p>
                 </body>
                 </html>
@@ -386,7 +386,7 @@ def send_newsletter_subscription_emails(subscription):
     )
 
     # Email to subscriber
-    subscriber_subject = 'Welcome to Novustell Travel Newsletter!'
+    subscriber_subject = 'Welcome to Mbugani Luxe Adventures Newsletter!'
     subscriber_message = render_to_string('users/emails/newsletter_confirmation.html', {
         'subscription': subscription
     })
@@ -796,7 +796,7 @@ def send_booking_email(booking):
 
         # Email content
         msg = MIMEMultipart()
-        msg['From'] = f"Novustell Travel <{sender_email}>"
+        msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
         msg['To'] = "info@mbuganiluxeadventures.com"
         msg['Subject'] = f"New Booking: {booking.full_name} for {booking.package.name}"
 
@@ -852,7 +852,7 @@ class ActivateAccountView(View):
 
 def documentation(request):
     """
-    Documentation page for Novustell Travel Django project
+    Documentation page for Mbugani Luxe Adventures Django project
     """
     # Get project statistics for the documentation
     stats = {
@@ -876,7 +876,7 @@ def documentation(request):
         'recent_posts': recent_posts,
         'recent_packages': recent_packages,
         'page_title': 'Project Documentation',
-        'page_description': 'Comprehensive documentation for the Novustell Travel Django project including architecture, user guides, and technical specifications.',
+        'page_description': 'Comprehensive documentation for the Mbugani Luxe Adventures Django project including architecture, user guides, and technical specifications.',
     }
 
     return render(request, 'users/documentation.html', context)

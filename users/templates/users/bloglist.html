@@ -2,27 +2,27 @@
 {% load static %}
 {% load image_tags %}
 
-{% block title %}{{ page_title|default:"Travel Blog - Novustell Travel" }}{% endblock %}
+{% block title %}{{ page_title|default:"Travel Blog - Mbugani Luxe Adventures" }}{% endblock %}
 
-{% block meta_description %}{{ meta_description|default:"Discover amazing travel stories, tips, and guides from Novustell Travel. Explore destinations, get travel advice, and plan your next adventure." }}{% endblock %}
+{% block meta_description %}{{ meta_description|default:"Discover amazing travel stories, tips, and guides from Mbugani Luxe Adventures. Explore destinations, get travel advice, and plan your next adventure." }}{% endblock %}
 
 {% block extra_head %}
 <!-- SEO Meta Tags -->
-<meta name="keywords" content="travel blog, travel tips, destination guides, travel stories, adventure travel, Novustell Travel">
-<meta name="author" content="Novustell Travel">
+<meta name="keywords" content="travel blog, travel tips, destination guides, travel stories, adventure travel, Mbugani Luxe Adventures">
+<meta name="author" content="Mbugani Luxe Adventures">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph Tags -->
-<meta property="og:title" content="{{ page_title|default:'Travel Blog - Novustell Travel' }}">
-<meta property="og:description" content="{{ meta_description|default:'Discover amazing travel stories, tips, and guides from Novustell Travel.' }}">
+<meta property="og:title" content="{{ page_title|default:'Travel Blog - Mbugani Luxe Adventures' }}">
+<meta property="og:description" content="{{ meta_description|default:'Discover amazing travel stories, tips, and guides from Mbugani Luxe Adventures.' }}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
-<meta property="og:site_name" content="Novustell Travel">
+<meta property="og:site_name" content="Mbugani Luxe Adventures">
 
 <!-- Twitter Card Tags -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ page_title|default:'Travel Blog - Novustell Travel' }}">
-<meta name="twitter:description" content="{{ meta_description|default:'Discover amazing travel stories, tips, and guides from Novustell Travel.' }}">
+<meta name="twitter:title" content="{{ page_title|default:'Travel Blog - Mbugani Luxe Adventures' }}">
+<meta name="twitter:description" content="{{ meta_description|default:'Discover amazing travel stories, tips, and guides from Mbugani Luxe Adventures.' }}">
 
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ request.build_absolute_uri }}">
@@ -32,12 +32,12 @@
 {
   "@context": "https://schema.org",
   "@type": "Blog",
-  "name": "Novustell Travel Blog",
+  "name": "Mbugani Luxe Adventures Blog",
   "description": "Travel stories, tips, and destination guides",
   "url": "{{ request.build_absolute_uri }}",
   "publisher": {
     "@type": "Organization",
-    "name": "Novustell Travel",
+    "name": "Mbugani Luxe Adventures",
     "url": "{{ request.scheme }}://{{ request.get_host }}"
   }
 }

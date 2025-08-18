@@ -1,5 +1,5 @@
 """
-Session-based cart system for Novustell Travel
+Session-based cart system for Mbugani Luxe Adventures
 """
 
 from decimal import Decimal

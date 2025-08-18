@@ -1,5 +1,5 @@
 """
-Checkout forms for Novustell Travel
+Checkout forms for Mbugani Luxe Adventures
 """
 
 from django import forms
@@ -80,7 +80,7 @@ class CheckoutForm(forms.Form):
         widget=forms.CheckboxInput(attrs={
             'class': 'form-check-input'
         }),
-        label='I would like to receive travel updates and special offers from Novustell Travel'
+        label='I would like to receive travel updates and special offers from Mbugani Luxe Adventures'
     )
 
     def clean_full_name(self):

@@ -8,8 +8,8 @@
 
 {% block extra_head %}
 <!-- SEO Meta Tags -->
-<meta name="keywords" content="{% for tag in post.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}{% if post.category %}, {{ post.category.title }}{% endif %}, travel blog, Novustell Travel">
-<meta name="author" content="{% if post.user %}{{ post.user.get_full_name|default:post.user.username }}{% else %}Novustell Travel{% endif %}">
+<meta name="keywords" content="{% for tag in post.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}{% if post.category %}, {{ post.category.title }}{% endif %}, travel blog, Mbugani Luxe Adventures">
+<meta name="author" content="{% if post.user %}{{ post.user.get_full_name|default:post.user.username }}{% else %}Mbugani Luxe Adventures{% endif %}">
 <meta name="robots" content="index, follow">
 <meta name="article:published_time" content="{{ post.date|date:'c' }}">
 <meta name="article:modified_time" content="{{ post.updated|date:'c' }}">
@@ -20,7 +20,7 @@
 <meta property="og:description" content="{{ post.get_meta_description }}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="{{ canonical_url|default:request.build_absolute_uri }}">
-<meta property="og:site_name" content="Novustell Travel">
+<meta property="og:site_name" content="Mbugani Luxe Adventures">
 <meta property="og:image" content="{% image_url_with_default post.image 'blog_posts' %}">
 <meta property="article:published_time" content="{{ post.date|date:'c' }}">
 <meta property="article:modified_time" content="{{ post.updated|date:'c' }}">
@@ -47,11 +47,11 @@
   "image": "{% image_url_with_default post.image 'blog_posts' %}",
   "author": {
     "@type": "Person",
-    "name": "{% if post.user %}{{ post.user.get_full_name|default:post.user.username|escapejs }}{% else %}Novustell Travel{% endif %}"
+    "name": "{% if post.user %}{{ post.user.get_full_name|default:post.user.username|escapejs }}{% else %}Mbugani Luxe Adventures{% endif %}"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Novustell Travel",
+    "name": "Mbugani Luxe Adventures",
     "url": "{{ request.scheme }}://{{ request.get_host }}"
   },
   "datePublished": "{{ post.date|date:'c' }}",

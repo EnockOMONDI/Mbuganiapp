@@ -52,7 +52,7 @@ def is_valid_django_url(url):
     return url.startswith('/') or url.startswith('http')
 
 @register.simple_tag
-def image_with_placeholder(image_field, css_class="", alt_text="", placeholder_path="images/novustelltravelplaceholder.svg"):
+def image_with_placeholder(image_field, css_class="", alt_text="", placeholder_path="images/mbuganiluxeadventuresplaceholder.svg"):
     """
     Template tag to display an image with automatic placeholder fallback
 
@@ -117,7 +117,7 @@ def image_with_default(image_field, content_type="default", css_class="", alt_te
 
         if use_placeholder:
             # Use SVG placeholder
-            placeholder_path = default_images_config.get('PLACEHOLDER_SVG', 'images/novustelltravelplaceholder.svg')
+            placeholder_path = default_images_config.get('PLACEHOLDER_SVG', 'images/mbuganiluxeadventuresplaceholder.svg')
             image_url = static(placeholder_path)
         else:
             # Use content-type specific default
@@ -158,7 +158,7 @@ def image_with_default(image_field, content_type="default", css_class="", alt_te
     return mark_safe(html)
 
 @register.simple_tag
-def image_url_with_placeholder(image_field, placeholder_path="images/novustelltravelplaceholder.svg"):
+def image_url_with_placeholder(image_field, placeholder_path="images/mbuganiluxeadventuresplaceholder.svg"):
     """
     Template tag to get image URL with automatic placeholder fallback
 
@@ -210,7 +210,7 @@ def image_url_with_default(image_field, content_type="default", use_placeholder=
 
     if use_placeholder:
         # Use SVG placeholder
-        placeholder_path = default_images_config.get('PLACEHOLDER_SVG', 'images/novustelltravelplaceholder.svg')
+        placeholder_path = default_images_config.get('PLACEHOLDER_SVG', 'images/mbuganiluxeadventuresplaceholder.svg')
         return static(placeholder_path)
     else:
         # Use content-type specific default

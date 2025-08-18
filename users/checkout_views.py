@@ -1,5 +1,5 @@
 """
-Modern checkout views for Novustell Travel
+Modern checkout views for Mbugani Luxe Adventures
 """
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -537,7 +537,7 @@ def send_welcome_email(user, password):
     """
     Send welcome email to new user with login credentials
     """
-    subject = 'Welcome to Novustell Travel'
+    subject = 'Welcome to Mbugani Luxe Adventures'
     
     html_message = render_to_string('users/emails/welcome.html', {
         'user': user,

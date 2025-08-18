@@ -1,5 +1,5 @@
 """
-Form data persistence utilities for Novustell Travel booking system
+Form data persistence utilities for Mbugani Luxe Adventures booking system
 """
 
 from django.core.serializers.json import DjangoJSONEncoder

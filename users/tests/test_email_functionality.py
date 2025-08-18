@@ -135,7 +135,7 @@ class EmailFunctionalityTest(TestCase):
         
         email = mail.outbox[0]
         self.assertEqual(email.to, ['test@example.com'])
-        self.assertEqual(email.subject, 'Welcome to Novustell Travel')
+        self.assertEqual(email.subject, 'Welcome to Mbugani Luxe Adventures')
         
         # Check email content
         self.assertIn('Test', email.body)  # First name
@@ -144,7 +144,7 @@ class EmailFunctionalityTest(TestCase):
         
         # Check HTML content
         html_content = email.alternatives[0][0]
-        self.assertIn('Welcome to Novustell Travel', html_content)
+        self.assertIn('Welcome to Mbugani Luxe Adventures', html_content)
         self.assertIn('Test', html_content)  # First name
         self.assertIn(password, html_content)
         self.assertIn('test@example.com', html_content)
@@ -180,7 +180,7 @@ class EmailFunctionalityTest(TestCase):
         welcome_html = render_to_string('users/emails/welcome.html', welcome_context)
         
         # Check welcome email content
-        self.assertIn('Welcome to Novustell Travel', welcome_html)
+        self.assertIn('Welcome to Mbugani Luxe Adventures', welcome_html)
         self.assertIn('Test', welcome_html)  # First name
         self.assertIn('temppass123', welcome_html)
         self.assertIn('test@example.com', welcome_html)
@@ -299,7 +299,7 @@ class EmailFunctionalityTest(TestCase):
         
         # Check email subjects
         subjects = [email.subject for email in mail.outbox]
-        self.assertIn('Welcome to Novustell Travel', subjects)
+        self.assertIn('Welcome to Mbugani Luxe Adventures', subjects)
         self.assertIn(f'Booking Confirmation - {self.booking.booking_reference}', subjects)
         
         # Check recipients
