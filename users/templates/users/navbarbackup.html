@@ -14,14 +14,7 @@
                             <div class="mobile-logo mb-30 d-block d-xl-none">
 <a href="{% url 'users:users-home'%}" class="brand-logo"><img src="{% static 'assets/images/logo/websitelogo.png' %}" alt="Logo"></a>                            </div>
                             <!--=== Nav Search ===-->
-                            <div class="nav-search mb-30 d-block d-xl-none ">
-                                <form>
-                                    <div class="form_group">
-                                        <input type="email" class="form_control" placeholder="Search Here" name="email" required="">
-                                        <button class="search-btn"><i class="fas fa-search"></i></button>
-                                    </div>
-                                </form>
-                            </div>
+                           
                             <!--====== Main Menu ======-->
                             <nav class="main-menu">
                                 <ul>
@@ -61,7 +54,7 @@
                         </div>
                         <!--====== Nav Right Item ======-->
                         <div class="nav-right-item">
-                            <div class="search-btn" data-bs-toggle="modal" data-bs-target="#search-modal"><i class="far fa-search"></i></div>
+
                            
                             <div class="menu-button d-xl-block d-none">
                                 <a href="{% url 'adminside:package_list' %}" class="main-btn primary-btn">Book Now<i class="fas fa-paper-plane"></i></a>
@@ -78,6 +71,20 @@
         </header>
 
 <style>
+/* ===== MBUGANI LUXE ADVENTURES NAVBAR STYLING ===== */
+
+/* Color Variables for Navbar */
+:root {
+    --navbar-primary: #5d0000; /* Mbugani burgundy */
+    --navbar-secondary: #fb9300; /* Mbugani orange */
+    --navbar-primary-hover: #4a0000;
+    --navbar-secondary-hover: #e8850a;
+    --navbar-text-light: #ffffff;
+    --navbar-text-dark: #2c2c2c;
+    --navbar-border: #e5e5e5;
+    --navbar-shadow: rgba(93, 0, 0, 0.15);
+}
+
 /* ===== NAVBAR OPTIMIZATION STYLES ===== */
 
 /* Logo Size Reduction */
@@ -92,22 +99,84 @@
     width: auto !important;
 }
 
-/* Font Size Optimization for Menu Items */
+/* === NAVIGATION MENU STYLING === */
+
+/* Main menu items with Mbugani colors */
 .main-menu > ul > li > a {
-    font-size: 14px !important; /* Reduced from default ~16px */
+    font-size: 14px !important;
     font-weight: 500 !important;
-    padding: 0 15px !important; /* Reduced horizontal padding */
+    padding: 0 15px !important;
+    color: var(--navbar-text-light) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.main-menu > ul > li > a:hover {
+    color: var(--navbar-secondary) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Submenu styling */
+.main-menu .sub-menu {
+    background: var(--navbar-text-light) !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--navbar-border) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    z-index: 1000 !important;
 }
 
 .main-menu .sub-menu li a {
-    font-size: 13px !important; /* Smaller submenu font */
-    padding: 8px 20px !important;
+    font-size: 13px !important;
+    padding: 12px 20px !important;
+    color: var(--navbar-text-dark) !important;
+    transition: all 0.3s ease !important;
+    border-radius: 4px !important;
+    margin: 2px 8px !important;
 }
 
-/* Button Size Optimization */
-.main-btn {
-    font-size: 13px !important; /* Reduced button font size */
-    padding: 10px 20px !important; /* Reduced button padding */
+.main-menu .sub-menu li a:hover {
+    color: var(--navbar-text-light) !important;
+    background-color: var(--navbar-primary) !important;
+    transform: translateX(5px) !important;
+}
+
+/* === BUTTON STYLING === */
+
+/* Primary buttons */
+.main-btn.primary-btn {
+    font-size: 13px !important;
+    padding: 10px 20px !important;
+    background-color: var(--navbar-primary) !important;
+    border-color: var(--navbar-primary) !important;
+    color: var(--navbar-text-light) !important;
+    border-radius: 25px !important;
+    transition: all 0.3s ease !important;
+}
+
+.main-btn.primary-btn:hover {
+    background-color: var(--navbar-primary-hover) !important;
+    border-color: var(--navbar-primary-hover) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px var(--navbar-shadow) !important;
+}
+
+/* Secondary buttons */
+.main-btn.secondary-btn {
+    font-size: 13px !important;
+    padding: 10px 20px !important;
+    background-color: var(--navbar-secondary) !important;
+    border-color: var(--navbar-secondary) !important;
+    color: var(--navbar-text-light) !important;
+    border-radius: 25px !important;
+    transition: all 0.3s ease !important;
+}
+
+.main-btn.secondary-btn:hover {
+    background-color: var(--navbar-secondary-hover) !important;
+    border-color: var(--navbar-secondary-hover) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(251, 147, 0, 0.3) !important;
 }
 
 .main-btn i {

@@ -28,6 +28,148 @@
         <link rel="manifest" href="{% static 'assets/images/favicon_io/site.webmanifest' %}">
         <!--====== Google Fonts ======-->
         <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+        <!--====== Mbugani Luxe Adventures Global Color Scheme ======-->
+        <style>
+            :root {
+                /* === MBUGANI LUXE ADVENTURES BRAND COLORS === */
+                --primary-color: #5d0000; /* Mbugani burgundy/dark red */
+                --secondary-color: #fb9300; /* Mbugani orange */
+                --primary-hover: #4a0000; /* Darker burgundy for hover */
+                --secondary-hover: #e8850a; /* Darker orange for hover */
+                --primary-light: #7a0000; /* Lighter burgundy */
+                --secondary-light: #ffb84d; /* Lighter orange */
+
+                /* Text Colors */
+                --text-dark: #2c2c2c;
+                --text-light: #ffffff;
+                --text-muted: #6c757d;
+                --text-primary: var(--primary-color);
+
+                /* Background Colors */
+                --background-light: #ffffff;
+                --background-dark: #1a1a1a;
+                --background-gray: #f8f9fa;
+                --background-primary: var(--primary-color);
+                --background-secondary: var(--secondary-color);
+
+                /* Border and Shadow Colors */
+                --border-color: #e5e5e5;
+                --border-light: #f0f0f0;
+                --shadow-color: rgba(93, 0, 0, 0.15);
+                --shadow-light: rgba(0, 0, 0, 0.1);
+                --shadow-dark: rgba(0, 0, 0, 0.3);
+
+                /* Status Colors */
+                --success-color: #28a745;
+                --warning-color: #ffc107;
+                --danger-color: #dc3545;
+                --info-color: #17a2b8;
+
+                /* Gradient Colors */
+                --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+                --gradient-secondary: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-light) 100%);
+                --gradient-hero: linear-gradient(135deg, rgba(93, 0, 0, 0.8) 0%, rgba(251, 147, 0, 0.8) 100%);
+            }
+
+            /* === GLOBAL COLOR OVERRIDES === */
+            .text-primary { color: var(--primary-color) !important; }
+            .text-secondary { color: var(--secondary-color) !important; }
+            .bg-primary { background-color: var(--primary-color) !important; }
+            .bg-secondary { background-color: var(--secondary-color) !important; }
+            .border-primary { border-color: var(--primary-color) !important; }
+            .border-secondary { border-color: var(--secondary-color) !important; }
+
+            /* === BUTTON COLOR UPDATES === */
+            .btn-primary, .main-btn.primary-btn {
+                background-color: var(--primary-color) !important;
+                border-color: var(--primary-color) !important;
+                color: var(--text-light) !important;
+                transition: all 0.3s ease !important;
+            }
+
+            .btn-primary:hover, .main-btn.primary-btn:hover,
+            .btn-primary:focus, .main-btn.primary-btn:focus {
+                background-color: var(--primary-hover) !important;
+                border-color: var(--primary-hover) !important;
+                color: var(--text-light) !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 5px 15px var(--shadow-color) !important;
+            }
+
+            .btn-secondary, .main-btn.secondary-btn {
+                background-color: var(--secondary-color) !important;
+                border-color: var(--secondary-color) !important;
+                color: var(--text-light) !important;
+                transition: all 0.3s ease !important;
+            }
+
+            .btn-secondary:hover, .main-btn.secondary-btn:hover,
+            .btn-secondary:focus, .main-btn.secondary-btn:focus {
+                background-color: var(--secondary-hover) !important;
+                border-color: var(--secondary-hover) !important;
+                color: var(--text-light) !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 5px 15px rgba(251, 147, 0, 0.3) !important;
+            }
+
+            /* === LINK COLOR UPDATES === */
+            a {
+                color: var(--primary-color);
+                transition: color 0.3s ease;
+            }
+
+            a:hover, a:focus {
+                color: var(--primary-hover);
+                text-decoration: none;
+            }
+
+            /* === HEADING COLOR UPDATES === */
+            h1, h2, h3, h4, h5, h6 {
+                color: var(--text-dark);
+            }
+
+            .display-4, .section-title h1, .section-title h2,
+            .hero-title, .page-title {
+                color: var(--primary-color) !important;
+            }
+
+            /* === FORM ELEMENT COLORS === */
+            .form-control:focus, .form_control:focus {
+                border-color: var(--primary-color) !important;
+                box-shadow: 0 0 0 0.2rem rgba(93, 0, 0, 0.25) !important;
+            }
+
+            .form-check-input:checked {
+                background-color: var(--primary-color) !important;
+                border-color: var(--primary-color) !important;
+            }
+
+            /* === NAVIGATION COLORS === */
+            .navbar-brand, .site-branding a {
+                color: var(--primary-color) !important;
+            }
+
+            .nav-link {
+                color: var(--text-dark) !important;
+                transition: color 0.3s ease !important;
+            }
+
+            .nav-link:hover, .nav-link:focus {
+                color: var(--primary-color) !important;
+            }
+
+            .nav-link.active {
+                color: var(--primary-color) !important;
+                font-weight: 600 !important;
+            }
+
+            /* === MOBILE MENU BODY LOCK === */
+            body.menu-open {
+                overflow: hidden;
+            }
+        </style>
+
         <!--====== TAN-Garland Custom Fonts ======-->
         <link rel="stylesheet" href="{% static 'css/tan-garland-fonts.css' %}">
         <!--====== Flaticon css ======-->
@@ -51,7 +193,7 @@
         <!--====== Style css ======-->
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     </head>
-    <body style="background-color: #def0ff;">
+    <body style="background-color: #fff8f4;">
         <script>
             var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?55090';
             var s = document.createElement('script');

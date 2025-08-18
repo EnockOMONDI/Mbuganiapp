@@ -6,9 +6,36 @@
     --animate-duration: 800ms;
     --animate-delay: 0.9s;
   }
+
+  /* === MBUGANI LUXE ADVENTURES COLOR SCHEME === */
+  :root {
+    --mbugani-primary: #5d0000; /* Burgundy */
+    --mbugani-secondary: #fb9300; /* Orange */
+    --mbugani-primary-hover: #4a0000;
+    --mbugani-secondary-hover: #e8850a;
+  }
+
   .btn-primary {
-    background-color: #0f238d; /* Replace with your desired color */
-}
+    background-color: var(--mbugani-primary) !important;
+    border-color: var(--mbugani-primary) !important;
+    color: #ffffff !important;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--mbugani-primary-hover) !important;
+    border-color: var(--mbugani-primary-hover) !important;
+  }
+
+  .btn-secondary {
+    background-color: var(--mbugani-secondary) !important;
+    border-color: var(--mbugani-secondary) !important;
+    color: #ffffff !important;
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--mbugani-secondary-hover) !important;
+    border-color: var(--mbugani-secondary-hover) !important;
+  }
 .header{
     height:100%;
     background-image:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(../images/Maldives.jpg);
