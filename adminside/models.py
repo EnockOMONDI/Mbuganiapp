@@ -527,8 +527,8 @@ class HeroSlider(models.Model):
         help_text="Optional subtitle for the hero slide"
     )
     image = ImageField(
-        manual_crop="16:9",
-        help_text="Hero slider image (recommended size: 1920x1080px)"
+        manual_crop="2048x1080",
+        help_text="Hero slider image (recommended size: 2048x1080px for optimal quality)"
     )
     is_active = models.BooleanField(
         default=True,

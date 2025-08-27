@@ -17,7 +17,7 @@
                     {% for slide in hero_slides %}
                         <!--=== Dynamic Slider ===-->
                         <div class="single-slider">
-                            <div class="image-layer bg_cover" style="background-image: url({% if slide.image %}{{ slide.image.cdn_url }}{% else %}{% static 'assets/images/hero/2.png' %}{% endif %});"></div>
+                            <div class="image-layer bg_cover" style="background-image: url({% if slide.image %}{{ slide.image.cdn_url }}scale_crop/2048x1080/center/-/quality/smart/-/format/auto/{% else %}{% static 'assets/images/hero/2.png' %}{% endif %});"></div>
                             <div class="container-fluid">
                                 <div class="row justify-content-center">
                                     <div class="col-xl-9">

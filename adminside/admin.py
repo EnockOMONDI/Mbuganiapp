@@ -316,8 +316,37 @@ class PackageBookingAdmin(admin.ModelAdmin):
         }),
     )
 
+class HeroSliderAdminForm(forms.ModelForm):
+    """Custom form for HeroSlider with multiple image scaling options"""
+
+    SCALING_CHOICES = [
+        ('16:9', '16:9 Aspect Ratio (Standard)'),
+        ('2048x1080', '2048x1080 Resolution (Optimized)'),
+        ('', 'Free Form (No Cropping)'),
+    ]
+
+    image_scaling = forms.ChoiceField(
+        choices=SCALING_CHOICES,
+        initial='2048x1080',
+        required=False,
+        help_text="Choose image scaling option: 16:9 for standard aspect ratio, 2048x1080 for optimized resolution, or Free Form for no cropping constraints"
+    )
+
+    class Meta:
+        model = HeroSlider
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set the manual_crop based on the selected scaling option
+        if 'image_scaling' in self.data:
+            scaling = self.data['image_scaling']
+            if scaling:
+                self.fields['image'].widget.attrs['data-manual-crop'] = scaling
+
 @admin.register(HeroSlider)
 class HeroSliderAdmin(admin.ModelAdmin):
+    form = HeroSliderAdminForm
     list_display = ('display_image_thumbnail', 'title', 'subtitle', 'is_active', 'order', 'created_at')
     list_filter = ('is_active', 'created_at')
     search_fields = ('title', 'subtitle', 'cta_text')
@@ -326,7 +355,11 @@ class HeroSliderAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Slide Content', {
-            'fields': ('title', 'subtitle', 'image')
+            'fields': ('title', 'subtitle')
+        }),
+        ('Image Settings', {
+            'fields': ('image_scaling', 'image'),
+            'description': 'Choose your preferred image scaling option before uploading the image'
         }),
         ('Call to Action', {
             'fields': ('cta_text', 'cta_url'),

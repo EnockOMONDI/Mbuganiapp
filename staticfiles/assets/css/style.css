@@ -706,32 +706,49 @@ button {
 }
 .preloader .loader {
   position: relative;
-  width: 50px;
-  height: 50px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+.preloader .preloader-logo {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader .preloader-logo img {
+  width: 100px;
+  height: auto;
+  opacity: 1;
+  animation: logoFadeScale 2s ease-in-out infinite;
+}
+
+@keyframes logoFadeScale {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(0.95);
+  }
+}
+/* Hide old preloader elements - keeping for backward compatibility */
 .preloader .pre-box {
-  width: 50px;
-  height: 50px;
-  background: #ff9d00;
-  -webkit-animation: loaderAnimate 0.8s ease-in-out infinite;
-          animation: loaderAnimate 0.8s ease-in-out infinite;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 4px;
-  will-change: transform;
+  display: none;
 }
 .preloader .pre-shadow {
-  width: 50px;
-  height: 5px;
-  background: rgba(0, 0, 0, 0.15);
-  position: absolute;
-  top: 59px;
-  left: 0;
-  border-radius: 50%;
-  -webkit-animation: loaderShadow 0.8s ease-in-out infinite;
-          animation: loaderShadow 0.8s ease-in-out infinite;
-  will-change: transform;
+  display: none;
 }
 
 @-webkit-keyframes loaderAnimate {

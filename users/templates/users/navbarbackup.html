@@ -85,13 +85,14 @@
 
 /* Logo Size Reduction */
 .site-branding .brand-logo img {
-    max-height: 45px !important; /* Reduced from default ~60px */
+    max-height: 60px !important; /* Reduced from default ~60px */
     width: auto !important;
     object-fit: contain;
+    margin-right: 15px;
 }
 
 .mobile-logo .brand-logo img {
-    max-height: 40px !important; /* Reduced mobile logo size */
+    max-height: 50px !important; /* Reduced mobile logo size */
     width: auto !important;
 }
 
@@ -264,7 +265,7 @@
 /* Responsive Adjustments */
 @media (max-width: 1199px) {
     .site-branding .brand-logo img {
-        max-height: 40px !important;
+        max-height: 50px !important;
     }
 
     .main-menu > ul > li > a {
@@ -284,7 +285,7 @@
     }
 
     .site-branding .brand-logo img {
-        max-height: 35px !important;
+        max-height: 40px !important;
     }
 }
 
@@ -356,23 +357,31 @@
 
 /* === ENHANCED STICKY NAVBAR STYLING === */
 
-/* Force sticky navbar background color */
-.header-navigation.sticky {
+/* Default sticky navbar background color for non-homepage pages */
+.page-navbar .header-navigation.sticky {
     background-color: var(--navbar-primary) !important;
     box-shadow: 0 2px 20px var(--navbar-shadow) !important;
     transition: all 0.3s ease !important;
 }
 
+/* Homepage sticky navbar - white background */
+.homepage-navbar .header-navigation.sticky {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
 /* === STICKY NAVBAR STYLING === */
 
-/* Sticky navbar for homepage - keep white text on colored background */
+/* Sticky navbar for homepage - dark text on white background */
 .homepage-navbar .header-navigation.sticky .main-menu > ul > li > a {
-    color: var(--navbar-text-light) !important;
+    color: var(--navbar-text-dark) !important;
     text-shadow: none !important;
 }
 
 .homepage-navbar .header-navigation.sticky .main-menu > ul > li > a:hover {
-    color: var(--navbar-secondary) !important;
+    color: var(--navbar-primary) !important;
 }
 
 /* Sticky navbar for other pages - white text on colored background */
@@ -405,10 +414,16 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Force override any conflicting styles for sticky navbar */
-.header-two .header-navigation.sticky,
-.header-one .header-navigation.sticky {
+/* Force override any conflicting styles for sticky navbar - non-homepage pages */
+.page-navbar.header-two .header-navigation.sticky,
+.page-navbar.header-one .header-navigation.sticky {
     background-color: var(--navbar-primary) !important;
+}
+
+/* Force override for homepage sticky navbar */
+.homepage-navbar.header-two .header-navigation.sticky,
+.homepage-navbar.header-one .header-navigation.sticky {
+    background-color: rgba(255, 255, 255, 0.98) !important;
 }
 
 /* === SMOOTH TRANSITIONS === */
@@ -465,12 +480,22 @@
 
 /* Mobile sticky navbar */
 @media (max-width: 991px) {
-    .header-navigation.sticky {
+    /* Default for non-homepage pages */
+    .page-navbar .header-navigation.sticky {
         background-color: var(--navbar-primary) !important;
     }
 
-    .header-navigation.sticky .navbar-toggler span {
+    .page-navbar .header-navigation.sticky .navbar-toggler span {
         background-color: var(--navbar-text-light) !important;
+    }
+
+    /* Homepage specific */
+    .homepage-navbar .header-navigation.sticky {
+        background-color: rgba(255, 255, 255, 0.98) !important;
+    }
+
+    .homepage-navbar .header-navigation.sticky .navbar-toggler span {
+        background-color: var(--navbar-text-dark) !important;
     }
 }
 </style>
