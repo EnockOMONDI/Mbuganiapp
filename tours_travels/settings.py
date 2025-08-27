@@ -19,6 +19,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Environment-based settings loading
+DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
+
+print(f"🌍 Environment: {DJANGO_ENV}")
+
+# Continue with base settings first, then override with environment-specific settings
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -450,3 +457,23 @@ def dashboard_callback(request, context):
     """Return dashboard data for Unfold admin"""
     return context
 
+
+# Import environment-specific settings to override base settings
+if DJANGO_ENV == 'production':
+    print("🚀 Loading production settings...")
+    try:
+        from .settings_prod import *
+        print("✅ Production settings loaded successfully")
+    except ImportError as e:
+        print(f"❌ Failed to load production settings: {e}")
+        print("🔄 Using base settings...")
+elif DJANGO_ENV == 'development':
+    print("🔧 Loading development settings...")
+    try:
+        from .settings_dev import *
+        print("✅ Development settings loaded successfully")
+    except ImportError as e:
+        print(f"❌ Failed to load development settings: {e}")
+        print("🔄 Using base settings...")
+else:
+    print(f"⚠️  Unknown environment '{DJANGO_ENV}', using base settings...")
