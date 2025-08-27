@@ -1,5 +1,5 @@
 {% load static %}
-<header class="header-area header-two transparent-header">
+<header class="header-area header-two transparent-header {% if request.resolver_match.url_name == 'users-home' %}homepage-navbar{% else %}page-navbar{% endif %}">
             <!--====== Header Navigation ======-->
             <div class="header-navigation navigation-white breakpoint-on">
                 <div class="nav-overlay"></div>
@@ -59,11 +59,7 @@
                             <div class="menu-button d-xl-block d-none">
                                 <a href=  "https://api.whatsapp.com/send/?phone=254798197430&text&type=phone_number&app_absent=0"  target="_blank" class="main-btn primary-btn">Contact Us<i class="fas fa-paper-plane"></i></a>
                             </div>
-                            <div class="navbar-toggler">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
+                        
                         </div>
                     </div>
                 </div>
@@ -75,14 +71,14 @@
 
 /* Color Variables for Navbar */
 :root {
-    --navbar-primary: #471601; /* Mbugani burgundy */
-    --navbar-secondary: #e3aa00; /* Mbugani orange */
-    --navbar-primary-hover: #4a0000;
-    --navbar-secondary-hover: #e8850a;
+    --navbar-primary: #291c1a; /* Mbugani darker brown */
+    --navbar-secondary: #bd8c06; /* Mbugani darker gold */
+    --navbar-primary-hover: #1f1513;
+    --navbar-secondary-hover: #a67805;
     --navbar-text-light: #ffffff;
     --navbar-text-dark: #2c2c2c;
     --navbar-border: #e5e5e5;
-    --navbar-shadow: rgba(71, 22, 1, 0.15);
+    --navbar-shadow: rgba(41, 28, 26, 0.15);
 }
 
 /* ===== NAVBAR OPTIMIZATION STYLES ===== */
@@ -101,8 +97,10 @@
 
 /* === NAVIGATION MENU STYLING === */
 
-/* Main menu items with Mbugani colors */
-.main-menu > ul > li > a {
+/* === CONDITIONAL NAVBAR STYLING === */
+
+/* Homepage navbar - white text for transparent background over hero images */
+.homepage-navbar .main-menu > ul > li > a {
     font-size: 14px !important;
     font-weight: 500 !important;
     padding: 0 15px !important;
@@ -112,8 +110,26 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
 }
 
-.main-menu > ul > li > a:hover {
+/* Other pages navbar - dark text for white/light backgrounds */
+.page-navbar .main-menu > ul > li > a {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    padding: 0 15px !important;
+    color: var(--navbar-text-dark) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    text-shadow: none !important;
+}
+
+/* Homepage navbar hover */
+.homepage-navbar .main-menu > ul > li > a:hover {
     color: var(--navbar-secondary) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Other pages navbar hover */
+.page-navbar .main-menu > ul > li > a:hover {
+    color: var(--navbar-primary) !important;
     transform: translateY(-1px) !important;
 }
 
@@ -203,15 +219,46 @@
     gap: 15px !important; /* Consistent spacing between elements */
 }
 
-/* Mobile Menu Optimization */
+/* === MOBILE MENU OPTIMIZATION === */
 .navbar-toggler {
     width: 35px !important;
     height: 35px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
 }
 
 .navbar-toggler span {
-    height: 2px !important;
-    margin: 5px 0 !important;
+    display: block !important;
+    width: 25px !important;
+    height: 3px !important;
+    background-color: var(--navbar-text-light) !important;
+    margin: 3px 0 !important;
+    transition: all 0.3s ease !important;
+    border-radius: 2px !important;
+}
+
+/* Dark text for non-homepage pages */
+.page-navbar .navbar-toggler span {
+    background-color: var(--navbar-text-dark) !important;
+}
+
+/* Hamburger animation on active */
+.navbar-toggler.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px) !important;
+}
+
+.navbar-toggler.active span:nth-child(2) {
+    opacity: 0 !important;
+}
+
+.navbar-toggler.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px) !important;
 }
 
 /* Responsive Adjustments */
@@ -288,9 +335,17 @@
     flex-wrap: nowrap !important;
 }
 
-/* Menu item hover effects optimization */
-.main-menu > ul > li > a:hover {
-    color: #471601 !important;
+/* === OPTIMIZED MENU HOVER EFFECTS === */
+
+/* Homepage menu hover effects */
+.homepage-navbar .main-menu > ul > li > a:hover {
+    color: var(--navbar-secondary) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Other pages menu hover effects */
+.page-navbar .main-menu > ul > li > a:hover {
+    color: var(--navbar-primary) !important;
     transition: all 0.3s ease !important;
 }
 
@@ -308,13 +363,25 @@
     transition: all 0.3s ease !important;
 }
 
-/* Ensure sticky navbar text remains visible */
-.header-navigation.sticky .main-menu > ul > li > a {
+/* === STICKY NAVBAR STYLING === */
+
+/* Sticky navbar for homepage - keep white text on colored background */
+.homepage-navbar .header-navigation.sticky .main-menu > ul > li > a {
     color: var(--navbar-text-light) !important;
     text-shadow: none !important;
 }
 
-.header-navigation.sticky .main-menu > ul > li > a:hover {
+.homepage-navbar .header-navigation.sticky .main-menu > ul > li > a:hover {
+    color: var(--navbar-secondary) !important;
+}
+
+/* Sticky navbar for other pages - white text on colored background */
+.page-navbar .header-navigation.sticky .main-menu > ul > li > a {
+    color: var(--navbar-text-light) !important;
+    text-shadow: none !important;
+}
+
+.page-navbar .header-navigation.sticky .main-menu > ul > li > a:hover {
     color: var(--navbar-secondary) !important;
 }
 
@@ -324,10 +391,76 @@
     transition: all 0.3s ease !important;
 }
 
-/* Force override any conflicting styles */
+/* === BACKGROUND STYLING FOR DIFFERENT PAGE TYPES === */
+
+/* Homepage - transparent background when not sticky */
+.homepage-navbar .header-navigation:not(.sticky) {
+    background-color: transparent !important;
+}
+
+/* Other pages - white background when not sticky for visibility */
+.page-navbar .header-navigation:not(.sticky) {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Force override any conflicting styles for sticky navbar */
 .header-two .header-navigation.sticky,
 .header-one .header-navigation.sticky {
     background-color: var(--navbar-primary) !important;
+}
+
+/* === SMOOTH TRANSITIONS === */
+.header-navigation {
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.main-menu > ul > li > a {
+    transition: color 0.3s ease, transform 0.3s ease !important;
+}
+
+/* === MOBILE MENU STYLING === */
+@media (max-width: 1199px) {
+    /* Mobile menu background */
+    .header-navigation.breakpoint-on .nav-menu {
+        background-color: var(--navbar-text-light) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+        border-radius: 0 0 15px 15px !important;
+        padding: 20px !important;
+    }
+
+    /* Mobile menu links */
+    .header-navigation.breakpoint-on .nav-menu .main-menu ul li a {
+        color: var(--navbar-text-dark) !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        padding: 15px 20px !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Mobile menu link hover */
+    .header-navigation.breakpoint-on .nav-menu .main-menu ul li a:hover {
+        background-color: var(--navbar-primary) !important;
+        color: var(--navbar-text-light) !important;
+        transform: translateX(10px) !important;
+    }
+
+    /* Mobile submenu styling */
+    .header-navigation.breakpoint-on .nav-menu .main-menu ul li .sub-menu {
+        background-color: #f8f9fa !important;
+        border-left: 3px solid var(--navbar-primary) !important;
+        margin-left: 20px !important;
+    }
+
+    /* Mobile logo styling */
+    .mobile-logo {
+        text-align: center !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        padding-bottom: 20px !important;
+        margin-bottom: 20px !important;
+    }
 }
 
 /* Mobile sticky navbar */
@@ -341,3 +474,43 @@
     }
 }
 </style>
+
+<script>
+// Enhanced Mobile Navbar Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navbarToggler && navMenu) {
+        navbarToggler.addEventListener('click', function() {
+            // Toggle active class for hamburger animation
+            this.classList.toggle('active');
+
+            // Toggle nav menu visibility
+            navMenu.classList.toggle('active');
+
+            // Prevent body scroll when menu is open
+            document.body.classList.toggle('nav-open');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navbarToggler.contains(e.target) && !navMenu.contains(e.target)) {
+                navbarToggler.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('nav-open');
+            }
+        });
+
+        // Close menu when clicking on menu links
+        const menuLinks = navMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navbarToggler.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('nav-open');
+            });
+        });
+    }
+});
+</script>

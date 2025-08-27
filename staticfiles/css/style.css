@@ -9,10 +9,10 @@
 
   /* === MBUGANI LUXE ADVENTURES COLOR SCHEME === */
   :root {
-    --mbugani-primary: #471601; /* Burgundy */
-    --mbugani-secondary: #e3aa00; /* Orange */
-    --mbugani-primary-hover: #4a0000;
-    --mbugani-secondary-hover: #e8850a;
+    --mbugani-primary: #291c1a; /* Darker brown */
+    --mbugani-secondary: #bd8c06; /* Darker gold */
+    --mbugani-primary-hover: #1f1513;
+    --mbugani-secondary-hover: #a67805;
   }
 
   .btn-primary {
