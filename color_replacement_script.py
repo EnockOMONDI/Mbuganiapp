@@ -9,7 +9,7 @@ import glob
 
 # Color mapping: Current Novustell → New Mbugani
 COLOR_MAPPING = {
-    '#5d0000': '[NEW_PRIMARY_COLOR]',      # Mbugani Burgundy → New Primary
+    '#471601': '[NEW_PRIMARY_COLOR]',      # Mbugani Burgundy → New Primary
     '#ff9d00': '[NEW_ACCENT_COLOR]',       # Novustell Orange → New Accent
     '#1C231F': '[NEW_TEXT_COLOR]',         # Dark Text → New Text
     '#1D231F': '[NEW_TEXT_COLOR]',         # Dark Text Variant → New Text

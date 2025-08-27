@@ -68,56 +68,109 @@ def destination_detail(request, slug):
 
 # Package Views
 def package_list(request):
-    """List packages with filtering by destination hierarchy"""
+    """Enhanced package list with modern filtering and AJAX support"""
     packages = Package.objects.filter(status=Package.PUBLISHED).select_related('main_destination')
 
-    # Filter by destination if provided
+    # Get filter parameters
+    category = request.GET.get('category', 'all')
     destination_id = request.GET.get('destination')
+    search_query = request.GET.get('search', '').strip()
+
+    # Category filtering based on destination type
+    if category != 'all':
+        if category == 'uganda':
+            packages = packages.filter(main_destination__name__icontains='uganda')
+        elif category == 'kenya':
+            packages = packages.filter(main_destination__name__icontains='kenya')
+        elif category == 'tanzania':
+            packages = packages.filter(main_destination__name__icontains='tanzania')
+        elif category == 'beach':
+            packages = packages.filter(
+                Q(name__icontains='beach') |
+                Q(description__icontains='beach') |
+                Q(name__icontains='coastal') |
+                Q(description__icontains='coastal')
+            )
+        elif category == 'cultural':
+            packages = packages.filter(
+                Q(name__icontains='cultural') |
+                Q(description__icontains='cultural') |
+                Q(name__icontains='heritage') |
+                Q(description__icontains='heritage')
+            )
+        elif category == 'adventure':
+            packages = packages.filter(
+                Q(name__icontains='adventure') |
+                Q(description__icontains='adventure') |
+                Q(name__icontains='safari') |
+                Q(description__icontains='safari')
+            )
+
+    # Filter by specific destination if provided
     if destination_id:
         try:
             destination = Destination.objects.get(id=destination_id, is_active=True)
-            # Include packages from this destination and all its children
             destination_ids = [destination.id] + [child.id for child in destination.get_all_children()]
             packages = packages.filter(main_destination_id__in=destination_ids)
         except Destination.DoesNotExist:
             pass
 
     # Search functionality
-    search_query = request.GET.get('search')
     if search_query:
         packages = packages.filter(
             Q(name__icontains=search_query) |
             Q(description__icontains=search_query) |
-            Q(main_destination__name__icontains=search_query)
+            Q(main_destination__name__icontains=search_query) |
+            Q(inclusions__icontains=search_query)
         )
 
-    # Pagination
+    # Handle AJAX requests for dynamic filtering
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        from django.template.loader import render_to_string
+
+        # Pagination for AJAX
+        paginator = Paginator(packages, 12)
+        page_number = request.GET.get('page', 1)
+        page_obj = paginator.get_page(page_number)
+
+        html = render_to_string('adminside/package_cards.html', {
+            'page_obj': page_obj,
+            'request': request
+        })
+
+        return JsonResponse({
+            'html': html,
+            'has_next': page_obj.has_next(),
+            'has_previous': page_obj.has_previous(),
+            'current_page': page_obj.number,
+            'total_pages': paginator.num_pages,
+            'total_count': paginator.count
+        })
+
+    # Regular pagination for non-AJAX requests
     paginator = Paginator(packages, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # Get destination hierarchy for sidebar
-    countries = Destination.objects.filter(
-        destination_type=Destination.COUNTRY,
-        is_active=True
-    ).prefetch_related(
-        Prefetch(
-            'children',
-            queryset=Destination.objects.filter(is_active=True).prefetch_related(
-                Prefetch(
-                    'children',
-                    queryset=Destination.objects.filter(is_active=True)
-                )
-            )
-        )
-    ).order_by('display_order', 'name')
+    # Get destination categories for filter pills
+    categories = [
+        {'key': 'all', 'name': 'All Packages', 'count': Package.objects.filter(status=Package.PUBLISHED).count()},
+        {'key': 'uganda', 'name': 'Uganda Tours', 'count': Package.objects.filter(status=Package.PUBLISHED, main_destination__name__icontains='uganda').count()},
+        {'key': 'kenya', 'name': 'Kenya Tours', 'count': Package.objects.filter(status=Package.PUBLISHED, main_destination__name__icontains='kenya').count()},
+        {'key': 'tanzania', 'name': 'Tanzania Tours', 'count': Package.objects.filter(status=Package.PUBLISHED, main_destination__name__icontains='tanzania').count()},
+        {'key': 'beach', 'name': 'Beach Holidays', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(name__icontains='beach') | Q(description__icontains='beach')).count()},
+        {'key': 'cultural', 'name': 'Cultural Tours', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(name__icontains='cultural') | Q(description__icontains='cultural')).count()},
+        {'key': 'adventure', 'name': 'Adventure Tours', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(name__icontains='adventure') | Q(description__icontains='adventure')).count()},
+    ]
 
     context = {
         'page_obj': page_obj,
-        'countries': countries,
+        'categories': categories,
+        'current_category': category,
         'current_destination_id': destination_id,
         'search_query': search_query,
-        'page_title': 'Travel Packages'
+        'page_title': 'Travel Packages - Mbugani Luxe Adventures',
+        'meta_description': 'Discover luxury safari packages and adventure tours with Mbugani Luxe Adventures. Explore Uganda, Kenya, Tanzania and more with our premium travel experiences.'
     }
     return render(request, 'adminside/package_list.html', context)
 

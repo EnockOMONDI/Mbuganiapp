@@ -259,7 +259,7 @@ class JobApplicationAdmin(admin.ModelAdmin):
         """Display resume download link in list view"""
         if obj.resume:
             return format_html(
-                '<a href="{}" target="_blank" style="color: #5d0000; font-weight: bold;">'
+                '<a href="{}" target="_blank" style="color: #471601; font-weight: bold;">'
                 '<i class="fas fa-download"></i> Download CV</a>',
                 obj.resume.url
             )
@@ -279,7 +279,7 @@ class JobApplicationAdmin(admin.ModelAdmin):
 
             return format_html(
                 '<div style="margin: 10px 0;">'
-                '<a href="{}" target="_blank" class="button" style="background: #5d0000; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; display: inline-block;">'
+                '<a href="{}" target="_blank" class="button" style="background: #471601; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; display: inline-block;">'
                 '<i class="fas fa-download"></i> Download Resume{}</a>'
                 '<br><small style="color: #666; margin-top: 5px; display: block;">File: {}</small>'
                 '</div>',

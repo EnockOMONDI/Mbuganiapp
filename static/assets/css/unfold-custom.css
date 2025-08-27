@@ -21,8 +21,8 @@
 
 .model-heroslider .results tr:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(93, 0, 0, 0.15);
-    border-color: #5d0000;
+    box-shadow: 0 8px 24px rgba(71, 22, 1, 0.15);
+    border-color: #471601;
 }
 
 /* Hero Slider Image Thumbnails */
@@ -37,7 +37,7 @@
 }
 
 .hero-slider-thumbnail:hover {
-    border-color: #5d0000;
+    border-color: #471601;
     transform: scale(1.02);
 }
 
@@ -48,7 +48,7 @@
 
 .model-heroslider .form-row label {
     font-weight: 600;
-    color: #5d0000;
+    color: #471601;
     margin-bottom: 8px;
     display: block;
 }
@@ -63,8 +63,8 @@
 
 .model-heroslider .form-row input:focus,
 .model-heroslider .form-row textarea:focus {
-    border-color: #5d0000;
-    box-shadow: 0 0 0 3px rgba(93, 0, 0, 0.1);
+    border-color: #471601;
+    box-shadow: 0 0 0 3px rgba(71, 22, 1, 0.1);
 }
 
 /* Hero Slider Status Indicators */
@@ -88,7 +88,7 @@
 
 /* Hero Slider Order Badge */
 .hero-slider-order {
-    background: linear-gradient(135deg, #5d0000, #fb9300);
+    background: linear-gradient(135deg, #471601, #e3aa00);
     color: white;
     width: 30px;
     height: 30px;
@@ -109,13 +109,13 @@
 }
 
 .app-adminside .model-heroslider h2 {
-    color: #5d0000;
+    color: #471601;
     font-family: 'TAN-Garland-Regular', sans-serif;
     margin-bottom: 15px;
 }
 
 .app-adminside .model-heroslider .addlink {
-    background: linear-gradient(135deg, #5d0000, #fb9300);
+    background: linear-gradient(135deg, #471601, #e3aa00);
     color: white;
     padding: 10px 20px;
     border-radius: 25px;
@@ -126,16 +126,16 @@
 
 .app-adminside .model-heroslider .addlink:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(93, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(71, 22, 1, 0.3);
     color: white;
 }
 
 /* Brand Colors */
 :root {
-    --mbugani-primary: #5d0000;
-    --mbugani-secondary: #fb9300;
+    --mbugani-primary: #471601;
+    --mbugani-secondary: #e3aa00;
     --mbugani-light: #f8f9fa;
-    --mbugani-dark: #5d0000;
+    --mbugani-dark: #471601;
 }
 
 /* Custom branding for admin interface */

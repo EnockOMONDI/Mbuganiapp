@@ -377,11 +377,11 @@ customColorPalette = [
         'label': 'Blue'
     },
     {
-        'color': '#5d0000',  # Mbugani primary color - burgundy
+        'color': '#471601',  # Mbugani primary color - burgundy
         'label': 'Mbugani Primary'
     },
     {
-        'color': '#fb9300',  # Mbugani accent color - orange
+        'color': '#e3aa00',  # Mbugani accent color - orange
         'label': 'Mbugani Accent'
     },
 ]
