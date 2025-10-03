@@ -31,7 +31,7 @@ class Command(BaseCommand):
                     self.stdout.write(self.style.ERROR('❌ Background image not found in HTML'))
                 
                 # Check for the gradient overlay
-                if 'rgba(71, 22, 1, 0.8)' in html_content and 'rgba(227, 170, 0, 0.6)' in html_content:
+                if 'rgba(93, 0, 0, 0.8)' in html_content and 'rgba(251, 147, 0, 0.6)' in html_content:
                     self.stdout.write(self.style.SUCCESS('✅ Mbugani brand gradient overlay found'))
                 else:
                     self.stdout.write(self.style.WARNING('⚠️  Brand gradient overlay not found'))

@@ -14,7 +14,7 @@
 
 /* Toolbar styling for admin */
 .ck-toolbar {
-    background: linear-gradient(135deg, #471601 0%, #471601 100%);
+    background: linear-gradient(135deg, #5d0000 0%, #5d0000 100%);
     border-radius: 6px 6px 0 0;
     border: none;
     padding: 8px;
@@ -50,7 +50,7 @@
 .ck-editor__editable h1,
 .ck-editor__editable h2,
 .ck-editor__editable h3 {
-    color: #471601;
+    color: #5d0000;
     font-weight: bold;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .ck-editor__editable table th {
-    background-color: #471601;
+    background-color: #5d0000;
     color: white;
     padding: 8px;
 }

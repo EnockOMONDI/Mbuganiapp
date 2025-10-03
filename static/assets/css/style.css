@@ -1318,7 +1318,10 @@ button {
   }
 }
 .hero-wrapper .single-slider {
-  padding: 195px 0 90px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 60px;
 }
 .hero-wrapper .hero-content {
   position: relative;
@@ -1407,13 +1410,17 @@ button {
 
 /* Hero Two */
 .hero-wrapper-two .single-slider {
-  padding: 355px 0 270px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 60px;
   position: relative;
   z-index: 1;
 }
 @media (max-width: 767px) {
   .hero-wrapper-two .single-slider {
-    padding: 255px 0 220px;
+    min-height: 100vh;
+    padding: 100px 0 50px;
   }
 }
 .hero-wrapper-two .single-slider .image-layer {
@@ -1480,13 +1487,17 @@ button {
   margin-bottom: 0;
 }
 .hero-wrapper-three .single-slider {
-  padding: 85px 0 140px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 60px;
   position: relative;
   z-index: 1;
 }
 @media (max-width: 1199px) {
   .hero-wrapper-three .single-slider {
-    padding: 150px 0;
+    min-height: 100vh;
+    padding: 100px 0 50px;
   }
 }
 .hero-wrapper-three .single-slider .image-layer {
@@ -1677,6 +1688,178 @@ button {
 =================----*/
 .about-two_content-box > p {
   margin-bottom: 45px;
+}
+
+/*---==================
+    Split Hero Section - Mbugani Luxe Adventures
+=================----*/
+
+.split-hero-section {
+
+  padding: 64px 0 !important;
+}
+
+.split-hero-section .container {
+  max-width: 1280px !important;
+  padding: 0 48px !important;
+}
+
+.split-hero-section .row {
+  gap: 48px !important;
+  margin: 0 !important;
+}
+
+.split-hero-section .col-lg-5 {
+  flex: 0 0 38% !important;
+  max-width: 38% !important;
+}
+
+.split-hero-section .col-lg-7 {
+  flex: 0 0 62% !important;
+  max-width: 62% !important;
+}
+
+.split-hero-card {
+  background: white !important;
+  height: 100% !important;
+}
+
+.inspiration-label {
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom: 24px !important;
+}
+
+.inspiration-label i {
+  color: #C6A35B !important;
+  font-size: 12px !important;
+  margin-right: 8px !important;
+}
+
+.inspiration-label span {
+  font-size: 12px !important;
+  letter-spacing: 0.12em !important;
+  color: #C6A35B !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  font-family: 'TAN-Garland-Regular', 'Arial', sans-serif !important;
+}
+
+.split-hero-headline {
+  font-family: 'TAN-Garland-Regular', 'Arial', sans-serif !important;
+  font-size: 42px !important;
+  line-height: 1.2 !important;
+  color: #2E2A27 !important;
+  margin-bottom: 24px !important;
+  font-weight: normal !important;
+}
+
+.split-hero-copy {
+  font-size: 17px !important;
+  line-height: 1.6 !important;
+  color: #3E3A34 !important;
+  max-width: 34ch !important;
+  margin-bottom: 32px !important;
+  font-family: 'TAN-Garland-Regular', 'Arial', sans-serif !important;
+}
+
+.split-hero-cta {
+  display: inline-block !important;
+  border: 1.5px solid #C6A35B !important;
+  color: #C6A35B !important;
+  text-decoration: none !important;
+  padding: 10px 16px !important;
+  border-radius: 4px !important;
+  font-size: 13px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+  font-family: 'TAN-Garland-Regular', 'Arial', sans-serif !important;
+}
+
+.split-hero-cta:hover {
+  background-color: #C6A35B !important;
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.split-hero-cta:focus {
+  outline: 2px solid #C6A35B !important;
+  outline-offset: 2px !important;
+}
+
+.split-hero-image {
+  width: 100% !important;
+  height: 400px !important;
+  overflow: hidden !important;
+  border-radius: 4px !important;
+}
+
+.split-hero-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* Responsive Design for Split Hero Section */
+
+/* Tablet (≤1024px) */
+@media (max-width: 1024px) {
+  .split-hero-section {
+    padding: 32px 0 !important;
+  }
+
+  .split-hero-section .container {
+    padding: 0 32px !important;
+  }
+
+  .split-hero-section .col-lg-5 {
+    flex: 0 0 45% !important;
+    max-width: 45% !important;
+  }
+
+  .split-hero-section .col-lg-7 {
+    flex: 0 0 55% !important;
+    max-width: 55% !important;
+  }
+
+  .split-hero-card {
+    padding: 32px !important;
+  }
+
+  .split-hero-headline {
+    font-size: 38px !important;
+  }
+}
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .split-hero-section .row {
+    flex-direction: column-reverse !important;
+    gap: 32px !important;
+  }
+
+  .split-hero-section .col-lg-5,
+  .split-hero-section .col-lg-7 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .split-hero-headline {
+    font-size: 32px !important;
+  }
+
+  .split-hero-cta {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .split-hero-image {
+    height: 300px !important;
+    margin-bottom: 0 !important;
+  }
 }
 .about-two_content-box .card-list {
   max-width: 500px;
@@ -5551,4 +5734,200 @@ ul.slick-dots li.slick-active {
 .reviews-wrapper .reviews-inner-box .reviews-progress .single-progress-bar:not(:last-child) {
   margin-bottom: 38px;
 }
+
+/*====== Start Split Hero Section Styles ======*/
+.split-hero-section {
+    background-color: #F8F4ED;
+    padding: 64px 0;
+    width: 100%;
+}
+
+.split-hero-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px;
+}
+
+.split-hero-layout {
+    display: flex;
+    gap: 48px;
+    align-items: stretch;
+}
+
+.split-hero-left {
+    flex: 0 0 38%;
+}
+
+.split-hero-right {
+    flex: 0 0 62%;
+}
+
+.split-hero-card {
+    background: #FFFFFF;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.split-hero-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.split-hero-label i {
+    color: #C6A35B;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+.split-hero-label span {
+    font-family: 'TAN-Garland-Regular', 'Arial', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: #C6A35B;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.split-hero-headline {
+    font-family: 'TAN-Garland-Regular', 'Arial', sans-serif;
+    font-size: 42px;
+    line-height: 1.2;
+    color: #2E2A27;
+    margin-bottom: 24px;
+    font-weight: normal;
+}
+
+.split-hero-copy {
+    font-family: 'TAN-Garland-Regular', 'Arial', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #3E3A34;
+    max-width: 34ch;
+    margin-bottom: 32px;
+}
+
+.split-hero-cta {
+    display: inline-block;
+    border: 1.5px solid #C6A35B;
+    color: #C6A35B;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-family: 'TAN-Garland-Regular', 'Arial', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.split-hero-cta:hover {
+    background-color: #C6A35B;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.split-hero-cta:focus {
+    outline: 2px solid #C6A35B;
+    outline-offset: 2px;
+}
+
+.split-hero-image {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.split-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 16/9;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .split-hero-container {
+        padding: 0 32px;
+    }
+
+    .split-hero-left {
+        flex: 0 0 45%;
+    }
+
+    .split-hero-right {
+        flex: 0 0 55%;
+    }
+
+    .split-hero-card {
+        padding: 32px;
+    }
+
+    .split-hero-headline {
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 768px) {
+    .split-hero-section {
+        padding: 48px 0;
+    }
+
+    .split-hero-container {
+        padding: 0 24px;
+    }
+
+    .split-hero-layout {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .split-hero-left,
+    .split-hero-right {
+        flex: 1 1 100%;
+    }
+
+    .split-hero-headline {
+        font-size: 32px;
+    }
+
+    .split-hero-copy {
+        max-width: none;
+    }
+
+    .split-hero-cta {
+        width: 100%;
+        text-align: center;
+    }
+
+    .split-hero-image {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .split-hero-headline {
+        font-size: 28px;
+    }
+
+    .split-hero-card {
+        padding: 24px;
+    }
+}
+/*====== End Split Hero Section Styles ======*/
+
+/*====== About Image Styling ======*/
+.about-img {
+    border: 2px solid #e3aa00;
+    border-radius: 2px;
+}
+/*====== End About Image Styling ======*/
+
 /*# sourceMappingURL=style.css.map */

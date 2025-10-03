@@ -21,7 +21,7 @@
 
 .model-heroslider .results tr:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(71, 22, 1, 0.15);
+    box-shadow: 0 8px 24px rgba(93, 0, 0, 0.15);
     border-color: #471601;
 }
 
@@ -126,7 +126,7 @@
 
 .app-adminside .model-heroslider .addlink:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(71, 22, 1, 0.3);
+    box-shadow: 0 5px 15px rgba(93, 0, 0, 0.3);
     color: white;
 }
 

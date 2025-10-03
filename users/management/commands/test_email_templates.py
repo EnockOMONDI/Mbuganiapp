@@ -73,7 +73,7 @@ class Command(BaseCommand):
             else:
                 self.stdout.write(self.style.WARNING('⚠️  Updated phone number not found'))
             
-            if '#471601' in html_content or '#e3aa00' in html_content:
+            if '#5d0000' in html_content or '#fb9300' in html_content:
                 self.stdout.write('✅ Mbugani brand colors found')
             else:
                 self.stdout.write(self.style.WARNING('⚠️  Brand colors not found'))
