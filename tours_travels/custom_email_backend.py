@@ -23,16 +23,20 @@ class CustomSMTPBackend(EmailBackend):
     def open(self):
         """
         Open a connection to the SMTP server with custom SSL handling.
+        Optimized for production environments with proper timeout handling.
         """
         if self.connection:
             return False
 
+        # Use shorter timeout for production to prevent worker timeouts
+        connection_timeout = min(self.timeout or 30, 10)  # Max 10 seconds for production
+
         try:
-            # Create SMTP connection
+            # Create SMTP connection with shorter timeout
             if self.use_ssl:
-                self.connection = smtplib.SMTP_SSL(self.host, self.port, timeout=self.timeout)
+                self.connection = smtplib.SMTP_SSL(self.host, self.port, timeout=connection_timeout)
             else:
-                self.connection = smtplib.SMTP(self.host, self.port, timeout=self.timeout)
+                self.connection = smtplib.SMTP(self.host, self.port, timeout=connection_timeout)
 
             # Set debug level if needed
             if hasattr(self, '_debug') and self._debug:
@@ -40,37 +44,25 @@ class CustomSMTPBackend(EmailBackend):
 
             # Handle TLS/SSL upgrade
             if not self.use_ssl and self.use_tls:
-                # Create SSL context that handles certificate verification issues
+                # Create SSL context with proper timeout
                 context = ssl.create_default_context()
+                context.check_hostname = True
+                context.verify_mode = ssl.CERT_REQUIRED
 
-                # In local development, if SSL verification fails, try with verification disabled
-                # This is a workaround for local development environments
+                # Set SSL socket timeout
+                self.connection.sock.settimeout(connection_timeout)
+
                 try:
                     self.connection.starttls(context=context)
                 except ssl.SSLError as e:
-                    if 'CERTIFICATE_VERIFY_FAILED' in str(e):
-                        # Fallback: disable certificate verification for local development
-                        # WARNING: This reduces security and should only be used in development
-                        import warnings
-                        warnings.warn(
-                            "SSL certificate verification failed. Using insecure connection for development. "
-                            "Ensure proper SSL certificates are installed in production.",
-                            UserWarning
-                        )
-                        # Create a new context with verification disabled
-                        context = ssl.create_default_context()
-                        context.check_hostname = False
-                        context.verify_mode = ssl.CERT_NONE
-                        self.connection.starttls(context=context)
-                    else:
-                        raise
+                    # In production, we should NOT disable SSL verification
+                    # Instead, let the error propagate so it can be handled properly
+                    raise e
 
-                # Re-issue EHLO after STARTTLS to ensure connection is properly initialized
+                # Re-issue EHLO after STARTTLS
                 try:
                     self.connection.ehlo()
                 except Exception as ehlo_error:
-                    # If EHLO fails, the connection might be in a bad state
-                    # Try to close and reopen the connection
                     try:
                         self.connection.close()
                     except:
@@ -82,7 +74,6 @@ class CustomSMTPBackend(EmailBackend):
                 try:
                     self.connection.login(self.username, self.password)
                 except Exception as auth_error:
-                    # If authentication fails, ensure connection is closed
                     try:
                         self.connection.close()
                     except:
@@ -107,17 +98,34 @@ class CustomSMTPBackend(EmailBackend):
     def send_messages(self, email_messages):
         """
         Send one or more EmailMessage objects and return the number of email
-        messages sent.
+        messages sent. Optimized for production with robust error handling.
         """
         if not email_messages:
             return 0
 
         num_sent = 0
-        with self:
-            for message in email_messages:
-                sent = self._send(message)
-                if sent:
-                    num_sent += 1
+        # Use context manager with comprehensive error handling
+        try:
+            with self:
+                for message in email_messages:
+                    try:
+                        sent = self._send(message)
+                        if sent:
+                            num_sent += 1
+                    except Exception as e:
+                        # Log individual message errors but continue processing others
+                        import logging
+                        logger = logging.getLogger(__name__)
+                        logger.error(f"Failed to send email to {getattr(message, 'to', 'unknown')}: {e}")
+                        # Continue with other messages - don't fail the entire batch
+
+        except Exception as e:
+            # If the context manager fails, log the error
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Email backend context manager failed: {e}")
+            # Don't re-raise to prevent worker crashes
+
         return num_sent
 
     def _send(self, email_message):
@@ -127,7 +135,7 @@ class CustomSMTPBackend(EmailBackend):
             return False
 
         try:
-            # Ensure connection is still alive
+            # Quick connection check
             if hasattr(self.connection, 'noop'):
                 try:
                     self.connection.noop()

@@ -1266,25 +1266,25 @@ def quote_request_view(request):
                     quote_request.save()
                     logger.info(f"Quote request {quote_request.id} associated with package {package.name}")
 
-                # Send email notifications with comprehensive error reporting
-                error_report = send_quote_request_emails(quote_request)
+                # Send email notifications asynchronously to prevent request timeouts
+                import threading
 
-                # Generate user-friendly messages based on error report
-                user_messages = generate_user_friendly_error_message(error_report)
+                def send_emails_async():
+                    try:
+                        error_report = send_quote_request_emails(quote_request)
+                        logger.info(f"Async email dispatch completed for quote request {quote_request.id}: {error_report['overall_success']}")
+                        if not error_report['overall_success']:
+                            logger.warning(f"Email errors for quote request {quote_request.id}: {error_report}")
+                    except Exception as e:
+                        logger.error(f"Async email dispatch failed for quote request {quote_request.id}: {e}")
 
-                # Display appropriate messages to user
-                if error_report['overall_success']:
-                    messages.success(request, user_messages[0])
-                    logger.info(f"Quote request {quote_request.id} processed successfully")
-                else:
-                    # Show success for the quote submission
-                    messages.success(request, "Thank you! Your quote request has been submitted successfully.")
-                    # Show warnings for email issues
-                    for msg in user_messages[1:]:
-                        messages.warning(request, msg)
+                # Start email sending in a background thread
+                email_thread = threading.Thread(target=send_emails_async, daemon=True)
+                email_thread.start()
 
-                    # Log detailed error report for debugging
-                    logger.warning(f"Quote request {quote_request.id} email errors: {error_report}")
+                # Show immediate success message to user
+                messages.success(request, "Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.")
+                logger.info(f"Quote request {quote_request.id} submitted successfully - emails queued for async processing")
 
                 # Redirect to success page
                 return redirect('users:quote_success')
