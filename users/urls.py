@@ -26,6 +26,10 @@ urlpatterns = [
     path('careers/job/<slug:slug>/', views.job_detail, name='job_detail'),
     path('newsletter/subscribe/', views.newsletter_subscribe, name='newsletter_subscribe'),
 
+    # Quote Request URLs
+    path('quote/', views.quote_request_view, name='quote_request'),
+    path('quote/success/', views.quote_success, name='quote_success'),
+
     # User Profile URLs
     path('profile/', views.user_profile, name='user_profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),

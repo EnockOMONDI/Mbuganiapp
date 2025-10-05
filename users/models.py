@@ -615,6 +615,80 @@ class JobListing(models.Model):
         super().save(*args, **kwargs)
 
 
+class QuoteRequest(models.Model):
+    """
+    Model for quote requests submitted through the website
+    """
+    # Personal Information
+    full_name = models.CharField(max_length=100, help_text="Full name of the person requesting quote")
+    email = models.EmailField(help_text="Email address for communication")
+    phone_number = models.CharField(max_length=20, help_text="Contact phone number")
+
+    # Travel Details
+    destination = models.CharField(max_length=100, help_text="Preferred destination or region")
+    preferred_travel_dates = models.CharField(max_length=200, help_text="Preferred travel dates (flexible dates welcome)")
+    number_of_travelers = models.PositiveIntegerField(default=1, help_text="Number of people traveling")
+
+    # Package Information (optional - if requesting quote for specific package)
+    package = models.ForeignKey(
+        "adminside.Package",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        help_text="Specific package if requesting quote for existing package"
+    )
+
+    # Additional Information
+    special_requests = CKEditor5Field(
+        config_name='default',
+        blank=True,
+        null=True,
+        help_text="Any special requirements, preferences, or additional information"
+    )
+
+    # System Information
+    created_at = models.DateTimeField(auto_now_add=True, help_text="When the quote request was submitted")
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # Email tracking
+    confirmation_email_sent = models.BooleanField(default=False, help_text="Whether confirmation email was sent to user")
+    admin_notification_sent = models.BooleanField(default=False, help_text="Whether notification was sent to admin")
+
+    # Status tracking
+    STATUS_CHOICES = [
+        ('new', 'New Request'),
+        ('contacted', 'Contacted'),
+        ('quoted', 'Quote Sent'),
+        ('confirmed', 'Booking Confirmed'),
+        ('cancelled', 'Cancelled'),
+    ]
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='new',
+        help_text="Current status of the quote request"
+    )
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Quote Request"
+        verbose_name_plural = "Quote Requests"
+
+    def __str__(self):
+        return f"Quote Request - {self.full_name} ({self.destination})"
+
+    def get_status_badge_class(self):
+        """Get CSS class for status badge"""
+        status_classes = {
+            'new': 'badge-primary',
+            'contacted': 'badge-info',
+            'quoted': 'badge-warning',
+            'confirmed': 'badge-success',
+            'cancelled': 'badge-danger',
+        }
+        return status_classes.get(self.status, 'badge-secondary')
+
+
 # Signal to create UserProfile when User is created
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

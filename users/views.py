@@ -39,7 +39,8 @@ from .forms import UserRegisterForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .utils import send_booking_confirmation_email
-from .forms import MICEInquiryForm, StudentTravelInquiryForm, NGOTravelInquiryForm, JobApplicationForm, NewsletterSubscriptionSimpleForm
+from .forms import MICEInquiryForm, StudentTravelInquiryForm, NGOTravelInquiryForm, JobApplicationForm, NewsletterSubscriptionSimpleForm, QuoteRequestForm
+from .models import QuoteRequest
 from django.contrib.auth.models import User
 from blog.models import Post, Category
 from adminside.models import Destination, Package, Accommodation
@@ -1198,6 +1199,113 @@ def booking_detail(request, booking_reference):
     }
 
     return render(request, 'users/booking_detail.html', context)
+
+
+def quote_request_view(request):
+    """
+    Handle quote request form submission and display
+    """
+    # Check if package_id is provided in URL parameters
+    package_id = request.GET.get('package_id')
+    package = None
+    if package_id:
+        try:
+            package = Package.objects.get(id=package_id, status=Package.PUBLISHED)
+        except Package.DoesNotExist:
+            pass
+
+    if request.method == 'POST':
+        form = QuoteRequestForm(request.POST)
+        if form.is_valid():
+            # Create quote request
+            quote_request = form.save()
+
+            # Associate with package if provided
+            if package:
+                quote_request.package = package
+                quote_request.save()
+
+            try:
+                # Send email notifications
+                send_quote_request_emails(quote_request)
+                messages.success(request, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.')
+            except Exception as e:
+                messages.warning(request, 'Your quote request was submitted successfully, but there was an issue sending email notifications. We will still contact you soon.')
+                print(f"Email error: {e}")
+
+            # Redirect to success page
+            return redirect('users:quote_success')
+
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        # Pre-populate form if package is specified
+        initial_data = {}
+        if package:
+            initial_data['destination'] = package.main_destination.name if package.main_destination else ''
+
+        form = QuoteRequestForm(initial=initial_data)
+
+    context = {
+        'form': form,
+        'package': package,
+        'page_title': 'Request a Quote',
+    }
+
+    return render(request, 'users/quote_form.html', context)
+
+
+def quote_success(request):
+    """
+    Success page after quote request submission
+    """
+    return render(request, 'users/quote_success.html', {
+        'page_title': 'Quote Request Submitted',
+    })
+
+
+def send_quote_request_emails(quote_request):
+    """
+    Send email notifications for quote requests
+    """
+    from django.core.mail import send_mail
+    from django.template.loader import render_to_string
+    from django.conf import settings
+
+    # Email to user (confirmation)
+    user_subject = 'Quote Request Received - Mbugani Luxe Adventures'
+    user_message = render_to_string('users/emails/quote_request_confirmation.html', {
+        'quote_request': quote_request
+    })
+
+    send_mail(
+        subject=user_subject,
+        message='',  # Plain text version
+        html_message=user_message,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=[quote_request.email],
+        fail_silently=False,
+    )
+
+    # Email to admin
+    admin_subject = f'New Quote Request - {quote_request.full_name}'
+    admin_message = render_to_string('users/emails/quote_request_admin.html', {
+        'quote_request': quote_request
+    })
+
+    send_mail(
+        subject=admin_subject,
+        message='',  # Plain text version
+        html_message=admin_message,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=['info@mbuganiluxeadventures.com'],
+        fail_silently=False,
+    )
+
+    # Update email tracking
+    quote_request.confirmation_email_sent = True
+    quote_request.admin_notification_sent = True
+    quote_request.save()
 
 
 def test_500_error(request):
