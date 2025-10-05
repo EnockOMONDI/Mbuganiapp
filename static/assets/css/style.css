@@ -1720,7 +1720,7 @@ button {
 }
 
 .split-hero-card {
-  background: white !important;
+ 
   height: 100% !important;
 }
 
@@ -5763,7 +5763,7 @@ ul.slick-dots li.slick-active {
 }
 
 .split-hero-card {
-    background: #FFFFFF;
+   
     height: 100%;
     display: flex;
     flex-direction: column;
