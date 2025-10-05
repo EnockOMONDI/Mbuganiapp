@@ -337,7 +337,7 @@ def send_job_application_emails(job_application):
         html_message=admin_message,
         from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=recipient_list,
-        fail_silently=False,
+        fail_silently=True,  # Changed to fail silently
     )
 
     # Email to applicant
@@ -383,7 +383,7 @@ def send_newsletter_subscription_emails(subscription):
         html_message=admin_message,
         from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[newsletter_email],
-        fail_silently=False,
+        fail_silently=True,  # Changed to fail silently
     )
 
     # Email to subscriber
@@ -398,7 +398,7 @@ def send_newsletter_subscription_emails(subscription):
         html_message=subscriber_message,
         from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[subscription.email],
-        fail_silently=False,
+        fail_silently=True,  # Changed to fail silently
     )
 
     # Update email tracking
@@ -1230,8 +1230,16 @@ def quote_request_view(request):
                 send_quote_request_emails(quote_request)
                 messages.success(request, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.')
             except Exception as e:
-                messages.warning(request, 'Your quote request was submitted successfully, but there was an issue sending email notifications. We will still contact you soon.')
-                print(f"Email error: {e}")
+                # Log the error but don't fail the request
+                print(f"Email sending failed: {e}")
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.error(f"Failed to send quote request emails: {e}")
+
+                # Still show success message since the quote was saved
+                messages.success(request, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.')
+                # Optionally add a note about email issues
+                messages.info(request, 'Note: If you don\'t receive a confirmation email, please check your spam folder or contact us directly.')
 
             # Redirect to success page
             return redirect('users:quote_success')
@@ -1271,41 +1279,69 @@ def send_quote_request_emails(quote_request):
     from django.core.mail import send_mail
     from django.template.loader import render_to_string
     from django.conf import settings
+    import logging
+
+    logger = logging.getLogger(__name__)
+    email_errors = []
 
     # Email to user (confirmation)
-    user_subject = 'Quote Request Received - Mbugani Luxe Adventures'
-    user_message = render_to_string('users/emails/quote_request_confirmation.html', {
-        'quote_request': quote_request
-    })
+    try:
+        user_subject = 'Quote Request Received - Mbugani Luxe Adventures'
+        user_message = render_to_string('users/emails/quote_request_confirmation.html', {
+            'quote_request': quote_request
+        })
 
-    send_mail(
-        subject=user_subject,
-        message='',  # Plain text version
-        html_message=user_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[quote_request.email],
-        fail_silently=False,
-    )
+        send_mail(
+            subject=user_subject,
+            message='',  # Plain text version
+            html_message=user_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[quote_request.email],
+            fail_silently=True,  # Changed to fail silently
+        )
+        logger.info(f"Confirmation email sent to {quote_request.email}")
+    except Exception as e:
+        email_errors.append(f"User confirmation email failed: {e}")
+        logger.error(f"Failed to send confirmation email to {quote_request.email}: {e}")
 
     # Email to admin
-    admin_subject = f'New Quote Request - {quote_request.full_name}'
-    admin_message = render_to_string('users/emails/quote_request_admin.html', {
-        'quote_request': quote_request
-    })
+    try:
+        admin_subject = f'New Quote Request - {quote_request.full_name}'
+        admin_message = render_to_string('users/emails/quote_request_admin.html', {
+            'quote_request': quote_request
+        })
 
-    send_mail(
-        subject=admin_subject,
-        message='',  # Plain text version
-        html_message=admin_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=['info@mbuganiluxeadventures.com'],
-        fail_silently=False,
-    )
+        send_mail(
+            subject=admin_subject,
+            message='',  # Plain text version
+            html_message=admin_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=['info@mbuganiluxeadventures.com'],
+            fail_silently=True,  # Changed to fail silently
+        )
+        logger.info(f"Admin notification email sent for quote request {quote_request.id}")
+    except Exception as e:
+        email_errors.append(f"Admin notification email failed: {e}")
+        logger.error(f"Failed to send admin notification for quote request {quote_request.id}: {e}")
 
-    # Update email tracking
-    quote_request.confirmation_email_sent = True
-    quote_request.admin_notification_sent = True
+    # Update email tracking based on success
+    if not email_errors:
+        # Both emails sent successfully
+        quote_request.confirmation_email_sent = True
+        quote_request.admin_notification_sent = True
+    elif len(email_errors) == 1:
+        # One email failed, one succeeded
+        if "User confirmation" in email_errors[0]:
+            quote_request.admin_notification_sent = True
+        else:
+            quote_request.confirmation_email_sent = True
+    # If both failed, leave flags as False
+
     quote_request.save()
+
+    # Log any errors for debugging
+    if email_errors:
+        logger.warning(f"Quote request {quote_request.id} email errors: {'; '.join(email_errors)}")
 
 
 def test_500_error(request):
