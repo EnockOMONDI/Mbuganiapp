@@ -67,11 +67,11 @@ services:
 
       # Email Configuration
       - key: EMAIL_HOST_USER
-        value: novustellke@gmail.com
+        value: mbuganiluxeadventures@gmail.com
       - key: EMAIL_HOST_PASSWORD
         sync: false  # Set manually: iagt yans hoyd pavg
       - key: DEFAULT_FROM_EMAIL
-        value: Mbugani Luxe Adventures <novustellke@gmail.com>
+        value: Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>
       - key: ADMIN_EMAIL
         value: info@mbuganiluxeadventures.com
       - key: JOBS_EMAIL
@@ -188,7 +188,7 @@ services:
           name: novustell-travel
           envVarKey: SECRET_KEY
       - key: EMAIL_HOST_USER
-        value: novustellke@gmail.com
+        value: mbuganiluxeadventures@gmail.com
       - key: EMAIL_HOST_PASSWORD
         sync: false
       - key: ADMIN_EMAIL
