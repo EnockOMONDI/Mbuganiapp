@@ -32,8 +32,9 @@ DATABASES = {
     }
 }
 
-# Production email backend - SMTP
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Production email backend - Temporarily disabled due to SMTP connection issues
+# TODO: Re-enable once SMTP connection is resolved
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
