@@ -32,15 +32,20 @@ DATABASES = {
     }
 }
 
-# Production email backend - Temporarily disabled due to SMTP connection issues
-# TODO: Re-enable once SMTP connection is resolved
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Production email backend - Custom SMTP with SSL handling for development compatibility
+EMAIL_BACKEND = 'tours_travels.custom_email_backend.CustomSMTPBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'mbuganiluxeadventures@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'grdg fofh myne wdpf')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>')
+
+# SSL Configuration for SMTP
+# In production deployment on Render, SSL certificates should be properly configured
+# For local development, we ensure TLS is used properly
+EMAIL_USE_SSL = False
+EMAIL_TIMEOUT = 30  # Connection timeout in seconds
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
 JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
 NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL', 'news@mbuganiluxeadventures.com')
