@@ -226,7 +226,7 @@ EMAIL_USE_TLS = True
 # Mbugani Luxe Adventures email credentials
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'mbuganiluxeadventures@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'grdg fofh myne wdpf')
-DEFAULT_FROM_EMAIL = 'Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>'
+DEFAULT_FROM_EMAIL = 'Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>' 
 
 # Admin email for notifications
 ADMIN_EMAIL = 'info@mbuganiluxeadventures.com'

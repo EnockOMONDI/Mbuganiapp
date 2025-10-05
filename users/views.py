@@ -1225,21 +1225,14 @@ def quote_request_view(request):
                 quote_request.package = package
                 quote_request.save()
 
-            try:
-                # Send email notifications
-                send_quote_request_emails(quote_request)
-                messages.success(request, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.')
-            except Exception as e:
-                # Log the error but don't fail the request
-                print(f"Email sending failed: {e}")
-                import logging
-                logger = logging.getLogger(__name__)
-                logger.error(f"Failed to send quote request emails: {e}")
+            # Send email notifications
+            emails_sent = send_quote_request_emails(quote_request)
 
-                # Still show success message since the quote was saved
+            if emails_sent:
                 messages.success(request, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.')
-                # Optionally add a note about email issues
-                messages.info(request, 'Note: If you don\'t receive a confirmation email, please check your spam folder or contact us directly.')
+            else:
+                messages.success(request, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.')
+                messages.warning(request, 'Note: There was an issue sending email notifications. Please check your spam folder or contact us directly if you don\'t receive a confirmation email.')
 
             # Redirect to success page
             return redirect('users:quote_success')
@@ -1286,6 +1279,8 @@ def send_quote_request_emails(quote_request):
     # Log that we're attempting to send emails
     logger.info(f"Attempting to send emails for quote request {quote_request.id} from {quote_request.full_name}")
 
+    emails_sent_successfully = True
+
     try:
         # Email to user (confirmation)
         user_subject = 'Quote Request Received - Mbugani Luxe Adventures'
@@ -1299,14 +1294,15 @@ def send_quote_request_emails(quote_request):
             html_message=user_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[quote_request.email],
-            fail_silently=True,
+            fail_silently=False,
         )
-        logger.info(f"Confirmation email processed for {quote_request.email}")
+        logger.info(f"Confirmation email sent successfully to {quote_request.email}")
         quote_request.confirmation_email_sent = True
 
     except Exception as e:
-        logger.warning(f"Confirmation email processing failed for {quote_request.email}: {e}")
+        logger.error(f"Confirmation email sending failed for {quote_request.email}: {e}")
         quote_request.confirmation_email_sent = False
+        emails_sent_successfully = False
 
     try:
         # Email to admin
@@ -1321,18 +1317,25 @@ def send_quote_request_emails(quote_request):
             html_message=admin_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=['info@mbuganiluxeadventures.com'],
-            fail_silently=True,
+            fail_silently=False,
         )
-        logger.info(f"Admin notification email processed for quote request {quote_request.id}")
+        logger.info(f"Admin notification email sent successfully for quote request {quote_request.id}")
         quote_request.admin_notification_sent = True
 
     except Exception as e:
-        logger.warning(f"Admin notification email processing failed for quote request {quote_request.id}: {e}")
+        logger.error(f"Admin notification email sending failed for quote request {quote_request.id}: {e}")
         quote_request.admin_notification_sent = False
+        emails_sent_successfully = False
 
     # Always save the quote request
     quote_request.save()
-    logger.info(f"Quote request {quote_request.id} saved successfully")
+
+    if emails_sent_successfully:
+        logger.info(f"Quote request {quote_request.id} saved successfully with emails sent")
+    else:
+        logger.warning(f"Quote request {quote_request.id} saved but email sending failed")
+
+    return emails_sent_successfully
 
 
 def test_500_error(request):
