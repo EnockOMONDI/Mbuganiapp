@@ -1,7 +1,7 @@
 services:
   # Web service for Mbugani Luxe Adventures
   - type: web
-    name: mbugani3
+    name: mbugani4
     env: python
     region: oregon
     plan: starter
