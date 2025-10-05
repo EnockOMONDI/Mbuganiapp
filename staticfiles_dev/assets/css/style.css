@@ -1696,7 +1696,7 @@ button {
 
 .split-hero-section {
 
-  padding:  0 !important;
+  padding: 64px 0 !important;
 }
 
 .split-hero-section .container {
@@ -1808,7 +1808,7 @@ button {
 /* Tablet (≤1024px) */
 @media (max-width: 1024px) {
   .split-hero-section {
-    padding: 0 0 !important;
+    padding: 32px 0 !important;
   }
 
   .split-hero-section .container {
@@ -5738,7 +5738,7 @@ ul.slick-dots li.slick-active {
 /*====== Start Split Hero Section Styles ======*/
 .split-hero-section {
     background-color: #F8F4ED;
-    padding:  0;
+    padding: 64px 0;
     width: 100%;
 }
 

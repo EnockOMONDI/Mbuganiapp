@@ -1,80 +1,125 @@
 #!/usr/bin/env python3
 """
-Automated Color Replacement Script for Mbugani Luxe Adventures Rebranding
+Mbugani Luxe Adventures - Color Replacement Script
+Replace all instances of #291c1b with #291c1b across the entire codebase
 """
 
 import os
 import re
 import glob
+from pathlib import Path
 
-# Color mapping: Current Novustell → New Mbugani
-COLOR_MAPPING = {
-    '#5d0000': '[NEW_PRIMARY_COLOR]',      # Mbugani Burgundy → New Primary
-    '#ff9d00': '[NEW_ACCENT_COLOR]',       # Novustell Orange → New Accent
-    '#1C231F': '[NEW_TEXT_COLOR]',         # Dark Text → New Text
-    '#1D231F': '[NEW_TEXT_COLOR]',         # Dark Text Variant → New Text
-    '#484848': '[NEW_SECONDARY_TEXT]',     # Gray Text → New Secondary Text
-    '#f8f3fc': '[NEW_LIGHT_BG]',          # Light Background → New Light BG
-    '#f0f9ff': '[NEW_LIGHT_BG_ALT]',      # Light Background Alt → New Light BG Alt
-}
+# Color mapping
+OLD_COLOR = '#291c1b'
+NEW_COLOR = '#291c1b'
 
-def replace_colors_in_file(file_path):
+# Files to exclude (binary files, logs, etc.)
+EXCLUDE_PATTERNS = [
+    '*.pyc',
+    '*.pyo',
+    '*.log',
+    '*.sqlite3',
+    '*.db',
+    '*.jpg',
+    '*.jpeg',
+    '*.png',
+    '*.gif',
+    '*.bmp',
+    '*.ico',
+    '*.svg',  # SVG files might have binary content
+    '*.woff',
+    '*.woff2',
+    '*.ttf',
+    '*.eot',
+    '*.pdf',
+    '*.zip',
+    '*.tar.gz',
+    '*.git*',
+    '__pycache__',
+    'node_modules',
+    '.git',
+    'media',
+    'staticfiles_dev',
+    'staticfiles',
+    'logs',
+    'status'
+]
+
+def is_text_file(filepath):
+    """Check if a file is a text file"""
+    try:
+        with open(filepath, 'rb') as f:
+            chunk = f.read(1024)
+            if b'\0' in chunk:  # Binary file
+                return False
+        return True
+    except:
+        return False
+
+def should_process_file(filepath):
+    """Check if file should be processed"""
+    # Check exclude patterns
+    for pattern in EXCLUDE_PATTERNS:
+        if pattern.startswith('*'):
+            if filepath.endswith(pattern[1:]):
+                return False
+        elif pattern in filepath:
+            return False
+
+    # Check if it's a text file
+    return is_text_file(filepath)
+
+def replace_colors_in_file(filepath):
     """Replace colors in a single file"""
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
             content = f.read()
-        
-        original_content = content
-        replacements_made = 0
-        
-        for old_color, new_color in COLOR_MAPPING.items():
-            if old_color in content:
-                count = content.count(old_color)
-                content = content.replace(old_color, new_color)
-                replacements_made += count
-                print(f"   - {old_color} → {new_color}: {count} times")
-        
-        if replacements_made > 0:
-            with open(file_path, 'w', encoding='utf-8') as f:
-                f.write(content)
-            print(f"✅ Updated: {file_path} ({replacements_made} replacements)")
-            return replacements_made
-        
-        return 0
-        
+
+        # Count occurrences before replacement
+        old_count = content.count(OLD_COLOR)
+
+        if old_count > 0:
+            # Replace the color
+            new_content = content.replace(OLD_COLOR, NEW_COLOR)
+
+            # Write back to file
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+
+            return old_count
     except Exception as e:
-        print(f"❌ Error updating {file_path}: {e}")
+        print(f"Error processing {filepath}: {e}")
         return 0
 
+    return 0
+
 def main():
-    """Main color replacement function"""
-    print("🎨 MBUGANI LUXE ADVENTURES COLOR REPLACEMENT")
-    print("=" * 60)
-    print("⚠️  IMPORTANT: Update COLOR_MAPPING with actual new colors before running!")
-    print()
-    
-    # File patterns to update
-    file_patterns = ['**/*.css', '**/*.html']
-    
-    total_files = 0
+    """Main function"""
+    print("Mbugani Luxe Adventures - Color Replacement Script")
+    print(f"Replacing {OLD_COLOR} with {NEW_COLOR}")
+    print("-" * 60)
+
+    # Get current directory
+    base_dir = Path.cwd()
+
+    total_files_processed = 0
     total_replacements = 0
-    
-    for pattern in file_patterns:
-        files = glob.glob(pattern, recursive=True)
-        for file_path in files:
-            # Skip certain directories
-            if any(skip in file_path for skip in ['env/', '__pycache__/', 'node_modules/']):
-                continue
-            
-            replacements = replace_colors_in_file(file_path)
-            if replacements > 0:
-                total_files += 1
-                total_replacements += replacements
-    
-    print(f"\n📊 REPLACEMENT SUMMARY")
-    print("=" * 60)
-    print(f"Total files updated: {total_files}")
-    print(f"Total replacements made: {total_replacements}")
+
+    # Walk through all files
+    for filepath in base_dir.rglob('*'):
+        if filepath.is_file():
+            filepath_str = str(filepath)
+
+            if should_process_file(filepath_str):
+                replacements = replace_colors_in_file(filepath_str)
+                if replacements > 0:
+                    print(f"✅ {filepath_str}: {replacements} replacements")
+                    total_files_processed += 1
+                    total_replacements += replacements
+
+    print("-" * 60)
+    print(f"Summary: {total_replacements} replacements in {total_files_processed} files")
+    print("Color replacement completed!")
 
 if __name__ == "__main__":
     main()

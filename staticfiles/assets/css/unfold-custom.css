@@ -21,7 +21,7 @@
 
 .model-heroslider .results tr:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(71, 22, 1, 0.15);
+    box-shadow: 0 8px 24px rgba(93, 0, 0, 0.15);
     border-color: #471601;
 }
 
@@ -88,7 +88,7 @@
 
 /* Hero Slider Order Badge */
 .hero-slider-order {
-    background: linear-gradient(135deg, #471601, #e3aa00);
+    background: #291c1b;
     color: white;
     width: 30px;
     height: 30px;
@@ -115,7 +115,7 @@
 }
 
 .app-adminside .model-heroslider .addlink {
-    background: linear-gradient(135deg, #291c1a, #bd8c06);
+    background: #291c1b;
     color: white;
     padding: 10px 20px;
     border-radius: 25px;
@@ -126,16 +126,16 @@
 
 .app-adminside .model-heroslider .addlink:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(41, 28, 26, 0.3);
+    box-shadow: 0 5px 15px rgba(93, 0, 0, 0.3);
     color: white;
 }
 
 /* Brand Colors */
 :root {
-    --mbugani-primary: #291c1a;
-    --mbugani-secondary: #bd8c06;
+    --mbugani-primary: #471601;
+    --mbugani-secondary: #e3aa00;
     --mbugani-light: #f8f9fa;
-    --mbugani-dark: #291c1a;
+    --mbugani-dark: #471601;
 }
 
 /* Custom branding for admin interface */

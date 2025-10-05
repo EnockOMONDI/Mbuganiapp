@@ -224,9 +224,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Mbugani Luxe Adventures email credentials
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'novustellke@gmail.com')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'iagt yans hoyd pavg')
-DEFAULT_FROM_EMAIL = 'Mbugani Luxe Adventures <novustellke@gmail.com>'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'mbuganiluxeadventures@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'grdg fofh myne wdpf')
+DEFAULT_FROM_EMAIL = 'Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>'
 
 # Admin email for notifications
 ADMIN_EMAIL = 'info@mbuganiluxeadventures.com'
@@ -377,7 +377,7 @@ customColorPalette = [
         'label': 'Blue'
     },
     {
-        'color': '#5d0000',  # Mbugani primary color - burgundy
+        'color': '#291c1b',  # Mbugani primary color - burgundy
         'label': 'Mbugani Primary'
     },
     {

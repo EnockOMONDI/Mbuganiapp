@@ -9,9 +9,9 @@ All email templates have been updated with the complete Mbugani Luxe Adventures 
 - **Company Name**: Mbugani Luxe Adventures
 - **Tagline**: "Untamed. Unmatched. Unforgettable."
 - **Color Scheme**: 
-  - Primary: #5d0000 (Burgundy)
+  - Primary: #291c1b (Burgundy)
   - Secondary: #fb9300 (Orange)
-  - Gradient: `linear-gradient(135deg, #5d0000, #fb9300)`
+  - Gradient: `linear-gradient(135deg, #291c1b, #fb9300)`
 - **Typography**: 'TAN-Garland-Regular' with fallbacks to Georgia, Times New Roman, serif
 
 ### Contact Information
@@ -112,8 +112,8 @@ All email templates have been updated with the complete Mbugani Luxe Adventures 
 
 ### Typography Hierarchy
 - **H1**: 28px, TAN-Garland-Regular, white (headers)
-- **H2**: 24px, TAN-Garland-Regular, #5d0000 (content headings)
-- **H3**: 18px, regular weight, #5d0000 (subheadings)
+- **H2**: 24px, TAN-Garland-Regular, #291c1b (content headings)
+- **H3**: 18px, regular weight, #291c1b (subheadings)
 - **Body**: 16px, Arial/Helvetica, #333 (main content)
 
 ### Interactive Elements
@@ -157,7 +157,7 @@ python manage.py test_email_templates
 - [ ] Correct phone number (+254 798 197 430)
 - [ ] Proper email addresses used
 - [ ] Responsive design implemented
-- [ ] Brand colors (#5d0000, #fb9300) included
+- [ ] Brand colors (#291c1b, #fb9300) included
 - [ ] Fallback fonts specified
 - [ ] Contact information in footer
 - [ ] Unsubscribe/disclaimer text included

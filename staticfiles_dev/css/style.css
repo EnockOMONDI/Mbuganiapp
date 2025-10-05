@@ -7,8 +7,8 @@
     --animate-delay: 0.9s;
   }
   .btn-primary {
-    background-color: #5d0000; /* Mbugani Luxe Adventures burgundy */
-}
+    background-color: #291c1b; /* Mbugani Luxe Adventures burgundy */
+  }
 .header{
     height:100%;
     background-image:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(../images/Maldives.jpg);
