@@ -1201,49 +1201,109 @@ def booking_detail(request, booking_reference):
     return render(request, 'users/booking_detail.html', context)
 
 
+def generate_user_friendly_error_message(error_report):
+    """
+    Generate user-friendly error messages based on error report
+    """
+    messages = []
+
+    # Check for SSL/TLS issues in development
+    if (error_report['environment']['debug_mode'] and
+        (error_report['confirmation_email'].get('error_type') == 'ssl_error' or
+         error_report['admin_email'].get('error_type') == 'ssl_error')):
+        messages.append("Email notifications couldn't be sent due to SSL certificate verification. This is normal in development - your quote request has been saved and our team will contact you.")
+
+    # Check for authentication issues
+    elif (error_report['confirmation_email'].get('error_type') == 'authentication' or
+          error_report['admin_email'].get('error_type') == 'authentication'):
+        messages.append("Email service temporarily unavailable due to authentication issues. Your quote request has been saved and our team will contact you.")
+
+    # Check for connection issues
+    elif (error_report['confirmation_email'].get('error_type') == 'connection' or
+          error_report['admin_email'].get('error_type') == 'connection'):
+        messages.append("Email service temporarily unavailable. Your quote request has been saved and our team will contact you.")
+
+    # Generic fallback
+    else:
+        messages.append("Your quote request has been submitted successfully! We will contact you within 24 hours with a personalized quote.")
+
+    # Add specific recommendations for production issues
+    if not error_report['environment']['debug_mode'] and not error_report['overall_success']:
+        messages.append("Please contact us directly at info@mbuganiluxeadventures.com if you don't receive a confirmation email.")
+
+    return messages
+
+
 def quote_request_view(request):
     """
-    Handle quote request form submission and display
+    Handle quote request form submission and display with comprehensive error reporting
     """
+    import logging
+    logger = logging.getLogger(__name__)
+
     # Check if package_id is provided in URL parameters
     package_id = request.GET.get('package_id')
     package = None
     if package_id:
         try:
             package = Package.objects.get(id=package_id, status=Package.PUBLISHED)
+            logger.info(f"Quote request for package: {package.name} (ID: {package.id})")
         except Package.DoesNotExist:
-            pass
+            logger.warning(f"Invalid package ID provided: {package_id}")
+            messages.warning(request, "The selected package is no longer available. You can still submit a general quote request.")
 
     if request.method == 'POST':
         form = QuoteRequestForm(request.POST)
         if form.is_valid():
-            # Create quote request
-            quote_request = form.save()
+            try:
+                # Create quote request
+                quote_request = form.save()
+                logger.info(f"Quote request created: ID {quote_request.id} for {quote_request.full_name}")
 
-            # Associate with package if provided
-            if package:
-                quote_request.package = package
-                quote_request.save()
+                # Associate with package if provided
+                if package:
+                    quote_request.package = package
+                    quote_request.save()
+                    logger.info(f"Quote request {quote_request.id} associated with package {package.name}")
 
-            # Send email notifications
-            emails_sent = send_quote_request_emails(quote_request)
+                # Send email notifications with comprehensive error reporting
+                error_report = send_quote_request_emails(quote_request)
 
-            if emails_sent:
-                messages.success(request, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.')
-            else:
-                messages.success(request, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.')
-                messages.warning(request, 'Note: There was an issue sending email notifications. Please check your spam folder or contact us directly if you don\'t receive a confirmation email.')
+                # Generate user-friendly messages based on error report
+                user_messages = generate_user_friendly_error_message(error_report)
 
-            # Redirect to success page
-            return redirect('users:quote_success')
+                # Display appropriate messages to user
+                if error_report['overall_success']:
+                    messages.success(request, user_messages[0])
+                    logger.info(f"Quote request {quote_request.id} processed successfully")
+                else:
+                    # Show success for the quote submission
+                    messages.success(request, "Thank you! Your quote request has been submitted successfully.")
+                    # Show warnings for email issues
+                    for msg in user_messages[1:]:
+                        messages.warning(request, msg)
+
+                    # Log detailed error report for debugging
+                    logger.warning(f"Quote request {quote_request.id} email errors: {error_report}")
+
+                # Redirect to success page
+                return redirect('users:quote_success')
+
+            except Exception as e:
+                # Handle unexpected errors during quote request processing
+                logger.error(f"Unexpected error processing quote request: {e}")
+                messages.error(request, "There was an unexpected error processing your request. Please try again or contact us directly.")
+                # Don't redirect, show form again
 
         else:
+            logger.warning(f"Quote request form validation failed: {form.errors}")
             messages.error(request, 'Please correct the errors below.')
     else:
         # Pre-populate form if package is specified
         initial_data = {}
         if package:
             initial_data['destination'] = package.main_destination.name if package.main_destination else ''
+            logger.info(f"Pre-populating quote form with destination: {initial_data['destination']}")
 
         form = QuoteRequestForm(initial=initial_data)
 
@@ -1251,6 +1311,7 @@ def quote_request_view(request):
         'form': form,
         'package': package,
         'page_title': 'Request a Quote',
+        'debug_mode': settings.DEBUG,  # Pass debug mode for template conditional logic
     }
 
     return render(request, 'users/quote_form.html', context)
@@ -1267,75 +1328,221 @@ def quote_success(request):
 
 def send_quote_request_emails(quote_request):
     """
-    Send email notifications for quote requests
+    Send email notifications for quote requests with comprehensive error reporting
+
+    Returns:
+        dict: Detailed status report with success/failure information
     """
     from django.core.mail import send_mail
     from django.template.loader import render_to_string
     from django.conf import settings
     import logging
+    import smtplib
+    import ssl
 
     logger = logging.getLogger(__name__)
 
-    # Log that we're attempting to send emails
-    logger.info(f"Attempting to send emails for quote request {quote_request.id} from {quote_request.full_name}")
+    # Initialize comprehensive error report
+    error_report = {
+        'overall_success': True,
+        'confirmation_email': {
+            'sent': False,
+            'error_type': None,
+            'error_message': None,
+            'error_details': None,
+            'smtp_error_code': None,
+            'template_rendered': False,
+            'recipient_valid': False
+        },
+        'admin_email': {
+            'sent': False,
+            'error_type': None,
+            'error_message': None,
+            'error_details': None,
+            'smtp_error_code': None,
+            'template_rendered': False,
+            'recipient_valid': False
+        },
+        'package_data': {
+            'valid': True,
+            'name': None,
+            'destination': None,
+            'price_info': None,
+            'errors': []
+        },
+        'environment': {
+            'email_backend': settings.EMAIL_BACKEND,
+            'debug_mode': settings.DEBUG,
+            'smtp_host': getattr(settings, 'EMAIL_HOST', 'Not configured'),
+            'smtp_port': getattr(settings, 'EMAIL_PORT', 'Not configured'),
+            'tls_enabled': getattr(settings, 'EMAIL_USE_TLS', False),
+            'from_email': getattr(settings, 'DEFAULT_FROM_EMAIL', 'Not configured')
+        },
+        'warnings': [],
+        'recommendations': []
+    }
 
-    emails_sent_successfully = True
+    # Log initial attempt
+    logger.info(f"Starting email dispatch for quote request {quote_request.id} from {quote_request.full_name}")
 
+    # Validate package data if present
+    if quote_request.package:
+        try:
+            package = quote_request.package
+            error_report['package_data']['name'] = package.name
+            error_report['package_data']['destination'] = package.main_destination.name if package.main_destination else 'No destination'
+            error_report['package_data']['price_info'] = f"{package.adult_price} KES per person"
+
+            # Validate package relationships
+            if not package.main_destination:
+                error_report['package_data']['warnings'].append("Package has no associated destination")
+            if package.adult_price <= 0:
+                error_report['package_data']['warnings'].append("Package has invalid pricing")
+
+        except Exception as e:
+            error_report['package_data']['valid'] = False
+            error_report['package_data']['errors'].append(f"Package data error: {str(e)}")
+            logger.warning(f"Package data validation failed for quote {quote_request.id}: {e}")
+
+    # Validate email addresses
+    def validate_email(email):
+        """Basic email validation"""
+        import re
+        pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        return re.match(pattern, email) is not None
+
+    # Validate recipient emails
+    user_email_valid = validate_email(quote_request.email)
+    admin_email_valid = validate_email('info@mbuganiluxeadventures.com')
+
+    error_report['confirmation_email']['recipient_valid'] = user_email_valid
+    error_report['admin_email']['recipient_valid'] = admin_email_valid
+
+    if not user_email_valid:
+        error_report['confirmation_email']['error_message'] = "Invalid user email format"
+        error_report['warnings'].append("User email address format is invalid")
+
+    if not admin_email_valid:
+        error_report['admin_email']['error_message'] = "Invalid admin email format"
+        error_report['warnings'].append("Admin email address format is invalid")
+
+    # Function to categorize SMTP errors
+    def categorize_smtp_error(error):
+        """Categorize SMTP errors for better reporting"""
+        if isinstance(error, smtplib.SMTPAuthenticationError):
+            return 'authentication', 'SMTP authentication failed', 'Check EMAIL_HOST_USER and EMAIL_HOST_PASSWORD'
+        elif isinstance(error, smtplib.SMTPConnectError):
+            return 'connection', 'SMTP server connection failed', 'Check EMAIL_HOST and EMAIL_PORT'
+        elif isinstance(error, smtplib.SMTPRecipientsRefused):
+            return 'recipients_refused', 'Email recipients refused', 'Check recipient email addresses'
+        elif isinstance(error, smtplib.SMTPSenderRefused):
+            return 'sender_refused', 'Sender email refused', 'Check DEFAULT_FROM_EMAIL'
+        elif isinstance(error, smtplib.SMTPDataError):
+            return 'data_error', 'SMTP data transmission error', 'Check email content encoding'
+        elif isinstance(error, ssl.SSLError):
+            return 'ssl_error', 'SSL/TLS certificate verification failed', 'Check EMAIL_USE_TLS setting or disable in development'
+        elif isinstance(error, smtplib.SMTPException):
+            return 'smtp_general', 'General SMTP error', 'Check SMTP server configuration'
+        else:
+            return 'unknown', f'Unknown error: {type(error).__name__}', 'Check Django email settings and server logs'
+
+    # Send confirmation email to user
     try:
-        # Email to user (confirmation)
+        logger.info(f"Preparing confirmation email for {quote_request.email}")
+
+        # Render template
         user_subject = 'Quote Request Received - Mbugani Luxe Adventures'
         user_message = render_to_string('users/emails/quote_request_confirmation.html', {
             'quote_request': quote_request
         })
+        error_report['confirmation_email']['template_rendered'] = True
 
+        # Send email
         send_mail(
             subject=user_subject,
             message='',  # Plain text version
             html_message=user_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[quote_request.email],
-            fail_silently=False,
+            fail_silently=False,  # We want to catch and report errors
         )
+
+        error_report['confirmation_email']['sent'] = True
         logger.info(f"Confirmation email sent successfully to {quote_request.email}")
-        quote_request.confirmation_email_sent = True
 
     except Exception as e:
-        logger.error(f"Confirmation email sending failed for {quote_request.email}: {e}")
-        quote_request.confirmation_email_sent = False
-        emails_sent_successfully = False
+        error_type, error_message, recommendation = categorize_smtp_error(e)
+        error_report['confirmation_email']['error_type'] = error_type
+        error_report['confirmation_email']['error_message'] = error_message
+        error_report['confirmation_email']['error_details'] = str(e)
+        error_report['confirmation_email']['smtp_error_code'] = getattr(e, 'smtp_code', None)
+        error_report['overall_success'] = False
+        error_report['recommendations'].append(f"User email: {recommendation}")
 
+        logger.error(f"Confirmation email failed for {quote_request.email}: {error_type} - {error_message} - {e}")
+
+    # Send admin notification email
     try:
-        # Email to admin
+        logger.info(f"Preparing admin notification email for quote request {quote_request.id}")
+
+        # Render template
         admin_subject = f'New Quote Request - {quote_request.full_name}'
         admin_message = render_to_string('users/emails/quote_request_admin.html', {
             'quote_request': quote_request
         })
+        error_report['admin_email']['template_rendered'] = True
 
+        # Send email
         send_mail(
             subject=admin_subject,
             message='',  # Plain text version
             html_message=admin_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=['info@mbuganiluxeadventures.com'],
-            fail_silently=False,
+            fail_silently=False,  # We want to catch and report errors
         )
+
+        error_report['admin_email']['sent'] = True
         logger.info(f"Admin notification email sent successfully for quote request {quote_request.id}")
-        quote_request.admin_notification_sent = True
 
     except Exception as e:
-        logger.error(f"Admin notification email sending failed for quote request {quote_request.id}: {e}")
-        quote_request.admin_notification_sent = False
-        emails_sent_successfully = False
+        error_type, error_message, recommendation = categorize_smtp_error(e)
+        error_report['admin_email']['error_type'] = error_type
+        error_report['admin_email']['error_message'] = error_message
+        error_report['admin_email']['error_details'] = str(e)
+        error_report['admin_email']['smtp_error_code'] = getattr(e, 'smtp_code', None)
+        error_report['overall_success'] = False
+        error_report['recommendations'].append(f"Admin email: {recommendation}")
+
+        logger.error(f"Admin notification email failed for quote request {quote_request.id}: {error_type} - {error_message} - {e}")
+
+    # Update quote request tracking flags
+    quote_request.confirmation_email_sent = error_report['confirmation_email']['sent']
+    quote_request.admin_notification_sent = error_report['admin_email']['sent']
 
     # Always save the quote request
-    quote_request.save()
+    try:
+        quote_request.save()
+        logger.info(f"Quote request {quote_request.id} saved successfully")
+    except Exception as e:
+        logger.error(f"Failed to save quote request {quote_request.id}: {e}")
+        error_report['overall_success'] = False
+        error_report['recommendations'].append("Database save failed - check model constraints")
 
-    if emails_sent_successfully:
-        logger.info(f"Quote request {quote_request.id} saved successfully with emails sent")
+    # Generate environment-specific recommendations
+    if settings.DEBUG and error_report['confirmation_email'].get('error_type') == 'ssl_error':
+        error_report['recommendations'].append("In development, consider setting EMAIL_USE_TLS=False or using console backend")
+
+    if not settings.DEBUG and not error_report['overall_success']:
+        error_report['recommendations'].append("Check production SMTP settings and network connectivity")
+
+    # Log final status
+    if error_report['overall_success']:
+        logger.info(f"Quote request {quote_request.id} processed successfully - all emails sent")
     else:
-        logger.warning(f"Quote request {quote_request.id} saved but email sending failed")
+        logger.warning(f"Quote request {quote_request.id} processed with errors - check error report")
 
-    return emails_sent_successfully
+    return error_report
 
 
 def test_500_error(request):
