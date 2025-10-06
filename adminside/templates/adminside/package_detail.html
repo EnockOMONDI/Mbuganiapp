@@ -334,11 +334,11 @@
             Starting from ${{ package.adult_price }}
         </div>
         
-        <!-- <div class="text-center">
+        <div class="text-center">
             <a href="{% url 'users:add_to_cart' package.id %}" class="book-now-btn">
                 <i class="fas fa-shopping-cart"></i> Book This Package
             </a>
-        </div> -->
+        </div>
         <div class="text-center">
             <a href="{% url 'users:quote_request' %}?package_id={{ package.id }}" class="book-now-btn">
                 <i class="fas fa-shopping-cart"></i> Get Quote
