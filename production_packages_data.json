@@ -249,7 +249,7 @@
   "model": "adminside.package",
   "pk": 1,
   "fields": {
-    "name": "Ultimate Kenya Safari Adventure",
+    "name": "Ultimate Kenya Multiday Bush Safari Adventure",
     "slug": "ultimate-kenya-safari-adventure",
     "description": "<p>Experience the best of Kenya with this comprehensive 7-day safari adventure that takes you through the country's most iconic destinations. Witness the Great Migration in the Maasai Mara and enjoy close encounters with elephants against the backdrop of Mount Kilimanjaro in Amboseli.</p>\n\n        <p>This carefully crafted itinerary combines thrilling game drives, cultural experiences with the Maasai people, and comfortable accommodations. You'll have the opportunity to see the Big Five and experience one of nature's greatest spectacles - the annual wildebeest migration.</p>\n\n        <p>Our expert guides will ensure you have the best wildlife viewing opportunities while learning about Kenya's diverse ecosystems and conservation efforts. This safari is perfect for first-time visitors to Africa and seasoned travelers alike.</p>",
     "main_destination": 1,
@@ -268,7 +268,7 @@
     "meta_title": "Ultimate Kenya Safari Adventure - 7 Days Maasai Mara & Amboseli",
     "meta_description": "Experience Kenya's best wildlife destinations on this 7-day safari adventure. See the Great Migration, Big Five, and enjoy luxury accommodations.",
     "created_at": "2025-08-15T17:44:21.707Z",
-    "updated_at": "2025-08-15T17:44:21.707Z",
+    "updated_at": "2025-10-06T17:32:35.892Z",
     "published_at": "2025-08-15T17:44:21.705Z",
     "available_accommodations": [
       1
@@ -280,7 +280,7 @@
   "model": "adminside.package",
   "pk": 3,
   "fields": {
-    "name": "Rwanda Gorilla Trekking Experience",
+    "name": "Rwanda Gorilla Trekking Outbound Package Experience",
     "slug": "rwanda-gorilla-trekking-experience",
     "description": "<p>Embark on a life-changing adventure with this 4-day Rwanda gorilla trekking experience. Come face-to-face with mountain gorillas in their natural habitat in the pristine Volcanoes National Park.</p>\n        \n        <p>Rwanda offers one of the world's most exclusive wildlife experiences. With only a limited number of permits available daily, gorilla trekking in Rwanda is an intimate and unforgettable encounter with these magnificent creatures.</p>\n        \n        <p>This package includes comfortable accommodations, expert guides, and all necessary permits. You'll also have the opportunity to learn about Rwanda's remarkable conservation success story and visit local communities.</p>",
     "main_destination": 3,
@@ -299,7 +299,7 @@
     "meta_title": "Rwanda Gorilla Trekking Experience - 4 Days Volcanoes National Park",
     "meta_description": "Experience mountain gorilla trekking in Rwanda's Volcanoes National Park. 4-day luxury package with permits included.",
     "created_at": "2025-08-15T17:47:14.173Z",
-    "updated_at": "2025-08-15T17:47:14.173Z",
+    "updated_at": "2025-10-06T17:32:59.809Z",
     "published_at": "2025-08-15T17:47:14.166Z",
     "available_accommodations": [
       5
@@ -311,7 +311,7 @@
   "model": "adminside.package",
   "pk": 5,
   "fields": {
-    "name": "3 Days & 2 Nights Amboseli Spectacular Escapade",
+    "name": "3 Days & 2 Nights Amboseli Spectacular Multiday Bush Safari Escapade",
     "slug": "3-days-2-nights-amboseli-spectacular-escapade",
     "description": "Experience the breathtaking views of Mount Kilimanjaro and large elephant herds in Amboseli National Park. This 3-day safari includes game drives, accommodation, and all meals.",
     "main_destination": 7,
@@ -330,7 +330,7 @@
     "meta_title": "",
     "meta_description": "",
     "created_at": "2025-10-03T01:26:30.384Z",
-    "updated_at": "2025-10-03T01:26:30.384Z",
+    "updated_at": "2025-10-06T17:32:35.886Z",
     "published_at": "2025-10-03T01:26:30.376Z",
     "available_accommodations": [],
     "available_travel_modes": []
@@ -340,7 +340,7 @@
   "model": "adminside.package",
   "pk": 6,
   "fields": {
-    "name": "4 Days & 3 Nights Maasai Mara Spectacular Getaway",
+    "name": "4 Days & 3 Nights Maasai Mara Spectacular Multiday Bush Safari Getaway",
     "slug": "4-days-3-nights-maasai-mara-spectacular-getaway",
     "description": "Discover the wildebeest migration and big five in Maasai Mara National Reserve. This 4-day adventure includes luxury accommodation and expert-guided game drives.",
     "main_destination": 1,
@@ -359,7 +359,7 @@
     "meta_title": "",
     "meta_description": "",
     "created_at": "2025-10-03T01:28:12.320Z",
-    "updated_at": "2025-10-03T01:28:12.323Z",
+    "updated_at": "2025-10-06T17:32:35.881Z",
     "published_at": "2025-10-03T01:28:12.312Z",
     "available_accommodations": [],
     "available_travel_modes": []
@@ -369,7 +369,7 @@
   "model": "adminside.package",
   "pk": 7,
   "fields": {
-    "name": "3 Days & 2 Nights Ol Pejeta Conservancy Spectacular Escapade",
+    "name": "3 Days & 2 Nights Ol Pejeta Conservancy Spectacular Multiday Bush Safari Escapade",
     "slug": "3-days-2-nights-ol-pejeta-conservancy-spectacular-escapade",
     "description": "Explore one of Africa's most celebrated wildlife sanctuaries. Ol Pejeta Conservancy is home to the Big Five and endangered species like chimpanzees and black rhinos.",
     "main_destination": 17,
@@ -388,7 +388,7 @@
     "meta_title": "",
     "meta_description": "",
     "created_at": "2025-10-03T01:28:12.325Z",
-    "updated_at": "2025-10-03T01:28:12.327Z",
+    "updated_at": "2025-10-06T17:32:35.877Z",
     "published_at": "2025-10-03T01:28:12.324Z",
     "available_accommodations": [],
     "available_travel_modes": []
@@ -398,7 +398,7 @@
   "model": "adminside.package",
   "pk": 8,
   "fields": {
-    "name": "Maasai Magic Cultural Tour",
+    "name": "Maasai Magic Cultural Multiday Bush Safari Tour",
     "slug": "maasai-magic-cultural-tour",
     "description": "Immerse yourself in Maasai culture with this full-day experience. Visit a traditional Maasai village, learn about their way of life, and participate in cultural activities.",
     "main_destination": 18,
@@ -417,7 +417,7 @@
     "meta_title": "",
     "meta_description": "",
     "created_at": "2025-10-03T01:28:12.329Z",
-    "updated_at": "2025-10-03T01:28:12.330Z",
+    "updated_at": "2025-10-06T17:32:35.894Z",
     "published_at": "2025-10-03T01:28:12.328Z",
     "available_accommodations": [],
     "available_travel_modes": []
@@ -446,7 +446,7 @@
     "meta_title": "",
     "meta_description": "",
     "created_at": "2025-10-03T01:28:12.332Z",
-    "updated_at": "2025-10-03T01:28:12.334Z",
+    "updated_at": "2025-10-06T17:32:49.624Z",
     "published_at": "2025-10-03T01:28:12.331Z",
     "available_accommodations": [],
     "available_travel_modes": []
@@ -456,7 +456,7 @@
   "model": "adminside.package",
   "pk": 10,
   "fields": {
-    "name": "Nairobi Heritage Tour",
+    "name": "Nairobi Heritage Excursion Tour",
     "slug": "nairobi-heritage-tour",
     "description": "Discover Nairobi's rich history and heritage. Visit the Nairobi Gallery, National Museum, and Bomas of Kenya for an authentic cultural experience.",
     "main_destination": 5,
@@ -475,7 +475,7 @@
     "meta_title": "",
     "meta_description": "",
     "created_at": "2025-10-03T01:28:12.337Z",
-    "updated_at": "2025-10-03T01:28:12.338Z",
+    "updated_at": "2025-10-06T17:32:49.622Z",
     "published_at": "2025-10-03T01:28:12.336Z",
     "available_accommodations": [],
     "available_travel_modes": []
@@ -485,7 +485,7 @@
   "model": "adminside.package",
   "pk": 11,
   "fields": {
-    "name": "Nairobi National Park Tour",
+    "name": "Nairobi National Park Excursion Tour",
     "slug": "nairobi-national-park-tour",
     "description": "Experience wildlife right in the heart of Nairobi. This exclusive game drive in Nairobi National Park offers sightings of lions, rhinos, giraffes, and diverse bird species.",
     "main_destination": 5,
@@ -504,7 +504,7 @@
     "meta_title": "",
     "meta_description": "",
     "created_at": "2025-10-03T01:28:12.340Z",
-    "updated_at": "2025-10-03T01:28:12.342Z",
+    "updated_at": "2025-10-06T17:32:49.619Z",
     "published_at": "2025-10-03T01:28:12.339Z",
     "available_accommodations": [],
     "available_travel_modes": []
@@ -514,7 +514,7 @@
   "model": "adminside.package",
   "pk": 12,
   "fields": {
-    "name": "Best of Cape Town - 7 Days & 6 Nights",
+    "name": "Best of Cape Town Outbound Package - 7 Days & 6 Nights",
     "slug": "best-of-cape-town-7-days-6-nights",
     "description": "Experience the best of Cape Town in 7 days. Enjoy a scenic cable car ride up Table Mountain, city tours rich in culture and history, guided visits to Cape Peninsula, sunset cruises, and wine tasting in the beautiful Cape Winelands.",
     "main_destination": 20,
@@ -533,7 +533,7 @@
     "meta_title": "",
     "meta_description": "",
     "created_at": "2025-10-03T01:28:12.344Z",
-    "updated_at": "2025-10-03T01:28:12.346Z",
+    "updated_at": "2025-10-06T17:32:59.806Z",
     "published_at": "2025-10-03T01:28:12.343Z",
     "available_accommodations": [],
     "available_travel_modes": []
@@ -559,6 +559,94 @@
     "overview": "Discover the vibrant capital of Kenya with this comprehensive 2-day excursion that combines urban exploration, wildlife encounters, and cultural experiences.",
     "created_at": "2025-10-05T12:39:34.812Z",
     "updated_at": "2025-10-05T12:39:34.812Z"
+  }
+},
+{
+  "model": "adminside.itinerary",
+  "pk": 5,
+  "fields": {
+    "package": 11,
+    "title": "2-Day Nairobi City Experience",
+    "overview": "Discover the vibrant capital of Kenya with this comprehensive 2-day excursion that combines urban exploration, wildlife encounters, and cultural experiences.",
+    "created_at": "2025-10-06T17:35:05.098Z",
+    "updated_at": "2025-10-06T17:35:05.098Z"
+  }
+},
+{
+  "model": "adminside.itinerary",
+  "pk": 6,
+  "fields": {
+    "package": 10,
+    "title": "2-Day Nairobi City Experience",
+    "overview": "Discover the vibrant capital of Kenya with this comprehensive 2-day excursion that combines urban exploration, wildlife encounters, and cultural experiences.",
+    "created_at": "2025-10-06T17:35:05.101Z",
+    "updated_at": "2025-10-06T17:35:05.101Z"
+  }
+},
+{
+  "model": "adminside.itinerary",
+  "pk": 7,
+  "fields": {
+    "package": 8,
+    "title": "7-Day Ultimate Bush Safari Experience",
+    "overview": "Experience the raw beauty of East Africa with this comprehensive 7-day safari that takes you through Kenya's most iconic wildlife destinations. Witness the Great Migration, encounter the Big Five, and immerse yourself in Maasai culture.",
+    "created_at": "2025-10-06T17:35:05.104Z",
+    "updated_at": "2025-10-06T17:35:05.104Z"
+  }
+},
+{
+  "model": "adminside.itinerary",
+  "pk": 8,
+  "fields": {
+    "package": 7,
+    "title": "7-Day Ultimate Bush Safari Experience",
+    "overview": "Experience the raw beauty of East Africa with this comprehensive 7-day safari that takes you through Kenya's most iconic wildlife destinations. Witness the Great Migration, encounter the Big Five, and immerse yourself in Maasai culture.",
+    "created_at": "2025-10-06T17:35:05.111Z",
+    "updated_at": "2025-10-06T17:35:05.111Z"
+  }
+},
+{
+  "model": "adminside.itinerary",
+  "pk": 9,
+  "fields": {
+    "package": 6,
+    "title": "7-Day Ultimate Bush Safari Experience",
+    "overview": "Experience the raw beauty of East Africa with this comprehensive 7-day safari that takes you through Kenya's most iconic wildlife destinations. Witness the Great Migration, encounter the Big Five, and immerse yourself in Maasai culture.",
+    "created_at": "2025-10-06T17:35:05.116Z",
+    "updated_at": "2025-10-06T17:35:05.116Z"
+  }
+},
+{
+  "model": "adminside.itinerary",
+  "pk": 10,
+  "fields": {
+    "package": 5,
+    "title": "7-Day Ultimate Bush Safari Experience",
+    "overview": "Experience the raw beauty of East Africa with this comprehensive 7-day safari that takes you through Kenya's most iconic wildlife destinations. Witness the Great Migration, encounter the Big Five, and immerse yourself in Maasai culture.",
+    "created_at": "2025-10-06T17:35:05.121Z",
+    "updated_at": "2025-10-06T17:35:05.121Z"
+  }
+},
+{
+  "model": "adminside.itinerary",
+  "pk": 11,
+  "fields": {
+    "package": 3,
+    "title": "Cape Town Adventure - 7 Days",
+    "overview": "Experience the stunning beauty of Cape Town with this comprehensive 7-day adventure that combines urban exploration, natural wonders, and South African culture.",
+    "created_at": "2025-10-06T17:35:05.128Z",
+    "updated_at": "2025-10-06T17:35:05.128Z"
+  }
+},
+{
+  "model": "adminside.itinerary",
+  "pk": 12,
+  "fields": {
+    "package": 1,
+    "title": "7-Day Ultimate Bush Safari Experience",
+    "overview": "Experience the raw beauty of East Africa with this comprehensive 7-day safari that takes you through Kenya's most iconic wildlife destinations. Witness the Great Migration, encounter the Big Five, and immerse yourself in Maasai culture.",
+    "created_at": "2025-10-06T17:35:05.139Z",
+    "updated_at": "2025-10-06T17:35:05.139Z"
   }
 },
 {
@@ -712,6 +800,788 @@
     "dinner": false,
     "created_at": "2025-10-05T12:39:34.814Z",
     "updated_at": "2025-10-05T12:39:34.814Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 19,
+  "fields": {
+    "itinerary": 5,
+    "day_number": 1,
+    "title": "Nairobi City Tour & National Park",
+    "description": "Start your Nairobi adventure with a comprehensive city tour visiting key landmarks including the Parliament Buildings, Kenyatta International Conference Centre, and the University of Nairobi. Visit the Karen Blixen Museum and learn about Kenya's colonial history. In the afternoon, explore Nairobi National Park, Kenya's first national park located within city limits. Spot lions, giraffes, and other wildlife while enjoying views of the city skyline.",
+    "destination": 5,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.099Z",
+    "updated_at": "2025-10-06T17:35:05.099Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 20,
+  "fields": {
+    "itinerary": 5,
+    "day_number": 2,
+    "title": "David Sheldrick Wildlife Trust & Departure",
+    "description": "Morning visit to the David Sheldrick Wildlife Trust to witness the elephant orphanage and learn about wildlife conservation efforts. Visit the Giraffe Centre to feed and interact with Rothschild giraffes. Afternoon at leisure for shopping or optional activities. Transfer to the airport for your departure flight.",
+    "destination": 5,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": false,
+    "created_at": "2025-10-06T17:35:05.100Z",
+    "updated_at": "2025-10-06T17:35:05.100Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 21,
+  "fields": {
+    "itinerary": 6,
+    "day_number": 1,
+    "title": "Nairobi City Tour & National Park",
+    "description": "Start your Nairobi adventure with a comprehensive city tour visiting key landmarks including the Parliament Buildings, Kenyatta International Conference Centre, and the University of Nairobi. Visit the Karen Blixen Museum and learn about Kenya's colonial history. In the afternoon, explore Nairobi National Park, Kenya's first national park located within city limits. Spot lions, giraffes, and other wildlife while enjoying views of the city skyline.",
+    "destination": 5,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.102Z",
+    "updated_at": "2025-10-06T17:35:05.102Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 22,
+  "fields": {
+    "itinerary": 6,
+    "day_number": 2,
+    "title": "David Sheldrick Wildlife Trust & Departure",
+    "description": "Morning visit to the David Sheldrick Wildlife Trust to witness the elephant orphanage and learn about wildlife conservation efforts. Visit the Giraffe Centre to feed and interact with Rothschild giraffes. Afternoon at leisure for shopping or optional activities. Transfer to the airport for your departure flight.",
+    "destination": 5,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": false,
+    "created_at": "2025-10-06T17:35:05.103Z",
+    "updated_at": "2025-10-06T17:35:05.103Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 23,
+  "fields": {
+    "itinerary": 7,
+    "day_number": 1,
+    "title": "Arrival in Nairobi & Maasai Cultural Visit",
+    "description": "Arrive at Jomo Kenyatta International Airport where you will be met by our representative. Transfer to your hotel in Nairobi for check-in and relaxation. In the afternoon, visit a Maasai village to learn about their traditional way of life, cultural dances, and customs. Enjoy a traditional Maasai meal before returning to Nairobi for your overnight stay.",
+    "destination": 5,
+    "accommodation": null,
+    "breakfast": false,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.105Z",
+    "updated_at": "2025-10-06T17:35:05.105Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 24,
+  "fields": {
+    "itinerary": 7,
+    "day_number": 2,
+    "title": "Maasai Mara Game Drive",
+    "description": "After breakfast, fly to the Maasai Mara. Upon arrival, check into your luxury tented camp. Embark on your first game drive in the Maasai Mara, known for its abundant wildlife and the annual wildebeest migration. Look out for lions, elephants, zebras, and various antelope species. Return to camp for dinner and overnight.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.106Z",
+    "updated_at": "2025-10-06T17:35:05.106Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 25,
+  "fields": {
+    "itinerary": 7,
+    "day_number": 3,
+    "title": "Full Day Maasai Mara Exploration",
+    "description": "Spend the full day exploring the Maasai Mara. Early morning game drive to catch the sunrise and wildlife activity. Visit the Mara River where crocodiles wait for migrating wildebeest. Afternoon game drive focusing on different areas of the reserve. Optional hot air balloon safari available at extra cost.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.106Z",
+    "updated_at": "2025-10-06T17:35:05.106Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 26,
+  "fields": {
+    "itinerary": 7,
+    "day_number": 4,
+    "title": "Maasai Mara to Serengeti",
+    "description": "Morning game drive in Maasai Mara before crossing to Tanzania. Drive to the Isebania border, complete immigration formalities, and continue to Serengeti National Park. Arrive at your luxury lodge in the afternoon. Evening game drive to spot wildlife unique to the Serengeti ecosystem.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.107Z",
+    "updated_at": "2025-10-06T17:35:05.107Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 27,
+  "fields": {
+    "itinerary": 7,
+    "day_number": 5,
+    "title": "Serengeti Exploration",
+    "description": "Full day exploring the vast Serengeti plains. The Serengeti is famous for its large lion prides, cheetah families, and the incredible diversity of wildlife. Visit different areas including the Seronera Valley and possibly the Moru Kopjes. Optional visit to a Maasai village in Tanzania.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.108Z",
+    "updated_at": "2025-10-06T17:35:05.108Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 28,
+  "fields": {
+    "itinerary": 7,
+    "day_number": 6,
+    "title": "Serengeti to Ngorongoro Crater",
+    "description": "Morning game drive before departing for Ngorongoro Conservation Area. Descend into the Ngorongoro Crater for a full day crater tour. The crater is home to over 25,000 animals including the Big Five. Picnic lunch in the crater. Return to your lodge in the evening.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.109Z",
+    "updated_at": "2025-10-06T17:35:05.109Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 29,
+  "fields": {
+    "itinerary": 7,
+    "day_number": 7,
+    "title": "Departure from Arusha",
+    "description": "Morning at leisure or optional activities. Transfer to Arusha Airport for your flight back home. Alternatively, extend your safari or connect to Zanzibar for beach relaxation.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": false,
+    "dinner": false,
+    "created_at": "2025-10-06T17:35:05.110Z",
+    "updated_at": "2025-10-06T17:35:05.110Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 30,
+  "fields": {
+    "itinerary": 8,
+    "day_number": 1,
+    "title": "Arrival in Nairobi & Maasai Cultural Visit",
+    "description": "Arrive at Jomo Kenyatta International Airport where you will be met by our representative. Transfer to your hotel in Nairobi for check-in and relaxation. In the afternoon, visit a Maasai village to learn about their traditional way of life, cultural dances, and customs. Enjoy a traditional Maasai meal before returning to Nairobi for your overnight stay.",
+    "destination": 5,
+    "accommodation": null,
+    "breakfast": false,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.111Z",
+    "updated_at": "2025-10-06T17:35:05.111Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 31,
+  "fields": {
+    "itinerary": 8,
+    "day_number": 2,
+    "title": "Maasai Mara Game Drive",
+    "description": "After breakfast, fly to the Maasai Mara. Upon arrival, check into your luxury tented camp. Embark on your first game drive in the Maasai Mara, known for its abundant wildlife and the annual wildebeest migration. Look out for lions, elephants, zebras, and various antelope species. Return to camp for dinner and overnight.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.112Z",
+    "updated_at": "2025-10-06T17:35:05.112Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 32,
+  "fields": {
+    "itinerary": 8,
+    "day_number": 3,
+    "title": "Full Day Maasai Mara Exploration",
+    "description": "Spend the full day exploring the Maasai Mara. Early morning game drive to catch the sunrise and wildlife activity. Visit the Mara River where crocodiles wait for migrating wildebeest. Afternoon game drive focusing on different areas of the reserve. Optional hot air balloon safari available at extra cost.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.112Z",
+    "updated_at": "2025-10-06T17:35:05.112Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 33,
+  "fields": {
+    "itinerary": 8,
+    "day_number": 4,
+    "title": "Maasai Mara to Serengeti",
+    "description": "Morning game drive in Maasai Mara before crossing to Tanzania. Drive to the Isebania border, complete immigration formalities, and continue to Serengeti National Park. Arrive at your luxury lodge in the afternoon. Evening game drive to spot wildlife unique to the Serengeti ecosystem.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.113Z",
+    "updated_at": "2025-10-06T17:35:05.113Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 34,
+  "fields": {
+    "itinerary": 8,
+    "day_number": 5,
+    "title": "Serengeti Exploration",
+    "description": "Full day exploring the vast Serengeti plains. The Serengeti is famous for its large lion prides, cheetah families, and the incredible diversity of wildlife. Visit different areas including the Seronera Valley and possibly the Moru Kopjes. Optional visit to a Maasai village in Tanzania.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.114Z",
+    "updated_at": "2025-10-06T17:35:05.114Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 35,
+  "fields": {
+    "itinerary": 8,
+    "day_number": 6,
+    "title": "Serengeti to Ngorongoro Crater",
+    "description": "Morning game drive before departing for Ngorongoro Conservation Area. Descend into the Ngorongoro Crater for a full day crater tour. The crater is home to over 25,000 animals including the Big Five. Picnic lunch in the crater. Return to your lodge in the evening.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.114Z",
+    "updated_at": "2025-10-06T17:35:05.114Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 36,
+  "fields": {
+    "itinerary": 8,
+    "day_number": 7,
+    "title": "Departure from Arusha",
+    "description": "Morning at leisure or optional activities. Transfer to Arusha Airport for your flight back home. Alternatively, extend your safari or connect to Zanzibar for beach relaxation.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": false,
+    "dinner": false,
+    "created_at": "2025-10-06T17:35:05.115Z",
+    "updated_at": "2025-10-06T17:35:05.115Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 37,
+  "fields": {
+    "itinerary": 9,
+    "day_number": 1,
+    "title": "Arrival in Nairobi & Maasai Cultural Visit",
+    "description": "Arrive at Jomo Kenyatta International Airport where you will be met by our representative. Transfer to your hotel in Nairobi for check-in and relaxation. In the afternoon, visit a Maasai village to learn about their traditional way of life, cultural dances, and customs. Enjoy a traditional Maasai meal before returning to Nairobi for your overnight stay.",
+    "destination": 5,
+    "accommodation": null,
+    "breakfast": false,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.116Z",
+    "updated_at": "2025-10-06T17:35:05.116Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 38,
+  "fields": {
+    "itinerary": 9,
+    "day_number": 2,
+    "title": "Maasai Mara Game Drive",
+    "description": "After breakfast, fly to the Maasai Mara. Upon arrival, check into your luxury tented camp. Embark on your first game drive in the Maasai Mara, known for its abundant wildlife and the annual wildebeest migration. Look out for lions, elephants, zebras, and various antelope species. Return to camp for dinner and overnight.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.117Z",
+    "updated_at": "2025-10-06T17:35:05.117Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 39,
+  "fields": {
+    "itinerary": 9,
+    "day_number": 3,
+    "title": "Full Day Maasai Mara Exploration",
+    "description": "Spend the full day exploring the Maasai Mara. Early morning game drive to catch the sunrise and wildlife activity. Visit the Mara River where crocodiles wait for migrating wildebeest. Afternoon game drive focusing on different areas of the reserve. Optional hot air balloon safari available at extra cost.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.118Z",
+    "updated_at": "2025-10-06T17:35:05.118Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 40,
+  "fields": {
+    "itinerary": 9,
+    "day_number": 4,
+    "title": "Maasai Mara to Serengeti",
+    "description": "Morning game drive in Maasai Mara before crossing to Tanzania. Drive to the Isebania border, complete immigration formalities, and continue to Serengeti National Park. Arrive at your luxury lodge in the afternoon. Evening game drive to spot wildlife unique to the Serengeti ecosystem.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.118Z",
+    "updated_at": "2025-10-06T17:35:05.118Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 41,
+  "fields": {
+    "itinerary": 9,
+    "day_number": 5,
+    "title": "Serengeti Exploration",
+    "description": "Full day exploring the vast Serengeti plains. The Serengeti is famous for its large lion prides, cheetah families, and the incredible diversity of wildlife. Visit different areas including the Seronera Valley and possibly the Moru Kopjes. Optional visit to a Maasai village in Tanzania.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.119Z",
+    "updated_at": "2025-10-06T17:35:05.119Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 42,
+  "fields": {
+    "itinerary": 9,
+    "day_number": 6,
+    "title": "Serengeti to Ngorongoro Crater",
+    "description": "Morning game drive before departing for Ngorongoro Conservation Area. Descend into the Ngorongoro Crater for a full day crater tour. The crater is home to over 25,000 animals including the Big Five. Picnic lunch in the crater. Return to your lodge in the evening.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.119Z",
+    "updated_at": "2025-10-06T17:35:05.119Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 43,
+  "fields": {
+    "itinerary": 9,
+    "day_number": 7,
+    "title": "Departure from Arusha",
+    "description": "Morning at leisure or optional activities. Transfer to Arusha Airport for your flight back home. Alternatively, extend your safari or connect to Zanzibar for beach relaxation.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": false,
+    "dinner": false,
+    "created_at": "2025-10-06T17:35:05.120Z",
+    "updated_at": "2025-10-06T17:35:05.120Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 44,
+  "fields": {
+    "itinerary": 10,
+    "day_number": 1,
+    "title": "Arrival in Nairobi & Maasai Cultural Visit",
+    "description": "Arrive at Jomo Kenyatta International Airport where you will be met by our representative. Transfer to your hotel in Nairobi for check-in and relaxation. In the afternoon, visit a Maasai village to learn about their traditional way of life, cultural dances, and customs. Enjoy a traditional Maasai meal before returning to Nairobi for your overnight stay.",
+    "destination": 5,
+    "accommodation": null,
+    "breakfast": false,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.122Z",
+    "updated_at": "2025-10-06T17:35:05.122Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 45,
+  "fields": {
+    "itinerary": 10,
+    "day_number": 2,
+    "title": "Maasai Mara Game Drive",
+    "description": "After breakfast, fly to the Maasai Mara. Upon arrival, check into your luxury tented camp. Embark on your first game drive in the Maasai Mara, known for its abundant wildlife and the annual wildebeest migration. Look out for lions, elephants, zebras, and various antelope species. Return to camp for dinner and overnight.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.122Z",
+    "updated_at": "2025-10-06T17:35:05.122Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 46,
+  "fields": {
+    "itinerary": 10,
+    "day_number": 3,
+    "title": "Full Day Maasai Mara Exploration",
+    "description": "Spend the full day exploring the Maasai Mara. Early morning game drive to catch the sunrise and wildlife activity. Visit the Mara River where crocodiles wait for migrating wildebeest. Afternoon game drive focusing on different areas of the reserve. Optional hot air balloon safari available at extra cost.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.123Z",
+    "updated_at": "2025-10-06T17:35:05.123Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 47,
+  "fields": {
+    "itinerary": 10,
+    "day_number": 4,
+    "title": "Maasai Mara to Serengeti",
+    "description": "Morning game drive in Maasai Mara before crossing to Tanzania. Drive to the Isebania border, complete immigration formalities, and continue to Serengeti National Park. Arrive at your luxury lodge in the afternoon. Evening game drive to spot wildlife unique to the Serengeti ecosystem.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.124Z",
+    "updated_at": "2025-10-06T17:35:05.124Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 48,
+  "fields": {
+    "itinerary": 10,
+    "day_number": 5,
+    "title": "Serengeti Exploration",
+    "description": "Full day exploring the vast Serengeti plains. The Serengeti is famous for its large lion prides, cheetah families, and the incredible diversity of wildlife. Visit different areas including the Seronera Valley and possibly the Moru Kopjes. Optional visit to a Maasai village in Tanzania.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.124Z",
+    "updated_at": "2025-10-06T17:35:05.124Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 49,
+  "fields": {
+    "itinerary": 10,
+    "day_number": 6,
+    "title": "Serengeti to Ngorongoro Crater",
+    "description": "Morning game drive before departing for Ngorongoro Conservation Area. Descend into the Ngorongoro Crater for a full day crater tour. The crater is home to over 25,000 animals including the Big Five. Picnic lunch in the crater. Return to your lodge in the evening.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.126Z",
+    "updated_at": "2025-10-06T17:35:05.126Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 50,
+  "fields": {
+    "itinerary": 10,
+    "day_number": 7,
+    "title": "Departure from Arusha",
+    "description": "Morning at leisure or optional activities. Transfer to Arusha Airport for your flight back home. Alternatively, extend your safari or connect to Zanzibar for beach relaxation.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": false,
+    "dinner": false,
+    "created_at": "2025-10-06T17:35:05.127Z",
+    "updated_at": "2025-10-06T17:35:05.127Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 51,
+  "fields": {
+    "itinerary": 11,
+    "day_number": 1,
+    "title": "Arrival in Cape Town",
+    "description": "Arrive at Cape Town International Airport. Transfer to your hotel in the city center. Afternoon at leisure to settle in and enjoy the beautiful surroundings. Optional Table Mountain cable car ride for panoramic views of the city and coastline.",
+    "destination": 20,
+    "accommodation": null,
+    "breakfast": false,
+    "lunch": false,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.128Z",
+    "updated_at": "2025-10-06T17:35:05.128Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 52,
+  "fields": {
+    "itinerary": 11,
+    "day_number": 2,
+    "title": "Cape Peninsula Tour",
+    "description": "Full day tour of the Cape Peninsula including the Cape of Good Hope, Cape Point, and the historic Cape Point Lighthouse. Visit Boulders Beach to see the African penguin colony. Stop at Simon's Town and enjoy scenic coastal drives with stunning ocean views.",
+    "destination": 20,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.129Z",
+    "updated_at": "2025-10-06T17:35:05.129Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 53,
+  "fields": {
+    "itinerary": 11,
+    "day_number": 3,
+    "title": "Table Mountain & City Tour",
+    "description": "Morning cable car ride up Table Mountain (weather permitting) for breathtaking views. Afternoon city tour including the Castle of Good Hope, District Six Museum, and the vibrant Bo-Kaap neighborhood. Visit the V&A Waterfront for shopping and entertainment.",
+    "destination": 20,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.131Z",
+    "updated_at": "2025-10-06T17:35:05.131Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 54,
+  "fields": {
+    "itinerary": 11,
+    "day_number": 4,
+    "title": "Stellenbosch Wine Route",
+    "description": "Day trip to Stellenbosch, South Africa's oldest town and heart of the wine industry. Visit several wine estates for tastings and tours. Learn about the history of winemaking in the region and enjoy the beautiful Cape Dutch architecture.",
+    "destination": 20,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.134Z",
+    "updated_at": "2025-10-06T17:35:05.134Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 55,
+  "fields": {
+    "itinerary": 11,
+    "day_number": 5,
+    "title": "Whale Watching & Coastal Drive",
+    "description": "Morning whale watching tour (seasonal) or coastal drive along Chapman's Peak. Visit the coastal towns of Hout Bay and Camps Bay. Afternoon visit to the Two Oceans Aquarium or relax on the beautiful beaches.",
+    "destination": 20,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.136Z",
+    "updated_at": "2025-10-06T17:35:05.136Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 56,
+  "fields": {
+    "itinerary": 11,
+    "day_number": 6,
+    "title": "Robben Island Tour",
+    "description": "Full day tour to Robben Island, former prison island and UNESCO World Heritage Site. Take a ferry to the island and join a guided tour led by former political prisoners. Learn about Nelson Mandela's imprisonment and South Africa's struggle for freedom.",
+    "destination": 20,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.137Z",
+    "updated_at": "2025-10-06T17:35:05.137Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 57,
+  "fields": {
+    "itinerary": 11,
+    "day_number": 7,
+    "title": "Departure from Cape Town",
+    "description": "Morning at leisure for last-minute shopping or relaxation. Transfer to Cape Town International Airport for your departure flight. Optional extension to safari destinations or other South African adventures.",
+    "destination": 20,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": false,
+    "dinner": false,
+    "created_at": "2025-10-06T17:35:05.138Z",
+    "updated_at": "2025-10-06T17:35:05.138Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 58,
+  "fields": {
+    "itinerary": 12,
+    "day_number": 1,
+    "title": "Arrival in Nairobi & Maasai Cultural Visit",
+    "description": "Arrive at Jomo Kenyatta International Airport where you will be met by our representative. Transfer to your hotel in Nairobi for check-in and relaxation. In the afternoon, visit a Maasai village to learn about their traditional way of life, cultural dances, and customs. Enjoy a traditional Maasai meal before returning to Nairobi for your overnight stay.",
+    "destination": 5,
+    "accommodation": null,
+    "breakfast": false,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.140Z",
+    "updated_at": "2025-10-06T17:35:05.140Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 59,
+  "fields": {
+    "itinerary": 12,
+    "day_number": 2,
+    "title": "Maasai Mara Game Drive",
+    "description": "After breakfast, fly to the Maasai Mara. Upon arrival, check into your luxury tented camp. Embark on your first game drive in the Maasai Mara, known for its abundant wildlife and the annual wildebeest migration. Look out for lions, elephants, zebras, and various antelope species. Return to camp for dinner and overnight.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.141Z",
+    "updated_at": "2025-10-06T17:35:05.142Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 60,
+  "fields": {
+    "itinerary": 12,
+    "day_number": 3,
+    "title": "Full Day Maasai Mara Exploration",
+    "description": "Spend the full day exploring the Maasai Mara. Early morning game drive to catch the sunrise and wildlife activity. Visit the Mara River where crocodiles wait for migrating wildebeest. Afternoon game drive focusing on different areas of the reserve. Optional hot air balloon safari available at extra cost.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.142Z",
+    "updated_at": "2025-10-06T17:35:05.142Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 61,
+  "fields": {
+    "itinerary": 12,
+    "day_number": 4,
+    "title": "Maasai Mara to Serengeti",
+    "description": "Morning game drive in Maasai Mara before crossing to Tanzania. Drive to the Isebania border, complete immigration formalities, and continue to Serengeti National Park. Arrive at your luxury lodge in the afternoon. Evening game drive to spot wildlife unique to the Serengeti ecosystem.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.143Z",
+    "updated_at": "2025-10-06T17:35:05.143Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 62,
+  "fields": {
+    "itinerary": 12,
+    "day_number": 5,
+    "title": "Serengeti Exploration",
+    "description": "Full day exploring the vast Serengeti plains. The Serengeti is famous for its large lion prides, cheetah families, and the incredible diversity of wildlife. Visit different areas including the Seronera Valley and possibly the Moru Kopjes. Optional visit to a Maasai village in Tanzania.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.144Z",
+    "updated_at": "2025-10-06T17:35:05.144Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 63,
+  "fields": {
+    "itinerary": 12,
+    "day_number": 6,
+    "title": "Serengeti to Ngorongoro Crater",
+    "description": "Morning game drive before departing for Ngorongoro Conservation Area. Descend into the Ngorongoro Crater for a full day crater tour. The crater is home to over 25,000 animals including the Big Five. Picnic lunch in the crater. Return to your lodge in the evening.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": true,
+    "dinner": true,
+    "created_at": "2025-10-06T17:35:05.145Z",
+    "updated_at": "2025-10-06T17:35:05.145Z"
+  }
+},
+{
+  "model": "adminside.itineraryday",
+  "pk": 64,
+  "fields": {
+    "itinerary": 12,
+    "day_number": 7,
+    "title": "Departure from Arusha",
+    "description": "Morning at leisure or optional activities. Transfer to Arusha Airport for your flight back home. Alternatively, extend your safari or connect to Zanzibar for beach relaxation.",
+    "destination": null,
+    "accommodation": null,
+    "breakfast": true,
+    "lunch": false,
+    "dinner": false,
+    "created_at": "2025-10-06T17:35:05.145Z",
+    "updated_at": "2025-10-06T17:35:05.145Z"
   }
 }
 ]

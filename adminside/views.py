@@ -78,32 +78,27 @@ def package_list(request):
 
     # Category filtering based on destination type
     if category != 'all':
-        if category == 'uganda':
-            packages = packages.filter(main_destination__name__icontains='uganda')
-        elif category == 'kenya':
-            packages = packages.filter(main_destination__name__icontains='kenya')
-        elif category == 'tanzania':
-            packages = packages.filter(main_destination__name__icontains='tanzania')
-        elif category == 'beach':
+        if category == 'multiday_bush_safaris':
             packages = packages.filter(
-                Q(name__icontains='beach') |
-                Q(description__icontains='beach') |
-                Q(name__icontains='coastal') |
-                Q(description__icontains='coastal')
-            )
-        elif category == 'cultural':
-            packages = packages.filter(
-                Q(name__icontains='cultural') |
-                Q(description__icontains='cultural') |
-                Q(name__icontains='heritage') |
-                Q(description__icontains='heritage')
-            )
-        elif category == 'adventure':
-            packages = packages.filter(
-                Q(name__icontains='adventure') |
-                Q(description__icontains='adventure') |
+                Q(name__icontains='multiday') |
+                Q(description__icontains='multiday') |
+                Q(name__icontains='bush safari') |
+                Q(description__icontains='bush safari') |
                 Q(name__icontains='safari') |
                 Q(description__icontains='safari')
+            )
+        elif category == 'nairobi_excursions':
+            packages = packages.filter(
+                Q(main_destination__name__icontains='nairobi') |
+                Q(name__icontains='nairobi') |
+                Q(description__icontains='nairobi') |
+                Q(name__icontains='excursion') |
+                Q(description__icontains='excursion')
+            )
+        elif category == 'outbound_packages':
+            packages = packages.filter(
+                Q(name__icontains='outbound') |
+                Q(description__icontains='outbound')
             )
 
     # Filter by specific destination if provided
@@ -155,12 +150,9 @@ def package_list(request):
     # Get destination categories for filter pills
     categories = [
         {'key': 'all', 'name': 'All Packages', 'count': Package.objects.filter(status=Package.PUBLISHED).count()},
-        {'key': 'uganda', 'name': 'Uganda Tours', 'count': Package.objects.filter(status=Package.PUBLISHED, main_destination__name__icontains='uganda').count()},
-        {'key': 'kenya', 'name': 'Kenya Tours', 'count': Package.objects.filter(status=Package.PUBLISHED, main_destination__name__icontains='kenya').count()},
-        {'key': 'tanzania', 'name': 'Tanzania Tours', 'count': Package.objects.filter(status=Package.PUBLISHED, main_destination__name__icontains='tanzania').count()},
-        {'key': 'beach', 'name': 'Beach Holidays', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(name__icontains='beach') | Q(description__icontains='beach')).count()},
-        {'key': 'cultural', 'name': 'Cultural Tours', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(name__icontains='cultural') | Q(description__icontains='cultural')).count()},
-        {'key': 'adventure', 'name': 'Adventure Tours', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(name__icontains='adventure') | Q(description__icontains='adventure')).count()},
+        {'key': 'multiday_bush_safaris', 'name': 'Multiday Bush Safaris', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(name__icontains='multiday') | Q(description__icontains='multiday') | Q(name__icontains='bush safari') | Q(description__icontains='bush safari') | Q(name__icontains='safari') | Q(description__icontains='safari')).count()},
+        {'key': 'nairobi_excursions', 'name': 'Nairobi Excursions', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(main_destination__name__icontains='nairobi') | Q(name__icontains='nairobi') | Q(description__icontains='nairobi') | Q(name__icontains='excursion') | Q(description__icontains='excursion')).count()},
+        {'key': 'outbound_packages', 'name': 'Outbound Packages', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(name__icontains='outbound') | Q(description__icontains='outbound')).count()},
     ]
 
     context = {
