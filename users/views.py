@@ -1266,29 +1266,15 @@ def quote_request_view(request):
                     quote_request.save()
                     logger.info(f"Quote request {quote_request.id} associated with package {package.name}")
 
-                # Send email notifications
-                try:
-                    email_success = send_quote_request_emails(quote_request)
+                # Send email notifications - Novustell Travel pattern
+                send_quote_request_emails(quote_request)
 
-                    if email_success:
-                        # Both emails sent successfully
-                        messages.success(request, "Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.")
-                        logger.info(f"Quote request {quote_request.id} submitted successfully - all emails sent")
-                        return redirect('users:quote_success')
-                    else:
-                        # Emails failed to send
-                        messages.warning(request,
-                            "Your quote request has been saved, but we couldn't send confirmation emails due to a technical issue. "
-                            "Please contact us directly at info@mbuganiluxeadventures.com or call +254701363551 to confirm your request.")
-                        logger.warning(f"Quote request {quote_request.id} saved but emails failed to send")
-                        return redirect('users:quote_success')
+                # Show success message - simple pattern like Novustell
+                messages.success(request, "Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.")
+                logger.info(f"Quote request {quote_request.id} submitted successfully")
 
-                except Exception as e:
-                    logger.error(f"Email sending failed for quote request {quote_request.id}: {e}")
-                    messages.error(request,
-                        "Your quote request has been saved, but we couldn't send confirmation emails. "
-                        "Please contact us directly at info@mbuganiluxeadventures.com or call +254701363551.")
-                    return redirect('users:quote_success')
+                # Redirect to success page
+                return redirect('users:quote_success')
 
             except Exception as e:
                 # Handle unexpected errors during quote request processing
@@ -1329,10 +1315,8 @@ def quote_success(request):
 
 def send_quote_request_emails(quote_request):
     """
-    Send email notifications for quote requests
-
-    Returns:
-        bool: True if both emails sent successfully, False otherwise
+    Send email notifications for quote requests using Novustell Travel pattern
+    Simple, synchronous email sending with fail_silently=True to prevent worker timeouts
     """
     from django.core.mail import send_mail
     from django.template.loader import render_to_string
@@ -1341,86 +1325,47 @@ def send_quote_request_emails(quote_request):
 
     logger = logging.getLogger(__name__)
 
-    # Track email sending success
-    confirmation_sent = False
-    admin_sent = False
-
-    logger.info(f"Starting email dispatch for quote request {quote_request.id} from {quote_request.full_name}")
-
-    # Send confirmation email to user
     try:
-        logger.info(f"Preparing confirmation email for {quote_request.email}")
-
-        # Render template
+        # Send confirmation email to user
         user_subject = 'Quote Request Received - Mbugani Luxe Adventures'
-        user_message = render_to_string('users/emails/quote_request_confirmation.html', {
+        user_html = render_to_string('users/emails/quote_request_confirmation.html', {
             'quote_request': quote_request
         })
 
-        # Send email
         send_mail(
             subject=user_subject,
             message='',  # Plain text version
-            html_message=user_message,
+            html_message=user_html,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[quote_request.email],
-            fail_silently=False,  # We want to catch and report errors
+            fail_silently=True,  # Prevent worker timeouts - Novustell pattern
         )
 
-        confirmation_sent = True
-        logger.info(f"Confirmation email sent successfully to {quote_request.email}")
-
-    except Exception as e:
-        logger.error(f"Confirmation email failed for {quote_request.email}: {e}")
-        confirmation_sent = False
-
-    # Send admin notification email
-    try:
-        logger.info(f"Preparing admin notification email for quote request {quote_request.id}")
-
-        # Render template
+        # Send admin notification email
         admin_subject = f'New Quote Request - {quote_request.full_name}'
-        admin_message = render_to_string('users/emails/quote_request_admin.html', {
+        admin_html = render_to_string('users/emails/quote_request_admin.html', {
             'quote_request': quote_request
         })
 
-        # Send email
         send_mail(
             subject=admin_subject,
             message='',  # Plain text version
-            html_message=admin_message,
+            html_message=admin_html,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[settings.ADMIN_EMAIL],
-            fail_silently=False,  # We want to catch and report errors
+            fail_silently=True,  # Prevent worker timeouts - Novustell pattern
         )
 
-        admin_sent = True
-        logger.info(f"Admin notification email sent successfully for quote request {quote_request.id}")
-
-    except Exception as e:
-        logger.error(f"Admin notification email failed for quote request {quote_request.id}: {e}")
-        admin_sent = False
-
-    # Update quote request tracking flags
-    quote_request.confirmation_email_sent = confirmation_sent
-    quote_request.admin_notification_sent = admin_sent
-
-    # Always save the quote request
-    try:
+        # Update tracking flags
+        quote_request.confirmation_email_sent = True
+        quote_request.admin_notification_sent = True
         quote_request.save()
-        logger.info(f"Quote request {quote_request.id} saved successfully")
+
+        logger.info(f"Quote request emails sent for {quote_request.full_name}")
+
     except Exception as e:
-        logger.error(f"Failed to save quote request {quote_request.id}: {e}")
-
-    # Return overall success status
-    overall_success = confirmation_sent and admin_sent
-
-    if overall_success:
-        logger.info(f"Quote request {quote_request.id} processed successfully - all emails sent")
-    else:
-        logger.error(f"Quote request {quote_request.id} processed with email failures - confirmation: {confirmation_sent}, admin: {admin_sent}")
-
-    return overall_success
+        logger.error(f"Quote request email error: {e}")
+        # Don't re-raise - follow Novustell pattern
 
 
 def test_500_error(request):
