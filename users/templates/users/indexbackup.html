@@ -143,7 +143,7 @@
                         </p>
 
                         <!-- CTA Button -->
-                        <a href="#" class="split-hero-cta">LEARN MORE</a>
+                        <a href="#" class="split-hero-cta">Learn more</a>
                     </div>
                 </div>
 
@@ -174,10 +174,9 @@
             </div>
 <br>
             <!-- Destinations Slider -->
-            <div class="destinations-slider-wrapper position-relative wow fadeInUp" data-wow-delay="0.1s" role="region" aria-label="Featured Destinations Carousel">
+            <!-- <div class="destinations-slider-wrapper position-relative wow fadeInUp" data-wow-delay="0.1s" role="region" aria-label="Featured Destinations Carousel">
                 <div class="destinations-slider" role="group" aria-label="Destination cards">
                     {% for destination in featured_destinations %}
-                    <!-- Dynamic Destination: {{ destination.name }} -->
                     <div class="destination-slide">
                         <div class="destination-card">
                             <div class="destination-image">
@@ -204,7 +203,6 @@
                         </div>
                     </div>
                     {% empty %}
-                    <!-- Fallback: No featured destinations found -->
                     <div class="destination-slide">
                         <div class="destination-card">
                             <div class="destination-image">
@@ -224,12 +222,13 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
+            </div> -->
 
             <!-- View All Button -->
             <div class="row mt-5">
                 <div class="col-12 text-center">
-                    <a href="{% url 'adminside:user_package_list' %}" class="view-all-destinations-btn wow fadeInUp" data-wow-delay="0.7s">
+
+                    <a href="{% url 'adminside:user_package_list' %}" class="view-all-destinations-btn wow fadeInUp" data-wow-delay="0.7s" style="background-color:#bd8c06;" >
                         <i class="fas fa-globe-americas"></i> View All Destinations
                     </a>
                 </div>
@@ -718,7 +717,7 @@
             font-size: 0.9rem;
             transition: all 0.4s ease;
             box-shadow: 0 8px 25px rgba(23, 11, 44, 0.3);
-            border: 2px solid #ffffff;
+            border: 2px solid #bd8c06; 
         }
 
         .view-all-destinations-btn:hover {
