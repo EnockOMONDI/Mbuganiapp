@@ -1,11 +1,11 @@
 services:
   # Web service for Mbugani Luxe Adventures
   - type: web
-    name: mbugani5
+    name: Mbuganiapp
     env: python
     region: oregon
     plan: starter
-    branch: main3
+    branch: mbugani5
     buildCommand: |
       echo "🚀 Starting Mbugani Luxe Adventures build process..."
       pip install --upgrade pip
