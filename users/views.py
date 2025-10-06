@@ -1315,8 +1315,7 @@ def quote_success(request):
 
 def send_quote_request_emails(quote_request):
     """
-    Send email notifications for quote requests
-    Enhanced error reporting while preventing worker timeouts
+    Send email notifications for quote requests - Novustell Travel pattern
     """
     from django.core.mail import send_mail
     from django.template.loader import render_to_string
@@ -1325,74 +1324,51 @@ def send_quote_request_emails(quote_request):
 
     logger = logging.getLogger(__name__)
 
-    confirmation_sent = False
-    admin_sent = False
-
     try:
-        # Send confirmation email to user
-        user_subject = 'Quote Request Received - Mbugani Luxe Adventures'
-        user_html = render_to_string('users/emails/quote_request_confirmation.html', {
-            'quote_request': quote_request
-        })
-
-        try:
-            result1 = send_mail(
-                subject=user_subject,
-                message='',  # Plain text version
-                html_message=user_html,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[quote_request.email],
-                fail_silently=False,  # Catch specific errors
-            )
-            confirmation_sent = result1 > 0
-            if confirmation_sent:
-                logger.info(f"✅ Confirmation email sent to {quote_request.email}")
-            else:
-                logger.warning(f"⚠️ Confirmation email failed - send_mail returned {result1}")
-        except Exception as e:
-            logger.error(f"❌ Confirmation email failed for {quote_request.email}: {e}")
-            confirmation_sent = False
-
         # Send admin notification email
-        admin_subject = f'New Quote Request - {quote_request.full_name}'
-        admin_html = render_to_string('users/emails/quote_request_admin.html', {
+        admin_subject = f'New Quote Request from {quote_request.full_name}'
+        admin_message_html = render_to_string('users/emails/quote_request_admin.html', {
+            'quote_request': quote_request
+        })
+        admin_message_txt = render_to_string('users/emails/quote_request_admin.txt', {
             'quote_request': quote_request
         })
 
-        try:
-            result2 = send_mail(
-                subject=admin_subject,
-                message='',  # Plain text version
-                html_message=admin_html,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.ADMIN_EMAIL],
-                fail_silently=False,  # Catch specific errors
-            )
-            admin_sent = result2 > 0
-            if admin_sent:
-                logger.info(f"✅ Admin email sent to {settings.ADMIN_EMAIL}")
-            else:
-                logger.warning(f"⚠️ Admin email failed - send_mail returned {result2}")
-        except Exception as e:
-            logger.error(f"❌ Admin email failed for {settings.ADMIN_EMAIL}: {e}")
-            admin_sent = False
+        # Send to admin email
+        admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
 
-        # Update tracking flags
-        quote_request.confirmation_email_sent = confirmation_sent
-        quote_request.admin_notification_sent = admin_sent
-        quote_request.save()
+        send_mail(
+            subject=admin_subject,
+            message=admin_message_txt,  # Plain text version
+            html_message=admin_message_html,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[admin_email],
+            fail_silently=False,
+        )
 
-        # Accurate logging
-        if confirmation_sent and admin_sent:
-            logger.info(f"✅ ALL emails sent successfully for quote request {quote_request.id}")
-        elif confirmation_sent or admin_sent:
-            logger.warning(f"⚠️ PARTIAL email success for quote request {quote_request.id} - confirmation: {confirmation_sent}, admin: {admin_sent}")
-        else:
-            logger.error(f"❌ ALL emails FAILED for quote request {quote_request.id}")
+        # Send user confirmation email
+        user_subject = f'Quote Request Received - Mbugani Luxe Adventures'
+        user_message_html = render_to_string('users/emails/quote_request_confirmation.html', {
+            'quote_request': quote_request
+        })
+        user_message_txt = render_to_string('users/emails/quote_request_confirmation.txt', {
+            'quote_request': quote_request
+        })
+
+        send_mail(
+            subject=user_subject,
+            message=user_message_txt,  # Plain text version
+            html_message=user_message_html,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[quote_request.email],
+            fail_silently=False,
+        )
+
+        logger.info(f"Quote request emails sent for {quote_request.full_name}")
 
     except Exception as e:
-        logger.error(f"❌ Quote request email function error: {e}")
-        # Don't re-raise to prevent worker timeouts
+        logger.error(f"Quote request email error: {e}")
+        # Don't re-raise - Novustell pattern
 
 
 def test_500_error(request):

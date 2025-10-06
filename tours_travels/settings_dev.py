@@ -38,31 +38,19 @@ DATABASES = {
     }
 }
 
-# Development email backend - Choose between console and SMTP for testing
-# Set ENABLE_REAL_EMAILS=True in environment to test actual email sending in development
-ENABLE_REAL_EMAILS = os.getenv('ENABLE_REAL_EMAILS', 'False').lower() == 'true'
+# Email Configuration - Novustell Travel pattern
+# Development email backend - Console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-if ENABLE_REAL_EMAILS:
-    # Use real SMTP for testing email functionality
-    EMAIL_BACKEND = 'tours_travels.custom_email_backend.CustomSMTPBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'mbuganiluxeadventures@gmail.com')
-    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'grdg fofh myne wdpf')
-    DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>')
-    ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
-    print("📧 Development mode: Using REAL EMAIL BACKEND for testing")
-else:
-    # Use console backend for development (default)
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    EMAIL_HOST = 'localhost'
-    EMAIL_PORT = 1025
-    EMAIL_USE_TLS = False
-    EMAIL_USE_SSL = False
-    DEFAULT_FROM_EMAIL = 'noreply@localhost'
-    ADMIN_EMAIL = 'admin@localhost'
-    print("📧 Development mode: Using CONSOLE EMAIL BACKEND (emails printed to console)")
+# Development email settings
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025  # For development email server
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = 'noreply@localhost'
+ADMIN_EMAIL = 'admin@localhost'
+
+print("📧 Development mode: Using CONSOLE EMAIL BACKEND (emails printed to console)")
 
 # Development allowed hosts
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
