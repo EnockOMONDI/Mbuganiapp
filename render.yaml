@@ -1,7 +1,7 @@
 services:
   # Web service for Mbugani Luxe Adventures
   - type: web
-    name: mbugani4
+    name: mbugani5
     env: python
     region: oregon
     plan: starter
@@ -69,9 +69,9 @@ services:
       - key: EMAIL_HOST_USER
         value: mbuganiluxeadventures@gmail.com
       - key: EMAIL_HOST_PASSWORD
-        sync: false  # Set manually: iagt yans hoyd pavg
+        value: grdg fofh myne wdpf
       - key: DEFAULT_FROM_EMAIL
-        value: Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>
+        value: MBUGANI LUXE ADVENTURES <mbuganiluxeadventures@gmail.com>
       - key: ADMIN_EMAIL
         value: info@mbuganiluxeadventures.com
       - key: JOBS_EMAIL
@@ -190,7 +190,9 @@ services:
       - key: EMAIL_HOST_USER
         value: mbuganiluxeadventures@gmail.com
       - key: EMAIL_HOST_PASSWORD
-        sync: false
+        value: grdg fofh myne wdpf
+      - key: DEFAULT_FROM_EMAIL
+        value: MBUGANI LUXE ADVENTURES <mbuganiluxeadventures@gmail.com>
       - key: ADMIN_EMAIL
         value: info@mbuganiluxeadventures.com
       - key: JOBS_EMAIL
@@ -231,7 +233,7 @@ services:
 # For production media files, consider AWS S3 integration
 
 # Environment-specific notes:
-# 1. Set EMAIL_HOST_PASSWORD manually in Render dashboard: iagt yans hoyd pavg
+# 1. EMAIL_HOST_PASSWORD is now automatically set via render.yaml: grdg fofh myne wdpf
 # 2. Set UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY manually
 # 3. Optional: Set SENTRY_DSN for error monitoring
 # 4. Optional: Set GOOGLE_ANALYTICS_ID for analytics
