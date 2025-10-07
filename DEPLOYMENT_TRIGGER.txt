@@ -1,0 +1,16 @@
+This file is used to trigger a Render deployment.
+
+Deployment Date: 2025-10-07 19:58
+Purpose: Deploy email system fixes (port 587, TLS, synchronous sending)
+Commits included:
+- 6518252: Fix email system: replicate Novustell's proven configuration
+- 441c66a: Update render.yaml branch to mbugani7
+
+Expected changes:
+- Email port: 465 → 587
+- Email protocol: SSL → TLS
+- Email timeout: Removed
+- Email sending: Async → Synchronous
+
+This deployment should fix the "[Errno 101] Network is unreachable" error.
+
