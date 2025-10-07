@@ -5,7 +5,7 @@ services:
     env: python
     region: oregon
     plan: starter
-    branch: mbugani5
+    branch: mbugani7
     buildCommand: |
       echo "🚀 Starting Mbugani Luxe Adventures build process..."
       pip install --upgrade pip
