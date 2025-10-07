@@ -9,6 +9,7 @@ os.environ['DJANGO_ENV'] = 'production'
 
 from .settings import *
 import dj_database_url
+import logging
 
 # Production-specific settings
 print("🚀 Production settings loaded")
@@ -55,6 +56,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'novustellke@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'vsmw vdut tanu gtdg')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <novustellke@gmail.com>')
+# Fail fast on SMTP hangs to avoid request/worker timeouts
+EMAIL_TIMEOUT = int(os.getenv('EMAIL_TIMEOUT', '10'))
 
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
 JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
