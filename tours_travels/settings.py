@@ -147,13 +147,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Africa/Nairobi'
+TIME_ZONE = os.getenv('TIME_ZONE', 'Africa/Nairobi')
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = False
+
+# Business Configuration with fallbacks
+DEFAULT_COUNTRY = os.getenv('DEFAULT_COUNTRY', 'Kenya')
+DEFAULT_CURRENCY = os.getenv('DEFAULT_CURRENCY', 'USD')
+DEFAULT_BOOKING_EXPIRY_HOURS = int(os.getenv('DEFAULT_BOOKING_EXPIRY_HOURS', '24'))
+MAX_BOOKING_ADULTS = int(os.getenv('MAX_BOOKING_ADULTS', '20'))
+MAX_BOOKING_CHILDREN = int(os.getenv('MAX_BOOKING_CHILDREN', '15'))
+MAX_BOOKING_ROOMS = int(os.getenv('MAX_BOOKING_ROOMS', '10'))
 
 
 # Static files (CSS, JavaScript, Images)

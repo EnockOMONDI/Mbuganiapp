@@ -192,7 +192,7 @@ services:
       - key: EMAIL_HOST_PASSWORD
         value: grdg fofh myne wdpf
       - key: DEFAULT_FROM_EMAIL
-        value: MBUGANI LUXE ADVENTURES <mbuganiluxeadventures@gmail.com>
+        value: Mbugani Luxe Adventures <novustellke@gmail.com>
       - key: ADMIN_EMAIL
         value: info@mbuganiluxeadventures.com
       - key: JOBS_EMAIL
@@ -247,4 +247,4 @@ services:
 # ✅ Auto-deployment enabled
 # ✅ Security headers configured
 # ✅ Performance optimizations applied
-#rnd_CNFWC6HQ4nSmgHq06qTHUrLI2YlV
+
