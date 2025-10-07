@@ -1266,8 +1266,13 @@ def quote_request_view(request):
                     quote_request.save()
                     logger.info(f"Quote request {quote_request.id} associated with package {package.name}")
 
-                # Send email notifications - Novustell Travel pattern
-                send_quote_request_emails(quote_request)
+                # Send email notifications - Novustell Travel pattern with timeout protection
+                try:
+                    send_quote_request_emails(quote_request)
+                    logger.info(f"Email notifications sent for quote {quote_request.id}")
+                except Exception as email_error:
+                    logger.error(f"Email sending failed for quote {quote_request.id}: {email_error}")
+                    # Don't fail the entire request if email fails - user still gets confirmation
 
                 # Show success message - simple pattern like Novustell
                 messages.success(request, "Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.")

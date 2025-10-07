@@ -41,9 +41,9 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG
-        value: true
+        value: False
       - key: ALLOWED_HOSTS
-        value: mbuganiapp.onrender.com,.onrender.com,mbuganiluxeadventures.com,www.mbuganiluxeadventures.com
+        value: mbuganiapp.onrender.com,mbuganiluxeadventures.com,www.mbuganiluxeadventures.com
 
       # Database Configuration - Supabase PostgreSQL
       - key: DATABASE_URL
@@ -67,11 +67,11 @@ services:
 
       # Email Configuration
       - key: EMAIL_HOST_USER
-        value: mbuganiluxeadventures@gmail.com
+        value: novustellke@gmail.com
       - key: EMAIL_HOST_PASSWORD
-        value: grdg fofh myne wdpf
+        value: vsmw vdut tanu gtdg
       - key: DEFAULT_FROM_EMAIL
-        value: Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>
+        value: Mbugani Luxe Adventures <novustellke@gmail.com>
       - key: ADMIN_EMAIL
         value: info@mbuganiluxeadventures.com
       - key: JOBS_EMAIL
@@ -247,3 +247,4 @@ services:
 # ✅ Auto-deployment enabled
 # ✅ Security headers configured
 # ✅ Performance optimizations applied
+#rnd_CNFWC6HQ4nSmgHq06qTHUrLI2YlV
