@@ -233,7 +233,7 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 EMAIL_SUBJECT_PREFIX = '[Mbugani Luxe Adventures] '
 
 # Production health check
-HEALTH_CHECK_URL = '/health/'
+
 
 # Production monitoring
 SENTRY_DSN = os.getenv('SENTRY_DSN')

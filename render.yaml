@@ -41,7 +41,7 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG
-        value: False
+        value: true
       - key: ALLOWED_HOSTS
         value: mbuganiapp.onrender.com,.onrender.com,mbuganiluxeadventures.com,www.mbuganiluxeadventures.com
 
@@ -71,7 +71,7 @@ services:
       - key: EMAIL_HOST_PASSWORD
         value: grdg fofh myne wdpf
       - key: DEFAULT_FROM_EMAIL
-        value: MBUGANI LUXE ADVENTURES <mbuganiluxeadventures@gmail.com>
+        value: Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>
       - key: ADMIN_EMAIL
         value: info@mbuganiluxeadventures.com
       - key: JOBS_EMAIL
