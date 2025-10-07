@@ -36,8 +36,7 @@ services:
       # Django Core Configuration
       - key: DJANGO_SETTINGS_MODULE
         value: tours_travels.settings_prod
-      - key: DJANGO_ENV
-        value: production
+      # NOTE: DJANGO_ENV removed to match Novustell's simple architecture
       - key: PYTHON_VERSION
         value: 3.12.0
       - key: SECRET_KEY
@@ -67,7 +66,8 @@ services:
       - key: RENDER_EXTERNAL_HOSTNAME
         generateValue: true
 
-      # Email Configuration
+      # Email Configuration (Matches Novustell's working config)
+      # Port 587 with TLS is hardcoded in settings_prod.py
       - key: EMAIL_HOST_USER
         value: novustellke@gmail.com
       - key: EMAIL_HOST_PASSWORD

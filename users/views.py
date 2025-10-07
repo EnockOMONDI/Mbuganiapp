@@ -1266,29 +1266,14 @@ def quote_request_view(request):
                     quote_request.save()
                     logger.info(f"Quote request {quote_request.id} associated with package {package.name}")
 
-                # Send email notifications asynchronously to avoid blocking request/worker timeouts
+                # Send email notifications synchronously (MATCHES NOVUSTELL'S WORKING PATTERN)
+                # Novustell uses synchronous email sending and it works perfectly on Render
                 try:
-                    import threading
-
-                    def _send_emails_async(qr_id):
-                        try:
-                            # Re-fetch instance to avoid stale objects in thread
-                            from users.models import QuoteRequest as _QR
-                            qr = _QR.objects.get(id=qr_id)
-                            ok = send_quote_request_emails(qr)
-                            if ok:
-                                logger.info(f"[Async] Email notifications sent for quote {qr_id}")
-                            else:
-                                logger.error(f"[Async] Email notifications FAILED for quote {qr_id}")
-                        except Exception as _e:
-                            logger.error(f"[Async] Email sending crashed for quote {qr_id}: {_e}")
-
-                    t = threading.Thread(target=_send_emails_async, args=(quote_request.id,), daemon=True)
-                    t.start()
-                    logger.info(f"Spawned async email-sender thread for quote {quote_request.id}")
+                    send_quote_request_emails(quote_request)
+                    logger.info(f"Email notifications sent for quote {quote_request.id}")
                 except Exception as email_error:
-                    logger.error(f"Failed to spawn async email thread for quote {quote_request.id}: {email_error}")
-                    # Even if async spawn fails, do not block the user flow
+                    logger.error(f"Email notification error for quote {quote_request.id}: {email_error}")
+                    # Don't block user flow even if email fails
 
                 # Show success message - simple pattern like Novustell
                 messages.success(request, "Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.")
