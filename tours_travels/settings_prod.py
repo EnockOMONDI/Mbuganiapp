@@ -50,9 +50,13 @@ DATABASES = {
 
 # Production email backend - Standard Django SMTP (same as Novustell Travel)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
+# TLS/SSL toggles are environment-driven; default to TLS on 587, SSL on 465
+_email_use_ssl_env = os.getenv('EMAIL_USE_SSL')
+EMAIL_USE_SSL = (_email_use_ssl_env.lower() in ('1','true','yes','on')) if _email_use_ssl_env else (EMAIL_PORT == 465)
+_email_use_tls_env = os.getenv('EMAIL_USE_TLS')
+EMAIL_USE_TLS = (_email_use_tls_env.lower() in ('1','true','yes','on')) if _email_use_tls_env else (EMAIL_PORT == 587 and not EMAIL_USE_SSL)
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'novustellke@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'vsmw vdut tanu gtdg')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <novustellke@gmail.com>')
@@ -275,6 +279,6 @@ if SENTRY_DSN:
 
 print("🚀 Production settings loaded")
 print(f"🌐 Site URL: {SITE_URL}")
-print(f"📧 Email host: {EMAIL_HOST}")
+print(f"📧 Email: host={EMAIL_HOST} port={EMAIL_PORT} use_tls={EMAIL_USE_TLS} use_ssl={EMAIL_USE_SSL} timeout={EMAIL_TIMEOUT}s")
 print(f"🔒 SSL redirect: {SECURE_SSL_REDIRECT}")
 print(f"📊 Debug mode: {DEBUG}")

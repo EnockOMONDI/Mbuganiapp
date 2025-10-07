@@ -1275,10 +1275,13 @@ def quote_request_view(request):
                             # Re-fetch instance to avoid stale objects in thread
                             from users.models import QuoteRequest as _QR
                             qr = _QR.objects.get(id=qr_id)
-                            send_quote_request_emails(qr)
-                            logger.info(f"[Async] Email notifications sent for quote {qr_id}")
+                            ok = send_quote_request_emails(qr)
+                            if ok:
+                                logger.info(f"[Async] Email notifications sent for quote {qr_id}")
+                            else:
+                                logger.error(f"[Async] Email notifications FAILED for quote {qr_id}")
                         except Exception as _e:
-                            logger.error(f"[Async] Email sending failed for quote {qr_id}: {_e}")
+                            logger.error(f"[Async] Email sending crashed for quote {qr_id}: {_e}")
 
                     t = threading.Thread(target=_send_emails_async, args=(quote_request.id,), daemon=True)
                     t.start()
@@ -1334,6 +1337,7 @@ def quote_success(request):
 def send_quote_request_emails(quote_request):
     """
     Send email notifications for quote requests - Novustell Travel pattern
+    Returns True on success, False on any error (does not raise).
     """
     from django.core.mail import send_mail
     from django.template.loader import render_to_string
@@ -1383,10 +1387,11 @@ def send_quote_request_emails(quote_request):
         )
 
         logger.info(f"Quote request emails sent for {quote_request.full_name}")
+        return True
 
     except Exception as e:
-        logger.error(f"Quote request email error: {e}")
-        # Don't re-raise - Novustell pattern
+        logger.error(f"Quote request email error: {type(e).__name__}: {e}")
+        return False
 
 
 def test_500_error(request):
