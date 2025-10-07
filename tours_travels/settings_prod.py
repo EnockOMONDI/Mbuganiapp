@@ -3,17 +3,32 @@ Production settings for Mbugani Luxe Adventures
 Uses Supabase PostgreSQL for production
 """
 
-from .settings import *
+# Force production environment before importing base settings
 import os
+os.environ['DJANGO_ENV'] = 'production'
+
+from .settings import *
 import dj_database_url
 
 # Production-specific settings
+print("🚀 Production settings loaded")
+print("📧 Production mode: Using SMTP EMAIL BACKEND")
+print(f"🗄️ Database: {os.getenv('DATABASE_URL', 'Not set')[:50]}...")
+print(f"🌐 Site URL: {os.getenv('SITE_URL', 'Not set')}")
+print(f"🔒 SSL redirect: True")
+print(f"📊 Debug mode: False")
 
 # Add CORS headers to installed apps
 INSTALLED_APPS = INSTALLED_APPS + [
     'corsheaders',
 ]
+
+# Force production settings
 DEBUG = False
+DJANGO_ENV = 'production'
+
+# Force SMTP email backend for production
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Production database - Supabase PostgreSQL
 DATABASES = {
