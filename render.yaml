@@ -5,7 +5,7 @@ services:
     env: python
     region: oregon
     plan: starter
-    branch: mbugani7
+    branch: main2
     buildCommand: |
       echo "🚀 Starting Mbugani Luxe Adventures build process..."
       pip install --upgrade pip
@@ -66,14 +66,14 @@ services:
       - key: RENDER_EXTERNAL_HOSTNAME
         generateValue: true
 
-      # Email Configuration (Matches Novustell's working config)
+      # Email Configuration (Mbugani Luxe Adventures Gmail)
       # Port 587 with TLS is hardcoded in settings_prod.py
       - key: EMAIL_HOST_USER
-        value: novustellke@gmail.com
+        value: mbuganiluxeadventures@gmail.com
       - key: EMAIL_HOST_PASSWORD
-        value: vsmw vdut tanu gtdg
+        value: ewxdvlrxgphzjrdf
       - key: DEFAULT_FROM_EMAIL
-        value: Mbugani Luxe Adventures <novustellke@gmail.com>
+        value: Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>
       - key: ADMIN_EMAIL
         value: info@mbuganiluxeadventures.com
       - key: JOBS_EMAIL
@@ -189,7 +189,7 @@ services:
 # For production media files, consider AWS S3 integration
 
 # Environment-specific notes:
-# 1. EMAIL_HOST_PASSWORD is now automatically set via render.yaml: grdg fofh myne wdpf
+# 1. EMAIL_HOST_PASSWORD is now automatically set via render.yaml: ewxdvlrxgphzjrdf
 # 2. Set UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY manually
 # 3. Optional: Set SENTRY_DSN for error monitoring
 # 4. Optional: Set GOOGLE_ANALYTICS_ID for analytics
