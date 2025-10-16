@@ -14,7 +14,7 @@ from django.utils import timezone
 logger = logging.getLogger(__name__)
 
 
-def send_quote_request_emails_async(quote_request_id):
+def send_quote_request_emails_async(quote_request_id, **kwargs):
     """
     Asynchronously send email notifications for quote requests
     
@@ -126,7 +126,7 @@ def send_quote_request_emails_async(quote_request_id):
         return {'success': False, 'error': error_msg}
 
 
-def send_job_application_emails_async(application_id):
+def send_job_application_emails_async(application_id, **kwargs):
     """
     Asynchronously send email notifications for job applications
     
@@ -225,7 +225,7 @@ def send_job_application_emails_async(application_id):
         return {'success': False, 'error': error_msg}
 
 
-def send_newsletter_subscription_emails_async(subscription_id):
+def send_newsletter_subscription_emails_async(subscription_id, **kwargs):
     """
     Asynchronously send email notifications for newsletter subscriptions
     
@@ -322,7 +322,7 @@ def send_newsletter_subscription_emails_async(subscription_id):
         return {'success': False, 'error': error_msg}
 
 
-def send_booking_confirmation_email_async(booking_id):
+def send_booking_confirmation_email_async(booking_id, **kwargs):
     """
     Asynchronously send booking confirmation email
 
