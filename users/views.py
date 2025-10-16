@@ -314,97 +314,56 @@ def contactus(request):
 
 def send_job_application_emails(job_application):
     """
-    Send email notifications for job applications
+    Queue job application emails for asynchronous processing
     """
-    from django.core.mail import send_mail
-    from django.template.loader import render_to_string
-    from django.conf import settings
+    import logging
+    logger = logging.getLogger(__name__)
 
-    # Email to admin (send to both careers and info email addresses)
-    admin_subject = f'New Job Application - {job_application.get_position_display()}'
-    admin_message = render_to_string('users/emails/job_application_admin.html', {
-        'application': job_application
-    })
+    try:
+        from django_q.tasks import async_task
 
-    # Send to both careers and info email addresses
-    careers_email = getattr(settings, 'JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
-    info_email = getattr(settings, 'ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
-    recipient_list = [careers_email, info_email]
+        # Queue the email task for background processing
+        task_id = async_task(
+            'users.tasks.send_job_application_emails_async',
+            job_application.id,
+            task_name=f'job_emails_{job_application.id}',
+            timeout=60,
+            retry=5,
+        )
 
-    send_mail(
-        subject=admin_subject,
-        message='',  # Plain text version
-        html_message=admin_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=recipient_list,
-        fail_silently=True,  # Changed to fail silently
-    )
+        logger.info(f"Job application emails queued: task_id={task_id}, application_id={job_application.id}")
+        return True
 
-    # Email to applicant
-    applicant_subject = f'Application Received - {job_application.get_position_display()}'
-    applicant_message = render_to_string('users/emails/job_application_confirmation.html', {
-        'application': job_application
-    })
-
-    send_mail(
-        subject=applicant_subject,
-        message='',  # Plain text version
-        html_message=applicant_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[job_application.email],
-        fail_silently=True,
-    )
-
-    # Update email tracking
-    job_application.admin_notification_sent = True
-    job_application.applicant_confirmation_sent = True
-    job_application.save()
+    except Exception as e:
+        logger.error(f"Failed to queue job application emails for {job_application.id}: {e}")
+        return False
 
 
 def send_newsletter_subscription_emails(subscription):
     """
-    Send email notifications for newsletter subscriptions
+    Queue newsletter subscription emails for asynchronous processing
     """
-    from django.core.mail import send_mail
-    from django.template.loader import render_to_string
-    from django.conf import settings
+    import logging
+    logger = logging.getLogger(__name__)
 
-    # Email to admin
-    admin_subject = f'New Newsletter Subscription - {subscription.email}'
-    admin_message = render_to_string('users/emails/newsletter_admin.html', {
-        'subscription': subscription
-    })
+    try:
+        from django_q.tasks import async_task
 
-    newsletter_email = getattr(settings, 'NEWSLETTER_EMAIL', 'news@mbuganiluxeadventures.com')
+        # Queue the email task for background processing
+        task_id = async_task(
+            'users.tasks.send_newsletter_subscription_emails_async',
+            subscription.id,
+            task_name=f'newsletter_emails_{subscription.id}',
+            timeout=60,
+            retry=5,
+        )
 
-    send_mail(
-        subject=admin_subject,
-        message='',  # Plain text version
-        html_message=admin_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[newsletter_email],
-        fail_silently=True,  # Changed to fail silently
-    )
+        logger.info(f"Newsletter subscription emails queued: task_id={task_id}, subscription_id={subscription.id}")
+        return True
 
-    # Email to subscriber
-    subscriber_subject = 'Welcome to Mbugani Luxe Adventures Newsletter!'
-    subscriber_message = render_to_string('users/emails/newsletter_confirmation.html', {
-        'subscription': subscription
-    })
-
-    send_mail(
-        subject=subscriber_subject,
-        message='',  # Plain text version
-        html_message=subscriber_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[subscription.email],
-        fail_silently=True,
-    )
-
-    # Update email tracking
-    subscription.admin_notification_sent = True
-    subscription.confirmation_email_sent = True
-    subscription.save()
+    except Exception as e:
+        logger.error(f"Failed to queue newsletter subscription emails for {subscription.id}: {e}")
+        return False
 
 
 def careers(request):
@@ -1266,14 +1225,25 @@ def quote_request_view(request):
                     quote_request.save()
                     logger.info(f"Quote request {quote_request.id} associated with package {package.name}")
 
-                # Send email notifications synchronously (MATCHES NOVUSTELL'S WORKING PATTERN)
-                # Novustell uses synchronous email sending and it works perfectly on Render
+                # Send email notifications asynchronously using Django-Q
+                # This prevents worker timeouts by processing emails in background
                 try:
-                    send_quote_request_emails(quote_request)
-                    logger.info(f"Email notifications sent for quote {quote_request.id}")
+                    from django_q.tasks import async_task
+
+                    # Queue the email task for background processing
+                    task_id = async_task(
+                        'users.tasks.send_quote_request_emails_async',
+                        quote_request.id,
+                        task_name=f'quote_emails_{quote_request.id}',
+                        timeout=60,  # Task timeout (well under worker timeout)
+                        retry=5,  # Retry up to 5 times on failure
+                    )
+
+                    logger.info(f"Quote request emails queued for background processing: task_id={task_id}, quote_id={quote_request.id}")
+
                 except Exception as email_error:
-                    logger.error(f"Email notification error for quote {quote_request.id}: {email_error}")
-                    # Don't block user flow even if email fails
+                    logger.error(f"Failed to queue email task for quote {quote_request.id}: {email_error}")
+                    # Don't fail the entire request if email queueing fails - user still gets confirmation
 
                 # Show success message - simple pattern like Novustell
                 messages.success(request, "Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.")

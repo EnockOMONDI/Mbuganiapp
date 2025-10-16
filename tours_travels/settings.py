@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_ckeditor_5',  # CKEditor 5 for modern rich text editing
     'import_export',
+    'django_q',  # Django-Q for background tasks
     'adminside',
     'users',
     'blog',
@@ -244,6 +245,25 @@ JOBS_EMAIL = 'careers@mbuganiluxeadventures.com'
 
 # Newsletter email for subscriptions
 NEWSLETTER_EMAIL = 'news@mbuganiluxeadventures.com'
+
+# Django-Q Configuration (Base settings)
+Q_CLUSTER = {
+    'name': 'mbugani_luxe',
+    'workers': 2,
+    'recycle': 500,
+    'timeout': 60,  # Task timeout in seconds (well under Gunicorn's 240s)
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 50,
+    'cpu_affinity': 1,
+    'label': 'Django Q',
+    'redis': None,  # Will be overridden in environment-specific settings
+    'orm': 'default',  # Use Django ORM as fallback broker
+    'retry': 120,  # Retry failed tasks after 2 minutes (must be > timeout)
+    'max_attempts': 5,
+    'ack_failures': True,
+    'catch_up': False,  # Don't process old tasks on startup
+}
 
 # Cart session configuration
 CART_SESSION_ID = 'cart'

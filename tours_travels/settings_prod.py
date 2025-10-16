@@ -62,6 +62,27 @@ ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
 JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
 NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL', 'news@mbuganiluxeadventures.com')
 
+# Django-Q Configuration for Production (Supabase PostgreSQL as broker)
+Q_CLUSTER = {
+    'name': 'mbugani_luxe_prod',
+    'workers': 3,  # More workers for production
+    'recycle': 500,
+    'timeout': 60,  # Task timeout in seconds (well under Gunicorn's 240s)
+    'compress': True,
+    'save_limit': 1000,  # Keep more task history in production
+    'queue_limit': 100,  # Higher queue limit for production
+    'cpu_affinity': 1,
+    'label': 'Django Q Production',
+    'orm': 'default',  # Use Supabase PostgreSQL as broker
+    'retry': 5,  # Retry failed tasks up to 5 times
+    'max_attempts': 5,
+    'ack_failures': True,
+    'catch_up': False,  # Don't process old tasks on startup
+    'bulk': 10,  # Process tasks in bulk for better performance
+    'guard_cycle': 5,  # Check for new tasks every 5 seconds
+    'poll': 0.1,  # Poll interval in seconds
+}
+
 
 # Production allowed hosts
 ALLOWED_HOSTS = [

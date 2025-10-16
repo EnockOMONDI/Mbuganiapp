@@ -52,6 +52,29 @@ ADMIN_EMAIL = 'admin@localhost'
 
 print("📧 Development mode: Using CONSOLE EMAIL BACKEND (emails printed to console)")
 
+# Django-Q Configuration for Development (Django ORM as broker)
+Q_CLUSTER = {
+    'name': 'mbugani_luxe_dev',
+    'workers': 1,  # Single worker for development
+    'recycle': 100,
+    'timeout': 30,  # Shorter timeout for development
+    'compress': False,  # No compression for easier debugging
+    'save_limit': 50,  # Keep fewer tasks in development
+    'queue_limit': 20,
+    'cpu_affinity': 1,
+    'label': 'Django Q Development',
+    'orm': 'default',  # Use SQLite as broker in development
+    'retry': 60,  # Retry after 60 seconds (must be > timeout of 30s)
+    'max_attempts': 3,
+    'ack_failures': True,
+    'catch_up': False,
+    'sync': False,  # Async processing even in development
+    'guard_cycle': 2,  # Check for new tasks every 2 seconds
+    'poll': 0.2,  # Poll interval in seconds
+}
+
+print("🔄 Development mode: Django-Q configured with SQLite broker")
+
 # Development allowed hosts
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
