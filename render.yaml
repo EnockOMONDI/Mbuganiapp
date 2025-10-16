@@ -1,5 +1,5 @@
 services:
-  # Web service for Mbugani Luxe Adventures
+  # Web service for Mbugani Luxe Adventures# Web service for Mbugani Luxe Adventures
   - type: web
     name: Mbuganiapp
     env: python
