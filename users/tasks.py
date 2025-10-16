@@ -6,12 +6,59 @@ to prevent blocking the main request thread and avoid Gunicorn worker timeouts.
 """
 
 import logging
+import time
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.utils import timezone
 
 logger = logging.getLogger(__name__)
+
+
+def send_email_with_retry(subject, message, html_message, from_email, recipient_list, max_retries=3):
+    """
+    Send email with retry logic for better reliability
+
+    Args:
+        subject (str): Email subject
+        message (str): Plain text message
+        html_message (str): HTML message
+        from_email (str): From email address
+        recipient_list (list): List of recipient emails
+        max_retries (int): Maximum number of retry attempts
+
+    Returns:
+        bool: True if email sent successfully, False otherwise
+    """
+    for attempt in range(max_retries):
+        try:
+            logger.info(f"Attempting to send email (attempt {attempt + 1}/{max_retries})")
+
+            send_mail(
+                subject=subject,
+                message=message,
+                html_message=html_message,
+                from_email=from_email,
+                recipient_list=recipient_list,
+                fail_silently=False,
+            )
+
+            logger.info(f"Email sent successfully on attempt {attempt + 1}")
+            return True
+
+        except Exception as e:
+            logger.warning(f"Email send attempt {attempt + 1} failed: {e}")
+
+            if attempt < max_retries - 1:
+                # Wait before retrying (exponential backoff)
+                wait_time = 2 ** attempt  # 1s, 2s, 4s
+                logger.info(f"Waiting {wait_time} seconds before retry...")
+                time.sleep(wait_time)
+            else:
+                logger.error(f"All {max_retries} email send attempts failed: {e}")
+                return False
+
+    return False
 
 
 def send_quote_request_emails_async(quote_request_id, **kwargs):
@@ -53,46 +100,46 @@ def send_quote_request_emails_async(quote_request_id, **kwargs):
             })
             
             admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
-            
-            send_mail(
+
+            admin_sent = send_email_with_retry(
                 subject=admin_subject,
                 message=admin_message_txt,
                 html_message=admin_message_html,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[admin_email],
-                fail_silently=False,
+                max_retries=3
             )
-            
-            admin_sent = True
-            logger.info(f"Admin notification sent for quote request {quote_request_id}")
+
+            if admin_sent:
+                logger.info(f"Admin notification sent for quote request {quote_request_id}")
+            else:
+                logger.error(f"Failed to send admin email for quote request {quote_request_id} after all retries")
             
         except Exception as e:
             logger.error(f"Failed to send admin email for quote request {quote_request_id}: {e}")
         
         # Send user confirmation email
-        try:
-            user_subject = f'Quote Request Received - Mbugani Luxe Adventures'
-            user_message_html = render_to_string('users/emails/quote_request_confirmation.html', {
-                'quote_request': quote_request
-            })
-            user_message_txt = render_to_string('users/emails/quote_request_confirmation.txt', {
-                'quote_request': quote_request
-            })
-            
-            send_mail(
-                subject=user_subject,
-                message=user_message_txt,
-                html_message=user_message_html,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[quote_request.email],
-                fail_silently=False,
-            )
-            
-            user_sent = True
+        user_subject = f'Quote Request Received - Mbugani Luxe Adventures'
+        user_message_html = render_to_string('users/emails/quote_request_confirmation.html', {
+            'quote_request': quote_request
+        })
+        user_message_txt = render_to_string('users/emails/quote_request_confirmation.txt', {
+            'quote_request': quote_request
+        })
+
+        user_sent = send_email_with_retry(
+            subject=user_subject,
+            message=user_message_txt,
+            html_message=user_message_html,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[quote_request.email],
+            max_retries=3
+        )
+
+        if user_sent:
             logger.info(f"User confirmation sent for quote request {quote_request_id}")
-            
-        except Exception as e:
-            logger.error(f"Failed to send user email for quote request {quote_request_id}: {e}")
+        else:
+            logger.error(f"Failed to send user email for quote request {quote_request_id} after all retries")
         
         # Update quote request with email status
         try:
