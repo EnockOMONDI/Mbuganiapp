@@ -5,7 +5,7 @@ services:
     env: python
     region: oregon
     plan: starter
-    branch: emails0ct25
+    branch: railwayapp
     buildCommand: |
       echo "🚀 Starting Mbugani Luxe Adventures build process..."
       pip install --upgrade pip
@@ -168,7 +168,7 @@ services:
     env: python
     region: oregon
     plan: starter
-    branch: emails0ct25
+    branch: railwayapp
     buildCommand: |
       echo "🚀 Starting Mbugani worker build process..."
       pip install --upgrade pip

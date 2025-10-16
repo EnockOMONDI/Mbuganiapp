@@ -95,7 +95,7 @@ When you push your next commit to the repository, Render.com will automatically:
 ```bash
 git add .
 git commit -m "Fix email configuration for production deployment"
-git push origin emails0ct25
+git push origin railwayapp
 ```
 
 ### **Step 2: Monitor Deployment**
