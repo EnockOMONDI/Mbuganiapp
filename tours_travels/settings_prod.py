@@ -74,7 +74,7 @@ Q_CLUSTER = {
     'cpu_affinity': 1,
     'label': 'Django Q Production',
     'orm': 'default',  # Use Supabase PostgreSQL as broker
-    'retry': 5,  # Retry failed tasks up to 5 times
+    'retry': 120,  # Retry failed tasks after 2 minutes (must be > timeout)
     'max_attempts': 5,
     'ack_failures': True,
     'catch_up': False,  # Don't process old tasks on startup
