@@ -19,6 +19,11 @@ print(f"🌐 Site URL: {os.getenv('SITE_URL', 'Not set')}")
 print(f"🔒 SSL redirect: True")
 print(f"📊 Debug mode: False")
 
+# Railway environment detection
+IS_RAILWAY = os.getenv('RAILWAY_ENVIRONMENT') == 'production'
+if IS_RAILWAY:
+    print("🚂 Railway environment detected - optimizing for worker deployment")
+
 # Add CORS headers to installed apps
 INSTALLED_APPS = INSTALLED_APPS + [
     'corsheaders',
@@ -104,15 +109,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Production logging
+# Production logging - Railway-friendly configuration
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
         'simple': {
             'format': '{levelname} {message}',
             'style': '{',
@@ -123,36 +124,29 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
         },
-        'file': {
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/tmp/mbugani.log',
-            'maxBytes': 1024*1024*10,  # 10MB
-            'backupCount': 5,
-            'formatter': 'verbose',
-        },
     },
     'root': {
-        'handlers': ['console', 'file'],
-        'level': 'WARNING',
+        'handlers': ['console'],
+        'level': 'INFO',
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'WARNING',
             'propagate': False,
         },
         'django.security': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
         },
         'users': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
         },
         'adminside': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
         },
