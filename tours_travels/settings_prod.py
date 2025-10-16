@@ -23,6 +23,8 @@ print(f"📊 Debug mode: False")
 IS_RAILWAY = os.getenv('RAILWAY_ENVIRONMENT') == 'production'
 if IS_RAILWAY:
     print("🚂 Railway environment detected - optimizing for worker deployment")
+    # Disable Django's colorized output to prevent serialization errors
+    os.environ['DJANGO_COLORS'] = 'nocolor'
 
 # Add CORS headers to installed apps
 INSTALLED_APPS = INSTALLED_APPS + [
@@ -61,7 +63,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'mbuganiluxeadventures@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'ewxdvlrxgphzjrdf')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>')
-# NOTE: NO EMAIL_TIMEOUT - Keep it simple and reliable
+# Email timeout settings for Railway
+EMAIL_TIMEOUT = 120  # 2 minutes timeout for SMTP connections
 
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
 JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
@@ -72,19 +75,19 @@ Q_CLUSTER = {
     'name': 'mbugani_luxe_prod',
     'workers': 3,  # More workers for production
     'recycle': 500,
-    'timeout': 60,  # Task timeout in seconds (well under Gunicorn's 240s)
+    'timeout': 180,  # Increased timeout for email sending (3 minutes)
     'compress': True,
     'save_limit': 1000,  # Keep more task history in production
     'queue_limit': 100,  # Higher queue limit for production
     'cpu_affinity': 1,
     'label': 'Django Q Production',
     'orm': 'default',  # Use Supabase PostgreSQL as broker
-    'retry': 120,  # Retry failed tasks after 2 minutes (must be > timeout)
+    'retry': 300,  # Retry failed tasks after 5 minutes (must be > timeout)
     'max_attempts': 5,
     'ack_failures': True,
     'catch_up': False,  # Don't process old tasks on startup
     'bulk': 10,  # Process tasks in bulk for better performance
-    'guard_cycle': 5,  # Check for new tasks every 5 seconds
+    'guard_cycle': 10,  # Check for new tasks every 5 seconds
     'poll': 0.1,  # Poll interval in seconds
 }
 
