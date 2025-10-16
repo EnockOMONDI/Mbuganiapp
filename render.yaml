@@ -5,7 +5,7 @@ services:
     env: python
     region: oregon
     plan: starter
-    branch: railwayapp
+    branch: emails0ct25
     buildCommand: |
       echo "🚀 Starting Mbugani Luxe Adventures build process..."
       pip install --upgrade pip
@@ -162,48 +162,8 @@ services:
       mountPath: /opt/render/project/src/media
       sizeGB: 1
 
-  # Django-Q Background Worker for Email Processing
-  - type: worker
-    name: mbugani-worker
-    env: python
-    region: oregon
-    plan: starter
-    branch: railwayapp
-    buildCommand: |
-      echo "🚀 Starting Mbugani worker build process..."
-      pip install --upgrade pip
-      pip install -r requirements.txt
-      echo "📦 Worker dependencies installed successfully"
-      echo "✅ Worker build completed"
-    startCommand: |
-      echo "🔄 Starting Django-Q worker for background email processing..."
-      python manage.py qcluster --settings=tours_travels.settings_prod
-    envVars:
-      # Django Core Configuration (same as web service)
-      - key: DJANGO_SETTINGS_MODULE
-        value: tours_travels.settings_prod
-      - key: SECRET_KEY
-        sync: false  # Sync from web service
-      - key: DEBUG
-        value: False
-
-      # Database Configuration - Supabase PostgreSQL (same as web service)
-      - key: DATABASE_URL
-        sync: false  # Sync from web service
-
-      # Email Configuration (same as web service)
-      - key: EMAIL_HOST_USER
-        value: mbuganiluxeadventures@gmail.com
-      - key: EMAIL_HOST_PASSWORD
-        value: ewxdvlrxgphzjrdf
-      - key: DEFAULT_FROM_EMAIL
-        value: Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>
-      - key: ADMIN_EMAIL
-        value: info@mbuganiluxeadventures.com
-      - key: JOBS_EMAIL
-        value: careers@mbuganiluxeadventures.com
-      - key: NEWSLETTER_EMAIL
-        value: news@mbuganiluxeadventures.com
+  # Django-Q Background Worker moved to Railway.app
+  # Worker service now runs on Railway for better resource management
 
 
 # External Database Configuration
