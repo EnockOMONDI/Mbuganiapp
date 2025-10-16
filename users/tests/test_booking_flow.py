@@ -149,7 +149,7 @@ class BookingFlowIntegrationTest(TestCase):
         welcome_email = None
         confirmation_email = None
         for email in mail.outbox:
-            if 'Welcome to Novustell Travel' in email.subject:
+            if 'Welcome to Mbugani Luxe Adventures' in email.subject:
                 welcome_email = email
             elif 'Booking Confirmation' in email.subject:
                 confirmation_email = email

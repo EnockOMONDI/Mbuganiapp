@@ -1,14 +1,35 @@
 """
-Production settings for Novustell Travel
-Uses NeonDB PostgreSQL for production
+Production settings for Mbugani Luxe Adventures
+Uses Supabase PostgreSQL for production
 """
 
-from .settings import *
+# Force production environment before importing base settings
 import os
+os.environ['DJANGO_ENV'] = 'production'
+
+from .settings import *
 import dj_database_url
+import logging
 
 # Production-specific settings
+print("🚀 Production settings loaded")
+print("📧 Production mode: Using SMTP EMAIL BACKEND")
+print(f"🗄️ Database: {os.getenv('DATABASE_URL', 'Not set')[:50]}...")
+print(f"🌐 Site URL: {os.getenv('SITE_URL', 'Not set')}")
+print(f"🔒 SSL redirect: True")
+print(f"📊 Debug mode: False")
+
+# Add CORS headers to installed apps
+INSTALLED_APPS = INSTALLED_APPS + [
+    'corsheaders',
+]
+
+# Force production settings
 DEBUG = False
+DJANGO_ENV = 'production'
+
+# Force SMTP email backend for production
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Production database - Supabase PostgreSQL
 DATABASES = {
@@ -27,23 +48,47 @@ DATABASES = {
     }
 }
 
-# Production email backend - SMTP
+# Production email backend - SMTP (Port 587 with TLS)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'novustellke@gmail.com')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Novustell Travel <novustellke@gmail.com>')
-ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@novustelltravel.com')
-JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@novustelltravel.com')
-NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL', 'news@novustelltravel.com')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'mbuganiluxeadventures@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'ewxdvlrxgphzjrdf')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>')
+# NOTE: NO EMAIL_TIMEOUT - Keep it simple and reliable
+
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
+JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
+NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL', 'news@mbuganiluxeadventures.com')
+
+# Django-Q Configuration for Production (Supabase PostgreSQL as broker)
+Q_CLUSTER = {
+    'name': 'mbugani_luxe_prod',
+    'workers': 3,  # More workers for production
+    'recycle': 500,
+    'timeout': 60,  # Task timeout in seconds (well under Gunicorn's 240s)
+    'compress': True,
+    'save_limit': 1000,  # Keep more task history in production
+    'queue_limit': 100,  # Higher queue limit for production
+    'cpu_affinity': 1,
+    'label': 'Django Q Production',
+    'orm': 'default',  # Use Supabase PostgreSQL as broker
+    'retry': 120,  # Retry failed tasks after 2 minutes (must be > timeout)
+    'max_attempts': 5,
+    'ack_failures': True,
+    'catch_up': False,  # Don't process old tasks on startup
+    'bulk': 10,  # Process tasks in bulk for better performance
+    'guard_cycle': 5,  # Check for new tasks every 5 seconds
+    'poll': 0.1,  # Poll interval in seconds
+}
+
 
 # Production allowed hosts
 ALLOWED_HOSTS = [
-    'novustelltravel.onrender.com',
-    'www.novustelltravel.com',
-    'novustelltravel.com',
+    'mbuganiapp.onrender.com',
+    'www.mbuganiluxeadventures.com',
+    'mbuganiluxeadventures.com',
     '.onrender.com',
     os.getenv('RENDER_EXTERNAL_HOSTNAME', ''),
 ]
@@ -80,7 +125,7 @@ LOGGING = {
         },
         'file': {
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/tmp/novustell.log',
+            'filename': '/tmp/mbugani.log',
             'maxBytes': 1024*1024*10,  # 10MB
             'backupCount': 5,
             'formatter': 'verbose',
@@ -150,7 +195,7 @@ UPLOADCARE = {
 }
 
 # Production site URL
-SITE_URL = os.getenv('SITE_URL', 'https://www.novustelltravel.com')
+SITE_URL = os.getenv('SITE_URL', 'https://www.mbuganiluxeadventures.com')
 
 # Production WhatsApp settings
 WHATSAPP_PHONE = os.getenv('WHATSAPP_PHONE', '+254701363551')
@@ -172,9 +217,9 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
 # Production CORS settings
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-    "https://novustelltravel.onrender.com",
-    "https://www.novustelltravel.com",
-    "https://novustelltravel.com",
+    "https://mbuganiapp.onrender.com",
+    "https://www.mbuganiluxeadventures.com",
+    "https://mbuganiluxeadventures.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -188,7 +233,7 @@ CSP_CONNECT_SRC = ("'self'", "https://api.uploadcare.com")
 
 # Production error reporting
 ADMINS = [
-    ('Admin', os.getenv('ADMIN_EMAIL', 'info@novustelltravel.com')),
+    ('Admin', os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')),
 ]
 MANAGERS = ADMINS
 
@@ -208,7 +253,7 @@ MIDDLEWARE = [
 ]
 
 # Production static files with WhiteNoise
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = False
 
@@ -223,10 +268,10 @@ TEMPLATES[0]['OPTIONS']['debug'] = False
 
 # Production email error reporting
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
-EMAIL_SUBJECT_PREFIX = '[Novustell Travel] '
+EMAIL_SUBJECT_PREFIX = '[Mbugani Luxe Adventures] '
 
 # Production health check
-HEALTH_CHECK_URL = '/health/'
+
 
 # Production monitoring
 SENTRY_DSN = os.getenv('SENTRY_DSN')
@@ -250,6 +295,6 @@ if SENTRY_DSN:
 
 print("🚀 Production settings loaded")
 print(f"🌐 Site URL: {SITE_URL}")
-print(f"📧 Email host: {EMAIL_HOST}")
+print(f"📧 Email: host={EMAIL_HOST} port={EMAIL_PORT} use_tls={EMAIL_USE_TLS}")
 print(f"🔒 SSL redirect: {SECURE_SSL_REDIRECT}")
 print(f"📊 Debug mode: {DEBUG}")

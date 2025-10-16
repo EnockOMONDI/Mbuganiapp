@@ -1,12 +1,12 @@
-{% extends 'users/basemain.html' %}
+{% extends 'users/basebackup.html' %}
 {% load static %}
 
-{% block title %}System Status Dashboard | Novustell Travel{% endblock %}
+{% block title %}System Status Dashboard | Mbugani Luxe Adventures{% endblock %}
 
 {% block content %}
 <style>
     :root {
-        --primary-blue: #0f238d;
+        --primary-blue: #471601;
         --accent-orange: #ff9d00;
         --light-gray: #f8f9fa;
         --text-dark: #333;
@@ -46,7 +46,7 @@
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 15px;
-        font-family: 'Fonarto', sans-serif;
+        font-family: 'TAN-Garland-Regular', sans-serif;
     }
 
     .status-subtitle {
@@ -72,7 +72,7 @@
         font-size: 1.8rem;
         font-weight: 700;
         margin-bottom: 25px;
-        font-family: 'Fonarto', sans-serif;
+        font-family: 'TAN-Garland-Regular', sans-serif;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -294,7 +294,7 @@
                 <i class="fas fa-server"></i> System Status Dashboard
             </h1>
             <p class="status-subtitle">
-                Real-time monitoring of Novustell Travel system health and database statistics
+                Real-time monitoring of Mbugani Luxe Adventures system health and database statistics
             </p>
             {% if last_updated %}
             <div class="last-updated">

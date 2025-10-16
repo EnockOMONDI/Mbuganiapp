@@ -8,14 +8,15 @@ from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from decimal import Decimal
 
-from users.models import Booking
+from users.models import Booking, QuoteRequest
 from users.checkout_views import send_booking_confirmation_email, send_welcome_email
+from users.views import send_quote_request_emails
 from adminside.models import Package, Destination
 
 
 @override_settings(
     EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend',
-    DEFAULT_FROM_EMAIL='test@novustelltravel.com'
+    DEFAULT_FROM_EMAIL='test@mbuganiluxeadventures.com'
 )
 class EmailFunctionalityTest(TestCase):
     """Test email sending functionality"""
@@ -135,7 +136,7 @@ class EmailFunctionalityTest(TestCase):
         
         email = mail.outbox[0]
         self.assertEqual(email.to, ['test@example.com'])
-        self.assertEqual(email.subject, 'Welcome to Novustell Travel')
+        self.assertEqual(email.subject, 'Welcome to Mbugani Luxe Adventures')
         
         # Check email content
         self.assertIn('Test', email.body)  # First name
@@ -144,7 +145,7 @@ class EmailFunctionalityTest(TestCase):
         
         # Check HTML content
         html_content = email.alternatives[0][0]
-        self.assertIn('Welcome to Novustell Travel', html_content)
+        self.assertIn('Welcome to Mbugani Luxe Adventures', html_content)
         self.assertIn('Test', html_content)  # First name
         self.assertIn(password, html_content)
         self.assertIn('test@example.com', html_content)
@@ -180,7 +181,7 @@ class EmailFunctionalityTest(TestCase):
         welcome_html = render_to_string('users/emails/welcome.html', welcome_context)
         
         # Check welcome email content
-        self.assertIn('Welcome to Novustell Travel', welcome_html)
+        self.assertIn('Welcome to Mbugani Luxe Adventures', welcome_html)
         self.assertIn('Test', welcome_html)  # First name
         self.assertIn('temppass123', welcome_html)
         self.assertIn('test@example.com', welcome_html)
@@ -284,7 +285,7 @@ class EmailFunctionalityTest(TestCase):
         self.assertIn('254701363551', html_content)  # Phone number
         
         # Should contain proper mailto links
-        self.assertIn('info@novustelltravel.com', html_content)
+        self.assertIn('info@mbuganiluxeadventures.com', html_content)
     
     def test_multiple_email_sending(self):
         """Test sending multiple emails in sequence"""
@@ -299,7 +300,7 @@ class EmailFunctionalityTest(TestCase):
         
         # Check email subjects
         subjects = [email.subject for email in mail.outbox]
-        self.assertIn('Welcome to Novustell Travel', subjects)
+        self.assertIn('Welcome to Mbugani Luxe Adventures', subjects)
         self.assertIn(f'Booking Confirmation - {self.booking.booking_reference}', subjects)
         
         # Check recipients
@@ -344,3 +345,492 @@ class EmailFunctionalityTest(TestCase):
         self.assertIn('José', welcome_email.alternatives[0][0])
         self.assertIn('García', welcome_email.alternatives[0][0])
         self.assertIn('océano', booking_email.alternatives[0][0])
+
+
+@override_settings(
+    EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend',
+    DEFAULT_FROM_EMAIL='test@mbuganiluxeadventures.com'
+)
+class QuoteRequestEmailTest(TestCase):
+    """Test quote request email functionality across different environments"""
+
+    def setUp(self):
+        """Set up test data"""
+        # Clear mail outbox
+        mail.outbox = []
+
+        # Create test destination and package
+        self.destination = Destination.objects.create(
+            name='Maasai Mara',
+            description='Famous wildlife reserve'
+        )
+
+        self.package = Package.objects.create(
+            name='Maasai Mara Safari',
+            description='3-day wildlife safari',
+            adult_price=1500,
+            child_price=1050,
+            duration_days=3,
+            duration_nights=2,
+            main_destination=self.destination,
+            status=Package.PUBLISHED
+        )
+
+        # Create test quote request
+        self.quote_request = QuoteRequest.objects.create(
+            full_name='John Doe',
+            email='john.doe@example.com',
+            phone_number='+254701363551',
+            destination='Maasai Mara',
+            preferred_travel_dates='2025-12-01 to 2025-12-05',
+            number_of_travelers=2,
+            special_requests='Vegetarian meals and early morning game drives',
+            package=self.package
+        )
+
+    def test_quote_request_email_sending_production_like(self):
+        """Test quote request email sending in production-like environment (console backend)"""
+        # This simulates production environment with console backend
+        with override_settings(
+            EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+        ):
+            # Send emails
+            send_quote_request_emails(self.quote_request)
+
+            # Refresh from database
+            self.quote_request.refresh_from_db()
+
+            # Should be marked as sent (console backend doesn't fail)
+            self.assertTrue(self.quote_request.confirmation_email_sent)
+            self.assertTrue(self.quote_request.admin_notification_sent)
+
+            # No emails should be in outbox (console backend doesn't store them)
+            self.assertEqual(len(mail.outbox), 0)
+
+    def test_quote_request_email_sending_development_failure_simulation(self):
+        """Test quote request email sending with SMTP failure simulation (development-like)"""
+        from unittest.mock import patch, Mock
+
+        # Mock send_mail to simulate SMTP failure
+        def mock_send_mail_fail(*args, **kwargs):
+            raise Exception("SMTP connection failed: [Errno 11001] getaddrinfo failed")
+
+        with patch('django.core.mail.send_mail', side_effect=mock_send_mail_fail):
+            # Send emails - should fail gracefully
+            send_quote_request_emails(self.quote_request)
+
+            # Refresh from database
+            self.quote_request.refresh_from_db()
+
+            # Should be marked as not sent due to SMTP failure
+            self.assertFalse(self.quote_request.confirmation_email_sent)
+            self.assertFalse(self.quote_request.admin_notification_sent)
+
+            # No emails should be in outbox due to failure
+            self.assertEqual(len(mail.outbox), 0)
+
+    def test_quote_request_email_success_with_locmem_backend(self):
+        """Test quote request email sending with successful locmem backend"""
+        # Send emails with locmem backend (should succeed)
+        send_quote_request_emails(self.quote_request)
+
+        # Refresh from database
+        self.quote_request.refresh_from_db()
+
+        # Should be marked as sent
+        self.assertTrue(self.quote_request.confirmation_email_sent)
+        self.assertTrue(self.quote_request.admin_notification_sent)
+
+
+    def test_comprehensive_error_reporting_success_case(self):
+        """Test comprehensive error reporting for successful email sending"""
+        # Send emails
+        error_report = send_quote_request_emails(self.quote_request)
+
+        # Check overall success
+        self.assertTrue(error_report['overall_success'])
+
+        # Check confirmation email status
+        self.assertTrue(error_report['confirmation_email']['sent'])
+        self.assertTrue(error_report['confirmation_email']['template_rendered'])
+        self.assertTrue(error_report['confirmation_email']['recipient_valid'])
+        self.assertIsNone(error_report['confirmation_email']['error_type'])
+
+        # Check admin email status
+        self.assertTrue(error_report['admin_email']['sent'])
+        self.assertTrue(error_report['admin_email']['template_rendered'])
+        self.assertTrue(error_report['admin_email']['recipient_valid'])
+        self.assertIsNone(error_report['admin_email']['error_type'])
+
+        # Check package data
+        self.assertTrue(error_report['package_data']['valid'])
+        self.assertEqual(error_report['package_data']['name'], 'Maasai Mara Safari')
+
+        # Check environment info
+        self.assertEqual(error_report['environment']['email_backend'], 'django.core.mail.backends.locmem.EmailBackend')
+        self.assertIsInstance(error_report['environment']['debug_mode'], bool)
+
+        # Check warnings and recommendations
+        self.assertIsInstance(error_report['warnings'], list)
+        self.assertIsInstance(error_report['recommendations'], list)
+
+    def test_comprehensive_error_reporting_ssl_failure(self):
+        """Test comprehensive error reporting for SSL certificate failures"""
+        from unittest.mock import patch
+
+        # Mock SSL error
+        def mock_send_mail_ssl_error(*args, **kwargs):
+            import ssl
+            raise ssl.SSLError("SSL certificate verification failed")
+
+        with patch('django.core.mail.send_mail', side_effect=mock_send_mail_ssl_error):
+            # Send emails
+            error_report = send_quote_request_emails(self.quote_request)
+
+            # Check overall failure
+            self.assertFalse(error_report['overall_success'])
+
+            # Check confirmation email failure
+            self.assertFalse(error_report['confirmation_email']['sent'])
+            self.assertEqual(error_report['confirmation_email']['error_type'], 'ssl_error')
+            self.assertEqual(error_report['confirmation_email']['error_message'], 'SSL/TLS certificate verification failed')
+            self.assertIn('SSL certificate verification failed', error_report['confirmation_email']['error_details'])
+
+            # Check admin email failure
+            self.assertFalse(error_report['admin_email']['sent'])
+            self.assertEqual(error_report['admin_email']['error_type'], 'ssl_error')
+
+            # Check recommendations for development
+            self.assertIn('Check EMAIL_USE_TLS setting or disable in development', error_report['recommendations'][0])
+
+    def test_comprehensive_error_reporting_authentication_failure(self):
+        """Test comprehensive error reporting for SMTP authentication failures"""
+        from unittest.mock import patch
+        import smtplib
+
+        # Mock authentication error
+        def mock_send_mail_auth_error(*args, **kwargs):
+            raise smtplib.SMTPAuthenticationError(535, b'Authentication failed')
+
+        with patch('django.core.mail.send_mail', side_effect=mock_send_mail_auth_error):
+            # Send emails
+            error_report = send_quote_request_emails(self.quote_request)
+
+            # Check overall failure
+            self.assertFalse(error_report['overall_success'])
+
+            # Check error categorization
+            self.assertEqual(error_report['confirmation_email']['error_type'], 'authentication')
+            self.assertEqual(error_report['confirmation_email']['error_message'], 'SMTP authentication failed')
+            self.assertIn('Check EMAIL_HOST_USER and EMAIL_HOST_PASSWORD', error_report['recommendations'][0])
+
+    def test_comprehensive_error_reporting_connection_failure(self):
+        """Test comprehensive error reporting for SMTP connection failures"""
+        from unittest.mock import patch
+        import smtplib
+
+        # Mock connection error
+        def mock_send_mail_conn_error(*args, **kwargs):
+            raise smtplib.SMTPConnectError(111, "Connection refused")
+
+        with patch('django.core.mail.send_mail', side_effect=mock_send_mail_conn_error):
+            # Send emails
+            error_report = send_quote_request_emails(self.quote_request)
+
+            # Check overall failure
+            self.assertFalse(error_report['overall_success'])
+
+            # Check error categorization
+            self.assertEqual(error_report['confirmation_email']['error_type'], 'connection')
+            self.assertEqual(error_report['confirmation_email']['error_message'], 'SMTP server connection failed')
+            self.assertIn('Check EMAIL_HOST and EMAIL_PORT', error_report['recommendations'][0])
+
+    def test_comprehensive_error_reporting_partial_success(self):
+        """Test comprehensive error reporting for partial email success"""
+        from unittest.mock import patch, Mock
+
+        # Mock send_mail to succeed for confirmation, fail for admin
+        call_count = 0
+        def mock_send_mail_partial(*args, **kwargs):
+            nonlocal call_count
+            call_count += 1
+            if call_count == 1:  # First call (confirmation) succeeds
+                return Mock()
+            else:  # Second call (admin) fails
+                import smtplib
+                raise smtplib.SMTPAuthenticationError(535, b'Authentication failed')
+
+        with patch('django.core.mail.send_mail', side_effect=mock_send_mail_partial):
+            # Send emails
+            error_report = send_quote_request_emails(self.quote_request)
+
+            # Check partial success
+            self.assertFalse(error_report['overall_success'])  # Overall should be false due to admin failure
+
+            # Confirmation should succeed
+            self.assertTrue(error_report['confirmation_email']['sent'])
+            self.assertIsNone(error_report['confirmation_email']['error_type'])
+
+            # Admin should fail
+            self.assertFalse(error_report['admin_email']['sent'])
+            self.assertEqual(error_report['admin_email']['error_type'], 'authentication')
+
+    def test_comprehensive_error_reporting_invalid_email(self):
+        """Test comprehensive error reporting for invalid email addresses"""
+        # Create quote request with invalid email
+        invalid_quote = QuoteRequest.objects.create(
+            full_name='Test User',
+            email='invalid-email-format',  # Invalid email
+            phone_number='+254701363551',
+            destination='Test Destination',
+            preferred_travel_dates='2025-12-01 to 2025-12-05',
+            number_of_travelers=2,
+            special_requests='Test request'
+        )
+
+        # Send emails
+        error_report = send_quote_request_emails(invalid_quote)
+
+        # Should still attempt to send (validation is separate)
+        # But recipient validation should catch it
+        self.assertFalse(error_report['confirmation_email']['recipient_valid'])
+        self.assertIn('User email address format is invalid', error_report['warnings'])
+
+    def test_comprehensive_error_reporting_package_data_validation(self):
+        """Test comprehensive error reporting for package data validation"""
+        # Create quote request with package
+        package_quote = QuoteRequest.objects.create(
+            full_name='Package Test User',
+            email='package.test@example.com',
+            phone_number='+254701363551',
+            destination='Test Destination',
+            preferred_travel_dates='2025-12-01 to 2025-12-05',
+            number_of_travelers=2,
+            special_requests='Test with package',
+            package=self.package
+        )
+
+        # Send emails
+        error_report = send_quote_request_emails(package_quote)
+
+        # Check package data is properly captured
+        self.assertTrue(error_report['package_data']['valid'])
+        self.assertEqual(error_report['package_data']['name'], 'Maasai Mara Safari')
+        self.assertEqual(error_report['package_data']['destination'], 'Maasai Mara')
+        self.assertEqual(error_report['package_data']['price_info'], '1500 KES per person')
+
+    def test_comprehensive_error_reporting_environment_info(self):
+        """Test that environment information is properly captured"""
+        # Send emails
+        error_report = send_quote_request_emails(self.quote_request)
+
+        # Check environment information
+        env = error_report['environment']
+        self.assertEqual(env['email_backend'], 'django.core.mail.backends.locmem.EmailBackend')
+        self.assertIsInstance(env['debug_mode'], bool)
+        self.assertIsNotNone(env['smtp_host'])
+        self.assertIsNotNone(env['smtp_port'])
+        self.assertIsInstance(env['tls_enabled'], bool)
+        self.assertIsNotNone(env['from_email'])
+
+    def test_comprehensive_error_reporting_production_recommendations(self):
+        """Test production-specific error recommendations"""
+        from unittest.mock import patch
+
+        # Mock error for production-like scenario
+        def mock_send_mail_prod_error(*args, **kwargs):
+            import smtplib
+            raise smtplib.SMTPConnectError(111, "Connection refused")
+
+        with patch('django.core.mail.send_mail', side_effect=mock_send_mail_prod_error):
+            with override_settings(DEBUG=False):  # Simulate production
+                # Send emails
+                error_report = send_quote_request_emails(self.quote_request)
+
+                # Check production recommendations
+                self.assertIn('Check EMAIL_HOST and EMAIL_PORT', error_report['recommendations'][0])
+
+    def test_user_friendly_error_messages_ssl_error(self):
+        """Test user-friendly error message generation for SSL errors"""
+        from users.views import generate_user_friendly_error_message
+
+        # Create error report for SSL error in development
+        error_report = {
+            'overall_success': False,
+            'confirmation_email': {'error_type': 'ssl_error'},
+            'admin_email': {'error_type': 'ssl_error'},
+            'environment': {'debug_mode': True}
+        }
+
+        messages = generate_user_friendly_error_message(error_report)
+
+        self.assertIn('SSL certificate verification', messages[0])
+        self.assertIn('normal in development', messages[0])
+
+    def test_user_friendly_error_messages_production_error(self):
+        """Test user-friendly error message generation for production errors"""
+        from users.views import generate_user_friendly_error_message
+
+        # Create error report for production error
+        error_report = {
+            'overall_success': False,
+            'confirmation_email': {'error_type': 'connection'},
+            'admin_email': {'error_type': 'connection'},
+            'environment': {'debug_mode': False}
+        }
+
+        messages = generate_user_friendly_error_message(error_report)
+
+        self.assertIn('contact us directly', messages[1])
+        # Don't check for emails in outbox since we're not actually sending emails
+
+        # Should have sent 2 emails (confirmation + admin notification)
+        self.assertEqual(len(mail.outbox), 2)
+
+        # Check confirmation email
+        confirmation_email = mail.outbox[0]
+        self.assertEqual(confirmation_email.to, ['john.doe@example.com'])
+        self.assertIn('Quote Request Received', confirmation_email.subject)
+        self.assertIn('John Doe', confirmation_email.alternatives[0][0])
+        self.assertIn('Maasai Mara', confirmation_email.alternatives[0][0])
+        self.assertIn('Vegetarian meals', confirmation_email.alternatives[0][0])
+
+        # Check admin notification email
+        admin_email = mail.outbox[1]
+        self.assertEqual(admin_email.to, ['info@mbuganiluxeadventures.com'])
+        self.assertIn('New Quote Request', admin_email.subject)
+        self.assertIn('John Doe', admin_email.alternatives[0][0])
+        self.assertIn('john.doe@example.com', admin_email.alternatives[0][0])
+        self.assertIn('Maasai Mara Safari', admin_email.alternatives[0][0])
+
+    def test_quote_request_email_partial_failure(self):
+        """Test quote request email with partial failure (one email succeeds, one fails)"""
+        # This test simulates a scenario where one email succeeds and one fails
+        # We'll mock the send_mail function to fail on the second call
+        from unittest.mock import patch, Mock
+
+        original_send_mail = mail.send_mail
+
+        def mock_send_mail(*args, **kwargs):
+            # Fail on admin notification (second call), succeed on confirmation (first call)
+            if len(mail.outbox) == 0:  # First call (confirmation)
+                return original_send_mail(*args, **kwargs)
+            else:  # Second call (admin) - simulate failure
+                raise Exception("SMTP connection failed")
+
+        with patch('django.core.mail.send_mail', side_effect=mock_send_mail):
+            # Send emails
+            send_quote_request_emails(self.quote_request)
+
+            # Refresh from database
+            self.quote_request.refresh_from_db()
+
+            # Only confirmation email should be marked as sent
+            self.assertTrue(self.quote_request.confirmation_email_sent)
+            self.assertFalse(self.quote_request.admin_notification_sent)
+
+            # Only one email should be in outbox (confirmation succeeded)
+            self.assertEqual(len(mail.outbox), 1)
+
+    def test_quote_request_email_template_rendering(self):
+        """Test quote request email template rendering"""
+        # Test confirmation email template
+        context = {'quote_request': self.quote_request}
+        html_content = render_to_string('users/emails/quote_request_confirmation.html', context)
+
+        self.assertIn('John Doe', html_content)
+        self.assertIn('john.doe@example.com', html_content)
+        self.assertIn('Maasai Mara', html_content)
+        self.assertIn('Vegetarian meals', html_content)
+        self.assertIn('24 hours', html_content)  # Response time commitment
+
+        # Test admin notification template
+        admin_html = render_to_string('users/emails/quote_request_admin.html', context)
+
+        self.assertIn('New Quote Request', admin_html)
+        self.assertIn('John Doe', admin_html)
+        self.assertIn('+254701363551', admin_html)
+        self.assertIn('Maasai Mara Safari', admin_html)
+
+    def test_quote_request_email_with_package_association(self):
+        """Test quote request email when associated with a specific package"""
+        # Send emails
+        send_quote_request_emails(self.quote_request)
+
+        # Check that package information is included in admin email
+        admin_email = mail.outbox[1]  # Second email is admin notification
+        html_content = admin_email.alternatives[0][0]
+
+        self.assertIn('Maasai Mara Safari', html_content)
+        self.assertIn('3 days / 1500 KES per person', html_content)
+
+    def test_quote_request_email_without_package(self):
+        """Test quote request email when not associated with a specific package"""
+        # Create quote request without package
+        quote_without_package = QuoteRequest.objects.create(
+            full_name='Jane Smith',
+            email='jane.smith@example.com',
+            phone_number='+254701363552',
+            destination='Amboseli National Park',
+            preferred_travel_dates='2025-11-15 to 2025-11-20',
+            number_of_travelers=4,
+            special_requests='Family-friendly activities'
+        )
+
+        # Send emails
+        send_quote_request_emails(quote_without_package)
+
+        # Check admin email doesn't reference a package
+        admin_email = mail.outbox[1]
+        html_content = admin_email.alternatives[0][0]
+
+        self.assertIn('Jane Smith', html_content)
+        self.assertIn('Amboseli National Park', html_content)
+        self.assertIn('Family-friendly activities', html_content)
+
+    def test_quote_request_email_error_logging(self):
+        """Test that email errors are properly logged"""
+        from unittest.mock import patch
+
+        # Mock send_mail to simulate failure
+        def mock_send_mail_fail(*args, **kwargs):
+            raise Exception("SMTP connection failed")
+
+        with patch('django.core.mail.send_mail', side_effect=mock_send_mail_fail):
+            with self.assertLogs('users.views', level='WARNING') as log_context:
+                # Send emails - should fail and log warnings
+                send_quote_request_emails(self.quote_request)
+
+                # Check that warnings were logged
+                self.assertTrue(any('email failed' in record.lower() for record in log_context.output))
+
+    def test_quote_request_email_environment_specific_behavior(self):
+        """Test that email behavior differs between development and production settings"""
+        from unittest.mock import patch
+
+        # Test with development-like settings (SMTP with TLS - should fail gracefully)
+        def mock_send_mail_fail(*args, **kwargs):
+            raise Exception("SSL certificate verification failed")
+
+        with patch('django.core.mail.send_mail', side_effect=mock_send_mail_fail):
+            # This should fail due to SSL/cert issues
+            send_quote_request_emails(self.quote_request)
+            self.quote_request.refresh_from_db()
+
+            # Should be marked as not sent
+            self.assertFalse(self.quote_request.confirmation_email_sent)
+            self.assertFalse(self.quote_request.admin_notification_sent)
+
+        # Reset email flags
+        self.quote_request.confirmation_email_sent = False
+        self.quote_request.admin_notification_sent = False
+        self.quote_request.save()
+
+        # Test with production-like settings (console backend - should succeed)
+        # Remove the mock to use the default locmem backend
+        send_quote_request_emails(self.quote_request)
+        self.quote_request.refresh_from_db()
+
+        # Should be marked as sent
+        self.assertTrue(self.quote_request.confirmation_email_sent)
+        self.assertTrue(self.quote_request.admin_notification_sent)

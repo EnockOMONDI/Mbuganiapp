@@ -1,8 +1,8 @@
-/* CKEditor Admin Interface Styling for Novustell Travel - Default Django Admin */
+/* CKEditor Admin Interface Styling for Mbugani Luxe Adventures - Default Django Admin */
 
 /* CKEditor toolbar styling for default admin */
 .cke_toolbar {
-    background: linear-gradient(135deg, #0f238d 0%, #1a3a9e 100%) !important;
+    background: linear-gradient(135deg, #291c1b 0%, #1a3a9e 100%) !important;
     border: 1px solid #ddd !important;
     border-radius: 4px 4px 0 0 !important;
     padding: 8px !important;
@@ -55,7 +55,7 @@
 }
 
 .cke_top {
-    background: #0f238d !important;
+    background: #291c1b !important;
     border-bottom: 2px solid #ff9d00 !important;
 }
 
@@ -82,7 +82,7 @@
 
 /* CKEditor dropdown menus */
 .cke_panel {
-    border: 2px solid #0f238d !important;
+    border: 2px solid #291c1b !important;
     border-radius: 8px !important;
     box-shadow: 0 8px 25px rgba(15, 35, 141, 0.3) !important;
 }
@@ -114,18 +114,18 @@
 }
 
 .cke_combo_button:hover .cke_combo_arrow {
-    border-top-color: #0f238d !important;
+    border-top-color: #291c1b !important;
 }
 
 /* CKEditor dialog styling */
 .cke_dialog {
-    border: 2px solid #0f238d !important;
+    border: 2px solid #291c1b !important;
     border-radius: 12px !important;
     box-shadow: 0 15px 40px rgba(15, 35, 141, 0.4) !important;
 }
 
 .cke_dialog_title {
-    background: linear-gradient(135deg, #0f238d 0%, #1a3a9e 100%) !important;
+    background: linear-gradient(135deg, #291c1b 0%, #1a3a9e 100%) !important;
     color: white !important;
     font-weight: 700 !important;
     padding: 15px 20px !important;
@@ -139,7 +139,7 @@
 }
 
 .cke_dialog_ui_button {
-    background: #0f238d !important;
+    background: #291c1b !important;
     border: none !important;
     color: white !important;
     padding: 8px 16px !important;
@@ -170,7 +170,7 @@
 }
 
 .cke_path_item {
-    color: #0f238d !important;
+    color: #291c1b !important;
     font-weight: 600 !important;
 }
 
@@ -191,7 +191,7 @@
 
 /* CKEditor maximized mode */
 .cke_maximized .cke_top {
-    background: linear-gradient(135deg, #0f238d 0%, #1a3a9e 100%) !important;
+    background: linear-gradient(135deg, #291c1b 0%, #1a3a9e 100%) !important;
 }
 
 /* Custom styles for Django admin integration */
@@ -200,7 +200,7 @@
 }
 
 .form-row label {
-    color: #0f238d !important;
+    color: #291c1b !important;
     font-weight: 600 !important;
 }
 
@@ -249,7 +249,7 @@
 
 /* Loading animation */
 .cke_loading {
-    background: linear-gradient(90deg, #0f238d, #ff9d00, #0f238d) !important;
+    background: linear-gradient(90deg, #291c1b, #ff9d00, #291c1b) !important;
     background-size: 200% 100% !important;
     animation: loading 2s infinite !important;
 }
@@ -298,6 +298,6 @@
 
 /* Focus states for better UX */
 .cke:focus-within {
-    border-color: #0f238d !important;
+    border-color: #291c1b !important;
     box-shadow: 0 0 0 2px rgba(15, 35, 141, 0.2) !important;
 }

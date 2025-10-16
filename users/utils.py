@@ -15,38 +15,26 @@ generate_token=TokenGenerator()
 
 def send_booking_confirmation_email(booking):
     """
-    Send booking confirmation email
+    Queue booking confirmation email for asynchronous processing
     """
+    import logging
+    logger = logging.getLogger(__name__)
+
     try:
-        # Email subject
-        subject = f'Web Booking - Booking ID {booking.id}'
+        from django_q.tasks import async_task
 
-        # Prepare email context
-        email_context = {
-            'booking_id': booking.id,
-            'full_name': booking.full_name,
-            'package_name': booking.package.package_name,
-            'number_of_adults': booking.number_of_adults,
-            'number_of_children': booking.number_of_children or 0,
-            'number_of_rooms': booking.number_of_rooms,
-            'total_amount': booking.total_amount,
-            'include_travelling': 'Yes' if booking.include_travelling else 'No',
-        }
-
-        # Render email body from a template
-        email_body = render_to_string('users/booking_confirmation.html', email_context)
-
-        # Send email using Django's send_mail function
-        send_mail(
-            subject,
-            email_body,
-            settings.DEFAULT_FROM_EMAIL,
-            ['info@novustelltravel.com'],  # Recipient email
-            html_message=email_body,  # Optional: HTML email
-            fail_silently=False,
+        # Queue the email task for background processing
+        task_id = async_task(
+            'users.tasks.send_booking_confirmation_email_async',
+            booking.id,
+            task_name=f'booking_emails_{booking.id}',
+            timeout=60,
+            retry=5,
         )
+
+        logger.info(f"Booking confirmation email queued: task_id={task_id}, booking_id={booking.id}")
         return True
+
     except Exception as e:
-        # Log the error or handle it as needed
-        print(f"Email sending failed: {e}")
+        logger.error(f"Failed to queue booking confirmation email for {booking.id}: {e}")
         return False

@@ -8,7 +8,8 @@ from .models import (
     Package,
     Itinerary,
     ItineraryDay,
-    PackageBooking
+    PackageBooking,
+    HeroSlider
 )
 # CKEditor5Field automatically handles CKEditor 5 widgets based on config_name
 # No need for explicit widget overrides
@@ -315,7 +316,80 @@ class PackageBookingAdmin(admin.ModelAdmin):
         }),
     )
 
+class HeroSliderAdminForm(forms.ModelForm):
+    """Custom form for HeroSlider with multiple image scaling options"""
+
+    SCALING_CHOICES = [
+        ('16:9', '16:9 Aspect Ratio (Standard)'),
+        ('2048x1080', '2048x1080 Resolution (Optimized)'),
+        ('', 'Free Form (No Cropping)'),
+    ]
+
+    image_scaling = forms.ChoiceField(
+        choices=SCALING_CHOICES,
+        initial='2048x1080',
+        required=False,
+        help_text="Choose image scaling option: 16:9 for standard aspect ratio, 2048x1080 for optimized resolution, or Free Form for no cropping constraints"
+    )
+
+    class Meta:
+        model = HeroSlider
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set the manual_crop based on the selected scaling option
+        if 'image_scaling' in self.data:
+            scaling = self.data['image_scaling']
+            if scaling:
+                self.fields['image'].widget.attrs['data-manual-crop'] = scaling
+
+@admin.register(HeroSlider)
+class HeroSliderAdmin(admin.ModelAdmin):
+    form = HeroSliderAdminForm
+    list_display = ('display_image_thumbnail', 'title', 'subtitle', 'is_active', 'order', 'created_at')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('title', 'subtitle', 'cta_text')
+    list_editable = ('is_active', 'order')
+    ordering = ('order', '-created_at')
+
+    fieldsets = (
+        ('Slide Content', {
+            'fields': ('title', 'subtitle')
+        }),
+        ('Image Settings', {
+            'fields': ('image_scaling', 'image'),
+            'description': 'Choose your preferred image scaling option before uploading the image'
+        }),
+        ('Call to Action', {
+            'fields': ('cta_text', 'cta_url'),
+            'classes': ('collapse',)
+        }),
+        ('Display Settings', {
+            'fields': ('is_active', 'order')
+        }),
+    )
+
+    def display_image_thumbnail(self, obj):
+        """Display image thumbnail in admin list"""
+        if obj.image:
+            return format_html(
+                '<img src="{}" style="width: 100px; height: 60px; object-fit: cover; border-radius: 4px;" />',
+                obj.image.cdn_url
+            )
+        return format_html(
+            '<div style="width: 100px; height: 60px; background: #f0f0f0; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">No Image</div>'
+        )
+    display_image_thumbnail.short_description = 'Image'
+    display_image_thumbnail.allow_tags = True
+
+    class Media:
+        css = {
+            'all': ('assets/css/unfold-custom.css',)
+        }
+        js = ('assets/js/unfold-custom.js',)
+
 # Customize admin site header and title
-admin.site.site_header = 'Novustell Travel Administration'
-admin.site.site_title = 'Novustell Travel Admin Portal'
-admin.site.index_title = 'Welcome to Novustell Travel Admin Portal'
+admin.site.site_header = 'Mbugani Luxe Adventures Administration'
+admin.site.site_title = 'Mbugani Luxe Adventures Admin Portal'
+admin.site.index_title = 'Welcome to Mbugani Luxe Adventures Admin Portal'

@@ -1,5 +1,5 @@
 """
-Modern checkout views for Novustell Travel
+Modern checkout views for Mbugani Luxe Adventures
 """
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -334,7 +334,7 @@ def booking_confirmation(request, booking_reference):
     
     # Generate WhatsApp link
     whatsapp_message = f"Booking made for {booking.package.name} - Reference: {booking.booking_reference}"
-    whatsapp_link = f"https://api.whatsapp.com/send?phone=254701363551&text={whatsapp_message}"
+    whatsapp_link = f"https://api.whatsapp.com/send?phone=254798197430&text={whatsapp_message}"
     
     context = {
         'booking': booking,
@@ -479,10 +479,10 @@ def send_booking_confirmation_email(booking, is_new_user=False):
         # URL encode the WhatsApp message
         from urllib.parse import quote
         whatsapp_message = f"Booking made for {booking.package.name} - Reference: {booking.booking_reference}"
-        whatsapp_link = f"https://api.whatsapp.com/send?phone=254701363551&text={quote(whatsapp_message)}"
+        whatsapp_link = f"https://api.whatsapp.com/send?phone=254798197430&text={quote(whatsapp_message)}"
 
         # Generate dashboard URL
-        dashboard_url = f"{getattr(settings, 'SITE_URL', 'https://novustelltravel.com')}/profile/"
+        dashboard_url = f"{getattr(settings, 'SITE_URL', 'https://mbuganiluxeadventures.com')}/profile/"
 
         html_message = render_to_string('users/emails/booking_confirmation.html', {
             'booking': booking,
@@ -537,7 +537,7 @@ def send_welcome_email(user, password):
     """
     Send welcome email to new user with login credentials
     """
-    subject = 'Welcome to Novustell Travel'
+    subject = 'Welcome to Mbugani Luxe Adventures'
     
     html_message = render_to_string('users/emails/welcome.html', {
         'user': user,

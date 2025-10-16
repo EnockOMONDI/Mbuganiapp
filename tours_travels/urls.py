@@ -5,6 +5,7 @@ from . import views as tours_travels_views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 from .health_check import (
     health_check, health_detailed, readiness_check,
     liveness_check, metrics, csp_report, version_info
@@ -27,6 +28,12 @@ urlpatterns = [
     path('metrics/', metrics, name='metrics'),
     path('csp-report/', csp_report, name='csp_report'),
     path('version/', version_info, name='version_info'),
+
+    # Favicon handling
+    path('favicon.ico', RedirectView.as_view(url='/static/assets/images/favicon_io/favicon.ico', permanent=True)),
+
+    # Font testing (development only)
+    path('font-test/', tours_travels_views.font_test, name='font_test'),
 
     #path('',tours_travels_views.home,name = 'home'),
 

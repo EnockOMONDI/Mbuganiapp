@@ -19,6 +19,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Environment-based settings loading
+DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
+
+print(f"🌍 Environment: {DJANGO_ENV}")
+
+# Continue with base settings first, then override with environment-specific settings
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -58,6 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_ckeditor_5',  # CKEditor 5 for modern rich text editing
     'import_export',
+    'django_q',  # Django-Q for background tasks
     'adminside',
     'users',
     'blog',
@@ -140,13 +148,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Africa/Nairobi'
+TIME_ZONE = os.getenv('TIME_ZONE', 'Africa/Nairobi')
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = False
+
+# Business Configuration with fallbacks
+DEFAULT_COUNTRY = os.getenv('DEFAULT_COUNTRY', 'Kenya')
+DEFAULT_CURRENCY = os.getenv('DEFAULT_CURRENCY', 'USD')
+DEFAULT_BOOKING_EXPIRY_HOURS = int(os.getenv('DEFAULT_BOOKING_EXPIRY_HOURS', '24'))
+MAX_BOOKING_ADULTS = int(os.getenv('MAX_BOOKING_ADULTS', '20'))
+MAX_BOOKING_CHILDREN = int(os.getenv('MAX_BOOKING_CHILDREN', '15'))
+MAX_BOOKING_ROOMS = int(os.getenv('MAX_BOOKING_ROOMS', '10'))
 
 
 # Static files (CSS, JavaScript, Images)
@@ -185,19 +201,19 @@ UPLOADCARE = {
 # Default Image Configuration
 DEFAULT_IMAGES = {
     # Primary default image for most content types
-    'DEFAULT': 'assets/images/logo/defaultimagenovustell.png',
+    'DEFAULT': 'assets/images/logo/websitelogo.png',
 
-    # Category-specific default images
-    'DESTINATIONS': 'assets/images/logo/defaultimagenovustell.png',
-    'ACCOMMODATIONS': 'assets/images/logo/defaultimagenovustell.png',
-    'PACKAGES': 'assets/images/logo/defaultimagenovustell.png',
-    'BLOG_POSTS': 'assets/images/logo/defaultimagenovustell.png',
+    # Category-specific default images - Updated for Mbugani Luxe Adventures
+    'DESTINATIONS': 'assets/images/about/about-1.png',
+    'ACCOMMODATIONS': 'assets/images/about/accomodationdefault.png',
+    'PACKAGES': 'assets/images/hero/2.png',
+    'BLOG_POSTS': 'assets/images/about/about-2.jpg',
 
     # Keep existing job thumbnail (do not change)
     'JOB_LISTINGS': 'images/jobsthumbnail.png',
 
     # Legacy placeholder (maintain for backward compatibility)
-    'PLACEHOLDER_SVG': 'images/novustelltravelplaceholder.svg',
+    'PLACEHOLDER_SVG': 'images/mbuganiluxeadventuresplaceholder.svg',
 
     # Fallback images for specific use cases
     'HERO_BACKGROUND': 'assets/images/place/place-1.jpg',
@@ -210,25 +226,44 @@ TEMPLATE_DIRS = (
 )
 
 
-# Email settings for Novustell Travel
+# Email settings for Mbugani Luxe Adventures
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-# Novustell Travel email credentials
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'novustellke@gmail.com')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'iagt yans hoyd pavg')
-DEFAULT_FROM_EMAIL = 'NOVUSTELL TRAVEL'
+# Mbugani Luxe Adventures email credentials
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'mbuganiluxeadventures@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'ewxdvlrxgphzjrdf')
+DEFAULT_FROM_EMAIL = 'MBUGANI LUXE ADVENTURES'
 
 # Admin email for notifications
-ADMIN_EMAIL = 'info@novustelltravel.com'
+ADMIN_EMAIL = 'info@mbuganiluxeadventures.com'
 
 # Jobs email for career applications
-JOBS_EMAIL = 'careers@novustelltravel.com'
+JOBS_EMAIL = 'careers@mbuganiluxeadventures.com'
 
 # Newsletter email for subscriptions
-NEWSLETTER_EMAIL = 'news@novustelltravel.com'
+NEWSLETTER_EMAIL = 'news@mbuganiluxeadventures.com'
+
+# Django-Q Configuration (Base settings)
+Q_CLUSTER = {
+    'name': 'mbugani_luxe',
+    'workers': 2,
+    'recycle': 500,
+    'timeout': 60,  # Task timeout in seconds (well under Gunicorn's 240s)
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 50,
+    'cpu_affinity': 1,
+    'label': 'Django Q',
+    'redis': None,  # Will be overridden in environment-specific settings
+    'orm': 'default',  # Use Django ORM as fallback broker
+    'retry': 120,  # Retry failed tasks after 2 minutes (must be > timeout)
+    'max_attempts': 5,
+    'ack_failures': True,
+    'catch_up': False,  # Don't process old tasks on startup
+}
 
 # Cart session configuration
 CART_SESSION_ID = 'cart'
@@ -238,8 +273,8 @@ from django.templatetags.static import static
 from django.urls import reverse_lazy
 
 UNFOLD = {
-    "SITE_TITLE": "Novustell Travel Admin",
-    "SITE_HEADER": "Novustell Travel Administration",
+    "SITE_TITLE": "Mbugani Luxe Adventures Admin",
+    "SITE_HEADER": "Mbugani Luxe Adventures Administration",
     "SITE_URL": "/",
     "SITE_ICON": lambda request: static("assets/images/favicon_io/favicon-32x32.png"),
     "SITE_LOGO": lambda request: static("assets/images/logo/websitelogo.png"),
@@ -265,7 +300,7 @@ UNFOLD = {
             "200": "233 213 255",
             "300": "196 181 253",
             "400": "147 51 234",
-            "500": "15 35 141",  # Novustell primary blue
+            "500": "15 35 141",  # Mbugani primary blue
             "600": "12 28 113",
             "700": "10 23 94",
             "800": "8 18 75",
@@ -370,12 +405,12 @@ customColorPalette = [
         'label': 'Blue'
     },
     {
-        'color': '#0f238d',  # Novustell primary color
-        'label': 'Novustell Primary'
+        'color': '#291c1b',  # Mbugani primary color - burgundy
+        'label': 'Mbugani Primary'
     },
     {
-        'color': '#ff9d00',  # Novustell accent color
-        'label': 'Novustell Accent'
+        'color': '#fb9300',  # Mbugani accent color - orange
+        'label': 'Mbugani Accent'
     },
 ]
 
@@ -450,3 +485,23 @@ def dashboard_callback(request, context):
     """Return dashboard data for Unfold admin"""
     return context
 
+
+# Import environment-specific settings to override base settings
+if DJANGO_ENV == 'production':
+    print("🚀 Loading production settings...")
+    try:
+        from .settings_prod import *
+        print("✅ Production settings loaded successfully")
+    except ImportError as e:
+        print(f"❌ Failed to load production settings: {e}")
+        print("🔄 Using base settings...")
+elif DJANGO_ENV == 'development':
+    print("🔧 Loading development settings...")
+    try:
+        from .settings_dev import *
+        print("✅ Development settings loaded successfully")
+    except ImportError as e:
+        print(f"❌ Failed to load development settings: {e}")
+        print("🔄 Using base settings...")
+else:
+    print(f"⚠️  Unknown environment '{DJANGO_ENV}', using base settings...")

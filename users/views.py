@@ -39,7 +39,8 @@ from .forms import UserRegisterForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .utils import send_booking_confirmation_email
-from .forms import MICEInquiryForm, StudentTravelInquiryForm, NGOTravelInquiryForm, JobApplicationForm, NewsletterSubscriptionSimpleForm
+from .forms import MICEInquiryForm, StudentTravelInquiryForm, NGOTravelInquiryForm, JobApplicationForm, NewsletterSubscriptionSimpleForm, QuoteRequestForm
+from .models import QuoteRequest
 from django.contrib.auth.models import User
 from blog.models import Post, Category
 from adminside.models import Destination, Package, Accommodation
@@ -127,15 +128,15 @@ def micepage(request):
                 msg = MIMEMultipart()
 
                 # Email headers
-                msg['From'] = f"Novustell Travel <{sender_email}>"
-                msg['To'] = "info@novustelltravel.com"
+                msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
+                msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New MICE Inquiry from {inquiry.company_name}"
 
                 # Create HTML content with better formatting
                 html_content = f"""
                 <html>
                 <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-                    <h2 style="color: #0f238d;">New MICE Inquiry</h2>
+                    <h2 style="color: #291c1b;">New MICE Inquiry</h2>
                     <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
                         <p><strong>Company Name:</strong> {inquiry.company_name}</p>
                         <p><strong>Contact Person:</strong> {inquiry.contact_person}</p>
@@ -143,11 +144,11 @@ def micepage(request):
                         <p><strong>Phone:</strong> {inquiry.phone_number}</p>
                         <p><strong>Event Type:</strong> {inquiry.event_type}</p>
                         <p><strong>Expected Attendees:</strong> {inquiry.attendees}</p>
-                        <h3 style="color: #0f238d;">Event Details:</h3>
+                        <h3 style="color: #291c1b;">Event Details:</h3>
                         <p style="white-space: pre-wrap;">{inquiry.event_details}</p>
                     </div>
                     <p style="color: #666; font-size: 12px; margin-top: 20px;">
-                        This inquiry was submitted through the MICE form on Novustell Travel website.
+                        This inquiry was submitted through the MICE form on Mbugani Luxe Adventures website.
                     </p>
                 </body>
                 </html>
@@ -191,15 +192,15 @@ def student_travel(request):
                 msg = MIMEMultipart()
 
                 # Email headers
-                msg['From'] = f"Novustell Travel <{sender_email}>"
-                msg['To'] = "info@novustelltravel.com"
+                msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
+                msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New Student Travel Inquiry from {inquiry.school_name}"
 
                 # Create HTML content with better formatting
                 html_content = f"""
                 <html>
                 <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-                    <h2 style="color: #0f238d;">New Student Travel Inquiry</h2>
+                    <h2 style="color: #291c1b;">New Student Travel Inquiry</h2>
                     <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
                         <p><strong>School Name:</strong> {inquiry.school_name}</p>
                         <p><strong>Contact Person:</strong> {inquiry.contact_person}</p>
@@ -207,11 +208,11 @@ def student_travel(request):
                         <p><strong>Phone:</strong> {inquiry.phone_number}</p>
                         <p><strong>Program Stage:</strong> {inquiry.program_stage}</p>
                         <p><strong>Number of Students:</strong> {inquiry.number_of_students}</p>
-                        <h3 style="color: #0f238d;">Travel Details:</h3>
+                        <h3 style="color: #291c1b;">Travel Details:</h3>
                         <p style="white-space: pre-wrap;">{inquiry.travel_details}</p>
                     </div>
                     <p style="color: #666; font-size: 12px; margin-top: 20px;">
-                        This inquiry was submitted through the Student Travel form on Novustell Travel website.
+                        This inquiry was submitted through the Student Travel form on Mbugani Luxe Adventures website.
                     </p>
                 </body>
                 </html>
@@ -255,15 +256,15 @@ def ngo_travel(request):
                 msg = MIMEMultipart()
 
                 # Email headers
-                msg['From'] = f"Novustell Travel <{sender_email}>"
-                msg['To'] = "info@novustelltravel.com"
+                msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
+                msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New NGO Travel Inquiry from {inquiry.organization_name}"
 
                 # Create HTML content with better formatting
                 html_content = f"""
                 <html>
                 <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-                    <h2 style="color: #0f238d;">New NGO Travel Inquiry</h2>
+                    <h2 style="color: #291c1b;">New NGO Travel Inquiry</h2>
                     <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
                         <p><strong>Organization Name:</strong> {inquiry.organization_name}</p>
                         <p><strong>Contact Person:</strong> {inquiry.contact_person}</p>
@@ -273,11 +274,11 @@ def ngo_travel(request):
                         <p><strong>Travel Purpose:</strong> {inquiry.travel_purpose}</p>
                         <p><strong>Number of Travelers:</strong> {inquiry.number_of_travelers}</p>
                         <p><strong>Sustainability Requirements:</strong> {'Yes' if inquiry.sustainability_requirements else 'No'}</p>
-                        <h3 style="color: #0f238d;">Travel Details:</h3>
+                        <h3 style="color: #291c1b;">Travel Details:</h3>
                         <p style="white-space: pre-wrap;">{inquiry.travel_details}</p>
                     </div>
                     <p style="color: #666; font-size: 12px; margin-top: 20px;">
-                        This inquiry was submitted through the NGO Travel form on Novustell Travel website.
+                        This inquiry was submitted through the NGO Travel form on Mbugani Luxe Adventures website.
                     </p>
                 </body>
                 </html>
@@ -313,97 +314,56 @@ def contactus(request):
 
 def send_job_application_emails(job_application):
     """
-    Send email notifications for job applications
+    Queue job application emails for asynchronous processing
     """
-    from django.core.mail import send_mail
-    from django.template.loader import render_to_string
-    from django.conf import settings
+    import logging
+    logger = logging.getLogger(__name__)
 
-    # Email to admin (send to both careers and info email addresses)
-    admin_subject = f'New Job Application - {job_application.get_position_display()}'
-    admin_message = render_to_string('users/emails/job_application_admin.html', {
-        'application': job_application
-    })
+    try:
+        from django_q.tasks import async_task
 
-    # Send to both careers and info email addresses
-    careers_email = getattr(settings, 'JOBS_EMAIL', 'careers@novustelltravel.com')
-    info_email = getattr(settings, 'ADMIN_EMAIL', 'info@novustelltravel.com')
-    recipient_list = [careers_email, info_email]
+        # Queue the email task for background processing
+        task_id = async_task(
+            'users.tasks.send_job_application_emails_async',
+            job_application.id,
+            task_name=f'job_emails_{job_application.id}',
+            timeout=60,
+            retry=5,
+        )
 
-    send_mail(
-        subject=admin_subject,
-        message='',  # Plain text version
-        html_message=admin_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=recipient_list,
-        fail_silently=False,
-    )
+        logger.info(f"Job application emails queued: task_id={task_id}, application_id={job_application.id}")
+        return True
 
-    # Email to applicant
-    applicant_subject = f'Application Received - {job_application.get_position_display()}'
-    applicant_message = render_to_string('users/emails/job_application_confirmation.html', {
-        'application': job_application
-    })
-
-    send_mail(
-        subject=applicant_subject,
-        message='',  # Plain text version
-        html_message=applicant_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[job_application.email],
-        fail_silently=False,
-    )
-
-    # Update email tracking
-    job_application.admin_notification_sent = True
-    job_application.applicant_confirmation_sent = True
-    job_application.save()
+    except Exception as e:
+        logger.error(f"Failed to queue job application emails for {job_application.id}: {e}")
+        return False
 
 
 def send_newsletter_subscription_emails(subscription):
     """
-    Send email notifications for newsletter subscriptions
+    Queue newsletter subscription emails for asynchronous processing
     """
-    from django.core.mail import send_mail
-    from django.template.loader import render_to_string
-    from django.conf import settings
+    import logging
+    logger = logging.getLogger(__name__)
 
-    # Email to admin
-    admin_subject = f'New Newsletter Subscription - {subscription.email}'
-    admin_message = render_to_string('users/emails/newsletter_admin.html', {
-        'subscription': subscription
-    })
+    try:
+        from django_q.tasks import async_task
 
-    newsletter_email = getattr(settings, 'NEWSLETTER_EMAIL', 'news@novustelltravel.com')
+        # Queue the email task for background processing
+        task_id = async_task(
+            'users.tasks.send_newsletter_subscription_emails_async',
+            subscription.id,
+            task_name=f'newsletter_emails_{subscription.id}',
+            timeout=60,
+            retry=5,
+        )
 
-    send_mail(
-        subject=admin_subject,
-        message='',  # Plain text version
-        html_message=admin_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[newsletter_email],
-        fail_silently=False,
-    )
+        logger.info(f"Newsletter subscription emails queued: task_id={task_id}, subscription_id={subscription.id}")
+        return True
 
-    # Email to subscriber
-    subscriber_subject = 'Welcome to Novustell Travel Newsletter!'
-    subscriber_message = render_to_string('users/emails/newsletter_confirmation.html', {
-        'subscription': subscription
-    })
-
-    send_mail(
-        subject=subscriber_subject,
-        message='',  # Plain text version
-        html_message=subscriber_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[subscription.email],
-        fail_silently=False,
-    )
-
-    # Update email tracking
-    subscription.admin_notification_sent = True
-    subscription.confirmation_email_sent = True
-    subscription.save()
+    except Exception as e:
+        logger.error(f"Failed to queue newsletter subscription emails for {subscription.id}: {e}")
+        return False
 
 
 def careers(request):
@@ -585,7 +545,11 @@ def home(request):
     Fully optimized homepage view with efficient database queries, caching, and featured accommodations
     """
     from django.core.cache import cache
-    from adminside.models import Accommodation
+    from adminside.models import Accommodation, HeroSlider
+    import logging
+
+    logger = logging.getLogger(__name__)
+    logger.debug("Starting home view")
 
     try:
         # Get featured destinations with optimized query (limit to 8 for performance)
@@ -646,6 +610,9 @@ def home(request):
             except Exception as e:
                 continue
 
+        # Get active hero slider images
+        hero_slides = HeroSlider.get_active_slides()
+
         # Create optimized context
         context = {
             'featured_destinations': featured_destinations,
@@ -655,26 +622,31 @@ def home(request):
             'packages': package_data,  # For backward compatibility with template
             'dests1': all_destinations,  # For backward compatibility
             'package1': packages_queryset,  # For backward compatibility
+            'hero_slides': hero_slides,  # Dynamic hero slider data
         }
 
-        return render(request, 'users/index.html', context)
+        return render(request, 'users/indexbackup.html', context)
 
     except Exception as e:
+        logger.error(f"Error in home view main try block: {e}")
         # Fallback to basic context to prevent complete failure
         try:
             basic_context = {
-                'featured_destinations': Destination.objects.filter(is_featured=True, is_active=True)[:4],
+                'featured_destinations': [],
                 'featured_accommodations': [],
-                'all_destinations': Destination.objects.filter(is_active=True)[:20],
+                'all_destinations': [],
                 'package_data': [],
                 'packages': [],
                 'dests1': [],
                 'package1': [],
+                'hero_slides': [],  # Empty hero slides for fallback
             }
-            return render(request, 'users/index.html', basic_context)
-        except:
+            logger.debug("Using basic context fallback")
+            return render(request, 'users/indexbackup.html', basic_context)
+        except Exception as e2:
+            logger.error(f"Error in home view fallback: {e2}")
             from django.http import HttpResponse
-            return HttpResponse("Homepage temporarily unavailable. Please try again later.", status=503)
+            return HttpResponse(f"Homepage temporarily unavailable. Error: {e2}", status=503)
 
 
 
@@ -789,8 +761,8 @@ def send_booking_email(booking):
 
         # Email content
         msg = MIMEMultipart()
-        msg['From'] = f"Novustell Travel <{sender_email}>"
-        msg['To'] = "info@novustelltravel.com"
+        msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
+        msg['To'] = "info@mbuganiluxeadventures.com"
         msg['Subject'] = f"New Booking: {booking.full_name} for {booking.package.name}"
 
         message = f"""
@@ -845,7 +817,7 @@ class ActivateAccountView(View):
 
 def documentation(request):
     """
-    Documentation page for Novustell Travel Django project
+    Documentation page for Mbugani Luxe Adventures Django project
     """
     # Get project statistics for the documentation
     stats = {
@@ -869,7 +841,7 @@ def documentation(request):
         'recent_posts': recent_posts,
         'recent_packages': recent_packages,
         'page_title': 'Project Documentation',
-        'page_description': 'Comprehensive documentation for the Novustell Travel Django project including architecture, user guides, and technical specifications.',
+        'page_description': 'Comprehensive documentation for the Mbugani Luxe Adventures Django project including architecture, user guides, and technical specifications.',
     }
 
     return render(request, 'users/documentation.html', context)
@@ -1186,6 +1158,195 @@ def booking_detail(request, booking_reference):
     }
 
     return render(request, 'users/booking_detail.html', context)
+
+
+def generate_user_friendly_error_message(error_report):
+    """
+    Generate user-friendly error messages based on error report
+    """
+    messages = []
+
+    # Check for SSL/TLS issues in development
+    if (error_report['environment']['debug_mode'] and
+        (error_report['confirmation_email'].get('error_type') == 'ssl_error' or
+         error_report['admin_email'].get('error_type') == 'ssl_error')):
+        messages.append("Email notifications couldn't be sent due to SSL certificate verification. This is normal in development - your quote request has been saved and our team will contact you.")
+
+    # Check for authentication issues
+    elif (error_report['confirmation_email'].get('error_type') == 'authentication' or
+          error_report['admin_email'].get('error_type') == 'authentication'):
+        messages.append("Email service temporarily unavailable due to authentication issues. Your quote request has been saved and our team will contact you.")
+
+    # Check for connection issues
+    elif (error_report['confirmation_email'].get('error_type') == 'connection' or
+          error_report['admin_email'].get('error_type') == 'connection'):
+        messages.append("Email service temporarily unavailable. Your quote request has been saved and our team will contact you.")
+
+    # Generic fallback
+    else:
+        messages.append("Your quote request has been submitted successfully! We will contact you within 24 hours with a personalized quote.")
+
+    # Add specific recommendations for production issues
+    if not error_report['environment']['debug_mode'] and not error_report['overall_success']:
+        messages.append("Please contact us directly at info@mbuganiluxeadventures.com if you don't receive a confirmation email.")
+
+    return messages
+
+
+def quote_request_view(request):
+    """
+    Handle quote request form submission and display with comprehensive error reporting
+    """
+    import logging
+    logger = logging.getLogger(__name__)
+
+    # Check if package_id is provided in URL parameters
+    package_id = request.GET.get('package_id')
+    package = None
+    if package_id:
+        try:
+            package = Package.objects.get(id=package_id, status=Package.PUBLISHED)
+            logger.info(f"Quote request for package: {package.name} (ID: {package.id})")
+        except Package.DoesNotExist:
+            logger.warning(f"Invalid package ID provided: {package_id}")
+            messages.warning(request, "The selected package is no longer available. You can still submit a general quote request.")
+
+    if request.method == 'POST':
+        form = QuoteRequestForm(request.POST)
+        if form.is_valid():
+            try:
+                # Create quote request
+                quote_request = form.save()
+                logger.info(f"Quote request created: ID {quote_request.id} for {quote_request.full_name}")
+
+                # Associate with package if provided
+                if package:
+                    quote_request.package = package
+                    quote_request.save()
+                    logger.info(f"Quote request {quote_request.id} associated with package {package.name}")
+
+                # Send email notifications asynchronously using Django-Q
+                # This prevents worker timeouts by processing emails in background
+                try:
+                    from django_q.tasks import async_task
+
+                    # Queue the email task for background processing
+                    task_id = async_task(
+                        'users.tasks.send_quote_request_emails_async',
+                        quote_request.id,
+                        task_name=f'quote_emails_{quote_request.id}',
+                        timeout=60,  # Task timeout (well under worker timeout)
+                        retry=5,  # Retry up to 5 times on failure
+                    )
+
+                    logger.info(f"Quote request emails queued for background processing: task_id={task_id}, quote_id={quote_request.id}")
+
+                except Exception as email_error:
+                    logger.error(f"Failed to queue email task for quote {quote_request.id}: {email_error}")
+                    # Don't fail the entire request if email queueing fails - user still gets confirmation
+
+                # Show success message - simple pattern like Novustell
+                messages.success(request, "Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.")
+                logger.info(f"Quote request {quote_request.id} submitted successfully")
+
+                # Redirect to success page
+                return redirect('users:quote_success')
+
+            except Exception as e:
+                # Handle unexpected errors during quote request processing
+                logger.error(f"Unexpected error processing quote request: {e}")
+                messages.error(request, "There was an unexpected error processing your request. Please try again or contact us directly.")
+                # Don't redirect, show form again
+
+        else:
+            logger.warning(f"Quote request form validation failed: {form.errors}")
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        # Pre-populate form if package is specified
+        initial_data = {}
+        if package:
+            initial_data['destination'] = package.main_destination.name if package.main_destination else ''
+            logger.info(f"Pre-populating quote form with destination: {initial_data['destination']}")
+
+        form = QuoteRequestForm(initial=initial_data)
+
+    context = {
+        'form': form,
+        'package': package,
+        'page_title': 'Request a Quote',
+        'debug_mode': settings.DEBUG,  # Pass debug mode for template conditional logic
+    }
+
+    return render(request, 'users/quote_form.html', context)
+
+
+def quote_success(request):
+    """
+    Success page after quote request submission
+    """
+    return render(request, 'users/quote_success.html', {
+        'page_title': 'Quote Request Submitted',
+    })
+
+
+def send_quote_request_emails(quote_request):
+    """
+    Send email notifications for quote requests - Novustell Travel pattern
+    Returns True on success, False on any error (does not raise).
+    """
+    from django.core.mail import send_mail
+    from django.template.loader import render_to_string
+    from django.conf import settings
+    import logging
+
+    logger = logging.getLogger(__name__)
+
+    try:
+        # Send admin notification email
+        admin_subject = f'New Quote Request from {quote_request.full_name}'
+        admin_message_html = render_to_string('users/emails/quote_request_admin.html', {
+            'quote_request': quote_request
+        })
+        admin_message_txt = render_to_string('users/emails/quote_request_admin.txt', {
+            'quote_request': quote_request
+        })
+
+        # Send to admin email
+        admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
+
+        send_mail(
+            subject=admin_subject,
+            message=admin_message_txt,  # Plain text version
+            html_message=admin_message_html,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[admin_email],
+            fail_silently=False,
+        )
+
+        # Send user confirmation email
+        user_subject = f'Quote Request Received - Mbugani Luxe Adventures'
+        user_message_html = render_to_string('users/emails/quote_request_confirmation.html', {
+            'quote_request': quote_request
+        })
+        user_message_txt = render_to_string('users/emails/quote_request_confirmation.txt', {
+            'quote_request': quote_request
+        })
+
+        send_mail(
+            subject=user_subject,
+            message=user_message_txt,  # Plain text version
+            html_message=user_message_html,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[quote_request.email],
+            fail_silently=False,
+        )
+
+        logger.info(f"Quote request emails sent for {quote_request.full_name}")
+        return True
+
+    except Exception as e:
+        logger.error(f"Quote request email error: {type(e).__name__}: {e}")
+        return False
 
 
 def test_500_error(request):

@@ -6,7 +6,7 @@ app_name = 'users'
 
 urlpatterns = [
     path('', views.home, name='users-home'),
-    path('about/', views.aboutus, name='aboutus'),
+    path('aboutus/', views.aboutus, name='aboutus'),
     path('corporate/', views.corporate, name='corporatepage'),
     path('holidays/', views.holidays, name='holidayspage'),
     path('mice/', views.micepage, name='micepage'),
@@ -25,6 +25,10 @@ urlpatterns = [
     path('careers/', views.careers, name='careers'),
     path('careers/job/<slug:slug>/', views.job_detail, name='job_detail'),
     path('newsletter/subscribe/', views.newsletter_subscribe, name='newsletter_subscribe'),
+
+    # Quote Request URLs
+    path('quote/', views.quote_request_view, name='quote_request'),
+    path('quote/success/', views.quote_success, name='quote_success'),
 
     # User Profile URLs
     path('profile/', views.user_profile, name='user_profile'),

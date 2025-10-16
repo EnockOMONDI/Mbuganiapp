@@ -1,94 +1,781 @@
 {% load static %}
+<header class="header-area header-two transparent-header {% if request.resolver_match.url_name == 'users-home' %}homepage-navbar{% else %}page-navbar{% endif %}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 10000;">
+            <!--====== Header Navigation ======-->
+            <div class="header-navigation navigation-white breakpoint-on" style="position: relative; z-index: 10001;">
+                <div class="nav-overlay"></div>
+                <div class="container-fluid">
+                    <div class="primary-menu">
+                        <!--====== Site Branding ======-->
+                        <div class="site-branding">
+<a href="{% url 'users:users-home'%}" class="brand-logo"><img src="{% static 'assets/images/logo/websitelogo.png' %}" alt="Logo"></a>                        </div>
+                        <!--====== Navbar Toggler ======-->
+                        <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <!--====== Nav Menu ======-->
+                        <div class="nav-menu">
+                            <!--====== Site Branding ======-->
+                            <div class="mobile-logo mb-30 d-block d-xl-none">
+<a href="{% url 'users:users-home'%}" class="brand-logo"><img src="{% static 'assets/images/logo/websitelogo.png' %}" alt="Logo"></a>                            </div>
+                            <!--=== Nav Search ===-->
+                           
+                            <!--====== Main Menu ======-->
+                            <nav class="main-menu">
+                                <ul>
+                                    <li class="menu-item"><a href="{% url 'users:users-home' %}">Home</a></li>
+                                    <li class="menu-item has-children"><a href="#">Safaris & Journeys<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{% url 'adminside:package_list' %}">Highlight Safaris</a></li>
+                                            <li><a href="{% url 'adminside:destination_list' %}">Destinations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item has-children"><a href="#">Services<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{% url 'users:corporatepage' %}">Corporate Travel</a></li>
+                                            <li><a href="{% url 'users:micepage' %}">MICE</a></li>
+                                            <li><a href="{% url 'users:student-travel' %}">Student Travel</a></li>
+                                            <li><a href="{% url 'users:ngo-travel' %}">NGO Travel</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item has-children"><a href="#">About<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{% url 'users:aboutus' %}">About Us</a></li>
+                                            <li><a href="{% url 'users:careers' %}">Careers</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item has-children"><a href="#">Blog<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{% url 'blog:blog-list' %}">Blog List</a></li>
+                                        </ul>
+                                    </li>
+                               
+                                </ul>
+                            </nav>
+                            <!--====== Menu Button ======-->
+                     
+                            <!-- <div class="menu-button mt-40 d-xl-none">
+                                <a href="https://api.whatsapp.com/send/?phone=254798197430&text&type=phone_number&app_absent=0" target="_blank" class="main-btn secondary-btn">Chat<i class="fas fa-paper-plane"></i></a>
+                            </div> -->
+                        </div>
+                        <!--====== Nav Right Item ======-->
+                        <div class="nav-right-item">
 
-<header class="main_header_area">
-    <div class="header-content py-1 bg-theme">
-    <div class="container d-flex align-items-center justify-content-between">
-    <div class="links">
-    <ul>
-    <!-- <li><a href="#" class="white"><i class="icon-location-pin white"></i> Nairobi, Kenya | Eagle house Kilimani, off Ngong Rd</a></li> -->
-    <li><a href="#" class="white"><i class="icon-clock white"></i> Mon-Fri: 10 AM – 5 PM</a></li>
-    <li><a href="#" class="white"><i class="icon-phone white"></i> +49 163 8767374</a></li>
-    <li><a href="#" class="white"><i class="icon-phone white"></i>+49 177 5377023</a></li>
-    </ul>
-    </div>
-    <div class="links float-right">
-    <ul>
-    <li><a href="#" class="white"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-    <li><a href="#" class="white"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-    <li><a href="#" class="white"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-    <li><a href="#" class="white"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-    </ul>
-    </div>
-    </div>
-    </div>
-
-    <div class="header_menu" id="header_menu">
-    <nav class="navbar navbar-default">
-    <div class="container">
-    <div class="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
-    
-    <div class="navbar-header">
-    <a class="navbar-brand" href="">
-    <img src="{% static 'assets2/images/logo.png' %}"  style="  width: 110%;" alt="image">
-    </a>
-    </div>
-    
-    <div class="navbar-collapse1 d-flex align-items-center" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav" id="responsive-menu">
-     <li><a href="">Home</a></li>
-    
-    <li><a href="">About Us</a></li>
-    
-    <li class="submenu dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Destinations <i class="icon-arrow-down" aria-hidden="true"></i></a>
-    <ul class="dropdown-menu">
-    <li><a href="">Nakuru</a></li>
-    <li><a href="">Mombasa</a></li>
-    <li><a href="">Diani</a></li>
-    <li><a href="">Samburu</a></li>
-    
-    </ul>
-    </li>
-    <li class="submenu dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tours<i class="icon-arrow-down" aria-hidden="true"></i></a>
-    <ul class="dropdown-menu">
-        
-    <li><a href="">Sightseeing Tours</a></li>
-    <li><a href="">Wildlife Safaris</a></li>
-    <li><a href="">Adventure Tours</a></li>
-    <li><a href="">Historical Tours</a></li>
-    <li><a href="">Multi-Day Tours</a></li>
-    
-    </ul>
-    </li>
-    <li><a href="">Blogs</a></li>
-    <li><a href="">Contact Us</a></li>
-    
-    
-    <li >
+                           
+                            <div class="menu-button d-xl-block d-none">
+                                <a href=  "https://api.whatsapp.com/send/?phone=254798197430&text&type=phone_number&app_absent=0"  target="_blank" class="main-btn primary-btn">Contact Us<i class="fas fa-paper-plane"></i></a>
+                            </div>
                         
-        <div id="google_translate_element"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+<style>
+/* ===== MBUGANI LUXE ADVENTURES NAVBAR STYLING ===== */
+
+/* Color Variables for Navbar */
+:root {
+    --navbar-primary: #9e6a16; /* Updated primary color */
+    --navbar-secondary: #291c1a; /* Mbugani darker brown */
+    --navbar-primary-hover: #8a5d14;
+    --navbar-secondary-hover: #1f1513;
+    --navbar-text-light: #ffffff;
+    --navbar-text-dark: #2c2c2c;
+    --navbar-border: #e5e5e5;
+    --navbar-shadow: rgba(158, 106, 22, 0.15);
+}
+
+/* ===== NAVBAR OPTIMIZATION STYLES ===== */
+
+/* Logo Size Reduction */
+.site-branding .brand-logo img {
+    max-height: 60px !important; /* Reduced from default ~60px */
+    width: auto !important;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.mobile-logo .brand-logo img {
+    max-height: 50px !important; /* Reduced mobile logo size */
+    width: auto !important;
+}
+
+/* === NAVIGATION MENU STYLING === */
+
+/* === CONDITIONAL NAVBAR STYLING === */
+
+/* Homepage navbar - white text for transparent background over hero images */
+.homepage-navbar .main-menu > ul > li > a {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    padding: 0 15px !important;
+    color: var(--navbar-text-light) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Other pages navbar - dark text for white/light backgrounds */
+.page-navbar .main-menu > ul > li > a {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    padding: 0 15px !important;
+    color: var(--navbar-text-dark) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    text-shadow: none !important;
+}
+
+/* Homepage navbar hover */
+.homepage-navbar .main-menu > ul > li > a:hover {
+    color: var(--navbar-secondary) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Other pages navbar hover */
+.page-navbar .main-menu > ul > li > a:hover {
+    color: var(--navbar-primary) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Submenu styling - ABSOLUTE POSITIONING FOR PROPER OVERLAY */
+.main-menu .sub-menu {
+    background: var(--navbar-text-light) !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--navbar-border) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    z-index: 100000 !important;
+    position: absolute !important;
+    min-width: 200px !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    transition: all 0.3s ease !important;
+    pointer-events: none !important;
+}
+
+.main-menu .sub-menu li a {
+    font-size: 13px !important;
+    padding: 12px 20px !important;
+    color: var(--navbar-text-dark) !important;
+    transition: all 0.3s ease !important;
+    border-radius: 4px !important;
+    margin: 2px 8px !important;
+}
+
+.main-menu .sub-menu li a:hover {
+    color: var(--navbar-text-light) !important;
+    background-color: var(--navbar-primary) !important;
+    transform: translateX(5px) !important;
+}
+
+/* === BUTTON STYLING === */
+
+/* Primary buttons */
+.main-btn.primary-btn {
+    font-size: 13px !important;
+    padding: 10px 20px !important;
+    background-color: var(--navbar-primary) !important;
+    border-color: var(--navbar-primary) !important;
+    color: var(--navbar-text-light) !important;
+    border-radius: 25px !important;
+    transition: all 0.3s ease !important;
+}
+
+.main-btn.primary-btn:hover {
+    background-color: var(--navbar-primary-hover) !important;
+    border-color: var(--navbar-primary-hover) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px var(--navbar-shadow) !important;
+}
+
+/* Secondary buttons */
+.main-btn.secondary-btn {
+    font-size: 13px !important;
+    padding: 10px 20px !important;
+    background-color: var(--navbar-secondary) !important;
+    border-color: var(--navbar-secondary) !important;
+    color: var(--navbar-text-light) !important;
+    border-radius: 25px !important;
+    transition: all 0.3s ease !important;
+}
+
+.main-btn.secondary-btn:hover {
+    background-color: var(--navbar-secondary-hover) !important;
+    border-color: var(--navbar-secondary-hover) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(227, 170, 0, 0.3) !important;
+}
+
+.main-btn i {
+    font-size: 12px !important;
+    margin-left: 8px !important;
+}
+
+/* Search Button Optimization */
+.search-btn {
+    font-size: 16px !important; /* Reduced search icon size */
+    width: 40px !important;
+    height: 40px !important;
+}
+
+/* Navbar Container Optimization */
+.primary-menu {
+    align-items: center !important;
+    min-height: 70px !important; /* Reduced navbar height */
+}
+
+.nav-right-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important; /* Consistent spacing between elements */
+}
+
+/* === MOBILE MENU OPTIMIZATION === */
+.header-navigation .navbar-toggler {
+    display: none !important;
+}
+
+.header-navigation.breakpoint-on .navbar-toggler {
+    display: flex !important;
+    width: 35px !important;
+    height: 35px !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 10002 !important;
+}
+
+.navbar-toggler span {
+    display: block !important;
+    width: 25px !important;
+    height: 3px !important;
+    background-color: var(--navbar-text-light) !important;
+    margin: 3px 0 !important;
+    transition: all 0.3s ease !important;
+    border-radius: 2px !important;
+}
+
+/* Dark text for non-homepage pages */
+.page-navbar .navbar-toggler span {
+    background-color: var(--navbar-text-dark) !important;
+}
+
+/* Hamburger animation on active */
+.navbar-toggler.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px) !important;
+}
+
+.navbar-toggler.active span:nth-child(2) {
+    opacity: 0 !important;
+}
+
+.navbar-toggler.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px) !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1199px) {
+    .site-branding .brand-logo img {
+        max-height: 50px !important;
+    }
+
+    .main-menu > ul > li > a {
+        font-size: 13px !important;
+        padding: 0 12px !important;
+    }
+
+    .main-btn {
+        font-size: 12px !important;
+        padding: 8px 16px !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .primary-menu {
+        min-height: 60px !important;
+    }
+
+    .site-branding .brand-logo img {
+        max-height: 40px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .site-branding .brand-logo img {
+        max-height: 32px !important;
+    }
+
+    .search-btn {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* Dropdown Menu Optimization */
+.main-menu .sub-menu {
+    min-width: 200px !important; /* Reduced dropdown width */
+    padding: 10px 0 !important;
+}
+
+.dd-trigger i {
+    font-size: 12px !important;
+    margin-left: 5px !important;
+}
+
+/* Layout Balance Improvements */
+.nav-menu {
+    flex: 1 !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.container-fluid {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+/* Allow dropdown overflow - CRITICAL FIX */
+.header-navigation {
+    overflow: visible !important;
+}
+
+.header-navigation .container-fluid {
+    overflow: visible !important;
+}
+
+.primary-menu {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    overflow: visible !important;
+}
+
+.nav-menu {
+    overflow: visible !important;
+}
+
+.main-menu {
+    overflow: visible !important;
+}
+
+.main-menu ul {
+    overflow: visible !important;
+}
+
+.main-menu ul > li {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* === OPTIMIZED MENU HOVER EFFECTS === */
+
+/* Homepage menu hover effects */
+.homepage-navbar .main-menu > ul > li > a:hover {
+    color: var(--navbar-secondary) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Other pages menu hover effects */
+.page-navbar .main-menu > ul > li > a:hover {
+    color: var(--navbar-primary) !important;
+    transition: all 0.3s ease !important;
+}
+
+.main-btn:hover {
+    transform: translateY(-1px) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* === ENHANCED STICKY NAVBAR STYLING === */
+
+/* Default sticky navbar background color for non-homepage pages */
+.page-navbar .header-navigation.sticky {
+    background-color: var(--navbar-primary) !important;
+    box-shadow: 0 2px 20px var(--navbar-shadow) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Homepage sticky navbar - white background */
+.homepage-navbar .header-navigation.sticky {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* === STICKY NAVBAR STYLING === */
+
+/* Sticky navbar for homepage - dark text on white background */
+.homepage-navbar .header-navigation.sticky .main-menu > ul > li > a {
+    color: var(--navbar-text-dark) !important;
+    text-shadow: none !important;
+}
+
+.homepage-navbar .header-navigation.sticky .main-menu > ul > li > a:hover {
+    color: var(--navbar-primary) !important;
+}
+
+/* Sticky navbar for other pages - white text on colored background */
+.page-navbar .header-navigation.sticky .main-menu > ul > li > a {
+    color: var(--navbar-text-light) !important;
+    text-shadow: none !important;
+}
+
+.page-navbar .header-navigation.sticky .main-menu > ul > li > a:hover {
+    color: var(--navbar-secondary) !important;
+}
+
+/* Sticky navbar logo adjustment */
+.header-navigation.sticky .site-branding .brand-logo img {
+    max-height: 40px !important;
+    transition: all 0.3s ease !important;
+}
+
+/* === BACKGROUND STYLING FOR DIFFERENT PAGE TYPES === */
+
+/* Homepage - transparent background when not sticky */
+.homepage-navbar .header-navigation:not(.sticky) {
+    background-color: transparent !important;
+}
+
+/* Other pages - white background when not sticky for visibility */
+.page-navbar .header-navigation:not(.sticky) {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Force override any conflicting styles for sticky navbar - non-homepage pages */
+.page-navbar.header-two .header-navigation.sticky,
+.page-navbar.header-one .header-navigation.sticky {
+    background-color: var(--navbar-primary) !important;
+}
+
+/* Force override for homepage sticky navbar */
+.homepage-navbar.header-two .header-navigation.sticky,
+.homepage-navbar.header-one .header-navigation.sticky {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+}
+
+/* === HERO SECTION Z-INDEX FIX === */
+.hero-section, .hero-wrapper-two, .hero-slider-two {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Ensure main content doesn't overlap fixed navbar */
+
+
+/* Prevent body scroll when mobile menu is open */
+body.nav-open {
+    overflow: hidden !important;
+}
+
+/* Override any conflicting z-index from main stylesheet */
+.transparent-header {
+    z-index: 10000 !important;
+}
+
+.sticky {
+    z-index: 10000 !important;
+}
+
+.header-navigation,
+.header-navigation.sticky,
+.header-area {
+    z-index: 10001 !important;
+}
+
+/* Force dropdown visibility above everything - ABSOLUTE POSITIONING */
+.header-navigation .main-menu ul > li .sub-menu {
+    z-index: 100000 !important;
+    position: absolute !important;
+}
+
+/* Show dropdowns on hover with proper positioning */
+.header-navigation .main-menu ul > li.has-children:hover .sub-menu {
+    left: 0 !important;
+    top: 100% !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+}
+
+/* Ensure dropdowns don't overflow viewport */
+.main-menu .sub-menu {
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+}
+
+/* Adjust dropdown position for right-aligned items */
+.main-menu ul > li:nth-last-child(-n+2) .sub-menu {
+    left: auto !important;
+    right: 0 !important;
+}
+
+/* Ensure dropdowns hide when not hovering */
+.main-menu ul > li:not(:hover) .sub-menu {
+    left: -9999px !important;
+    top: -9999px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    pointer-events: none !important;
+}
+
+/* Mobile menu z-index override */
+.header-navigation.breakpoint-on .nav-menu {
+    z-index: 10000 !important;
+}
+
+/* === SMOOTH TRANSITIONS === */
+.header-navigation {
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.main-menu > ul > li > a {
+    transition: color 0.3s ease, transform 0.3s ease !important;
+}
+
+/* === NAV OVERLAY STYLING === */
+.nav-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    z-index: 9999 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.3s ease !important;
+}
+
+.nav-overlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* === MOBILE MENU STYLING === */
+@media (max-width: 1199px) {
+    /* Mobile menu background */
+    .header-navigation.breakpoint-on .nav-menu {
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important;
+        width: 300px !important;
+        height: 100vh !important;
+        background-color: var(--navbar-text-light) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+        border-radius: 0 !important;
+        padding: 20px !important;
+        z-index: 10000 !important;
+        transition: left 0.3s ease !important;
+        overflow-y: auto !important;
+    }
+
+    .header-navigation.breakpoint-on .nav-menu.menu-on {
+        left: 0 !important;
+    }
+
+    /* Mobile menu links */
+    .header-navigation.breakpoint-on .nav-menu .main-menu ul li a {
+        color: var(--navbar-text-dark) !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        padding: 15px 20px !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Mobile menu link hover */
+    .header-navigation.breakpoint-on .nav-menu .main-menu ul li a:hover {
+        background-color: var(--navbar-primary) !important;
+        color: var(--navbar-text-light) !important;
+        transform: translateX(10px) !important;
+    }
+
+    /* Mobile submenu styling - always visible in mobile menu */
+    .header-navigation.breakpoint-on .nav-menu .main-menu ul li .sub-menu {
+        background-color: #f8f9fa !important;
+        border-left: 3px solid var(--navbar-primary) !important;
+        margin-left: 20px !important;
+        position: static !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        z-index: auto !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        min-width: auto !important;
+        left: auto !important;
+        top: auto !important;
+        pointer-events: auto !important;
+        display: block !important;
+        padding: 5px 0 !important;
+    }
+
+    /* Mobile submenu links */
+    .header-navigation.breakpoint-on .nav-menu .main-menu ul li .sub-menu li a {
+        font-size: 14px !important;
+        padding: 8px 25px !important;
+        color: var(--navbar-text-dark) !important;
+        border-bottom: none !important;
+    }
+
+    /* Mobile submenu link hover */
+    .header-navigation.breakpoint-on .nav-menu .main-menu ul li .sub-menu li a:hover {
+        background-color: rgba(41, 28, 26, 0.1) !important;
+        color: var(--navbar-primary) !important;
+        transform: translateX(5px) !important;
+    }
+
+    /* Mobile logo styling */
+    .mobile-logo {
+        text-align: center !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        padding-bottom: 20px !important;
+        margin-bottom: 20px !important;
+    }
+}
+
+/* Mobile sticky navbar */
+@media (max-width: 991px) {
+    /* Default for non-homepage pages */
+    .page-navbar .header-navigation.sticky {
+        background-color: var(--navbar-primary) !important;
+    }
+
+    .page-navbar .header-navigation.sticky .navbar-toggler span {
+        background-color: var(--navbar-text-light) !important;
+    }
+
+    /* Homepage specific */
+    .homepage-navbar .header-navigation.sticky {
+        background-color: rgba(255, 255, 255, 0.98) !important;
+    }
+
+    .homepage-navbar .header-navigation.sticky .navbar-toggler span {
+        background-color: var(--navbar-text-dark) !important;
+    }
+}
+</style>
+
+<script>
+// Enhanced Mobile Navbar Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Override any existing navigation functionality
+    window.mobileNavOverride = true;
     
-    </li>
-    </ul>
-    </div>
-       
-    
-    <div class="register-login d-flex align-items-center">
-        {% if user.is_authenticated %}
-  <a href="/logout" class="login-btn">  Logout 
-  </a>
-      {% else %}
-    <a href="/login" class="me-3">
-    <i class="icon-user"></i> Login
-    </a>
-    {% endif %}  
-    <!-- <a href="#" class="nir-btn white">Book Now</a> -->
-    </div>
-    <div id="slicknav-mobile"></div>
-    </div>
-    </div>
-    </nav>
-    </div>
-    
-    </header>
+    // Enhanced mobile navigation functionality
+    function initMobileNav() {
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const navMenu = document.querySelector('.nav-menu');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const body = document.body;
+
+        console.log('Initializing mobile nav:', { navbarToggler, navMenu, navOverlay });
+
+        if (!navbarToggler || !navMenu) {
+            console.error('Mobile nav elements not found');
+            return;
+        }
+
+        // Remove any existing event listeners by cloning
+        const newToggler = navbarToggler.cloneNode(true);
+        navbarToggler.parentNode.replaceChild(newToggler, navbarToggler);
+
+        // Toggle mobile menu function
+        function toggleMobileMenu() {
+            const isOpen = navMenu.classList.contains('menu-on');
+
+            console.log('Toggling mobile menu, current state:', isOpen);
+
+            // Toggle classes
+            newToggler.classList.toggle('active');
+            navMenu.classList.toggle('menu-on');
+
+            if (navOverlay) {
+                navOverlay.classList.toggle('active');
+            }
+
+            // Prevent body scroll when menu is open
+            body.classList.toggle('nav-open');
+
+            console.log('Mobile menu toggled:', {
+                togglerActive: newToggler.classList.contains('active'),
+                menuOn: navMenu.classList.contains('menu-on'),
+                overlayActive: navOverlay ? navOverlay.classList.contains('active') : false,
+                bodyNavOpen: body.classList.contains('nav-open')
+            });
+        }
+
+        // Close mobile menu function
+        function closeMobileMenu() {
+            console.log('Closing mobile menu');
+            newToggler.classList.remove('active');
+            navMenu.classList.remove('menu-on');
+
+            if (navOverlay) {
+                navOverlay.classList.remove('active');
+            }
+
+            body.classList.remove('nav-open');
+        }
+
+        // Event listeners
+        newToggler.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMobileMenu();
+        });
+
+        // Close menu when clicking overlay
+        if (navOverlay) {
+            navOverlay.addEventListener('click', function(e) {
+                e.preventDefault();
+                closeMobileMenu();
+            });
+        }
+
+        // Close menu when clicking on menu links (including submenu links)
+        const menuLinks = navMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Only close if it's not a parent menu item with submenu
+                const parentLi = this.closest('li');
+                if (!parentLi || !parentLi.classList.contains('has-children')) {
+                    closeMobileMenu();
+                }
+            });
+        });
+
+        // Close menu on window resize to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1199 && navMenu.classList.contains('menu-on')) {
+                closeMobileMenu();
+            }
+        });
+
+        console.log('Mobile navigation initialized successfully');
+    }
+
+    // Initialize mobile navigation
+    initMobileNav();
+});
+</script>

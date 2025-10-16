@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.utils.html import format_html
-from .models import UserBookings, MICEInquiry, StudentTravelInquiry, NGOTravelInquiry, UserProfile, BucketList, Booking, JobApplication, NewsletterSubscription, JobListing
+from .models import UserBookings, MICEInquiry, StudentTravelInquiry, NGOTravelInquiry, UserProfile, BucketList, Booking, JobApplication, NewsletterSubscription, JobListing, QuoteRequest
 from django_ckeditor_5.widgets import CKEditor5Widget
 
 class UserBookingsAdminForm(forms.ModelForm):
@@ -259,7 +259,7 @@ class JobApplicationAdmin(admin.ModelAdmin):
         """Display resume download link in list view"""
         if obj.resume:
             return format_html(
-                '<a href="{}" target="_blank" style="color: #0f238d; font-weight: bold;">'
+                '<a href="{}" target="_blank" style="color: #291c1b; font-weight: bold;">'
                 '<i class="fas fa-download"></i> Download CV</a>',
                 obj.resume.url
             )
@@ -279,7 +279,7 @@ class JobApplicationAdmin(admin.ModelAdmin):
 
             return format_html(
                 '<div style="margin: 10px 0;">'
-                '<a href="{}" target="_blank" class="button" style="background: #0f238d; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; display: inline-block;">'
+                '<a href="{}" target="_blank" class="button" style="background: #291c1b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; display: inline-block;">'
                 '<i class="fas fa-download"></i> Download Resume{}</a>'
                 '<br><small style="color: #666; margin-top: 5px; display: block;">File: {}</small>'
                 '</div>',
@@ -363,6 +363,16 @@ class NewsletterSubscriptionAdmin(admin.ModelAdmin):
     send_confirmation_emails.short_description = 'Send confirmation emails'
 
 
+class QuoteRequestAdminForm(forms.ModelForm):
+    """Custom form for QuoteRequest admin with CKEditor5 widgets"""
+    class Meta:
+        model = QuoteRequest
+        fields = '__all__'
+        widgets = {
+            'special_requests': CKEditor5Widget(config_name='default'),
+        }
+
+
 class JobListingAdminForm(forms.ModelForm):
     """Custom form for JobListing admin with CKEditor5 widgets"""
     class Meta:
@@ -374,6 +384,96 @@ class JobListingAdminForm(forms.ModelForm):
             'responsibilities': CKEditor5Widget(config_name='default'),
             'benefits': CKEditor5Widget(config_name='default'),
         }
+
+
+@admin.register(QuoteRequest)
+class QuoteRequestAdmin(admin.ModelAdmin):
+    form = QuoteRequestAdminForm
+    list_display = ('full_name', 'email', 'destination', 'number_of_travelers', 'status', 'created_at', 'get_status_badge')
+    list_filter = ('status', 'created_at', 'number_of_travelers', 'confirmation_email_sent', 'admin_notification_sent')
+    search_fields = ('full_name', 'email', 'phone_number', 'destination')
+    readonly_fields = ('created_at', 'updated_at')
+    date_hierarchy = 'created_at'
+    actions = ['mark_as_contacted', 'mark_as_quoted', 'mark_as_confirmed', 'mark_as_cancelled']
+    list_editable = ('status',)
+    list_per_page = 20
+
+    fieldsets = (
+        ('Personal Information', {
+            'fields': ('full_name', 'email', 'phone_number'),
+            'description': 'Customer contact information'
+        }),
+        ('Travel Details', {
+            'fields': ('destination', 'preferred_travel_dates', 'number_of_travelers', 'package'),
+            'description': 'Requested travel information'
+        }),
+        ('Special Requests', {
+            'fields': ('special_requests',),
+            'classes': ('wide',)
+        }),
+        ('Status & Tracking', {
+            'fields': ('status', 'confirmation_email_sent', 'admin_notification_sent'),
+            'classes': ('collapse',)
+        }),
+        ('System Information', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+
+    def get_queryset(self, request):
+        """Optimize queryset for admin list view"""
+        return super().get_queryset(request).select_related('package')
+
+    def get_status_badge(self, obj):
+        """Display status with colored badge"""
+        status_colors = {
+            'new': '#dc3545',
+            'contacted': '#ffc107',
+            'quoted': '#17a2b8',
+            'confirmed': '#28a745',
+            'cancelled': '#6c757d',
+        }
+        color = status_colors.get(obj.status, '#6c757d')
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase;">{}</span>',
+            color,
+            obj.get_status_display()
+        )
+    get_status_badge.short_description = 'Status'
+    get_status_badge.allow_tags = True
+
+    def mark_as_contacted(self, request, queryset):
+        """Mark selected quote requests as contacted"""
+        updated = queryset.update(status='contacted')
+        self.message_user(request, f'{updated} quote requests marked as contacted.')
+    mark_as_contacted.short_description = 'Mark as contacted'
+
+    def mark_as_quoted(self, request, queryset):
+        """Mark selected quote requests as quoted"""
+        updated = queryset.update(status='quoted')
+        self.message_user(request, f'{updated} quote requests marked as quoted.')
+    mark_as_quoted.short_description = 'Mark as quoted'
+
+    def mark_as_confirmed(self, request, queryset):
+        """Mark selected quote requests as confirmed"""
+        updated = queryset.update(status='confirmed')
+        self.message_user(request, f'{updated} quote requests marked as confirmed.')
+    mark_as_confirmed.short_description = 'Mark as confirmed'
+
+    def mark_as_cancelled(self, request, queryset):
+        """Mark selected quote requests as cancelled"""
+        updated = queryset.update(status='cancelled')
+        self.message_user(request, f'{updated} quote requests marked as cancelled.')
+    mark_as_cancelled.short_description = 'Mark as cancelled'
+
+    class Media:
+        css = {
+            'all': ('admin/css/ckeditor-admin.css',)
+        }
+        js = (
+            'ckeditor/ckeditor/ckeditor.js',
+        )
 
 
 @admin.register(JobListing)

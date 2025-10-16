@@ -4,20 +4,18 @@
         <footer class="main-footer black-bg">
             <div class="container">
                 <!--=== Footer CTA ===-->
-                <div class="footer-cta pt-80 pb-40">
+                <div class="footer-cta pt-60 pb-40">
                  
                 </div>
                 <!--=== Footer Widget ===-->
-                <div class="footer-widget-area footer-cta pt-75 pb-30">
+                <div class="footer-widget-area footer-cta pt-55 pb-30">
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
                             <!--=== Footer Widget ===-->
                             <div class="footer-widget about-company-widget mb-40">
-                                <h4 class="widget-title">About</h4>
+                             
                                 <div class="footer-content">
-                                    <p>Novustell Travel is a travel consultancy with over 20 years of experience, aiming to provide comprehensive and cost-effective travel solutions. We offer a wide range of services including corporate travel, MICE (Meetings, Incentives, Conferences, and Exhibitions), student travel, NGO travel, holiday packages, accommodation, car/van rentals, and corporate gifting.
-                                        
-                                        At Novustell Travel, we're more than just travel experts; we are your strategic partner committed to elevating your travel experiences. We aim to alleviate the burdens of travel logistics, with a genuine commitment to delivering exceptional solutions.</p>
+                                 
                                     <a href="#" class="footer-logo"><img src="{% static 'assets/images/logo/websitelogo.png' %}" alt="Site Logo"></a>
                                 </div>
                             </div>
@@ -32,16 +30,16 @@
                                         <li><a href="{% url 'adminside:user_package_list' %}">Travel Packages</a></li>
                                         <li><a href="{% url 'adminside:accommodation_list' %}">Accommodations</a></li>
                                         <li><a href="{% url 'users:corporatepage' %}">Corporate Travel</a></li>
-                                        <li><a href="{% url 'users:micepage' %}">MICE Services</a></li>
+                                        <!-- <li><a href="{% url 'users:micepage' %}">MICE Services</a></li>
                                         <li><a href="{% url 'users:student-travel' %}">Student Travel</a></li>
-                                        <li><a href="{% url 'users:ngo-travel' %}">NGO Travel</a></li>
+                                        <li><a href="{% url 'users:ngo-travel' %}">NGO Travel</a></li> -->
                                     </ul>
                                     <ul class="footer-widget-nav">
                                         <li><a href="{% url 'users:aboutus' %}">About Us</a></li>
                                         <li><a href="{% url 'users:contactus' %}">Contact Us</a></li>
                                         <li><a href="{% url 'blog:blog-list' %}">Travel Blog</a></li>
-                                        <li><a href="{% url 'users:careers' %}">Careers</a></li>
-                                        <li><a href="{% url 'users:documentation' %}">Documentation</a></li>
+                                        <!-- <li><a href="{% url 'users:careers' %}">Careers</a></li>
+                                        <li><a href="{% url 'users:documentation' %}">Documentation</a></li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -70,7 +68,7 @@
                                         <div class="form_group">
                                             <label><i class="far fa-paper-plane"></i></label>
                                             <input type="email" class="form_control" placeholder="Email Address" name="email" required id="newsletter-email">
-                                            <button type="submit" class="btn btn-primary" id="newsletter-submit" style="margin-top: 10px; background: linear-gradient(135deg, #0f238d, #ff9d00); border: none; padding: 10px 20px; border-radius: 25px;">
+                                            <button type="submit" class="btn btn-primary" id="newsletter-submit" style="margin-top: 10px; background: linear-gradient(135deg, #291c1b, #fb9300); border: none; padding: 10px 20px; border-radius: 25px;">
                                                 <i class="fas fa-paper-plane me-2"></i>Subscribe
                                             </button>
                                         </div>
@@ -86,7 +84,7 @@
                         <div class="col-lg-6">
                             <!--=== Footer Text ===-->
                             <div class="footer-text">
-                                <p>Copy@ 2023 <span style="color: #F7921E;">Novustell travel </span> | Registration PVT-EYUB3KZP</p>
+                                <p>Copy@ 2025 <span style="color: #fb9300;">Mbugani Luxe Adventures </span> | Luxury Safari & Adventure Tourism</p>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -173,4 +171,74 @@
 
         <!--====== Back To Top  ======-->
         <a href="#" class="back-to-top" ><i class="far fa-angle-up"></i></a>
+
+        <!-- Enhanced Footer Styling -->
+        <style>
+        /* === MBUGANI LUXE ADVENTURES FOOTER STYLING === */
+
+        /* Force footer background color */
+        .main-footer.black-bg {
+            background-color: #291c1b  !important;
+            color: #ffffff !important;
+        }
+
+        /* Footer widget titles */
+        .main-footer .footer-widget h4.widget-title {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+
+        /* Footer text content */
+        .main-footer .footer-widget .footer-content p {
+            color: #e1e1e1 !important;
+        }
+
+        /* Footer navigation links */
+        .main-footer .footer-widget-nav li a {
+            color: #e1e1e1 !important;
+            transition: color 0.3s ease !important;
+        }
+
+        .main-footer .footer-widget-nav li a:hover {
+            color: #fb9300 !important;
+        }
+
+        /* Footer copyright section */
+        .main-footer .footer-copyright {
+         
+            border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .main-footer .footer-copyright .footer-text p {
+            color: #e1e1e1 !important;
+        }
+
+        .main-footer .footer-copyright .footer-nav ul li a {
+            color: #e1e1e1 !important;
+            transition: color 0.3s ease !important;
+        }
+
+        .main-footer .footer-copyright .footer-nav ul li a:hover {
+            color: #fb9300 !important;
+        }
+
+        /* Newsletter form styling */
+        .main-footer .footer-newsletter-widget .footer-content form .form_control {
+            background-color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #333333 !important;
+        }
+
+        /* Ensure footer sections have proper background */
+        .main-footer .footer-cta,
+        .main-footer .footer-widget-area {
+            background-color: transparent !important;
+        }
+
+        /* Override any conflicting styles */
+        .black-bg {
+            background-color: #291c1b !important;
+        }
+        </style>
+
         <!--====== Jquery js ======-->

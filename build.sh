@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Build the project
+# Build the project
 set -o errexit  # exit on error
 echo "Building the project JDA..."
 

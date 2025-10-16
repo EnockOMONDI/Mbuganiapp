@@ -2,7 +2,7 @@
 {% load static %}
 {% load image_tags %}
 
-{% block title %}Booking Confirmed - {{ booking.booking_reference }} - Novustell Travel{% endblock %}
+{% block title %}Booking Confirmed - {{ booking.booking_reference }} - Mbugani Luxe Adventures{% endblock %}
 
 {% block content %}
 <style>
@@ -146,12 +146,12 @@
         position: absolute;
         width: 10px;
         height: 10px;
-        background: #ff9d00;
+        background: #fb9300;
         animation: confetti 3s linear infinite;
     }
 
     .confetti-piece:nth-child(odd) {
-        background: #0f238d;
+        background: #291c1b;
         width: 8px;
         height: 8px;
     }
@@ -166,13 +166,13 @@
         position: absolute;
         width: 4px;
         height: 4px;
-        background: #ff9d00;
+        background: #fb9300;
         border-radius: 50%;
         animation: sparkle 1.5s infinite;
     }
 
     .sparkle:nth-child(2n) {
-        background: #0f238d;
+        background: #291c1b;
         animation-delay: 0.5s;
     }
 
@@ -261,14 +261,14 @@
     }
 
     .success-title {
-        font-family: 'Fonarto', sans-serif;
+        font-family: 'TAN-Garland-Regular', sans-serif;
         font-size: 2.5rem;
-        color: #0f238d;
+        color: #291c1a;
         margin-bottom: 20px;
     }
 
     .booking-reference {
-        background: linear-gradient(45deg, #0f238d, #ff9d00);
+        background: linear-gradient(45deg, #291c1a, #fb9300);
         color: white;
         padding: 15px 30px;
         border-radius: 25px;
@@ -296,7 +296,7 @@
     .details-title {
         font-size: 1.5rem;
         font-weight: 600;
-        color: #0f238d;
+        color: #291c1a;
         margin-bottom: 25px;
         text-align: center;
     }
@@ -315,7 +315,7 @@
 
     .detail-label {
         font-weight: 600;
-        color: #0f238d;
+        color: #291c1a;
     }
 
     .detail-value {
@@ -376,7 +376,7 @@
     }
 
     .btn-home {
-        background: linear-gradient(45deg, #0f238d, #ff9d00);
+        background: linear-gradient(45deg, #291c1a, #fb9300);
         color: white;
         border: none;
         padding: 18px 30px;
@@ -458,7 +458,7 @@
     .package-title {
         font-size: 1.5rem;
         font-weight: 600;
-        color: #0f238d;
+        color: #291c1a;
         margin-bottom: 15px;
     }
 
@@ -468,7 +468,7 @@
     }
 
     .total-amount {
-        background: linear-gradient(45deg, #0f238d, #ff9d00);
+        background: linear-gradient(45deg, #291c1a, #fb9300);
         color: white;
         padding: 20px;
         border-radius: 12px;
@@ -560,7 +560,7 @@
                     </div>
 
                     <p class="success-message animate-fade-in-up animate-delay-4">
-                        Thank you for choosing Novustell Travel! Your booking has been successfully confirmed.
+                        Thank you for choosing Mbugani Luxe Adventures! Your booking has been successfully confirmed.
                         We've sent a confirmation email to <strong>{{ booking.email }}</strong> with all the details.
                     </p>
 
@@ -655,7 +655,7 @@
                         </li>
                         <li>
                             <i class="fas fa-user-plus"></i>
-                            We've created your Novustell Travel account - check your email for login details
+                            We've created your Mbugani Luxe Adventures account - check your email for login details
                         </li>
                         <li>
                             <i class="fas fa-phone"></i>
@@ -667,7 +667,7 @@
                         </li>
                         <li>
                             <i class="fas fa-plane"></i>
-                            Get ready for an amazing adventure with Novustell Travel!
+                            Get ready for an amazing adventure with Mbugani Luxe Adventures!
                         </li>
                     </ul>
                 </div>
@@ -709,7 +709,7 @@
 // Confetti animation
 function createConfetti() {
     const container = document.getElementById('confettiContainer');
-    const colors = ['#ff9d00', '#0f238d', '#28a745', '#ffffff'];
+    const colors = ['#fb9300', '#291c1b', '#28a745', '#ffffff'];
 
     for (let i = 0; i < 50; i++) {
         const confetti = document.createElement('div');

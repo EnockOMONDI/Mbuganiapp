@@ -2,8 +2,8 @@
 {% load static %}
 {% load image_tags %}
 
-{% block title %}Destinations - Novustell Travel{% endblock %}
-{% block meta_description %}Explore amazing travel destinations around the world with Novustell Travel. From bustling cities to serene landscapes, discover your perfect travel destination.{% endblock %}
+{% block title %}Destinations - Mbugani Luxe Adventures{% endblock %}
+{% block meta_description %}Explore amazing travel destinations around the world with Mbugani Luxe Adventures. From bustling cities to serene landscapes, discover your perfect travel destination.{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -17,13 +17,13 @@
     }
 
     .nav-sidebar {
-        background: linear-gradient(135deg, #0f238d 0%, #0f238d 100%);
+        background: linear-gradient(135deg, #291c1b 0%, #291c1b 100%);
         border-radius: 20px;
         padding: 25px;
         height: fit-content;
         position: sticky;
         top: 20px;
-        box-shadow: 0 10px 30px rgba(15, 35, 141, 0.2);
+        box-shadow: 0 10px 30px rgba(93, 0, 0, 0.2);
         transform: translateY(0);
         animation: slideInLeft 0.6s ease-out;
     }
@@ -66,14 +66,14 @@
 
     .country-btn:hover {
         background: rgba(255, 157, 0, 0.2);
-        border-color: #ff9d00;
+        border-color: #fb9300;
         transform: translateX(5px);
     }
 
     .country-btn.active {
-        background: #ff9d00;
-        border-color: #ff9d00;
-        color: #0f238d;
+        background: #fb9300;
+        border-color: #fb9300;
+        color: #291c1b;
         font-weight: 600;
     }
 
@@ -145,7 +145,7 @@
         animation: fadeInUp 0.8s ease-out;
     }
 
-    /* Exact Novustell Travel destination card styling */
+    /* Exact Mbugani Luxe Adventures destination card styling */
     .destination-card {
         position: relative;
         border-radius: 20px;
@@ -203,9 +203,9 @@
     .destination-card:hover .destination-overlay {
         background: linear-gradient(
             to bottom,
-            rgba(15, 35, 141, 0.2) 0%,
-            rgba(15, 35, 141, 0.5) 50%,
-            rgba(15, 35, 141, 0.95) 100%
+            rgba(93, 0, 0, 0.2) 0%,
+            rgba(93, 0, 0, 0.5) 50%,
+            rgba(93, 0, 0, 0.95) 100%
         );
     }
 
@@ -271,7 +271,7 @@
     .destination-price {
         font-size: 0.9rem;
         font-weight: 600;
-        color: #ff9d00;
+        color: #fb9300;
         padding: 4px 8px;
         background: rgba(255, 157, 0, 0.1);
         border-radius: 4px;
@@ -521,7 +521,7 @@
         {% for city in country.children.all %}
         <div class="col-lg-4 col-md-6">
             <div class="destination-card">
-                <div class="destination-image" style="background-image: url('{{ city.image.cdn_url }}');">
+                <div class="destination-image" style="background-image: url('{{ city.get_image_url }}');">
                     {% if city.is_featured %}
                     <div class="featured-badge">
                         <i class="fas fa-star me-1"></i>Featured

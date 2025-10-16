@@ -1,5 +1,5 @@
 """
-Development settings for Novustell Travel
+Development settings for Mbugani Luxe Adventures
 Uses SQLite for local development
 """
 
@@ -9,6 +9,27 @@ import os
 # Development-specific settings
 DEBUG = True
 
+# Enhanced template debugging for development
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'debug': True,  # Enable template debugging
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+                'tours_travels.context_processors.default_images',
+                'tours_travels.context_processors.site_settings',
+            ],
+        },
+    },
+]
+
 # Development database - SQLite
 DATABASES = {
     'default': {
@@ -17,11 +38,54 @@ DATABASES = {
     }
 }
 
+# Email Configuration - Novustell Travel pattern
 # Development email backend - Console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Development email settings
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025  # For development email server
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = 'noreply@localhost'
+ADMIN_EMAIL = 'admin@localhost'
+
+print("📧 Development mode: Using CONSOLE EMAIL BACKEND (emails printed to console)")
+
+# Django-Q Configuration for Development (Django ORM as broker)
+Q_CLUSTER = {
+    'name': 'mbugani_luxe_dev',
+    'workers': 1,  # Single worker for development
+    'recycle': 100,
+    'timeout': 30,  # Shorter timeout for development
+    'compress': False,  # No compression for easier debugging
+    'save_limit': 50,  # Keep fewer tasks in development
+    'queue_limit': 20,
+    'cpu_affinity': 1,
+    'label': 'Django Q Development',
+    'orm': 'default',  # Use SQLite as broker in development
+    'retry': 60,  # Retry after 60 seconds (must be > timeout of 30s)
+    'max_attempts': 3,
+    'ack_failures': True,
+    'catch_up': False,
+    'sync': False,  # Async processing even in development
+    'guard_cycle': 2,  # Check for new tasks every 2 seconds
+    'poll': 0.2,  # Poll interval in seconds
+}
+
+print("🔄 Development mode: Django-Q configured with SQLite broker")
+
 # Development allowed hosts
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+
+# Enhanced debugging settings for template troubleshooting
+INTERNAL_IPS = ['127.0.0.1', 'localhost']
+
+# Show detailed error pages
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
+# Template string if invalid
+TEMPLATE_STRING_IF_INVALID = "TEMPLATE_ERROR: %s"
 
 # Development static files
 STATIC_URL = '/static/'
@@ -31,7 +95,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles_dev'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media_dev'
 
-# Development logging
+# Development logging with enhanced template debugging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -42,6 +106,10 @@ LOGGING = {
         },
         'simple': {
             'format': '{levelname} {message}',
+            'style': '{',
+        },
+        'template_debug': {
+            'format': 'TEMPLATE DEBUG: {levelname} {asctime} {message}',
             'style': '{',
         },
     },
@@ -72,6 +140,11 @@ LOGGING = {
             'propagate': False,
         },
         'adminside': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.template': {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False,
@@ -107,13 +180,7 @@ UPLOADCARE = {
     'secret': os.getenv('UPLOADCARE_SECRET_KEY', 'demosecretkey'),
 }
 
-# Development email settings
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025  # For development email server
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = False
-DEFAULT_FROM_EMAIL = 'noreply@localhost'
-ADMIN_EMAIL = 'admin@localhost'
+# Email settings are now configured above based on ENABLE_REAL_EMAILS flag
 
 # Development site URL
 SITE_URL = 'http://localhost:8000'

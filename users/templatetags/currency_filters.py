@@ -1,5 +1,5 @@
 """
-Currency formatting template filters for Novustell Travel
+Currency formatting template filters for Mbugani Luxe Adventures
 """
 
 from django import template
