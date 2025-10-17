@@ -13,18 +13,13 @@ import logging
 
 # Production-specific settings
 print("🚀 Production settings loaded")
-print("📧 Production mode: Using SMTP EMAIL BACKEND")
+print("📧 Production mode: Using Mailtrap HTTP API (synchronous)")
 print(f"🗄️ Database: {os.getenv('DATABASE_URL', 'Not set')[:50]}...")
 print(f"🌐 Site URL: {os.getenv('SITE_URL', 'Not set')}")
 print(f"🔒 SSL redirect: True")
 print(f"📊 Debug mode: False")
 
-# Railway environment detection
-IS_RAILWAY = os.getenv('RAILWAY_ENVIRONMENT') == 'production'
-if IS_RAILWAY:
-    print("🚂 Railway environment detected - optimizing for worker deployment")
-    # Disable Django's colorized output to prevent serialization errors
-    os.environ['DJANGO_COLORS'] = 'nocolor'
+# No longer using Railway for background workers - all email sending is synchronous
 
 # Add CORS headers to installed apps
 INSTALLED_APPS = INSTALLED_APPS + [
@@ -34,9 +29,6 @@ INSTALLED_APPS = INSTALLED_APPS + [
 # Force production settings
 DEBUG = False
 DJANGO_ENV = 'production'
-
-# Force SMTP email backend for production
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Production database - Supabase PostgreSQL
 DATABASES = {
@@ -55,43 +47,15 @@ DATABASES = {
     }
 }
 
-# Production email backend - Mailtrap SMTP
-# Using Mailtrap for reliable email delivery on Railway
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'live.smtp.mailtrap.io'
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', '2525'))  # Port 2525 for Railway compatibility
-EMAIL_USE_TLS = True  # TLS required for Mailtrap
-EMAIL_USE_SSL = False  # Not using SSL
-EMAIL_HOST_USER = 'api'  # Always 'api' for Mailtrap
-EMAIL_HOST_PASSWORD = os.getenv('MAILTRAP_API_TOKEN', '956b51c090fc5c1320bca0c26a394fd5')  # API token from Mailtrap dashboard
+# Production email configuration - Mailtrap HTTP API
+# Using Mailtrap HTTP API for synchronous email sending (no background worker needed)
+MAILTRAP_API_TOKEN = os.getenv('MAILTRAP_API_TOKEN', '956b51c090fc5c1320bca0c26a394fd5')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <info@mbuganiluxeadventures.com>')
-# Email timeout settings for Railway
-EMAIL_TIMEOUT = 30  # 30 seconds timeout for SMTP connections
 
+# Email addresses for different purposes
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
 JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
 NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL', 'news@mbuganiluxeadventures.com')
-
-# Django-Q Configuration for Production (Supabase PostgreSQL as broker)
-Q_CLUSTER = {
-    'name': 'mbugani_luxe_prod',
-    'workers': 3,  # More workers for production
-    'recycle': 500,
-    'timeout': 180,  # Increased timeout for email sending (3 minutes)
-    'compress': True,
-    'save_limit': 1000,  # Keep more task history in production
-    'queue_limit': 100,  # Higher queue limit for production
-    'cpu_affinity': 1,
-    'label': 'Django Q Production',
-    'orm': 'default',  # Use Supabase PostgreSQL as broker
-    'retry': 300,  # Retry failed tasks after 5 minutes (must be > timeout)
-    'max_attempts': 5,
-    'ack_failures': True,
-    'catch_up': False,  # Don't process old tasks on startup
-    'bulk': 10,  # Process tasks in bulk for better performance
-    'guard_cycle': 10,  # Check for new tasks every 5 seconds
-    'poll': 0.1,  # Poll interval in seconds
-}
 
 
 # Production allowed hosts
@@ -294,6 +258,6 @@ if SENTRY_DSN:
 
 print("🚀 Production settings loaded")
 print(f"🌐 Site URL: {SITE_URL}")
-print(f"📧 Email: host={EMAIL_HOST} port={EMAIL_PORT} use_tls={EMAIL_USE_TLS}")
+print(f"📧 Email: Mailtrap HTTP API (synchronous)")
 print(f"🔒 SSL redirect: {SECURE_SSL_REDIRECT}")
 print(f"📊 Debug mode: {DEBUG}")

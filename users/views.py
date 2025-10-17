@@ -314,55 +314,51 @@ def contactus(request):
 
 def send_job_application_emails(job_application):
     """
-    Queue job application emails for asynchronous processing
+    Send job application emails synchronously using Mailtrap HTTP API
     """
     import logging
     logger = logging.getLogger(__name__)
 
     try:
-        from django_q.tasks import async_task
+        from users.tasks import send_job_application_emails as send_emails_task
 
-        # Queue the email task for background processing
-        task_id = async_task(
-            'users.tasks.send_job_application_emails_async',
-            job_application.id,
-            task_name=f'job_emails_{job_application.id}',
-            timeout=60,
-            retry=5,
-        )
+        # Send emails synchronously
+        result = send_emails_task(job_application.id)
 
-        logger.info(f"Job application emails queued: task_id={task_id}, application_id={job_application.id}")
-        return True
+        if result.get('success'):
+            logger.info(f"Job application emails sent successfully: application_id={job_application.id}")
+            return True
+        else:
+            logger.error(f"Failed to send job application emails for {job_application.id}")
+            return False
 
     except Exception as e:
-        logger.error(f"Failed to queue job application emails for {job_application.id}: {e}")
+        logger.error(f"Failed to send job application emails for {job_application.id}: {e}")
         return False
 
 
 def send_newsletter_subscription_emails(subscription):
     """
-    Queue newsletter subscription emails for asynchronous processing
+    Send newsletter subscription emails synchronously using Mailtrap HTTP API
     """
     import logging
     logger = logging.getLogger(__name__)
 
     try:
-        from django_q.tasks import async_task
+        from users.tasks import send_newsletter_subscription_emails as send_emails_task
 
-        # Queue the email task for background processing
-        task_id = async_task(
-            'users.tasks.send_newsletter_subscription_emails_async',
-            subscription.id,
-            task_name=f'newsletter_emails_{subscription.id}',
-            timeout=60,
-            retry=5,
-        )
+        # Send emails synchronously
+        result = send_emails_task(subscription.id)
 
-        logger.info(f"Newsletter subscription emails queued: task_id={task_id}, subscription_id={subscription.id}")
-        return True
+        if result.get('success'):
+            logger.info(f"Newsletter subscription emails sent successfully: subscription_id={subscription.id}")
+            return True
+        else:
+            logger.error(f"Failed to send newsletter subscription emails for {subscription.id}")
+            return False
 
     except Exception as e:
-        logger.error(f"Failed to queue newsletter subscription emails for {subscription.id}: {e}")
+        logger.error(f"Failed to send newsletter subscription emails for {subscription.id}: {e}")
         return False
 
 
@@ -1225,25 +1221,21 @@ def quote_request_view(request):
                     quote_request.save()
                     logger.info(f"Quote request {quote_request.id} associated with package {package.name}")
 
-                # Send email notifications asynchronously using Django-Q
-                # This prevents worker timeouts by processing emails in background
+                # Send email notifications synchronously using Mailtrap HTTP API
                 try:
-                    from django_q.tasks import async_task
+                    from users.tasks import send_quote_request_emails
 
-                    # Queue the email task for background processing
-                    task_id = async_task(
-                        'users.tasks.send_quote_request_emails_async',
-                        quote_request.id,
-                        task_name=f'quote_emails_{quote_request.id}',
-                        timeout=60,  # Task timeout (well under worker timeout)
-                        retry=5,  # Retry up to 5 times on failure
-                    )
+                    # Send emails synchronously
+                    result = send_quote_request_emails(quote_request.id)
 
-                    logger.info(f"Quote request emails queued for background processing: task_id={task_id}, quote_id={quote_request.id}")
+                    if result.get('success'):
+                        logger.info(f"Quote request emails sent successfully: quote_id={quote_request.id}")
+                    else:
+                        logger.warning(f"Some quote request emails failed: quote_id={quote_request.id}")
 
                 except Exception as email_error:
-                    logger.error(f"Failed to queue email task for quote {quote_request.id}: {email_error}")
-                    # Don't fail the entire request if email queueing fails - user still gets confirmation
+                    logger.error(f"Failed to send email for quote {quote_request.id}: {email_error}")
+                    # Don't fail the entire request if email sending fails - user still gets confirmation
 
                 # Show success message - simple pattern like Novustell
                 messages.success(request, "Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.")
@@ -1289,64 +1281,8 @@ def quote_success(request):
     })
 
 
-def send_quote_request_emails(quote_request):
-    """
-    Send email notifications for quote requests - Novustell Travel pattern
-    Returns True on success, False on any error (does not raise).
-    """
-    from django.core.mail import send_mail
-    from django.template.loader import render_to_string
-    from django.conf import settings
-    import logging
-
-    logger = logging.getLogger(__name__)
-
-    try:
-        # Send admin notification email
-        admin_subject = f'New Quote Request from {quote_request.full_name}'
-        admin_message_html = render_to_string('users/emails/quote_request_admin.html', {
-            'quote_request': quote_request
-        })
-        admin_message_txt = render_to_string('users/emails/quote_request_admin.txt', {
-            'quote_request': quote_request
-        })
-
-        # Send to admin email
-        admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
-
-        send_mail(
-            subject=admin_subject,
-            message=admin_message_txt,  # Plain text version
-            html_message=admin_message_html,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[admin_email],
-            fail_silently=False,
-        )
-
-        # Send user confirmation email
-        user_subject = f'Quote Request Received - Mbugani Luxe Adventures'
-        user_message_html = render_to_string('users/emails/quote_request_confirmation.html', {
-            'quote_request': quote_request
-        })
-        user_message_txt = render_to_string('users/emails/quote_request_confirmation.txt', {
-            'quote_request': quote_request
-        })
-
-        send_mail(
-            subject=user_subject,
-            message=user_message_txt,  # Plain text version
-            html_message=user_message_html,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[quote_request.email],
-            fail_silently=False,
-        )
-
-        logger.info(f"Quote request emails sent for {quote_request.full_name}")
-        return True
-
-    except Exception as e:
-        logger.error(f"Quote request email error: {type(e).__name__}: {e}")
-        return False
+# Note: send_quote_request_emails() function moved to users/tasks.py
+# and is now imported directly where needed
 
 
 def test_500_error(request):

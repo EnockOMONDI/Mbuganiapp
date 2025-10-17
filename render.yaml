@@ -3,7 +3,7 @@ services:
   - type: web
     name: Mbuganiapp
     env: python
-    region: oregon
+    region: frankfurt
     plan: starter
     branch: main
     buildCommand: |
@@ -66,12 +66,9 @@ services:
       - key: RENDER_EXTERNAL_HOSTNAME
         generateValue: true
 
-      # Email Configuration (Mailtrap SMTP)
-      # Mailtrap settings: live.smtp.mailtrap.io:2525 with TLS (hardcoded in settings_prod.py)
-      - key: MAILTRAP_API_TOKEN
-        sync: false  # Set manually in Render dashboard for security
-      - key: EMAIL_PORT
-        value: 2525
+      # Email Configuration (Mailtrap HTTP API)
+      # Mailtrap API token is hardcoded in settings_prod.py for synchronous email sending
+      # No SMTP configuration needed - using HTTP API instead
       - key: DEFAULT_FROM_EMAIL
         value: Mbugani Luxe Adventures <info@mbuganiluxeadventures.com>
       - key: ADMIN_EMAIL
@@ -192,12 +189,12 @@ services:
 # For production media files, consider AWS S3 integration
 
 # Environment-specific notes:
-# 1. MAILTRAP_API_TOKEN must be set manually in Render dashboard (not in render.yaml for security)
+# 1. MAILTRAP_API_TOKEN is hardcoded in settings_prod.py (synchronous HTTP API)
 # 2. Set UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY manually in Render dashboard
 # 3. Optional: Set SENTRY_DSN for error monitoring
 # 4. Optional: Set GOOGLE_ANALYTICS_ID for analytics
 # 5. Consider upgrading to paid plans for production workloads
-# 6. Django-Q worker now runs on Railway.app (shares same Supabase database)
+# 6. Email sending is now synchronous via Mailtrap HTTP API (no background worker needed)
 
 # Deployment checklist:
 # ✅ Environment variables configured

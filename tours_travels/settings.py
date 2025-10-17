@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_ckeditor_5',  # CKEditor 5 for modern rich text editing
     'import_export',
-    'django_q',  # Django-Q for background tasks
+    # 'django_q',  # Removed - migrated to synchronous Mailtrap HTTP API
     'adminside',
     'users',
     'blog',

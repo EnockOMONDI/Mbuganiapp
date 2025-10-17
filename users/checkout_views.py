@@ -471,9 +471,11 @@ def create_booking_from_cart(cart, checkout_data):
 
 def send_booking_confirmation_email(booking, is_new_user=False):
     """
-    Send booking confirmation email to customer
+    Send booking confirmation email to customer using Mailtrap HTTP API
     """
     try:
+        from users.tasks import send_email_via_mailtrap
+
         subject = f'Booking Confirmation - {booking.booking_reference}'
 
         # URL encode the WhatsApp message
@@ -490,19 +492,19 @@ def send_booking_confirmation_email(booking, is_new_user=False):
             'is_new_user': is_new_user,
             'dashboard_url': dashboard_url,
         })
-        plain_message = strip_tags(html_message)
 
-        send_mail(
-            subject,
-            plain_message,
-            settings.DEFAULT_FROM_EMAIL,
-            [booking.email],
+        email_sent = send_email_via_mailtrap(
+            subject=subject,
             html_message=html_message,
-            fail_silently=False,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[booking.email],
         )
 
-        booking.confirmation_email_sent = True
-        booking.save()
+        if email_sent:
+            booking.confirmation_email_sent = True
+            booking.save()
+        else:
+            raise Exception("Failed to send email via Mailtrap API")
 
     except Exception as e:
         print(f"Error sending booking confirmation email: {e}")
@@ -511,45 +513,44 @@ def send_booking_confirmation_email(booking, is_new_user=False):
 
 def send_admin_notification_email(booking):
     """
-    Send booking notification to admin
+    Send booking notification to admin using Mailtrap HTTP API
     """
+    from users.tasks import send_email_via_mailtrap
+
     subject = f'New Booking Received - {booking.booking_reference}'
-    
+
     html_message = render_to_string('users/emails/admin_notification.html', {
         'booking': booking,
     })
-    plain_message = strip_tags(html_message)
-    
-    send_mail(
-        subject,
-        plain_message,
-        settings.DEFAULT_FROM_EMAIL,
-        [settings.ADMIN_EMAIL],
+
+    email_sent = send_email_via_mailtrap(
+        subject=subject,
         html_message=html_message,
-        fail_silently=False,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=[settings.ADMIN_EMAIL],
     )
-    
-    booking.admin_notification_sent = True
-    booking.save()
+
+    if email_sent:
+        booking.admin_notification_sent = True
+        booking.save()
 
 
 def send_welcome_email(user, password):
     """
-    Send welcome email to new user with login credentials
+    Send welcome email to new user with login credentials using Mailtrap HTTP API
     """
+    from users.tasks import send_email_via_mailtrap
+
     subject = 'Welcome to Mbugani Luxe Adventures'
-    
+
     html_message = render_to_string('users/emails/welcome.html', {
         'user': user,
         'password': password,
     })
-    plain_message = strip_tags(html_message)
-    
-    send_mail(
-        subject,
-        plain_message,
-        settings.DEFAULT_FROM_EMAIL,
-        [user.email],
+
+    send_email_via_mailtrap(
+        subject=subject,
         html_message=html_message,
-        fail_silently=False,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=[user.email],
     )

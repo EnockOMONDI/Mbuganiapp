@@ -1,44 +1,59 @@
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-import os
+"""
+Email verification module using Mailtrap HTTP API
+"""
 from django.conf import settings
+from mailtrap import Mail, Address, MailtrapClient
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def verification_mail(link, user):
-    s = smtplib.SMTP('smtp.gmail.com', 587)
-    s.starttls()
+    """
+    Send account verification email using Mailtrap HTTP API
 
-    # Use settings from Django settings.py
-    ei = settings.EMAIL_HOST_USER
-    password = settings.EMAIL_HOST_PASSWORD
+    Args:
+        link (str): Verification link URL
+        user (User): Django user object
 
+    Returns:
+        bool: True if email sent successfully, False otherwise
+    """
     try:
-        s.login(ei, password)
+        logger.info(f"Sending verification email to {user.email}")
 
-        msg = MIMEMultipart()
-        print(link, user.email, type(user.email))
-        msg['From'] = f"Mbugani Luxe Adventures <{ei}>"
-        msg['To'] = user.email
-        msg['Subject'] = "Welcome to Mbugani Luxe Adventures"
-        message = f'Hi {user.username}, welcome to Mbugani Luxe Adventures.<br>To activate your account, click the link below:<br>{link}<br><br>'
+        # Initialize Mailtrap client
+        client = MailtrapClient(token=settings.MAILTRAP_API_TOKEN)
 
-        # Add a new paragraph about the advantages of your travel agency in HTML
+        # Build email HTML content
+        message = f'Hi {user.username}, welcome to Mbugani Luxe Adventures.<br>To activate your account, click the link below:<br><a href="{link}">Activate Account</a><br><br>'
+
         directors_message = """
-        <p> <strong> Directors message </strong></p>
+        <p><strong>Directors message</strong></p>
         """
 
         advantages_message = """
-        <p>We are delighted to have you as part of the Mbugani Luxe Adventures community. Our goal is simple: We want every trip you take with us to be <strong>affordable</strong> and wonderfully <strong>memorable</strong>. Thats where we come in, we take care of all the little things to ensure your journey is smooth and effortless, creating moments you'll treasure forever.</p>    """
+        <p>We are delighted to have you as part of the Mbugani Luxe Adventures community. Our goal is simple: We want every trip you take with us to be <strong>affordable</strong> and wonderfully <strong>memorable</strong>. That's where we come in, we take care of all the little things to ensure your journey is smooth and effortless, creating moments you'll treasure forever.</p>
+        """
 
-        msg.attach(MIMEText(message + directors_message + advantages_message, 'html'))
-        s.send_message(msg)
-        s.quit()
+        html_content = message + directors_message + advantages_message
 
-        print(f"Verification email sent successfully to {user.email}")
+        # Create mail object
+        mail = Mail(
+            sender=Address(email="info@mbuganiluxeadventures.com", name="Mbugani Luxe Adventures"),
+            to=[Address(email=user.email)],
+            subject="Welcome to Mbugani Luxe Adventures",
+            html=html_content,
+        )
+
+        # Send email
+        response = client.send(mail)
+
+        logger.info(f"Verification email sent successfully to {user.email}: {response}")
         return True
+
     except Exception as e:
-        print(f"Error sending verification email: {e}")
+        logger.error(f"Error sending verification email to {user.email}: {e}")
         return False
 
 
