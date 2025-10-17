@@ -147,23 +147,29 @@ def check_django_q_config():
         print(f"❌ Error checking configuration: {e}")
         return False
 
+def safe_test_function(message="Test task executed"):
+    """Safe test function that can be pickled"""
+    return {'success': True, 'message': message}
+
 def test_task_creation():
     """Test creating a simple task"""
     print("\n🔍 Testing task creation...")
-    
+
     try:
         from django_q.tasks import async_task
-        
-        # Create a simple test task
+
+        # Create a simple test task using a safe function
         task_id = async_task(
-            'django.core.management.color.no_style',  # Simple built-in function
-            task_name='test_task_creation',
+            safe_test_function,  # Use a safe picklable function
+            "Django-Q diagnostic test",
+            task_name='diagnostic_test',
             timeout=30,
         )
-        
+
         print(f"✅ Test task created: {task_id}")
+        print("⚠️  Note: This task will be processed by the Railway worker")
         return True
-        
+
     except Exception as e:
         print(f"❌ Error creating test task: {e}")
         return False

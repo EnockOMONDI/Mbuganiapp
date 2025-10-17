@@ -55,16 +55,18 @@ DATABASES = {
     }
 }
 
-# Production email backend - SMTP (Port 587 with TLS)
+# Production email backend - SMTP
+# Try port 465 (SSL) for better Railway compatibility
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '465'))  # Port 465 (SSL) or 587 (TLS)
+EMAIL_USE_SSL = os.getenv('EMAIL_PORT', '465') == '465'  # Use SSL for port 465
+EMAIL_USE_TLS = os.getenv('EMAIL_PORT', '465') == '587'  # Use TLS for port 587
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'mbuganiluxeadventures@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'ewxdvlrxgphzjrdf')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>')
 # Email timeout settings for Railway
-EMAIL_TIMEOUT = 120  # 2 minutes timeout for SMTP connections
+EMAIL_TIMEOUT = 30  # 30 seconds timeout for SMTP connections
 
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
 JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')

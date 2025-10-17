@@ -15,7 +15,7 @@ from django.utils import timezone
 logger = logging.getLogger(__name__)
 
 
-def send_email_with_retry(subject, message, html_message, from_email, recipient_list, max_retries=3):
+def send_email_with_retry(subject, message, html_message, from_email, recipient_list, max_retries=2):
     """
     Send email with retry logic for better reliability
 
@@ -30,9 +30,19 @@ def send_email_with_retry(subject, message, html_message, from_email, recipient_
     Returns:
         bool: True if email sent successfully, False otherwise
     """
+    from django.core.mail import get_connection
+
     for attempt in range(max_retries):
+        connection = None
         try:
             logger.info(f"Attempting to send email (attempt {attempt + 1}/{max_retries})")
+
+            # Create a new connection for each attempt
+            connection = get_connection(
+                fail_silently=False,
+                timeout=30,  # 30 second timeout per attempt
+            )
+            connection.open()
 
             send_mail(
                 subject=subject,
@@ -41,6 +51,7 @@ def send_email_with_retry(subject, message, html_message, from_email, recipient_
                 from_email=from_email,
                 recipient_list=recipient_list,
                 fail_silently=False,
+                connection=connection,
             )
 
             logger.info(f"Email sent successfully on attempt {attempt + 1}")
@@ -50,13 +61,20 @@ def send_email_with_retry(subject, message, html_message, from_email, recipient_
             logger.warning(f"Email send attempt {attempt + 1} failed: {e}")
 
             if attempt < max_retries - 1:
-                # Wait before retrying (exponential backoff)
-                wait_time = 2 ** attempt  # 1s, 2s, 4s
+                # Short wait before retry (no exponential backoff to stay within timeout)
+                wait_time = 2  # 2 seconds between retries
                 logger.info(f"Waiting {wait_time} seconds before retry...")
                 time.sleep(wait_time)
             else:
                 logger.error(f"All {max_retries} email send attempts failed: {e}")
                 return False
+        finally:
+            # Always close the connection
+            if connection:
+                try:
+                    connection.close()
+                except:
+                    pass
 
     return False
 
@@ -107,7 +125,7 @@ def send_quote_request_emails_async(quote_request_id, **kwargs):
                 html_message=admin_message_html,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[admin_email],
-                max_retries=3
+                max_retries=2
             )
 
             if admin_sent:
@@ -133,7 +151,7 @@ def send_quote_request_emails_async(quote_request_id, **kwargs):
             html_message=user_message_html,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[quote_request.email],
-            max_retries=3
+            max_retries=2
         )
 
         if user_sent:
