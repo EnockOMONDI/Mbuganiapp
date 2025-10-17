@@ -5,7 +5,7 @@ services:
     env: python
     region: oregon
     plan: starter
-    branch: emails0ct25
+    branch: main
     buildCommand: |
       echo "🚀 Starting Mbugani Luxe Adventures build process..."
       pip install --upgrade pip
@@ -66,14 +66,14 @@ services:
       - key: RENDER_EXTERNAL_HOSTNAME
         generateValue: true
 
-      # Email Configuration (Mbugani Luxe Adventures Gmail)
-      # Port 587 with TLS is hardcoded in settings_prod.py
-      - key: EMAIL_HOST_USER
-        value: mbuganiluxeadventures@gmail.com
-      - key: EMAIL_HOST_PASSWORD
-        value: ewxdvlrxgphzjrdf
+      # Email Configuration (Mailtrap SMTP)
+      # Mailtrap settings: live.smtp.mailtrap.io:2525 with TLS (hardcoded in settings_prod.py)
+      - key: MAILTRAP_API_TOKEN
+        sync: false  # Set manually in Render dashboard for security
+      - key: EMAIL_PORT
+        value: 2525
       - key: DEFAULT_FROM_EMAIL
-        value: Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>
+        value: Mbugani Luxe Adventures <info@mbuganiluxeadventures.com>
       - key: ADMIN_EMAIL
         value: info@mbuganiluxeadventures.com
       - key: JOBS_EMAIL
@@ -192,11 +192,12 @@ services:
 # For production media files, consider AWS S3 integration
 
 # Environment-specific notes:
-# 1. EMAIL_HOST_PASSWORD is now automatically set via render.yaml: ewxdvlrxgphzjrdf
-# 2. Set UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY manually
+# 1. MAILTRAP_API_TOKEN must be set manually in Render dashboard (not in render.yaml for security)
+# 2. Set UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY manually in Render dashboard
 # 3. Optional: Set SENTRY_DSN for error monitoring
 # 4. Optional: Set GOOGLE_ANALYTICS_ID for analytics
 # 5. Consider upgrading to paid plans for production workloads
+# 6. Django-Q worker now runs on Railway.app (shares same Supabase database)
 
 # Deployment checklist:
 # ✅ Environment variables configured
