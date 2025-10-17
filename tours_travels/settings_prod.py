@@ -55,16 +55,16 @@ DATABASES = {
     }
 }
 
-# Production email backend - SMTP
-# Try port 465 (SSL) for better Railway compatibility
+# Production email backend - Mailtrap SMTP
+# Using Mailtrap for reliable email delivery on Railway
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', '465'))  # Port 465 (SSL) or 587 (TLS)
-EMAIL_USE_SSL = os.getenv('EMAIL_PORT', '465') == '465'  # Use SSL for port 465
-EMAIL_USE_TLS = os.getenv('EMAIL_PORT', '465') == '587'  # Use TLS for port 587
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'mbuganiluxeadventures@gmail.com')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'ewxdvlrxgphzjrdf')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <mbuganiluxeadventures@gmail.com>')
+EMAIL_HOST = 'live.smtp.mailtrap.io'
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '2525'))  # Port 2525 for Railway compatibility
+EMAIL_USE_TLS = True  # TLS required for Mailtrap
+EMAIL_USE_SSL = False  # Not using SSL
+EMAIL_HOST_USER = 'api'  # Always 'api' for Mailtrap
+EMAIL_HOST_PASSWORD = os.getenv('MAILTRAP_API_TOKEN', '956b51c090fc5c1320bca0c26a394fd5')  # API token from Mailtrap dashboard
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <info@mbuganiluxeadventures.com>')
 # Email timeout settings for Railway
 EMAIL_TIMEOUT = 30  # 30 seconds timeout for SMTP connections
 
