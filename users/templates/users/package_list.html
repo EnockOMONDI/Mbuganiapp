@@ -476,7 +476,7 @@
                                         <span><i class="far fa-calendar-alt"></i><a href="{% url 'adminside:package_detail' package.slug %}"> <strong> {{ package.duration_days }} Days </strong> </a></span>
                                         <h3 class="title"><a href="{% url 'adminside:package_detail' package.slug %}"> <strong>{{ package.name }} </strong>  </a></h3>
                                         <p class="location"><i class="far fa-map-marker-alt"></i> {{ package.main_destination.name }}</p>
-                                        <p class="location"><i class="far fa-briefcase"></i> From KES {{ package.adult_price }}</p>
+                                        <p class="location"><i class="far fa-briefcase"></i> From ${{ package.adult_price }}</p>
                                         {% if package.rating %}
                                         <p class="rating"><i class="fas fa-star text-warning"></i> {{ package.rating }}/5.0</p>
                                         {% endif %}

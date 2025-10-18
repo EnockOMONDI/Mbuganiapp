@@ -24,7 +24,7 @@ REQUESTED PACKAGE:
 =================
 Package: {{ quote_request.package.name }}
 Duration: {{ quote_request.package.duration_days }} days
-Price: {{ quote_request.package.adult_price }} KES per person
+Price: ${{ quote_request.package.adult_price }} USD per person
 {% endif %}
 
 REQUEST INFORMATION:
@@ -57,5 +57,5 @@ Please respond to this quote request within 24 hours.
 
 Mbugani Luxe Adventures
 Email: info@mbuganiluxeadventures.com
-Phone: +254 701 363 551
+Phone: +254701810167
 Website: https://www.mbuganiluxeadventures.com
