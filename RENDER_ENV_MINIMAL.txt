@@ -1,0 +1,138 @@
+# ============================================================================
+# COMPLETE ENVIRONMENT VARIABLES FOR RENDER.COM
+# Mbugani Luxe Adventures - Copy & Paste Ready
+# ============================================================================
+#
+# INSTRUCTIONS:
+# 1. Replace YOUR_APP with your actual Render subdomain (e.g., mbuganiapp)
+# 2. Generate SECRET_KEY using the command below
+# 3. Get DATABASE_URL from Supabase (Connection Pooling, port 6543)
+# 4. Copy ALL variables below to Render Dashboard > Environment
+# 5. Click "Add Environment Variable" for each one
+#
+# Generate SECRET_KEY:
+# python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+#
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# CORE DJANGO SETTINGS (REQUIRED)
+# ----------------------------------------------------------------------------
+DJANGO_SETTINGS_MODULE=tours_travels.settings_prod
+SECRET_KEY=PASTE_YOUR_GENERATED_SECRET_KEY_HERE
+DJANGO_ENV=production
+DEBUG=False
+PYTHON_VERSION=3.12.0
+
+# ----------------------------------------------------------------------------
+# DATABASE (REQUIRED)
+# ----------------------------------------------------------------------------
+# Get from: Supabase Dashboard > Settings > Database > Connection Pooling
+# IMPORTANT: Use port 6543 (pooling) NOT 5432 (direct)
+DATABASE_URL=postgresql://postgres.zgwfxeemdgfryiulbapx:JDuH37tYEfVuPpX!@aws-1-eu-west-1.pooler.supabase.com:6543/postgres
+DB_CONN_MAX_AGE=600
+DB_CONN_HEALTH_CHECKS=True
+
+# ----------------------------------------------------------------------------
+# DOMAINS & HOSTS (REQUIRED)
+# ----------------------------------------------------------------------------
+# Replace YOUR_APP with your Render subdomain (e.g., mbuganiapp)
+ALLOWED_HOSTS=www.mbuganiluxeadventures.com,mbuganiluxeadventures.com,YOUR_APP.onrender.com
+CSRF_TRUSTED_ORIGINS=https://www.mbuganiluxeadventures.com,https://mbuganiluxeadventures.com,https://YOUR_APP.onrender.com
+SITE_URL=https://www.mbuganiluxeadventures.com
+
+# ----------------------------------------------------------------------------
+# SERVER CONFIGURATION
+# ----------------------------------------------------------------------------
+WEB_CONCURRENCY=3
+GUNICORN_WORKERS=3
+GUNICORN_TIMEOUT=240
+
+# ----------------------------------------------------------------------------
+# EMAIL CONFIGURATION (REQUIRED)
+# ----------------------------------------------------------------------------
+MAILTRAP_API_TOKEN=956b51c090fc5c1320bca0c26a394fd5
+DEFAULT_FROM_EMAIL=Mbugani Luxe Adventures <info@mbuganiluxeadventures.com>
+ADMIN_EMAIL=info@mbuganiluxeadventures.com
+JOBS_EMAIL=careers@mbuganiluxeadventures.com
+NEWSLETTER_EMAIL=news@mbuganiluxeadventures.com
+
+# ----------------------------------------------------------------------------
+# UPLOADCARE (REQUIRED)
+# ----------------------------------------------------------------------------
+UPLOADCARE_PUBLIC_KEY=6fb55bb425b16d386db6
+UPLOADCARE_SECRET_KEY=3086089d3d2ac096684d
+
+# ----------------------------------------------------------------------------
+# SECURITY SETTINGS (REQUIRED)
+# ----------------------------------------------------------------------------
+SECURE_SSL_REDIRECT=True
+SECURE_HSTS_SECONDS=31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+SECURE_HSTS_PRELOAD=True
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
+SESSION_COOKIE_HTTPONLY=True
+CSRF_COOKIE_HTTPONLY=True
+
+# ----------------------------------------------------------------------------
+# PERFORMANCE & FILE UPLOADS
+# ----------------------------------------------------------------------------
+FILE_UPLOAD_MAX_MEMORY_SIZE=5242880
+DATA_UPLOAD_MAX_MEMORY_SIZE=5242880
+SESSION_COOKIE_AGE=86400
+
+# ----------------------------------------------------------------------------
+# REGIONAL SETTINGS
+# ----------------------------------------------------------------------------
+TIME_ZONE=Africa/Nairobi
+DEFAULT_LANGUAGE=en
+LANGUAGE_CODE=en-us
+DEFAULT_COUNTRY=Kenya
+DEFAULT_CURRENCY=USD
+
+# ----------------------------------------------------------------------------
+# BUSINESS CONFIGURATION
+# ----------------------------------------------------------------------------
+DEFAULT_BOOKING_EXPIRY_HOURS=24
+MAX_BOOKING_ADULTS=20
+MAX_BOOKING_CHILDREN=15
+MAX_BOOKING_ROOMS=10
+WHATSAPP_PHONE=+254701363551
+
+# ----------------------------------------------------------------------------
+# FEATURE FLAGS
+# ----------------------------------------------------------------------------
+ENABLE_BOOKING_NOTIFICATIONS=True
+ENABLE_EMAIL_MARKETING=True
+ENABLE_ANALYTICS=True
+ENABLE_CHAT_SUPPORT=False
+
+# ============================================================================
+# OPTIONAL VARIABLES (Uncomment if needed)
+# ============================================================================
+
+# Sentry error monitoring
+# SENTRY_DSN=https://your-sentry-dsn@sentry.io/your-project-id
+
+# Google Analytics
+# GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
+
+# ============================================================================
+# DO NOT SET THESE (Auto-generated by Render)
+# ============================================================================
+# PORT - Auto-generated
+# RENDER_EXTERNAL_HOSTNAME - Auto-generated
+
+# ============================================================================
+# DEPLOYMENT CHECKLIST
+# ============================================================================
+# [ ] Replace YOUR_APP with your Render subdomain
+# [ ] Generate and paste SECRET_KEY
+# [ ] Verify DATABASE_URL is correct (port 6543)
+# [ ] All security settings are True
+# [ ] DEBUG is False
+# [ ] Email addresses are correct
+# [ ] Uploadcare credentials are correct
+# ============================================================================
+

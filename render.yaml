@@ -67,8 +67,8 @@ services:
         generateValue: true
 
       # Email Configuration (Mailtrap HTTP API)
-      # Mailtrap API token is hardcoded in settings_prod.py for synchronous email sending
-      # No SMTP configuration needed - using HTTP API instead
+      - key: MAILTRAP_API_TOKEN
+        value: 956b51c090fc5c1320bca0c26a394fd5  # Or use sync: false to set manually
       - key: DEFAULT_FROM_EMAIL
         value: Mbugani Luxe Adventures <info@mbuganiluxeadventures.com>
       - key: ADMIN_EMAIL
