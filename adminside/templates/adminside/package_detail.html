@@ -334,11 +334,11 @@
             Starting from ${{ package.adult_price }}
         </div>
         
-        <div class="text-center">
+        <!-- <div class="text-center">
             <a href="{% url 'users:add_to_cart' package.id %}" class="book-now-btn">
                 <i class="fas fa-shopping-cart"></i> Book This Package
             </a>
-        </div>
+        </div> -->
         <div class="text-center">
             <a href="{% url 'users:quote_request' %}?package_id={{ package.id }}" class="book-now-btn">
                 <i class="fas fa-shopping-cart"></i> Get Quote
@@ -349,41 +349,9 @@
     <!-- Package Content -->
     <div class="package-content">
         <!-- Description -->
-        <div class="content-section">
-            <h3><i class="fas fa-info-circle me-2"></i>About This Package</h3>
-            <div>{{ package.description|safe }}</div>
-        </div>
-
-        <!-- Booking Call-to-Action -->
-        <div class="content-section" style="background: #291c1b; color: white; border-radius: 15px; padding: 40px; text-align: center; margin: 30px 0;">
-            <h2 style="color: white; margin-bottom: 20px; font-family: 'TAN-Garland-Regular', sans-serif;">
-                <i class="fas fa-star"></i> Ready for Your Adventure?
-            </h2>
-            <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9;">
-                Join thousands of satisfied travelers who have experienced the magic of East Africa with Mbugani Luxe Adventures.
-            </p>
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
-                <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px;">
-                    <i class="fas fa-shield-alt" style="color: #e3aa00; margin-right: 8px;"></i>
-                    <span>Secure Booking</span>
-                </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px;">
-                    <i class="fas fa-headset" style="color: #e3aa00; margin-right: 8px;"></i>
-                    <span>24/7 Support</span>
-                </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px;">
-                    <i class="fas fa-award" style="color: #e3aa00; margin-right: 8px;"></i>
-                    <span>Best Price Guarantee</span>
-                </div>
-            </div>
-            <a href="{% url 'users:add_to_cart' package.id %}" style="background: white; color: #471601; padding: 20px 50px; border-radius: 50px; font-size: 1.3rem; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)'">
-                <i class="fas fa-rocket" style="margin-right: 10px;"></i>
-                Start Your Journey - Book Now
-            </a>
-            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
-                <i class="fas fa-clock"></i> No login required • Instant confirmation • Free cancellation
-            </p>
-        </div>
+    
+   
+    
 
         <!-- Enhanced Itinerary Section -->
         {% if package.itinerary.days.exists %}
@@ -563,6 +531,37 @@
                     <div>{{ package.exclusions|safe }}</div>
                 </div>
             </div>
+        </div>
+<!-- Booking Call-to-Action -->
+
+        <div class="content-section" style="background: #291c1b; color: white; border-radius: 15px; padding: 40px; text-align: center; margin: 30px 0;">
+            <h2 style="color: white; margin-bottom: 20px; font-family: 'TAN-Garland-Regular', sans-serif;">
+                <i class="fas fa-star"></i> Ready for Your Adventure?
+            </h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9;">
+                Join thousands of satisfied travelers who have experienced the magic of East Africa with Mbugani Luxe Adventures.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px;">
+                    <i class="fas fa-shield-alt" style="color: #e3aa00; margin-right: 8px;"></i>
+                    <span>Secure Booking</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px;">
+                    <i class="fas fa-headset" style="color: #e3aa00; margin-right: 8px;"></i>
+                    <span>24/7 Support</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px;">
+                    <i class="fas fa-award" style="color: #e3aa00; margin-right: 8px;"></i>
+                    <span>Best Price Guarantee</span>
+                </div>
+            </div>
+            <a href="{% url 'users:add_to_cart' package.id %}" style="background: white; color: #471601; padding: 20px 50px; border-radius: 50px; font-size: 1.3rem; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)'">
+                <i class="fas fa-rocket" style="margin-right: 10px;"></i>
+                Start Your Journey - Book Now
+            </a>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
+                <i class="fas fa-clock"></i> No login required • Instant confirmation • Free cancellation
+            </p>
         </div>
     </div>
 </div>
