@@ -52,7 +52,7 @@ def is_valid_django_url(url):
     return url.startswith('/') or url.startswith('http')
 
 @register.simple_tag
-def image_with_placeholder(image_field, css_class="", alt_text="", placeholder_path="images/mbuganiluxeadventuresplaceholder.svg"):
+def image_with_placeholder(image_field, css_class="", alt_text="", placeholder_path="images/mbuganiluxeadventuresplaceholder.svg", lazy_load=True):
     """
     Template tag to display an image with automatic placeholder fallback
 
@@ -80,8 +80,9 @@ def image_with_placeholder(image_field, css_class="", alt_text="", placeholder_p
 
     css_classes = f'class="{css_class}"' if css_class else ''
     alt_attribute = f'alt="{alt_text}"' if alt_text else 'alt="Image"'
+    loading_attribute = 'loading="lazy"' if lazy_load else ''
 
-    html = f'<img src="{image_url}" {css_classes} {alt_attribute}>'
+    html = f'<img src="{image_url}" {css_classes} {alt_attribute} {loading_attribute}>'
     return mark_safe(html)
 
 @register.simple_tag

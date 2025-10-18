@@ -7,21 +7,11 @@
     <div class="package-card">
         <!-- Package Image -->
         <div class="package-image-container">
-            {% if package.featured_image %}
-                <img src="{{ package.featured_image.url }}"
-                     alt="{{ package.name }}"
-                     class="package-image"
-                     loading="lazy">
-            {% else %}
-                <img src="{% static 'assets/images/about/about-1.png' %}"
-                     alt="{{ package.name }}"
-                     class="package-image"
-                     loading="lazy">
-            {% endif %}
-            
+            {% image_with_placeholder package.featured_image "package-image" package.name %}
+
             <!-- Package Badges -->
             <div class="package-badges">
-                {% if package.featured_image %}
+                {% if package.is_featured %}
                     <span class="package-badge badge-featured">Featured</span>
                 {% endif %}
                 <span class="package-badge badge-popular">Popular</span>
