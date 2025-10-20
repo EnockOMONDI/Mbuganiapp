@@ -7,6 +7,43 @@ from pyuploadcare.dj.models import ImageField
 from django_ckeditor_5.fields import CKEditor5Field
 
 
+class PackageCategory(models.Model):
+    """
+    Category model for organizing packages (e.g., Nairobi Excursions, Kenya Safaris, Outbound)
+    """
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+    description = models.TextField(blank=True, help_text="Category description")
+    is_active = models.BooleanField(default=True)
+    display_order = models.PositiveIntegerField(default=0, help_text="Order of appearance (lower numbers appear first)")
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['display_order', 'name']
+        verbose_name = "Package Category"
+        verbose_name_plural = "Package Categories"
+        indexes = [
+            models.Index(fields=['slug']),
+            models.Index(fields=['is_active']),
+        ]
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        """Clean slug before saving"""
+        if self.slug:
+            self.slug = self.slug.replace('&', 'and').replace(' ', '-')
+            self.slug = slugify(self.slug, allow_unicode=False)
+        super().save(*args, **kwargs)
+
+    def get_package_count(self):
+        """Get count of published packages in this category"""
+        return self.packages.filter(status='published').count()
+
+
 
 class Destination(models.Model):
     """
@@ -294,6 +331,16 @@ class Package(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     description = CKEditor5Field(config_name='default', help_text="Detailed package description with rich text formatting")
 
+    # Category
+    category = models.ForeignKey(
+        PackageCategory,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='packages',
+        help_text="Package category (e.g., Nairobi Excursions, Kenya Safaris, Outbound)"
+    )
+
     # Destinations - simplified to main destination only
     # Sub-destinations will be handled through itinerary
     main_destination = models.ForeignKey(
@@ -353,6 +400,7 @@ class Package(models.Model):
     class Meta:
         ordering = ['-is_featured', '-published_at', '-created_at']
         indexes = [
+            models.Index(fields=['category', 'status']),
             models.Index(fields=['main_destination', 'status']),
             models.Index(fields=['status', 'is_featured']),
         ]

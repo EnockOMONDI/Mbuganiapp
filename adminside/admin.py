@@ -2,6 +2,7 @@ from django.contrib import admin
 from django import forms
 from django.utils.html import format_html
 from .models import (
+    PackageCategory,
     Destination,
     Accommodation,
     TravelMode,
@@ -37,6 +38,35 @@ class ItineraryDayAdminForm(forms.ModelForm):
         model = ItineraryDay
         fields = '__all__'
         # RichTextField widgets are automatically configured
+
+
+@admin.register(PackageCategory)
+class PackageCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'get_package_count', 'display_order', 'is_active', 'created_at')
+    list_editable = ('display_order', 'is_active')
+    search_fields = ('name', 'description')
+    prepopulated_fields = {'slug': ('name',)}
+    readonly_fields = ('created_at', 'updated_at')
+    ordering = ['display_order', 'name']
+
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('name', 'slug', 'description')
+        }),
+        ('Display Options', {
+            'fields': ('display_order', 'is_active')
+        }),
+        ('System Information', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+
+    def get_package_count(self, obj):
+        count = obj.get_package_count()
+        return f"{count} packages"
+    get_package_count.short_description = 'Published Packages'
+
 
 @admin.register(Destination)
 class DestinationAdmin(admin.ModelAdmin):
@@ -204,9 +234,9 @@ class PackageBookingInline(admin.TabularInline):
 @admin.register(Package)
 class PackageAdmin(admin.ModelAdmin):
     form = PackageAdminForm
-    list_display = ('name', 'display_image', 'main_destination', 'adult_price',
+    list_display = ('name', 'display_image', 'category', 'main_destination', 'adult_price',
                    'child_price', 'duration_days', 'status', 'is_featured', 'total_bookings')
-    list_filter = ('main_destination', 'status', 'is_featured', 'duration_days')
+    list_filter = ('category', 'main_destination', 'status', 'is_featured', 'duration_days')
     search_fields = ('name', 'description', 'inclusions', 'exclusions')
     filter_horizontal = ('available_accommodations', 'available_travel_modes')
     readonly_fields = ('total_bookings', 'total_reviews')
@@ -216,7 +246,7 @@ class PackageAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Basic Information', {
-            'fields': ('name', 'slug', 'main_destination', 'duration_days', 'duration_nights')
+            'fields': ('name', 'slug', 'category', 'main_destination', 'duration_days', 'duration_nights')
         }),
         ('Media', {
             'fields': ('featured_image',)

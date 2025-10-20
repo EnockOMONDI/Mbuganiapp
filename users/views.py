@@ -101,6 +101,12 @@ def aboutus(request):
     return render(request, 'users/aboutus.html')
 
 
+def services(request):
+    """
+    Render the services page showcasing all Mbugani Luxe Adventures services.
+    """
+    return render(request, 'users/services.html')
+
 
 def corporate(request):
 
