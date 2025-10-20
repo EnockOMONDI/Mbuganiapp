@@ -16,7 +16,7 @@ All email templates have been updated with the complete Mbugani Luxe Adventures 
 
 ### Contact Information
 - **Email**: info@mbuganiluxeadventures.com
-- **Phone**: +254 798 197 430
+- **Phone**: +2540701810167
 - **Location**: Nairobi, Kenya
 - **Website**: www.mbuganiluxeadventures.com
 
@@ -154,7 +154,7 @@ python manage.py test_email_templates
 
 ### Checklist for New Templates
 - [ ] Mbugani Luxe Adventures branding applied
-- [ ] Correct phone number (+254 798 197 430)
+- [ ] Correct phone number (+2540701810167)
 - [ ] Proper email addresses used
 - [ ] Responsive design implemented
 - [ ] Brand colors (#291c1b, #fb9300) included
