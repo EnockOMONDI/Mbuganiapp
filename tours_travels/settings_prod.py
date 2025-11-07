@@ -46,12 +46,12 @@ DATABASES = {
 MAILTRAP_API_TOKEN = os.getenv('MAILTRAP_API_TOKEN')
 if not MAILTRAP_API_TOKEN:
     raise ValueError("MAILTRAP_API_TOKEN environment variable is required for production")
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <info@mbuganiluxeadventures.com>')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 
 # Email addresses for different purposes
-ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
-JOBS_EMAIL = os.getenv('JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
-NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL', 'news@mbuganiluxeadventures.com')
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
+JOBS_EMAIL = os.getenv('JOBS_EMAIL')
+NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL')
 
 
 # Production allowed hosts
@@ -160,10 +160,10 @@ UPLOADCARE = {
 }
 
 # Production site URL
-SITE_URL = os.getenv('SITE_URL', 'https://www.mbuganiluxeadventures.com')
+SITE_URL = os.getenv('SITE_URL')
 
 # Production WhatsApp settings
-WHATSAPP_PHONE = os.getenv('WHATSAPP_PHONE', '+254701363551')
+WHATSAPP_PHONE = os.getenv('WHATSAPP_PHONE')
 WHATSAPP_MESSAGE_TEMPLATE = 'Hello! I have a question about my booking: {booking_reference}'
 
 # Production performance settings
@@ -198,7 +198,7 @@ CSP_CONNECT_SRC = ("'self'", "https://api.uploadcare.com")
 
 # Production error reporting
 ADMINS = [
-    ('Admin', os.getenv('ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')),
+    ('Admin', os.getenv('ADMIN_EMAIL')),
 ]
 MANAGERS = ADMINS
 

@@ -68,7 +68,7 @@ class AdminInterfaceTest(TestCase):
             user=self.regular_user,
             full_name='Test User',
             email='user@example.com',
-            phone_number='+254701363551',
+            phone_number='+254 701 810167',
             number_of_adults=2,
             number_of_children=0,
             number_of_rooms=1,

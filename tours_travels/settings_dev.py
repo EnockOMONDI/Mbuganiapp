@@ -186,7 +186,7 @@ UPLOADCARE = {
 SITE_URL = 'http://localhost:8000'
 
 # Development WhatsApp settings
-WHATSAPP_PHONE = '+254701363551'
+WHATSAPP_PHONE = '+254701810167'
 WHATSAPP_MESSAGE_TEMPLATE = 'Hello! I have a question about my booking: {booking_reference}'
 
 # Development debug toolbar (if installed)
