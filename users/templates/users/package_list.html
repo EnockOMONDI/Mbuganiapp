@@ -244,6 +244,25 @@
         z-index: 2;
     }
 
+    /* Category badge styling */
+    .category-badge {
+        display: inline-block;
+        padding: 6px 14px;
+        background: linear-gradient(135deg, #291c1a, #471601);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+    }
+
+    .category-badge i {
+        margin-right: 4px;
+        font-size: 0.7rem;
+    }
+
     /* Destination section styling */
     .destination-section {
         scroll-margin-top: 100px; /* Account for sticky header */
@@ -473,6 +492,11 @@
                                 </div>
                                 <div class="content">
                                     <div class="meta">
+                                        {% if package.category %}
+                                        <p class="category-badge">
+                                            <i class="fas fa-tag"></i> {{ package.category.name }}
+                                        </p>
+                                        {% endif %}
                                         <span><i class="far fa-calendar-alt"></i><a href="{% url 'adminside:package_detail' package.slug %}"> <strong> {{ package.duration_days }} Days </strong> </a></span>
                                         <h3 class="title"><a href="{% url 'adminside:package_detail' package.slug %}"> <strong>{{ package.name }} </strong>  </a></h3>
                                         <p class="location"><i class="far fa-map-marker-alt"></i> {{ package.main_destination.name }}</p>

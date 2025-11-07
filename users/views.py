@@ -572,7 +572,7 @@ def home(request):
         ).order_by('name')[:50]  # Limit to 50 most relevant destinations
 
         # Get published packages with highly optimized queries (limit to 12 for homepage)
-        packages_queryset = Package.objects.select_related('main_destination').prefetch_related(
+        packages_queryset = Package.objects.select_related('main_destination', 'category').prefetch_related(
             'available_accommodations',
             'available_travel_modes'
         ).filter(status=Package.PUBLISHED).order_by('-is_featured', 'total_bookings')[:12]

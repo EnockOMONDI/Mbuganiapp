@@ -1,0 +1,114 @@
+{
+  "categories_created": [
+    {
+      "name": "Nairobi Excursions",
+      "slug": "nairobi-excursions",
+      "status": "Created"
+    },
+    {
+      "name": "Kenyan Multi-Day Bush Safaris",
+      "slug": "kenyan-multiday-safaris",
+      "status": "Created"
+    },
+    {
+      "name": "Outbound Packages",
+      "slug": "outbound-packages",
+      "status": "Created"
+    }
+  ],
+  "packages_reassigned": [
+    {
+      "package_name": "Best of Cape Town Outbound Package - 7 Days & 6 Nights",
+      "package_slug": "best-of-cape-town-7-days-6-nights",
+      "old_category": "None",
+      "new_category": "Outbound Packages",
+      "destination": "Cape Town",
+      "duration_days": 7,
+      "reason": "International destination (Cape Town)"
+    },
+    {
+      "package_name": "Nairobi National Park Excursion Tour",
+      "package_slug": "nairobi-national-park-tour",
+      "old_category": "None",
+      "new_category": "Nairobi Excursions",
+      "destination": "Nairobi",
+      "duration_days": 1,
+      "reason": "Nairobi-based day trip (1 day)"
+    },
+    {
+      "package_name": "Nairobi Heritage Excursion Tour",
+      "package_slug": "nairobi-heritage-tour",
+      "old_category": "None",
+      "new_category": "Nairobi Excursions",
+      "destination": "Nairobi",
+      "duration_days": 1,
+      "reason": "Nairobi-based day trip (1 day)"
+    },
+    {
+      "package_name": "Nairobi Full Day Excursion Tour",
+      "package_slug": "nairobi-full-day-excursion-tour",
+      "old_category": "None",
+      "new_category": "Nairobi Excursions",
+      "destination": "Nairobi",
+      "duration_days": 1,
+      "reason": "Nairobi-based day trip (1 day)"
+    },
+    {
+      "package_name": "Maasai Magic Cultural Multiday Bush Safari Tour",
+      "package_slug": "maasai-magic-cultural-tour",
+      "old_category": "None",
+      "new_category": "Nairobi Excursions",
+      "destination": "Kiserian",
+      "duration_days": 1,
+      "reason": "Nairobi-based day trip (1 day)"
+    },
+    {
+      "package_name": "3 Days & 2 Nights Ol Pejeta Conservancy Spectacular Multiday Bush Safari Escapade",
+      "package_slug": "3-days-2-nights-ol-pejeta-conservancy-spectacular-escapade",
+      "old_category": "None",
+      "new_category": "Kenyan Multi-Day Bush Safaris",
+      "destination": "Ol Pejeta Conservancy",
+      "duration_days": 3,
+      "reason": "Multi-day Kenya safari (3 days)"
+    },
+    {
+      "package_name": "4 Days & 3 Nights Maasai Mara Spectacular Multiday Bush Safari Getaway",
+      "package_slug": "4-days-3-nights-maasai-mara-spectacular-getaway",
+      "old_category": "None",
+      "new_category": "Kenyan Multi-Day Bush Safaris",
+      "destination": "Kenya",
+      "duration_days": 4,
+      "reason": "Multi-day Kenya safari (4 days)"
+    },
+    {
+      "package_name": "3 Days & 2 Nights Amboseli Spectacular Multiday Bush Safari Escapade",
+      "package_slug": "3-days-2-nights-amboseli-spectacular-escapade",
+      "old_category": "None",
+      "new_category": "Kenyan Multi-Day Bush Safaris",
+      "destination": "Amboseli National Park",
+      "duration_days": 3,
+      "reason": "Multi-day Kenya safari (3 days)"
+    },
+    {
+      "package_name": "Rwanda Gorilla Trekking Outbound Package Experience",
+      "package_slug": "rwanda-gorilla-trekking-experience",
+      "old_category": "None",
+      "new_category": "Outbound Packages",
+      "destination": "Rwanda",
+      "duration_days": 4,
+      "reason": "International destination (Rwanda)"
+    },
+    {
+      "package_name": "Ultimate Kenya Multiday Bush Safari Adventure",
+      "package_slug": "ultimate-kenya-safari-adventure",
+      "old_category": "None",
+      "new_category": "Kenyan Multi-Day Bush Safaris",
+      "destination": "Kenya",
+      "duration_days": 7,
+      "reason": "Multi-day Kenya safari (7 days)"
+    }
+  ],
+  "packages_unchanged": [],
+  "packages_set_to_null": [],
+  "timestamp": "2025-10-20T17:55:54.923031"
+}

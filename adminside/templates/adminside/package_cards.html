@@ -19,6 +19,14 @@
 
         <!-- Package Content -->
         <div class="package-content">
+            <!-- Category Badge -->
+            {% if package.category %}
+            <div class="package-category-badge">
+                <i class="fas fa-tag"></i>
+                {{ package.category.name }}
+            </div>
+            {% endif %}
+
             <!-- Destination -->
             <div class="package-destination">
                 <i class="fas fa-map-marker-alt"></i>

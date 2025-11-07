@@ -8,18 +8,7 @@
 
 ---
 
-## 📋 TABLE OF CONTENTS
 
-1. [Overview](#overview)
-2. [Architecture Diagram](#architecture-diagram)
-3. [Key Components](#key-components)
-4. [Why This Architecture?](#why-this-architecture)
-5. [Configuration Steps](#configuration-steps)
-6. [Environment Variables](#environment-variables)
-7. [Code Implementation](#code-implementation)
-8. [Deployment Checklist](#deployment-checklist)
-9. [Troubleshooting](#troubleshooting)
-10. [Replication Guide](#replication-guide)
 
 ---
 
@@ -30,36 +19,10 @@
 **Kipekee** (Swahili for "unique/special") is a synchronous email architecture that:
 - ✅ Sends emails **immediately** during HTTP request (no background workers)
 - ✅ Uses **Mailtrap HTTP API** instead of SMTP
-- ✅ Eliminates need for **separate worker deployments** (Django-Q, Celery, etc.)
 - ✅ Provides **instant feedback** to users on email delivery status
 - ✅ Simplifies infrastructure to **single deployment** (Render.com)
 
 ### Trade-offs
-
-**Advantages:**
-- 🎯 Simple architecture (1 deployment instead of 2)
-- 💰 Lower cost (no separate worker service)
-- 🔍 Easier debugging (synchronous flow)
-- ⚡ Instant email delivery confirmation
-
-**Disadvantages:**
-- ⏱️ Slower form submissions (1-4 seconds added)
-- 🚫 No automatic retries on failure
-- 📊 Higher server load during email sending
-
-### When to Use This Architecture
-
-✅ **Use Kipekee when:**
-- You have low to medium email volume (<1000 emails/day)
-- You want simple infrastructure
-- You can accept 1-4 second form submission delays
-- You want to minimize deployment complexity
-
-❌ **Don't use Kipekee when:**
-- You have high email volume (>1000 emails/day)
-- You need sub-second form response times
-- You need automatic retry mechanisms
-- You send bulk emails or newsletters
 
 ---
 
@@ -151,7 +114,7 @@ your_project/
 │   └── wsgi.py
 ├── requirements.txt          # Python dependencies
 ├── render.yaml               # Render.com deployment config
-└── KIPEKEE_EMAIL_SYSTEM.md   # This documentation
+
 ```
 
 ### Dependencies
@@ -176,21 +139,7 @@ python-decouple>=3.8         # Environment variable management
 
 ---
 
-## 💡 WHY THIS ARCHITECTURE?
 
-### Previous Architecture (Async with Django-Q)
-
-```
-User → Django Web App → Database → Django-Q Worker → SMTP → Email
-       (Render.com)                  (Railway.app)
-       
-- 2 separate deployments
-- Complex infrastructure
-- Background task queue
-- Async email sending
-- Fast form response (<500ms)
-- Automatic retries
-```
 
 ### Current Architecture (Sync with Mailtrap HTTP API)
 
@@ -208,19 +157,6 @@ User → Django Web App → Mailtrap HTTP API → Email
 
 ### Migration Rationale
 
-**Problem with previous setup:**
-- Maintaining 2 separate deployments (Render + Railway)
-- Django-Q worker complexity
-- SMTP reliability issues
-- Higher infrastructure costs
-
-**Solution with Kipekee:**
-- Single deployment on Render.com
-- Direct HTTP API calls (more reliable than SMTP)
-- Simpler codebase
-- Lower costs
-
----
 
 ## ⚙️ CONFIGURATION STEPS
 
