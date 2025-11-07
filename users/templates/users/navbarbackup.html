@@ -25,26 +25,30 @@
                             <nav class="main-menu">
                                 <ul>
                                     <li class="menu-item"><a href="{% url 'users:users-home' %}">Home</a></li>
-                                    <li class="menu-item has-children"><a href="#">Safaris & Journeys<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                    <li class="menu-item"><a href="{% url 'users:aboutus' %}">About Us</a></li>
+                                  
+                                    
+                                    <li class="menu-item has-children"><a href="{% url 'users:services' %}">Services<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
                                         <ul class="sub-menu">
-                                            <li><a href="{% url 'adminside:package_list' %}">Highlight Safaris</a></li>
-                                            <li><a href="{% url 'adminside:destination_list' %}">Destinations</a></li>
+                                            <li><a href="{% url 'users:services' %}">All Services</a></li>
+                                            <li><a href="{% url 'users:services' %}#air-ticketing">Air Ticketing</a></li>
+                                            <li><a href="{% url 'users:services' %}#hotel-bookings">Hotel Bookings</a></li>
+                                            <li><a href="{% url 'users:services' %}#tours-safaris">Tours and Safaris</a></li>
+                                            <li><a href="{% url 'users:services' %}#mice">MICE</a></li>
+                                            <li><a href="{% url 'users:services' %}#group-travel">Group Travel Logistics</a></li>
+                                            <li><a href="{% url 'users:services' %}#team-building">Team Building</a></li>
+                                            <li><a href="{% url 'users:services' %}#travel-insurance">Travel Insurance</a></li>
+                                            <li><a href="{% url 'users:services' %}#airport-transfers">Airport Transfers</a></li>
                                         </ul>
                                     </li>
-                                    <li class="menu-item has-children"><a href="#">Services<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
+                                    <li class="menu-item has-children"><a href="#">Travel experiences<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
                                         <ul class="sub-menu">
-                                            <li><a href="{% url 'users:corporatepage' %}">Corporate Travel</a></li>
-                                            <li><a href="{% url 'users:micepage' %}">MICE</a></li>
-                                            <li><a href="{% url 'users:student-travel' %}">Student Travel</a></li>
-                                            <li><a href="{% url 'users:ngo-travel' %}">NGO Travel</a></li>
+                                            <li><a href="{% url 'adminside:package_list' %}">Highlight experiences</a></li>
+                                            <!-- <li><a href="{% url 'adminside:destination_list' %}">Destinations</a></li> -->
                                         </ul>
                                     </li>
-                                    <li class="menu-item has-children"><a href="#">About<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="{% url 'users:aboutus' %}">About Us</a></li>
-                                            <li><a href="{% url 'users:careers' %}">Careers</a></li>
-                                        </ul>
-                                    </li>
+                                
+                                 
                                     <li class="menu-item has-children"><a href="#">Blog<span class="dd-trigger"><i class="far fa-angle-down"></i></span></a>
                                         <ul class="sub-menu">
                                             <li><a href="{% url 'blog:blog-list' %}">Blog List</a></li>
@@ -64,7 +68,7 @@
 
                            
                             <div class="menu-button d-xl-block d-none">
-                                <a href=  "https://api.whatsapp.com/send/?phone=254798197430&text&type=phone_number&app_absent=0"  target="_blank" class="main-btn primary-btn">Contact Us<i class="fas fa-paper-plane"></i></a>
+                                <a href=  "https://api.whatsapp.com/send/?phone=2540701810167&text&type=phone_number&app_absent=0"  target="_blank" class="main-btn primary-btn">Contact Us<i class="fas fa-paper-plane"></i></a>
                             </div>
                         
                         </div>

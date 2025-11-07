@@ -44,7 +44,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "seen"
+# For development, you can use a simple key. For production, this MUST be set via environment variable
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-key-only-for-local-development-do-not-use-in-production')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
@@ -65,7 +66,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_ckeditor_5',  # CKEditor 5 for modern rich text editing
     'import_export',
-    'django_q',  # Django-Q for background tasks
+    # 'django_q',  # Removed - migrated to synchronous Mailtrap HTTP API
     'adminside',
     'users',
     'blog',
@@ -233,9 +234,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Mbugani Luxe Adventures email credentials
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'mbuganiluxeadventures@gmail.com')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'ewxdvlrxgphzjrdf')
-DEFAULT_FROM_EMAIL = 'MBUGANI LUXE ADVENTURES'
+# For development, these can have defaults. For production, MUST be set via environment variables
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='MBUGANI LUXE ADVENTURES')
 
 # Admin email for notifications
 ADMIN_EMAIL = 'info@mbuganiluxeadventures.com'

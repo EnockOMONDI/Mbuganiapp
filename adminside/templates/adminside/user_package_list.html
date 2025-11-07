@@ -627,7 +627,7 @@
                         
                         <div class="package-price">
                             <div>
-                                <div class="price">KES {{ package.adult_price }}</div>
+                                <div class="price">${{ package.adult_price }}</div>
                                 <div class="price-label">per person</div>
                             </div>
                             <a href="{% url 'adminside:package_detail' package.slug %}" class="explore-btn">

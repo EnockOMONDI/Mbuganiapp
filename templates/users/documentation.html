@@ -1182,7 +1182,7 @@ session['booking_form_data'] = {
     'details': {
         'full_name': 'John Doe',
         'email': 'john@example.com',
-        'phone_number': '+254701363551',
+        'phone_number': '',
         'travel_date': '2025-08-15',
         'special_requests': 'Vegetarian meals',
         'terms_accepted': True,
@@ -2219,7 +2219,7 @@ Compatibility: django-ckeditor 6.7.3 + django-js-asset 3.1.2
                                     <tr>
                                         <td><code>WHATSAPP_PHONE</code></td>
                                         <td>WhatsApp contact number</td>
-                                        <td>+254701363551</td>
+                                        <td>xxxxxx1</td>
                                         <td><span class="badge bg-info">Optional</span></td>
                                         <td>All</td>
                                     </tr>
@@ -2243,14 +2243,13 @@ Compatibility: django-ckeditor 6.7.3 + django-js-asset 3.1.2
                                 <h5>Core Settings</h5>
                                 <div class="code-block small">
 # Django Core
-DJANGO_SETTINGS_MODULE=tours_travels.settings_prod
+DJANGO_SETTINGS_MODULE=
 SECRET_KEY=your-super-secret-key-here
 DEBUG=False
 ALLOWED_HOSTS=mbuganiapp.onrender.com,.onrender.com
 
 # Database (Supabase PostgreSQL)
-DATABASE_URL=postgresql://postgres.zgwfxeemdgfryiulbapx:JDuH37tYEfVuPpX!@aws-1-eu-west-1.pooler.supabase.com:6543/postgres
-
+DATABASE_URL= 
 # Email Configuration
 EMAIL_HOST_USER=mbuganiluxeadventures@gmail.com
 EMAIL_HOST_PASSWORD=iagt yans hoyd pavg
@@ -2268,8 +2267,8 @@ UPLOADCARE_PUBLIC_KEY=your-uploadcare-public-key
 UPLOADCARE_SECRET_KEY=your-uploadcare-secret-key
 
 # Site Configuration
-SITE_URL=https://mbuganiapp.onrender.com
-WHATSAPP_PHONE=+254701363551
+SITE_URL=
+WHATSAPP_PHONE=
 
 # Security
 SECURE_SSL_REDIRECT=True
@@ -2625,8 +2624,7 @@ python manage.py runserver
                             <h5><i class="fas fa-database me-2 text-warning"></i>Database Configuration</h5>
                             <div class="code-block">
 # PostgreSQL (Supabase Cloud)
-DATABASE_URL=postgresql://postgres.zgwfxeemdgfryiulbapx:JDuH37tYEfVuPpX!@aws-1-eu-west-1.pooler.supabase.com:6543/postgres
-
+DATABASE_URL=
 # Environment Variables
 DEBUG=False
 SECRET_KEY=your-secret-key

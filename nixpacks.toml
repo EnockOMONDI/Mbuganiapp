@@ -1,5 +1,0 @@
-[variables]
-NIXPACKS_NO_DEFAULT_PORT = "true"
-
-[start]
-cmd = "python manage.py qcluster --settings=tours_travels.settings_prod"

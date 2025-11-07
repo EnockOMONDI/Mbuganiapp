@@ -69,37 +69,16 @@ def destination_detail(request, slug):
 # Package Views
 def package_list(request):
     """Enhanced package list with modern filtering and AJAX support"""
-    packages = Package.objects.filter(status=Package.PUBLISHED).select_related('main_destination')
+    packages = Package.objects.filter(status=Package.PUBLISHED).select_related('main_destination', 'category')
 
     # Get filter parameters
-    category = request.GET.get('category', 'all')
+    category_slug = request.GET.get('category', 'all')
     destination_id = request.GET.get('destination')
     search_query = request.GET.get('search', '').strip()
 
-    # Category filtering based on destination type
-    if category != 'all':
-        if category == 'multiday_bush_safaris':
-            packages = packages.filter(
-                Q(name__icontains='multiday') |
-                Q(description__icontains='multiday') |
-                Q(name__icontains='bush safari') |
-                Q(description__icontains='bush safari') |
-                Q(name__icontains='safari') |
-                Q(description__icontains='safari')
-            )
-        elif category == 'nairobi_excursions':
-            packages = packages.filter(
-                Q(main_destination__name__icontains='nairobi') |
-                Q(name__icontains='nairobi') |
-                Q(description__icontains='nairobi') |
-                Q(name__icontains='excursion') |
-                Q(description__icontains='excursion')
-            )
-        elif category == 'outbound_packages':
-            packages = packages.filter(
-                Q(name__icontains='outbound') |
-                Q(description__icontains='outbound')
-            )
+    # Category filtering using the new PackageCategory model
+    if category_slug != 'all':
+        packages = packages.filter(category__slug=category_slug, category__is_active=True)
 
     # Filter by specific destination if provided
     if destination_id:
@@ -147,18 +126,26 @@ def package_list(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # Get destination categories for filter pills
+    # Get package categories from the PackageCategory model
+    from .models import PackageCategory
+
+    # Build categories list with counts
     categories = [
-        {'key': 'all', 'name': 'All Packages', 'count': Package.objects.filter(status=Package.PUBLISHED).count()},
-        {'key': 'multiday_bush_safaris', 'name': 'Multiday Bush Safaris', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(name__icontains='multiday') | Q(description__icontains='multiday') | Q(name__icontains='bush safari') | Q(description__icontains='bush safari') | Q(name__icontains='safari') | Q(description__icontains='safari')).count()},
-        {'key': 'nairobi_excursions', 'name': 'Nairobi Excursions', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(main_destination__name__icontains='nairobi') | Q(name__icontains='nairobi') | Q(description__icontains='nairobi') | Q(name__icontains='excursion') | Q(description__icontains='excursion')).count()},
-        {'key': 'outbound_packages', 'name': 'Outbound Packages', 'count': Package.objects.filter(status=Package.PUBLISHED).filter(Q(name__icontains='outbound') | Q(description__icontains='outbound')).count()},
+        {'key': 'all', 'name': 'All Packages', 'count': Package.objects.filter(status=Package.PUBLISHED).count()}
     ]
+
+    # Add active package categories
+    for cat in PackageCategory.objects.filter(is_active=True).order_by('display_order'):
+        categories.append({
+            'key': cat.slug,
+            'name': cat.name,
+            'count': Package.objects.filter(status=Package.PUBLISHED, category=cat).count()
+        })
 
     context = {
         'page_obj': page_obj,
         'categories': categories,
-        'current_category': category,
+        'current_category': category_slug,
         'current_destination_id': destination_id,
         'search_query': search_query,
         'page_title': 'Travel Packages - Mbugani Luxe Adventures',
@@ -404,11 +391,12 @@ def user_package_list(request):
         )
     ).order_by('display_order', 'name')
 
-    # Get all published packages with their destinations
+    # Get all published packages with their destinations and categories
     packages = Package.objects.filter(
         status=Package.PUBLISHED
     ).select_related(
-        'main_destination'
+        'main_destination',
+        'category'
     ).prefetch_related(
         'available_accommodations',
         'available_travel_modes'

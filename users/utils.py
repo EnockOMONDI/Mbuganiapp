@@ -15,26 +15,24 @@ generate_token=TokenGenerator()
 
 def send_booking_confirmation_email(booking):
     """
-    Queue booking confirmation email for asynchronous processing
+    Send booking confirmation email synchronously using Mailtrap HTTP API
     """
     import logging
     logger = logging.getLogger(__name__)
 
     try:
-        from django_q.tasks import async_task
+        from users.tasks import send_booking_confirmation_email as send_email_task
 
-        # Queue the email task for background processing
-        task_id = async_task(
-            'users.tasks.send_booking_confirmation_email_async',
-            booking.id,
-            task_name=f'booking_emails_{booking.id}',
-            timeout=60,
-            retry=5,
-        )
+        # Send email synchronously
+        result = send_email_task(booking.id)
 
-        logger.info(f"Booking confirmation email queued: task_id={task_id}, booking_id={booking.id}")
-        return True
+        if result.get('success'):
+            logger.info(f"Booking confirmation email sent successfully: booking_id={booking.id}")
+            return True
+        else:
+            logger.error(f"Failed to send booking confirmation email for {booking.id}")
+            return False
 
     except Exception as e:
-        logger.error(f"Failed to queue booking confirmation email for {booking.id}: {e}")
+        logger.error(f"Failed to send booking confirmation email for {booking.id}: {e}")
         return False
