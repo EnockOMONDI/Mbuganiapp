@@ -31,25 +31,21 @@ DEBUG = False
 DJANGO_ENV = 'production'
 
 # Production database - Supabase PostgreSQL
+# Use DATABASE_URL environment variable (set in Render.com dashboard)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres.zgwfxeemdgfryiulbapx',
-        'PASSWORD': 'JDuH37tYEfVuPpX!',
-        'HOST': 'aws-1-eu-west-1.pooler.supabase.com',
-        'PORT': '6543',
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
-        'CONN_MAX_AGE': 600,
-        'CONN_HEALTH_CHECKS': True,
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=True
+    )
 }
 
 # Production email configuration - Mailtrap HTTP API
 # Using Mailtrap HTTP API for synchronous email sending (no background worker needed)
-MAILTRAP_API_TOKEN = os.getenv('MAILTRAP_API_TOKEN', '956b51c090fc5c1320bca0c26a394fd5')
+MAILTRAP_API_TOKEN = os.getenv('MAILTRAP_API_TOKEN')
+if not MAILTRAP_API_TOKEN:
+    raise ValueError("MAILTRAP_API_TOKEN environment variable is required for production")
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Mbugani Luxe Adventures <info@mbuganiluxeadventures.com>')
 
 # Email addresses for different purposes
@@ -152,9 +148,15 @@ SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
 
 # Production Uploadcare settings
+UPLOADCARE_PUBLIC_KEY = os.getenv('UPLOADCARE_PUBLIC_KEY')
+UPLOADCARE_SECRET_KEY = os.getenv('UPLOADCARE_SECRET_KEY')
+
+if not UPLOADCARE_PUBLIC_KEY or not UPLOADCARE_SECRET_KEY:
+    raise ValueError("UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY environment variables are required for production")
+
 UPLOADCARE = {
-    'pub_key': os.getenv('UPLOADCARE_PUBLIC_KEY'),
-    'secret': os.getenv('UPLOADCARE_SECRET_KEY'),
+    'pub_key': UPLOADCARE_PUBLIC_KEY,
+    'secret': UPLOADCARE_SECRET_KEY,
 }
 
 # Production site URL
