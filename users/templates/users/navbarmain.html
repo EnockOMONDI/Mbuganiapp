@@ -1,7 +1,7 @@
 {% load static %}
 <header class="header-area header-two transparent-header {% if request.resolver_match.url_name == 'users-home' %}homepage-navbar{% else %}page-navbar{% endif %}">
             <!--====== Header Navigation ======-->
-            <div class="header-navigation navigation-white breakpoint-on" style="position: relative; z-index: 100;">
+            <div class="header-navigation navigation-white breakpoint-on" style="position: relative; z-index: 10000;">
                 <div class="nav-overlay"></div>
                 <div class="container-fluid">
                     <div class="primary-menu">
@@ -446,6 +446,31 @@
 }
 
 /* === MOBILE MENU STYLING === */
+
+/* Nav Overlay - Dark background when mobile menu is open */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.nav-open {
+    overflow: hidden;
+}
+
 @media (max-width: 1199px) {
     /* Mobile menu background */
     .header-navigation.breakpoint-on .nav-menu {
@@ -455,11 +480,13 @@
         width: 300px !important;
         height: 100% !important;
         background-color: var(--navbar-text-light) !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
-        border-radius: 0 0 15px 15px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+        border-radius: 0 !important;
         padding: 20px !important;
-        z-index: 10000 !important;
+        z-index: 9999 !important;
         transition: left 0.3s ease !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
     }
 
     .header-navigation.breakpoint-on .nav-menu.menu-on {
@@ -474,6 +501,7 @@
         padding: 15px 20px !important;
         border-bottom: 1px solid #f0f0f0 !important;
         transition: all 0.3s ease !important;
+        display: block !important;
     }
 
     /* Mobile menu link hover */
@@ -488,6 +516,14 @@
         background-color: #f8f9fa !important;
         border-left: 3px solid var(--navbar-primary) !important;
         margin-left: 20px !important;
+        position: static !important;
+        box-shadow: none !important;
+        display: none !important;
+    }
+
+    .header-navigation.breakpoint-on .nav-menu .main-menu ul li .sub-menu li a {
+        padding: 12px 15px !important;
+        font-size: 14px !important;
     }
 
     /* Mobile logo styling */
@@ -521,42 +557,4 @@
 }
 </style>
 
-<script>
-// Enhanced Mobile Navbar Toggle Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const navbarToggler = document.querySelector('.navbar-toggler');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (navbarToggler && navMenu) {
-        navbarToggler.addEventListener('click', function() {
-            // Toggle active class for hamburger animation
-            this.classList.toggle('active');
-
-            // Toggle nav menu visibility
-            navMenu.classList.toggle('menu-on');
-
-            // Prevent body scroll when menu is open
-            document.body.classList.toggle('nav-open');
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!navbarToggler.contains(e.target) && !navMenu.contains(e.target)) {
-                navbarToggler.classList.remove('active');
-                navMenu.classList.remove('menu-on');
-                document.body.classList.remove('nav-open');
-            }
-        });
-
-        // Close menu when clicking on menu links
-        const menuLinks = navMenu.querySelectorAll('a');
-        menuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navbarToggler.classList.remove('active');
-                navMenu.classList.remove('menu-on');
-                document.body.classList.remove('nav-open');
-            });
-        });
-    }
-});
-</script>
+<!-- Mobile navigation is handled by theme.js loaded at the bottom of the page -->
