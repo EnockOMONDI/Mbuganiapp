@@ -34,25 +34,53 @@
 
     //===== Main Menu
     function mainMenu() {
-        
+
         // Variables
         var var_window = $(window),
         navContainer = $('.header-navigation'),
         navbarToggler = $('.navbar-toggler'),
         navMenu = $('.nav-menu'),
         navMenuLi = $('.nav-menu ul li ul li'),
+        navOverlay = $('.nav-overlay'),
         closeIcon = $('.navbar-close');
 
-        // navbar toggler
-        navbarToggler.on('click', function() {
+        // navbar toggler - Enhanced with overlay and body scroll lock
+        navbarToggler.on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
             navbarToggler.toggleClass('active');
             navMenu.toggleClass('menu-on');
+            navOverlay.toggleClass('active');
+            $('body').toggleClass('nav-open');
+
+            console.log('Mobile menu toggled:', navMenu.hasClass('menu-on'));
         });
 
         // close icon
         closeIcon.on('click', function() {
             navMenu.removeClass('menu-on');
             navbarToggler.removeClass('active');
+            navOverlay.removeClass('active');
+            $('body').removeClass('nav-open');
+        });
+
+        // Close menu when clicking overlay
+        navOverlay.on('click', function() {
+            navMenu.removeClass('menu-on');
+            navbarToggler.removeClass('active');
+            navOverlay.removeClass('active');
+            $('body').removeClass('nav-open');
+        });
+
+        // Close menu when clicking on menu links
+        navMenu.find('a').on('click', function() {
+            if (navContainer.hasClass('breakpoint-on')) {
+                navMenu.removeClass('menu-on');
+                navbarToggler.removeClass('active');
+                navOverlay.removeClass('active');
+                $('body').removeClass('nav-open');
+            }
         });
 
         // adds toggle button to li items that have children
@@ -80,6 +108,11 @@
             }
             else {
                 navContainer.removeClass('breakpoint-on');
+                // Close mobile menu if open when resizing to desktop
+                navMenu.removeClass('menu-on');
+                navbarToggler.removeClass('active');
+                navOverlay.removeClass('active');
+                $('body').removeClass('nav-open');
             }
         }
         breakpointCheck();
@@ -93,16 +126,7 @@
         mainMenu();
     });
 
-
-    // Nav Overlay On
-
-    $(".navbar-toggler, .navbar-close,.nav-overlay").on('click', function (e) {
-        $(".nav-overlay").toggleClass("active");
-    });
-    $(".nav-overlay").on('click', function (e) {
-        $(".navbar-toggler").removeClass("active");
-        $(".nav-menu").removeClass("menu-on");
-    });
+    // Nav Overlay is now handled inside mainMenu() function
 
 
     //===== Preloader
