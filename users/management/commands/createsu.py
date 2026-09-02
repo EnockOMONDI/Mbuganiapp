@@ -11,7 +11,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Use environment variables for credentials, with fallbacks
         username = os.getenv('DJANGO_SUPERUSER_USERNAME', 'mbuganiluxeadventures')
-        email = os.getenv('DJANGO_SUPERUSER_EMAIL', 'admin@mbuganiluxeadventures.com')
+        email = os.getenv('DJANGO_SUPERUSER_EMAIL', 'admin@mbuganiluxe.com')
         password = os.getenv('DJANGO_SUPERUSER_PASSWORD', 'mbuganiluxeadventurespassword')
 
         if not User.objects.filter(username=username).exists():

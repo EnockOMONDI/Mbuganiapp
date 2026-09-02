@@ -54,17 +54,22 @@ JOBS_EMAIL = os.getenv('JOBS_EMAIL')
 NEWSLETTER_EMAIL = os.getenv('NEWSLETTER_EMAIL')
 
 
-# Production allowed hosts
+def _csv_env(name):
+    return [value.strip() for value in os.getenv(name, '').split(',') if value.strip()]
+
+
+# Production allowed hosts. Keep new-domain defaults, but also honor Render envs.
 ALLOWED_HOSTS = [
     'mbuganiapp.onrender.com',
-    'www.mbuganiluxeadventures.com',
-    'mbuganiluxeadventures.com',
+    'www.mbuganiluxe.com',
+    'mbuganiluxe.com',
     '.onrender.com',
     os.getenv('RENDER_EXTERNAL_HOSTNAME', ''),
+    *_csv_env('ALLOWED_HOSTS'),
 ]
 
-# Remove empty strings from ALLOWED_HOSTS
-ALLOWED_HOSTS = [host for host in ALLOWED_HOSTS if host]
+# Remove empty strings and duplicates from ALLOWED_HOSTS
+ALLOWED_HOSTS = list(dict.fromkeys(host for host in ALLOWED_HOSTS if host))
 
 # Production static files
 STATIC_URL = '/static/'
@@ -181,12 +186,20 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
 
 # Production CORS settings
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOWED_ORIGINS = [
+CORS_ALLOWED_ORIGINS = list(dict.fromkeys([
     "https://mbuganiapp.onrender.com",
-    "https://www.mbuganiluxeadventures.com",
-    "https://mbuganiluxeadventures.com",
-]
+    "https://www.mbuganiluxe.com",
+    "https://mbuganiluxe.com",
+    *_csv_env('CORS_ALLOWED_ORIGINS'),
+]))
 CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = list(dict.fromkeys([
+    "https://mbuganiapp.onrender.com",
+    "https://www.mbuganiluxe.com",
+    "https://mbuganiluxe.com",
+    *_csv_env('CSRF_TRUSTED_ORIGINS'),
+]))
 
 # Production CSP settings
 CSP_DEFAULT_SRC = ("'self'",)

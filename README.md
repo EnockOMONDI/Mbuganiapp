@@ -196,7 +196,7 @@ See **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** for comprehensive deployment 
 
 1. **Set up environment variables** in Render dashboard (see `.env.secrets`)
 2. **Connect GitHub repository** to Render
-3. **Select branch:** `mailltrapapi`
+3. **Select branch:** `deploy`
 4. **Deploy** - Render will use `render.yaml` configuration
 
 **Critical Environment Variables for Production:**
@@ -307,7 +307,7 @@ coverage report
 
 **Last Updated:** November 7, 2025  
 **Platform:** Render.com  
-**Branch:** mailltrapapi  
+**Branch:** deploy
 **Python Version:** 3.12.0  
 **Django Version:** 5.0.14
 
@@ -405,7 +405,7 @@ These variables are automatically set from `render.yaml`:
 
 1. In Render dashboard, click **New** → **Web Service**
 2. Connect your GitHub repository
-3. Select branch: **mailltrapapi**
+3. Select branch: **deploy**
 4. Service name: **Mbuganiapp**
 5. Region: **Frankfurt** (or closest to your users)
 6. Plan: **Starter** (or higher)
@@ -505,11 +505,11 @@ Use https://securityheaders.com to check:
    ```bash
    git add .
    git commit -m "Your commit message"
-   git push origin mailltrapapi
+   git push origin deploy
    ```
 
 2. **Automatic Deployment:**
-   - Render automatically deploys when you push to the `mailltrapapi` branch
+   - Render automatically deploys when you push to the `deploy` branch
    - Monitor deployment in Render dashboard
 
 3. **Manual Deployment:**
@@ -662,8 +662,8 @@ python manage.py check --deploy --settings=tours_travels.settings_prod
 
 ### Important URLs
 
-- **Production Site:** https://www.mbuganiluxeadventures.com
-- **Admin Panel:** https://www.mbuganiluxeadventures.com/admin
+- **Production Site:** https://www.mbuganiluxe.com
+- **Admin Panel:** https://www.mbuganiluxe.com/admin
 - **Render Dashboard:** https://dashboard.render.com
 - **GitHub Repository:** [Your repository URL]
 

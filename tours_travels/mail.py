@@ -40,7 +40,7 @@ def verification_mail(link, user):
 
         # Create mail object
         mail = Mail(
-            sender=Address(email="info@mbuganiluxeadventures.com", name="Mbugani Luxe Adventures"),
+            sender=Address(email="info@mbuganiluxe.com", name="Mbugani Luxe Adventures"),
             to=[Address(email=user.email)],
             subject="Welcome to Mbugani Luxe Adventures",
             html=html_content,

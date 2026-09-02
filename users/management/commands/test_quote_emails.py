@@ -133,7 +133,7 @@ class Command(BaseCommand):
         self.stdout.write('\n🎯 Next Steps:')
         if options['real_emails']:
             self.stdout.write('   - Check your email inbox for test emails')
-            self.stdout.write('   - Verify admin email at info@mbuganiluxeadventures.com')
+            self.stdout.write('   - Verify admin email at info@mbuganiluxe.com')
         else:
             self.stdout.write('   - Use --real-emails flag to test actual email sending')
         self.stdout.write('   - Test the quote form on the website')

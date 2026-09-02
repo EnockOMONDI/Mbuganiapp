@@ -5,7 +5,7 @@ services:
     env: python
     region: frankfurt
     plan: starter
-    branch: mailltrapapi
+    branch: mugani2026b
     buildCommand: |
       echo "🚀 Starting Mbugani Luxe Adventures build process..."
       pip install --upgrade pip
@@ -206,4 +206,3 @@ services:
 # ✅ Auto-deployment enabled
 # ✅ Security headers configured
 # ✅ Performance optimizations applied
-

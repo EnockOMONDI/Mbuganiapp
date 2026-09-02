@@ -20,6 +20,12 @@
                 </button>
                 <!--====== Nav Menu ======-->
                 <div class="nav-menu">
+                    <!-- Mobile Logo - Only visible on mobile -->
+                    <div class="mobile-nav-logo">
+                        <a href="{% url 'users:users-home'%}">
+                            <img src="{% static 'assets/images/logo/websitelogo.png' %}" alt="Mbugani Luxe Adventures">
+                        </a>
+                    </div>
                     <!--====== Main Menu ======-->
                     <nav class="main-menu">
                         <ul>
@@ -85,6 +91,33 @@
 
 <style>
     /* ===== MBUGANI LUXE ADVENTURES NAVBAR STYLING ===== */
+    /*
+     * NAVBAR IMPROVEMENTS IMPLEMENTED:
+     *
+     * DESKTOP NAVIGATION:
+     * - Pure CSS hover-based dropdowns (no JavaScript conflicts)
+     * - Smooth fade-in with slide-down animation
+     * - Icon rotation on hover for visual feedback
+     * - Reduced z-index from 100000 to 1000
+     * - Better positioning without extreme negative values
+     *
+     * MOBILE NAVIGATION:
+     * - Reduced top padding from 80px to 70px (space for close button)
+     * - Improved spacing hierarchy with better margins
+     * - Enhanced submenu contrast (#f5f5f5 background)
+     * - Stronger border-left (4px instead of 3px)
+     * - Smoother animations with cubic-bezier easing
+     * - Better visual separation between parent and child items
+     * - Mobile logo added at top of menu panel (center-aligned)
+     * - Close button (X) fixed positioning with z-index: 100000
+     * - Close button stays visible above mobile menu panel
+     *
+     * JAVASCRIPT:
+     * - Desktop: CSS-only hover (no click handlers)
+     * - Mobile: JavaScript toggle for accordion behavior
+     * - Breakpoint-aware event listeners
+     * - No conflicts between hover and click
+     */
 
     /* Color Variables for Navbar */
     :root {
@@ -112,7 +145,7 @@
     }
 
     .mobile-logo .brand-logo img {
-        max-height: 50px !important;
+        max-height: 60px !important;
         /* Reduced mobile logo size */
         width: auto !important;
     }
@@ -155,32 +188,35 @@
         transform: translateY(-1px) !important;
     }
 
-    /* Submenu styling - ABSOLUTE POSITIONING FOR PROPER OVERLAY */
+    /* Submenu styling - SMOOTH HOVER DROPDOWNS */
     .main-menu .sub-menu {
         background: var(--navbar-text-light) !important;
         border-radius: 8px !important;
         border: 1px solid var(--navbar-border) !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
-        z-index: 100000 !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+        z-index: 1000 !important;
         position: absolute !important;
-        min-width: 200px !important;
-        left: -9999px !important;
-        top: -9999px !important;
+        min-width: 220px !important;
+        display: none !important;
         opacity: 0 !important;
         visibility: hidden !important;
-        transform: translateY(-10px) !important;
-        transition: all 0.3s ease !important;
+        transform: translateY(15px) !important;
+        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    visibility 0.3s !important;
         pointer-events: none !important;
+        padding: 8px 0 !important;
     }
 
     .main-menu .sub-menu li a {
         font-size: 13px !important;
         padding: 12px 20px !important;
         color: var(--navbar-text-dark) !important;
-        transition: all 0.3s ease !important;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
         border-radius: 4px !important;
         margin: 2px 8px !important;
         font-family: 'Prompt', 'TAN-Garland-Regular', sans-serif !important;
+        display: block !important;
     }
 
     .main-menu .sub-menu li a:hover {
@@ -198,7 +234,7 @@
         background-color: var(--navbar-primary) !important;
         border-color: var(--navbar-primary) !important;
         color: var(--navbar-text-light) !important;
-        border-radius: 25px !important;
+        border-radius: 10px !important;
         transition: all 0.3s ease !important;
     }
 
@@ -271,9 +307,17 @@
         background: transparent !important;
         cursor: pointer !important;
         position: relative !important;
-        z-index: 10002 !important;
+        z-index: 100000 !important;
         margin-left: auto !important;
         order: 4 !important;
+    }
+
+    /* Ensure toggler stays above mobile menu when active */
+    .header-navigation.breakpoint-on .navbar-toggler.active {
+        position: fixed !important;
+        top: 20px !important;
+        right: 20px !important;
+        z-index: 100000 !important;
     }
 
     .navbar-toggler span {
@@ -355,6 +399,15 @@
     .dd-trigger i {
         font-size: 12px !important;
         margin-left: 5px !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        display: inline-block !important;
+    }
+
+    /* Rotate dropdown icon on hover - DESKTOP ONLY */
+    @media (min-width: 1200px) {
+        .main-menu ul > li.has-children:hover .dd-trigger i {
+            transform: rotate(180deg) !important;
+        }
     }
 
     /* Layout Balance Improvements */
@@ -536,20 +589,34 @@
         z-index: 10001 !important;
     }
 
-    /* Force dropdown visibility above everything - ABSOLUTE POSITIONING */
+    /* Force dropdown visibility above everything */
     .header-navigation .main-menu ul>li .sub-menu {
-        z-index: 100000 !important;
+        z-index: 1000 !important;
         position: absolute !important;
     }
 
-    /* Show dropdowns on hover with proper positioning */
-    .header-navigation .main-menu ul>li.has-children:hover .sub-menu {
-        left: 0 !important;
-        top: 100% !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
-        pointer-events: auto !important;
+    /* DESKTOP ONLY: Show dropdowns on hover with smooth animation */
+    @media (min-width: 1200px) {
+        .header-navigation .main-menu ul>li.has-children:hover .sub-menu {
+            display: block !important;
+            left: 0 !important;
+            top: 100% !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+        }
+
+        /* Adjust dropdown position for right-aligned items */
+        .main-menu ul>li:nth-last-child(-n+2) .sub-menu {
+            left: auto !important;
+            right: 0 !important;
+        }
+
+        /* Add subtle hover effect to parent menu item */
+        .main-menu ul>li.has-children:hover > a {
+            transform: translateY(-2px) !important;
+        }
     }
 
     /* Ensure dropdowns don't overflow viewport */
@@ -558,25 +625,9 @@
         overflow-y: auto !important;
     }
 
-    /* Adjust dropdown position for right-aligned items */
-    .main-menu ul>li:nth-last-child(-n+2) .sub-menu {
-        left: auto !important;
-        right: 0 !important;
-    }
-
-    /* Ensure dropdowns hide when not hovering */
-    .main-menu ul>li:not(:hover) .sub-menu {
-        left: -9999px !important;
-        top: -9999px !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-        transform: translateY(-10px) !important;
-        pointer-events: none !important;
-    }
-
     /* Mobile menu z-index override */
     .header-navigation.breakpoint-on .nav-menu {
-        z-index: 10000 !important;
+        z-index: 1001 !important;
     }
 
     /* === SMOOTH TRANSITIONS === */
@@ -599,10 +650,11 @@
         width: 100% !important;
         height: 100% !important;
         background-color: rgba(0, 0, 0, 0.5) !important;
-        z-index: 9999 !important;
+        z-index: 999 !important;
         opacity: 0 !important;
         visibility: hidden !important;
-        transition: all 0.3s ease !important;
+        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    visibility 0.3s !important;
     }
 
     .nav-overlay.active {
@@ -610,10 +662,33 @@
         visibility: visible !important;
     }
 
+    /* === MOBILE LOGO STYLING === */
+    .mobile-nav-logo {
+        display: none !important; /* Hidden on desktop */
+    }
+
     /* === MOBILE MENU STYLING === */
     @media (max-width: 1199px) {
 
-        /* Mobile menu background - slides from TOP */
+        /* Mobile logo - visible only on mobile */
+        .mobile-nav-logo {
+            display: block !important;
+            text-align: center !important;
+            margin-bottom: 30px !important;
+            padding-top: 15px !important;
+        }
+
+        .mobile-nav-logo img {
+            max-height: 50px !important;
+            width: auto !important;
+            transition: transform 0.3s ease !important;
+        }
+
+        .mobile-nav-logo img:hover {
+            transform: scale(1.05) !important;
+        }
+
+        /* Mobile menu background - slides from TOP with smooth animation */
         .header-navigation.breakpoint-on .nav-menu {
             position: fixed !important;
             top: -100% !important;
@@ -624,29 +699,32 @@
             background-color: var(--navbar-text-light) !important;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
             border-radius: 0 !important;
-            padding: 80px 20px 40px 20px !important;
-            z-index: 10000 !important;
-            transition: top 0.3s ease !important;
+            padding: 70px 20px 40px 20px !important;
+            z-index: 1001 !important;
+            transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
             overflow-y: auto !important;
             overflow-x: hidden !important;
         }
-
-        /* Mobile logo removed - no longer needed in panel */
 
         .header-navigation.breakpoint-on .nav-menu.menu-on {
             top: 0 !important;
         }
 
-        /* Mobile menu links */
+        /* Mobile menu links - improved spacing */
         .header-navigation.breakpoint-on .nav-menu .main-menu ul li a {
             color: var(--navbar-text-dark) !important;
             font-size: 16px !important;
             font-weight: 500 !important;
-            padding: 15px 20px !important;
-            border-bottom: 1px solid #f0f0f0 !important;
-            transition: all 0.3s ease !important;
+            padding: 30px 60px !important;
+            border-bottom: 1px solid #e8e8e8 !important;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
             font-family: 'Prompt', 'TAN-Garland-Regular', sans-serif !important;
             display: block !important;
+        }
+
+        /* Add spacing between parent menu items */
+        .header-navigation.breakpoint-on .nav-menu .main-menu ul > li {
+            margin-bottom: 4px !important;
         }
 
         /* Mobile menu link hover */
@@ -656,53 +734,56 @@
             transform: translateX(10px) !important;
         }
 
-        /* Mobile submenu styling - HIDDEN by default */
+        /* Mobile submenu styling - IMPROVED HIERARCHY */
         .header-navigation.breakpoint-on .nav-menu .main-menu ul li .sub-menu {
-            background-color: #fcfcfc !important;
-            border-left: 3px solid var(--navbar-primary) !important;
-            margin-left: 20px !important;
+            background-color: #f5f5f5 !important;
+            border-left: 4px solid var(--navbar-primary) !important;
+            margin-left: 30px !important;
+            margin-right: 10px !important;
             position: static !important;
             opacity: 0 !important;
             visibility: hidden !important;
             transform: none !important;
             z-index: auto !important;
-            box-shadow: none !important;
-            border: none !important;
-            border-radius: 0 !important;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+            border-radius: 4px !important;
             min-width: auto !important;
             left: auto !important;
             top: auto !important;
             pointer-events: none !important;
             display: none !important;
-            padding: 5px 0 !important;
+            padding: 8px 0 !important;
             max-height: 0 !important;
             overflow: hidden !important;
-            transition: max-height 0.3s ease, opacity 0.3s ease !important;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
 
-        /* Show submenu when parent has 'active' class */
+        /* Show submenu when parent has 'active' class - SMOOTH EXPANSION */
         .header-navigation.breakpoint-on .nav-menu .main-menu ul li.active .sub-menu {
             opacity: 1 !important;
             visibility: visible !important;
             pointer-events: auto !important;
             display: block !important;
             max-height: 1000px !important;
-            margin-top: 10px !important;
-            margin-bottom: 10px !important;
+            margin-top: 8px !important;
+            margin-bottom: 12px !important;
         }
 
-        /* Mobile submenu links */
+        /* Mobile submenu links - BETTER SPACING */
         .header-navigation.breakpoint-on .nav-menu .main-menu ul li .sub-menu li a {
             font-size: 14px !important;
-            padding: 10px 25px !important;
+            padding: 12px 20px !important;
             color: var(--navbar-text-dark) !important;
             border-bottom: none !important;
             font-weight: 400 !important;
+            margin: 2px 8px !important;
+            border-radius: 3px !important;
         }
 
-        /* Mobile submenu link hover - Brown text on hover */
+        /* Mobile submenu link hover - SUBTLE HIGHLIGHT */
         .header-navigation.breakpoint-on .nav-menu .main-menu ul li .sub-menu li a:hover {
-            background-color: rgba(41, 28, 26, 0.05) !important;
+            background-color: rgba(41, 28, 26, 0.08) !important;
             color: var(--navbar-primary) !important;
             transform: translateX(5px) !important;
         }
@@ -825,50 +906,65 @@
                 });
             });
 
-            // Mobile Dropdown Toggle
-            const dropdownTriggers = navMenu.querySelectorAll('.dd-trigger');
-            dropdownTriggers.forEach(trigger => {
-                trigger.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const parentLi = this.closest('li');
+            // Mobile Dropdown Toggle - ONLY FOR MOBILE
+            function handleDropdownToggle() {
+                const dropdownTriggers = navMenu.querySelectorAll('.dd-trigger');
 
-                    // Close other open dropdowns (optional, but good UX)
-                    const otherActiveLis = navMenu.querySelectorAll('li.has-children.active');
-                    otherActiveLis.forEach(li => {
-                        if (li !== parentLi) {
-                            li.classList.remove('active');
-                            const icon = li.querySelector('.dd-trigger i');
-                            if (icon) {
+                dropdownTriggers.forEach(trigger => {
+                    // Remove existing listeners by cloning
+                    const newTrigger = trigger.cloneNode(true);
+                    trigger.parentNode.replaceChild(newTrigger, trigger);
+
+                    newTrigger.addEventListener('click', function (e) {
+                        // Only handle clicks on mobile
+                        if (window.innerWidth >= 1200) {
+                            return; // Let CSS hover handle desktop
+                        }
+
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const parentLi = this.closest('li');
+
+                        // Close other open dropdowns (accordion behavior)
+                        const otherActiveLis = navMenu.querySelectorAll('li.has-children.active');
+                        otherActiveLis.forEach(li => {
+                            if (li !== parentLi) {
+                                li.classList.remove('active');
+                                const icon = li.querySelector('.dd-trigger i');
+                                if (icon) {
+                                    icon.classList.remove('fa-angle-up');
+                                    icon.classList.add('fa-angle-down');
+                                }
+                            }
+                        });
+
+                        // Toggle current dropdown
+                        parentLi.classList.toggle('active');
+
+                        // Toggle icon
+                        const icon = this.querySelector('i');
+                        if (icon) {
+                            if (parentLi.classList.contains('active')) {
+                                icon.classList.remove('fa-angle-down');
+                                icon.classList.add('fa-angle-up');
+                            } else {
                                 icon.classList.remove('fa-angle-up');
                                 icon.classList.add('fa-angle-down');
                             }
                         }
                     });
-
-                    // Toggle current dropdown
-                    parentLi.classList.toggle('active');
-
-                    // Toggle icon
-                    const icon = this.querySelector('i');
-                    if (icon) {
-                        if (parentLi.classList.contains('active')) {
-                            icon.classList.remove('fa-angle-down');
-                            icon.classList.add('fa-angle-up');
-                        } else {
-                            icon.classList.remove('fa-angle-up');
-                            icon.classList.add('fa-angle-down');
-                        }
-                    }
                 });
-            });
+            }
 
-            // Also allow clicking the link text to toggle if it's a # link
+            // Initialize dropdown toggles
+            handleDropdownToggle();
+
+            // Mobile: Allow clicking parent link to toggle dropdown
             const dropdownLinks = navMenu.querySelectorAll('li.has-children > a');
             dropdownLinks.forEach(link => {
                 link.addEventListener('click', function (e) {
-                    // If it's a placeholder link or we want all parent links to toggle
-                    if (this.getAttribute('href') === '#' || window.innerWidth < 1200) {
+                    // Only handle on mobile and for # links
+                    if (window.innerWidth < 1200 && this.getAttribute('href') === '#') {
                         e.preventDefault();
                         e.stopPropagation();
                         const trigger = this.querySelector('.dd-trigger');
@@ -883,6 +979,17 @@
             window.addEventListener('resize', function () {
                 if (window.innerWidth > 1199 && navMenu.classList.contains('menu-on')) {
                     closeMobileMenu();
+
+                    // Close all active dropdowns when switching to desktop
+                    const activeDropdowns = navMenu.querySelectorAll('li.has-children.active');
+                    activeDropdowns.forEach(li => {
+                        li.classList.remove('active');
+                        const icon = li.querySelector('.dd-trigger i');
+                        if (icon) {
+                            icon.classList.remove('fa-angle-up');
+                            icon.classList.add('fa-angle-down');
+                        }
+                    });
                 }
             });
 
@@ -891,5 +998,7 @@
 
         // Initialize mobile navigation
         initMobileNav();
+
+        console.log('✅ Navbar initialized - Desktop: CSS hover | Mobile: JavaScript toggle');
     });
 </script>

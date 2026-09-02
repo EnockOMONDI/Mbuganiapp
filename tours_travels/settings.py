@@ -240,13 +240,13 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='MBUGANI LUXE ADVENTURES')
 
 # Admin email for notifications
-ADMIN_EMAIL = 'info@mbuganiluxeadventures.com'
+ADMIN_EMAIL = 'info@mbuganiluxe.com'
 
 # Jobs email for career applications
-JOBS_EMAIL = 'careers@mbuganiluxeadventures.com'
+JOBS_EMAIL = 'careers@mbuganiluxe.com'
 
 # Newsletter email for subscriptions
-NEWSLETTER_EMAIL = 'news@mbuganiluxeadventures.com'
+NEWSLETTER_EMAIL = 'news@mbuganiluxe.com'
 
 # Django-Q Configuration (Base settings)
 Q_CLUSTER = {

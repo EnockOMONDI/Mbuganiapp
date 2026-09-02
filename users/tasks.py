@@ -21,7 +21,7 @@ def send_email_via_mailtrap(subject, html_message, from_email, recipient_list):
     Args:
         subject (str): Email subject
         html_message (str): HTML message content
-        from_email (str): From email address (e.g., "Mbugani Luxe Adventures <info@mbuganiluxeadventures.com>")
+        from_email (str): From email address (e.g., "Mbugani Luxe Adventures <info@mbuganiluxe.com>")
         recipient_list (list): List of recipient email addresses
 
     Returns:
@@ -96,7 +96,7 @@ def send_quote_request_emails(quote_request_id):
                 'quote_request': quote_request
             })
 
-            admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
+            admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@mbuganiluxe.com')
 
             admin_sent = send_email_via_mailtrap(
                 subject=admin_subject,
@@ -199,8 +199,8 @@ def send_job_application_emails(application_id):
                 'application': job_application
             })
 
-            careers_email = getattr(settings, 'JOBS_EMAIL', 'careers@mbuganiluxeadventures.com')
-            info_email = getattr(settings, 'ADMIN_EMAIL', 'info@mbuganiluxeadventures.com')
+            careers_email = getattr(settings, 'JOBS_EMAIL', 'careers@mbuganiluxe.com')
+            info_email = getattr(settings, 'ADMIN_EMAIL', 'info@mbuganiluxe.com')
             recipient_list = [careers_email, info_email]
 
             admin_sent = send_email_via_mailtrap(
@@ -298,7 +298,7 @@ def send_newsletter_subscription_emails(subscription_id):
                 'subscription': subscription
             })
 
-            newsletter_email = getattr(settings, 'NEWSLETTER_EMAIL', 'news@mbuganiluxeadventures.com')
+            newsletter_email = getattr(settings, 'NEWSLETTER_EMAIL', 'news@mbuganiluxe.com')
 
             admin_sent = send_email_via_mailtrap(
                 subject=admin_subject,
@@ -408,7 +408,7 @@ def send_booking_confirmation_email(booking_id):
             subject=subject,
             html_message=email_body,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=['info@mbuganiluxeadventures.com'],
+            recipient_list=['info@mbuganiluxe.com'],
         )
 
         if email_sent:
