@@ -58,7 +58,7 @@ def _csv_env(name):
     return [value.strip() for value in os.getenv(name, '').split(',') if value.strip()]
 
 
-# Production allowed hosts. Keep new-domain defaults, but also honor Render envs.
+# Production allowed hosts. Keep production domain defaults, but also honor Render envs.
 ALLOWED_HOSTS = [
     'mbuganiapp.onrender.com',
     'www.mbuganiluxeadventures.com',
