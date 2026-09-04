@@ -61,8 +61,8 @@ def _csv_env(name):
 # Production allowed hosts. Keep new-domain defaults, but also honor Render envs.
 ALLOWED_HOSTS = [
     'mbuganiapp.onrender.com',
-    'www.mbuganiluxe.com',
-    'mbuganiluxe.com',
+    'www.mbuganiluxeadventures.com',
+    'mbuganiluxeadventures.com',
     '.onrender.com',
     os.getenv('RENDER_EXTERNAL_HOSTNAME', ''),
     *_csv_env('ALLOWED_HOSTS'),
@@ -188,16 +188,16 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = list(dict.fromkeys([
     "https://mbuganiapp.onrender.com",
-    "https://www.mbuganiluxe.com",
-    "https://mbuganiluxe.com",
+    "https://www.mbuganiluxeadventures.com",
+    "https://mbuganiluxeadventures.com",
     *_csv_env('CORS_ALLOWED_ORIGINS'),
 ]))
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = list(dict.fromkeys([
     "https://mbuganiapp.onrender.com",
-    "https://www.mbuganiluxe.com",
-    "https://mbuganiluxe.com",
+    "https://www.mbuganiluxeadventures.com",
+    "https://mbuganiluxeadventures.com",
     *_csv_env('CSRF_TRUSTED_ORIGINS'),
 ]))
 

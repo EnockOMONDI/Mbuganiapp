@@ -244,8 +244,8 @@ print("-" * 80)
 
 expected_hosts = [
     'mbuganiapp.onrender.com',
-    'www.mbuganiluxe.com',
-    'mbuganiluxe.com',
+    'www.mbuganiluxeadventures.com',
+    'mbuganiluxeadventures.com',
 ]
 
 for host in expected_hosts:

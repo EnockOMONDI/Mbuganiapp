@@ -135,7 +135,7 @@ def micepage(request):
 
                 # Email headers
                 msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
-                msg['To'] = "info@mbuganiluxe.com"
+                msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New MICE Inquiry from {inquiry.company_name}"
 
                 # Create HTML content with better formatting
@@ -199,7 +199,7 @@ def student_travel(request):
 
                 # Email headers
                 msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
-                msg['To'] = "info@mbuganiluxe.com"
+                msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New Student Travel Inquiry from {inquiry.school_name}"
 
                 # Create HTML content with better formatting
@@ -263,7 +263,7 @@ def ngo_travel(request):
 
                 # Email headers
                 msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
-                msg['To'] = "info@mbuganiluxe.com"
+                msg['To'] = "info@mbuganiluxeadventures.com"
                 msg['Subject'] = f"New NGO Travel Inquiry from {inquiry.organization_name}"
 
                 # Create HTML content with better formatting
@@ -765,7 +765,7 @@ def send_booking_email(booking):
         # Email content
         msg = MIMEMultipart()
         msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
-        msg['To'] = "info@mbuganiluxe.com"
+        msg['To'] = "info@mbuganiluxeadventures.com"
         msg['Subject'] = f"New Booking: {booking.full_name} for {booking.package.name}"
 
         message = f"""
@@ -1191,7 +1191,7 @@ def generate_user_friendly_error_message(error_report):
 
     # Add specific recommendations for production issues
     if not error_report['environment']['debug_mode'] and not error_report['overall_success']:
-        messages.append("Please contact us directly at info@mbuganiluxe.com if you don't receive a confirmation email.")
+        messages.append("Please contact us directly at info@mbuganiluxeadventures.com if you don't receive a confirmation email.")
 
     return messages
 
