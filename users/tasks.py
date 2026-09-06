@@ -6,6 +6,7 @@ for direct, synchronous email delivery. No background workers required.
 """
 
 import logging
+import requests
 from mailtrap import Mail, Address, MailtrapClient
 from django.template.loader import render_to_string
 from django.conf import settings
@@ -51,7 +52,14 @@ def send_email_via_mailtrap(subject, html_message, from_email, recipient_list):
         )
 
         # Send email
-        response = client.send(mail)
+        # The installed SDK sends without a timeout. Bound HTTPS requests so
+        # unavailable email infrastructure cannot exhaust the web worker.
+        response = requests.post(client.api_send_url, headers=client.headers,
+                                 json=mail.api_data, timeout=(3, 8))
+        response.raise_for_status()
+        response = response.json()
+        if response.get('success') is not True:
+            return False
 
         logger.info(f"Email sent successfully via Mailtrap API: {response}")
         return True

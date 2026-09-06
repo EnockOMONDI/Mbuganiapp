@@ -115,198 +115,32 @@ def corporate(request):
 # users/views.py
 
 
+def _service_inquiry(request, form_class, template_name, route_name, title):
+    """Save once, notify over HTTPS, and redirect even if notification fails."""
+    from .inquiry_email import send_service_inquiry_emails
+
+    form = form_class(request.POST if request.method == 'POST' else None)
+    if request.method == 'POST' and form.is_valid():
+        inquiry = form.save()
+        sent = send_service_inquiry_emails(inquiry, form, title)
+        if sent:
+            messages.success(request, 'Thank you! Your inquiry has been submitted successfully. We will contact you soon.')
+        else:
+            messages.warning(request, 'Your inquiry has been saved, but the email notification could not be sent. Please do not resubmit. You can contact us directly for assistance.')
+        return redirect(route_name)
+    return render(request, template_name, {'form': form})
+
+
 def micepage(request):
-    if request.method == 'POST':
-        form = MICEInquiryForm(request.POST)
-        if form.is_valid():
-            inquiry = form.save()
-
-            try:
-                # Setup SMTP
-                s = smtplib.SMTP('smtp.gmail.com', 587)
-                s.starttls()
-
-                # Use email credentials from settings
-                sender_email = settings.EMAIL_HOST_USER
-                password = settings.EMAIL_HOST_PASSWORD
-
-                s.login(sender_email, password)
-                msg = MIMEMultipart()
-
-                # Email headers
-                msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
-                msg['To'] = "info@mbuganiluxeadventures.com"
-                msg['Subject'] = f"New MICE Inquiry from {inquiry.company_name}"
-
-                # Create HTML content with better formatting
-                html_content = f"""
-                <html>
-                <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-                    <h2 style="color: #291c1b;">New MICE Inquiry</h2>
-                    <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
-                        <p><strong>Company Name:</strong> {inquiry.company_name}</p>
-                        <p><strong>Contact Person:</strong> {inquiry.contact_person}</p>
-                        <p><strong>Email:</strong> {inquiry.email}</p>
-                        <p><strong>Phone:</strong> {inquiry.phone_number}</p>
-                        <p><strong>Event Type:</strong> {inquiry.event_type}</p>
-                        <p><strong>Expected Attendees:</strong> {inquiry.attendees}</p>
-                        <h3 style="color: #291c1b;">Event Details:</h3>
-                        <p style="white-space: pre-wrap;">{inquiry.event_details}</p>
-                    </div>
-                    <p style="color: #666; font-size: 12px; margin-top: 20px;">
-                        This inquiry was submitted through the MICE form on Mbugani Luxe Adventures website.
-                    </p>
-                </body>
-                </html>
-                """
-
-                # Attach HTML content
-                msg.attach(MIMEText(html_content, 'html'))
-
-                # Send email
-                s.send_message(msg)
-                s.quit()
-
-                messages.success(request, 'Thank you! Your MICE inquiry has been submitted successfully. We will contact you soon.')
-                return redirect('users:micepage')
-
-            except Exception as e:
-                messages.error(request, 'There was an error sending your inquiry. Please try again.')
-                print(f"Email error: {e}")
-    else:
-        form = MICEInquiryForm()
-
-    return render(request, 'users/mice.html', {'form': form})
+    return _service_inquiry(request, MICEInquiryForm, 'users/mice.html', 'users:micepage', 'MICE')
 
 
 def student_travel(request):
-    if request.method == 'POST':
-        form = StudentTravelInquiryForm(request.POST)
-        if form.is_valid():
-            inquiry = form.save()
-
-            try:
-                # Setup SMTP
-                s = smtplib.SMTP('smtp.gmail.com', 587)
-                s.starttls()
-
-                # Use email credentials from settings
-                sender_email = settings.EMAIL_HOST_USER
-                password = settings.EMAIL_HOST_PASSWORD
-
-                s.login(sender_email, password)
-                msg = MIMEMultipart()
-
-                # Email headers
-                msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
-                msg['To'] = "info@mbuganiluxeadventures.com"
-                msg['Subject'] = f"New Student Travel Inquiry from {inquiry.school_name}"
-
-                # Create HTML content with better formatting
-                html_content = f"""
-                <html>
-                <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-                    <h2 style="color: #291c1b;">New Student Travel Inquiry</h2>
-                    <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
-                        <p><strong>School Name:</strong> {inquiry.school_name}</p>
-                        <p><strong>Contact Person:</strong> {inquiry.contact_person}</p>
-                        <p><strong>Email:</strong> {inquiry.email}</p>
-                        <p><strong>Phone:</strong> {inquiry.phone_number}</p>
-                        <p><strong>Program Stage:</strong> {inquiry.program_stage}</p>
-                        <p><strong>Number of Students:</strong> {inquiry.number_of_students}</p>
-                        <h3 style="color: #291c1b;">Travel Details:</h3>
-                        <p style="white-space: pre-wrap;">{inquiry.travel_details}</p>
-                    </div>
-                    <p style="color: #666; font-size: 12px; margin-top: 20px;">
-                        This inquiry was submitted through the Student Travel form on Mbugani Luxe Adventures website.
-                    </p>
-                </body>
-                </html>
-                """
-
-                # Attach HTML content
-                msg.attach(MIMEText(html_content, 'html'))
-
-                # Send email
-                s.send_message(msg)
-                s.quit()
-
-                messages.success(request, 'Thank you! Your student travel inquiry has been submitted successfully. We will contact you soon.')
-                return redirect('users:student-travel')
-
-            except Exception as e:
-                messages.error(request, 'There was an error sending your inquiry. Please try again.')
-                print(f"Email error: {e}")
-    else:
-        form = StudentTravelInquiryForm()
-
-    return render(request, 'users/student_travel.html', {'form': form})
+    return _service_inquiry(request, StudentTravelInquiryForm, 'users/student_travel.html', 'users:student-travel', 'Student Travel')
 
 
 def ngo_travel(request):
-    if request.method == 'POST':
-        form = NGOTravelInquiryForm(request.POST)
-        if form.is_valid():
-            inquiry = form.save()
-
-            try:
-                # Setup SMTP
-                s = smtplib.SMTP('smtp.gmail.com', 587)
-                s.starttls()
-
-                # Use email credentials from settings
-                sender_email = settings.EMAIL_HOST_USER
-                password = settings.EMAIL_HOST_PASSWORD
-
-                s.login(sender_email, password)
-                msg = MIMEMultipart()
-
-                # Email headers
-                msg['From'] = f"Mbugani Luxe Adventures <{sender_email}>"
-                msg['To'] = "info@mbuganiluxeadventures.com"
-                msg['Subject'] = f"New NGO Travel Inquiry from {inquiry.organization_name}"
-
-                # Create HTML content with better formatting
-                html_content = f"""
-                <html>
-                <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-                    <h2 style="color: #291c1b;">New NGO Travel Inquiry</h2>
-                    <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
-                        <p><strong>Organization Name:</strong> {inquiry.organization_name}</p>
-                        <p><strong>Contact Person:</strong> {inquiry.contact_person}</p>
-                        <p><strong>Email:</strong> {inquiry.email}</p>
-                        <p><strong>Phone:</strong> {inquiry.phone_number}</p>
-                        <p><strong>Organization Type:</strong> {inquiry.organization_type}</p>
-                        <p><strong>Travel Purpose:</strong> {inquiry.travel_purpose}</p>
-                        <p><strong>Number of Travelers:</strong> {inquiry.number_of_travelers}</p>
-                        <p><strong>Sustainability Requirements:</strong> {'Yes' if inquiry.sustainability_requirements else 'No'}</p>
-                        <h3 style="color: #291c1b;">Travel Details:</h3>
-                        <p style="white-space: pre-wrap;">{inquiry.travel_details}</p>
-                    </div>
-                    <p style="color: #666; font-size: 12px; margin-top: 20px;">
-                        This inquiry was submitted through the NGO Travel form on Mbugani Luxe Adventures website.
-                    </p>
-                </body>
-                </html>
-                """
-
-                # Attach HTML content
-                msg.attach(MIMEText(html_content, 'html'))
-
-                # Send email
-                s.send_message(msg)
-                s.quit()
-
-                messages.success(request, 'Thank you! Your NGO travel inquiry has been submitted successfully. We will contact you soon.')
-                return redirect('users:ngo-travel')
-
-            except Exception as e:
-                messages.error(request, 'There was an error sending your inquiry. Please try again.')
-                print(f"Email error: {e}")
-    else:
-        form = NGOTravelInquiryForm()
-
-    return render(request, 'users/ngo_travel.html', {'form': form})
+    return _service_inquiry(request, NGOTravelInquiryForm, 'users/ngo_travel.html', 'users:ngo-travel', 'NGO Travel')
 
 
 def holidays(request):
