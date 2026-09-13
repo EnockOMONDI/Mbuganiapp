@@ -32,7 +32,7 @@ class CheckoutForm(forms.Form):
     )
     
     phone_validator = RegexValidator(
-        regex=r'^\+?1?\d{9,15}$',
+        regex=r'^\+?[\d ()-]{9,20}$',
         message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
     )
     
@@ -82,6 +82,13 @@ class CheckoutForm(forms.Form):
         }),
         label='I would like to receive travel updates and special offers from Mbugani Luxe Adventures'
     )
+
+    def clean_travel_date(self):
+        from django.utils import timezone
+        date = self.cleaned_data.get('travel_date')
+        if date and date < timezone.localdate():
+            raise forms.ValidationError('Choose today or a future date.')
+        return date
 
     def clean_full_name(self):
         """

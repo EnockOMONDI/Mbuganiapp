@@ -1,0 +1,5 @@
+{% extends 'adminside/base.html' %}
+{% block title %}View your booking | Mbugani Luxe Adventures{% endblock %}
+{% block content %}<section class="quality-section narrow"><p class="eyebrow">Your journey, privately</p><h1>View your booking</h1><p>Enter the email used for your booking, then the code sent to that inbox.</p>
+{% if notice %}<p class="notice" role="status">{{ notice }}</p>{% endif %}
+<form method="post" class="quality-form">{% csrf_token %}{% include 'users/form_fields.html' %}<button class="brand-button" type="submit">{% if request.POST.email %}Verify / request code{% else %}Send verification code{% endif %}</button></form></section>{% endblock %}

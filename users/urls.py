@@ -1,3 +1,6 @@
+from django.conf import settings
+from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
 from django.urls import path,include
 from . import views
 from . import checkout_views
@@ -53,5 +56,12 @@ urlpatterns = [
     path('cart/update/<int:package_id>/', checkout_views.update_cart_item, name='update_cart_item'),
 
     # Test Error Pages (for development/testing only)
-    path('test-500-error/', views.test_500_error, name='test_500_error'),
+
 ]
+
+urlpatterns += [
+    path('account/set-password/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name='users/set_password.html', success_url=reverse_lazy('login')), name='set_password'),
+]
+if settings.DEBUG:
+    urlpatterns += [path('test-500-error/', views.test_500_error, name='test_500_error')]

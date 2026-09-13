@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
     
 <!-- Novustell Travel - Tours and Travel Website -->
 <head>
@@ -50,7 +50,7 @@
         <link rel="stylesheet" href="{% static 'assets/css/default.css' %}">
         <!--====== Style css ======-->
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    </head>
+    <link rel="stylesheet" href="{% static 'assets/css/website-quality.css' %}"><script defer src="{% static 'assets/js/website-quality.js' %}"></script></head>
     <body style="background-color: #def0ff;">
         <script>
             var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?55090';
@@ -91,12 +91,7 @@
         </script>
 
           <!--====== Start Preloader ======-->
-          <div class="preloader">
-            <div class="loader">
-                <div class="pre-shadow"></div>
-                <div class="pre-box"></div>
-            </div>
-        </div><!--====== End Preloader ======-->
+{% include 'users/fast_loader.html' %}
         {% include 'users/navbarmain.html' %}
 
         {% block content %}

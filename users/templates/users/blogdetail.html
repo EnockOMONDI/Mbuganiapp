@@ -35,7 +35,7 @@
 <meta name="twitter:image" content="{% image_url_with_default post.image 'blog_posts' %}">
 
 <!-- Canonical URL -->
-<link rel="canonical" href="{{ canonical_url|default:request.build_absolute_uri }}">
+
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
@@ -330,7 +330,7 @@
                             <h4 class="form-title mb-4">
                                 <i class="fas fa-edit me-2"></i>Join the Discussion
                             </h4>
-                            <form class="modern-comment-form" method="POST" action="{% url 'blog:blog-detail' slug=post.slug %}">
+                            <form class="modern-comment-form" method="POST" action="{{ post.get_absolute_url }}">
                                 {% csrf_token %}
                                 <div class="form-grid">
                                     <div class="form-group">
@@ -365,7 +365,7 @@
                         <div class="nav-container">
                             {% if previous_post %}
                             <div class="nav-item prev-post">
-                                <a href="{% url 'blog:blog-detail' slug=previous_post.slug %}" class="nav-link">
+                                <a href="{{ previous_post.get_absolute_url }}" class="nav-link">
                                     <div class="nav-direction">
                                         <i class="fas fa-arrow-left me-2"></i>Previous Article
                                     </div>
@@ -376,7 +376,7 @@
 
                             {% if next_post %}
                             <div class="nav-item next-post">
-                                <a href="{% url 'blog:blog-detail' slug=next_post.slug %}" class="nav-link">
+                                <a href="{{ next_post.get_absolute_url }}" class="nav-link">
                                     <div class="nav-direction">
                                         Next Article<i class="fas fa-arrow-right ms-2"></i>
                                     </div>
@@ -443,13 +443,13 @@
                             {% for rp in related_blogs|slice:":4" %}
                             <div class="related-post-item">
                                 <div class="post-thumb">
-                                    <a href="{% url 'blog:blog-detail' slug=rp.slug %}">
+                                    <a href="{{ rp.get_absolute_url }}">
                                         {% image_with_default rp.image "blog_posts" "" rp.title %}
                                     </a>
                                 </div>
                                 <div class="post-info">
                                     <h6 class="post-title">
-                                        <a href="{% url 'blog:blog-detail' slug=rp.slug %}">{{ rp.title|truncatechars:60 }}</a>
+                                        <a href="{{ rp.get_absolute_url }}">{{ rp.title|truncatechars:60 }}</a>
                                     </h6>
                                     <div class="post-meta">
                                         <span class="post-date">{{ rp.date|date:"M d, Y" }}</span>

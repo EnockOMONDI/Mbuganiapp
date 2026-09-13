@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils.text import slugify
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch
 from taggit.managers import TaggableManager
 from html import unescape
 from django.utils.html import strip_tags
@@ -96,10 +96,13 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         """Return the canonical URL for this post"""
-        return reverse('blog:blog-detail', kwargs={'slug': self.slug})
+        try:
+            return reverse('blog:blog-detail', kwargs={'slug': self.slug})
+        except NoReverseMatch:
+            return reverse('blog:blog-by-pid', kwargs={'pid': self.pid})
 
     def get_read_time(self):
-        string = self.content + unescape(strip_tags(self.content))
+        string = unescape(strip_tags(self.content or ''))
         total_words = len((string).split())
 
         return round(total_words / 200)

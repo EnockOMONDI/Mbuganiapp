@@ -15,7 +15,46 @@ from django.utils import timezone
 logger = logging.getLogger(__name__)
 
 
-def send_email_via_mailtrap(subject, html_message, from_email, recipient_list):
+def send_email_via_mailtrap(subject, html_message, from_email, recipient_list, expires_at=None):
+    from .models import EmailDelivery
+    delivery = EmailDelivery.objects.create(subject=subject, html_message=html_message,
+        from_email=from_email, recipients=recipient_list, expires_at=expires_at)
+    return deliver_email(delivery.pk)
+
+
+def deliver_email(delivery_id):
+    from datetime import timedelta
+    from django.db import transaction
+    from .models import EmailDelivery
+    # Claim with a bounded lease before network I/O, without holding a DB lock.
+    with transaction.atomic():
+        delivery = EmailDelivery.objects.select_for_update().get(pk=delivery_id)
+        if delivery.sent_at:
+            return True
+        if delivery.expires_at and delivery.expires_at <= timezone.now():
+            delivery.attempts = 3
+            delivery.last_error = 'Expired; request a new verification email.'
+            delivery.html_message = ''
+            delivery.save(update_fields=['attempts', 'last_error', 'html_message'])
+            return False
+        if delivery.attempts >= 3 or delivery.next_attempt_at > timezone.now():
+            return False
+        delivery.attempts += 1
+        delivery.next_attempt_at = timezone.now() + timedelta(minutes=5 * delivery.attempts)
+        delivery.save(update_fields=['attempts', 'next_attempt_at'])
+    sent = _send_email_via_mailtrap(delivery.subject, delivery.html_message, delivery.from_email, delivery.recipients)
+    if sent:
+        delivery.sent_at = timezone.now()
+        delivery.last_error = ''
+        # Do not retain sensitive verification codes or invitation links after delivery.
+        delivery.html_message = ''
+    else:
+        delivery.last_error = 'Provider did not confirm delivery; inspect provider logs.'
+    delivery.save(update_fields=['sent_at', 'last_error', 'html_message'])
+    return sent
+
+
+def _send_email_via_mailtrap(subject, html_message, from_email, recipient_list):
     """
     Send email using Mailtrap HTTP API
 
@@ -28,6 +67,11 @@ def send_email_via_mailtrap(subject, html_message, from_email, recipient_list):
     Returns:
         bool: True if email sent successfully, False otherwise
     """
+    # Local previews use the explicitly configured console backend.
+    if settings.EMAIL_BACKEND == 'django.core.mail.backends.console.EmailBackend':
+        from django.core.mail import send_mail
+        from django.utils.html import strip_tags
+        return bool(send_mail(subject, strip_tags(html_message), from_email, recipient_list, html_message=html_message))
     try:
         logger.info(f"Sending email via Mailtrap API: subject='{subject}', recipients={recipient_list}")
 
@@ -55,7 +99,7 @@ def send_email_via_mailtrap(subject, html_message, from_email, recipient_list):
         # The installed SDK sends without a timeout. Bound HTTPS requests so
         # unavailable email infrastructure cannot exhaust the web worker.
         response = requests.post(client.api_send_url, headers=client.headers,
-                                 json=mail.api_data, timeout=(3, 8))
+                                 json=mail.api_data, timeout=(2, 4))
         response.raise_for_status()
         response = response.json()
         if response.get('success') is not True:

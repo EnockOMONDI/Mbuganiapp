@@ -288,7 +288,7 @@ def blog_detail_redirect(request, pid):
     """Redirect old PID-based URLs to new slug-based URLs"""
     try:
         post = Post.objects.get(pid=pid, status="published")
-        return redirect("blog:blog-detail", slug=post.slug, permanent=True)
+        return redirect(post.get_absolute_url(), permanent=True)
     except Post.DoesNotExist:
         messages.error(request, "The requested article was not found.")
         return redirect("blog:blog-list")

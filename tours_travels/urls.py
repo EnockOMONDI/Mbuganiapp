@@ -1,3 +1,4 @@
+from django.contrib.admin.views.decorators import staff_member_required
 
 from django.contrib import admin
 from django.urls import path, include, re_path
@@ -22,10 +23,10 @@ urlpatterns = [
 
     # Health check endpoints
     path('health/', health_check, name='health_check'),
-    path('health/detailed/', health_detailed, name='health_detailed'),
+    path('health/detailed/', staff_member_required(health_detailed), name='health_detailed'),
     path('health/ready/', readiness_check, name='readiness_check'),
     path('health/live/', liveness_check, name='liveness_check'),
-    path('metrics/', metrics, name='metrics'),
+    path('metrics/', staff_member_required(metrics), name='metrics'),
     path('csp-report/', csp_report, name='csp_report'),
     path('version/', version_info, name='version_info'),
 
@@ -33,12 +34,15 @@ urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='/static/assets/images/favicon_io/favicon.ico', permanent=True)),
 
     # Font testing (development only)
-    path('font-test/', tours_travels_views.font_test, name='font_test'),
+
 
     #path('',tours_travels_views.home,name = 'home'),
 
     path('', include(('users.urls', 'users'), namespace='home')),
-    path('adminside/', include(('adminside.urls', 'adminside'), namespace='adminside')),
+    path('', include(('adminside.urls', 'adminside'), namespace='adminside')),
+    re_path(r'^adminside/(?P<legacy_path>.*)$', tours_travels_views.legacy_public_redirect),
+    path('robots.txt', tours_travels_views.robots),
+    path('sitemap.xml', tours_travels_views.public_sitemap),
     path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
     path('login/',auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
     path('logout/',auth_views.LogoutView.as_view(template_name='users/index.html'),name='logout'),

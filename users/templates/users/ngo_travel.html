@@ -236,49 +236,49 @@
                     {% endif %}
 
                     <form class="ngo-contact-form" method="POST">
-                        {% csrf_token %}
+                        {% csrf_token %}{% if form.non_field_errors %}<div role="alert">{{ form.non_field_errors }}</div>{% endif %}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.organization_name }}
+                                    <label for="{{ form.organization_name.id_for_label }}">{{ form.organization_name.label }}</label>{{ form.organization_name }}{% if form.organization_name.errors %}<div class="form-errors" role="alert">{{ form.organization_name.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.contact_person }}
+                                    <label for="{{ form.contact_person.id_for_label }}">{{ form.contact_person.label }}</label>{{ form.contact_person }}{% if form.contact_person.errors %}<div class="form-errors" role="alert">{{ form.contact_person.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.email }}
+                                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>{{ form.email }}{% if form.email.errors %}<div class="form-errors" role="alert">{{ form.email.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.phone_number }}
+                                    <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>{{ form.phone_number }}{% if form.phone_number.errors %}<div class="form-errors" role="alert">{{ form.phone_number.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Organization Type</label>
-                                    {{ form.organization_type }}
+                                    <label for="{{ form.organization_type.id_for_label }}">{{ form.organization_type.label }}</label>{{ form.organization_type }}{% if form.organization_type.errors %}<div class="form-errors" role="alert">{{ form.organization_type.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Travel Purpose</label>
-                                    {{ form.travel_purpose }}
+                                    <label for="{{ form.travel_purpose.id_for_label }}">{{ form.travel_purpose.label }}</label>{{ form.travel_purpose }}{% if form.travel_purpose.errors %}<div class="form-errors" role="alert">{{ form.travel_purpose.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.number_of_travelers }}
+                                    <label for="{{ form.number_of_travelers.id_for_label }}">{{ form.number_of_travelers.label }}</label>{{ form.number_of_travelers }}{% if form.number_of_travelers.errors %}<div class="form-errors" role="alert">{{ form.number_of_travelers.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group sustainability-checkbox">
                                     <label class="checkbox-label">
-                                        {{ form.sustainability_requirements }}
+                                        <label for="{{ form.sustainability_requirements.id_for_label }}">{{ form.sustainability_requirements.label }}</label>{{ form.sustainability_requirements }}{% if form.sustainability_requirements.errors %}<div class="form-errors" role="alert">{{ form.sustainability_requirements.errors }}</div>{% endif %}
                                         <span class="checkmark"></span>
                                         Require sustainable travel options
                                     </label>
@@ -286,7 +286,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    {{ form.travel_details }}
+                                    <label for="{{ form.travel_details.id_for_label }}">{{ form.travel_details.label }}</label>{{ form.travel_details }}{% if form.travel_details.errors %}<div class="form-errors" role="alert">{{ form.travel_details.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-12">

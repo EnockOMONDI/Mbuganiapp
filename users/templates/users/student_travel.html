@@ -263,7 +263,7 @@
                     <div class="section-title text-center">
                         <span class="subtitle">Get In Touch</span>
                         <h2>Start Your Student Travel Journey</h2>
-                        <p>Let us help you create an unforgettable eommit -m ducational experience</p>
+                        <p>Let us help you create an unforgettable educational experience</p>
                     </div>
 
                     {% if messages %}
@@ -278,42 +278,42 @@
                     {% endif %}
 
                     <form class="student-contact-form" method="POST">
-                        {% csrf_token %}
+                        {% csrf_token %}{% if form.non_field_errors %}<div role="alert">{{ form.non_field_errors }}</div>{% endif %}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.school_name }}
+                                    <label for="{{ form.school_name.id_for_label }}">{{ form.school_name.label }}</label>{{ form.school_name }}{% if form.school_name.errors %}<div class="form-errors" role="alert">{{ form.school_name.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.contact_person }}
+                                    <label for="{{ form.contact_person.id_for_label }}">{{ form.contact_person.label }}</label>{{ form.contact_person }}{% if form.contact_person.errors %}<div class="form-errors" role="alert">{{ form.contact_person.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.email }}
+                                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>{{ form.email }}{% if form.email.errors %}<div class="form-errors" role="alert">{{ form.email.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.phone_number }}
+                                    <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>{{ form.phone_number }}{% if form.phone_number.errors %}<div class="form-errors" role="alert">{{ form.phone_number.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Program Stage</label>
-                                    {{ form.program_stage }}
+                                    <label for="{{ form.program_stage.id_for_label }}">{{ form.program_stage.label }}</label>{{ form.program_stage }}{% if form.program_stage.errors %}<div class="form-errors" role="alert">{{ form.program_stage.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.number_of_students }}
+                                    <label for="{{ form.number_of_students.id_for_label }}">{{ form.number_of_students.label }}</label>{{ form.number_of_students }}{% if form.number_of_students.errors %}<div class="form-errors" role="alert">{{ form.number_of_students.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    {{ form.travel_details }}
+                                    <label for="{{ form.travel_details.id_for_label }}">{{ form.travel_details.label }}</label>{{ form.travel_details }}{% if form.travel_details.errors %}<div class="form-errors" role="alert">{{ form.travel_details.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-12">

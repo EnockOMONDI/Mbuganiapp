@@ -6,6 +6,7 @@
 {% block title %}Review Your Booking - Mbugani Luxe Adventures{% endblock %}
 
 {% block content %}
+{% for item in cart_items %}<form id="remove-{{ item.package.id }}" method="post" action="{% url 'users:remove_from_cart' item.package.id %}">{% csrf_token %}</form>{% endfor %}
 <style>
     .checkout-container {
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -817,9 +818,8 @@
                                     <button type="button" class="btn btn-sm btn-outline-primary" onclick="editPackage({{ item.package.id }}, {{ item.adults }}, {{ item.children }}, {{ item.rooms }})">
                                         <i class="fas fa-edit"></i> Edit
                                     </button>
-                                    <a href="{% url 'users:remove_from_cart' item.package.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to remove this package?')">
-                                        <i class="fas fa-trash"></i> Remove
-                                    </a>
+                                    <button type="submit" form="remove-{{ item.package.id }}" class="btn btn-sm btn-outline-danger">Remove</button>
+
                                 </div>
                             </div>
 

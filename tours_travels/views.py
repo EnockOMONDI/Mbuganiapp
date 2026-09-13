@@ -93,3 +93,46 @@ def version_info(request):
 def font_test(request):
     """Font testing page for TAN-Garland fonts"""
     return render(request, 'font_test.html')
+
+
+def legacy_public_redirect(request, legacy_path):
+    from django.http import HttpResponsePermanentRedirect, Http404
+    from django.urls import resolve, Resolver404
+    target = '/' + legacy_path.lstrip('/') if legacy_path else '/packages/'
+    try:
+        match = resolve(target)
+        if match.app_name != 'adminside':
+            raise Http404
+    except Resolver404:
+        raise Http404
+    query = request.META.get('QUERY_STRING', '')
+    return HttpResponsePermanentRedirect(target + ('?' + query if query else ''))
+
+
+def robots(request):
+    from django.conf import settings
+    from django.http import HttpResponse
+    return HttpResponse('User-agent: *\nDisallow: /admin/\nDisallow: /checkout/\nDisallow: /booking/\nDisallow: /profile/\nDisallow: /account/\nSitemap: ' + settings.SITE_URL.rstrip('/') + '/sitemap.xml\n', content_type='text/plain')
+
+
+def public_sitemap(request):
+    from django.conf import settings
+    from django.http import HttpResponse
+    from django.urls import reverse, NoReverseMatch
+    from xml.sax.saxutils import escape
+    from adminside.models import Package, Destination, Accommodation
+    from blog.models import Post
+    paths = ['/', '/aboutus/', '/services/', '/contactus/', '/packages/', '/destinations/', '/accommodations/', '/blog/', '/mice/', '/student-travel/', '/ngo-travel/']
+    for model, filters, route in [
+        (Package, {'status': Package.PUBLISHED}, 'adminside:package_detail'),
+        (Destination, {'is_active': True}, 'adminside:destination_detail'),
+        (Accommodation, {'is_active': True}, 'adminside:accommodation_detail'),
+        (Post, {'status': 'published'}, 'blog:blog-detail')]:
+        for slug in model.objects.filter(**filters).exclude(slug='').values_list('slug', flat=True):
+            try:
+                paths.append(reverse(route, kwargs={'slug': slug}))
+            except NoReverseMatch:
+                continue
+    base = settings.SITE_URL.rstrip('/')
+    body = ''.join('<url><loc>' + escape(base + path) + '</loc></url>' for path in paths)
+    return HttpResponse('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + body + '</urlset>', content_type='application/xml')

@@ -630,7 +630,7 @@
                                 <div class="price">${{ package.adult_price }}</div>
                                 <div class="price-label">per person</div>
                             </div>
-                            <a href="{% url 'adminside:package_detail' package.slug %}" class="explore-btn">
+                            <a href="{{ package.get_absolute_url }}" class="explore-btn">
                                 <span>Explore</span>
                                 <i class="fas fa-arrow-right"></i>
                             </a>

@@ -106,10 +106,9 @@ class Booking(models.Model):
 
     def generate_booking_reference(self):
         """Generate unique booking reference"""
-        import random
-        import string
+        import secrets
         while True:
-            reference = 'NVT' + ''.join(random.choices(string.digits, k=7))
+            reference = 'MBG' + secrets.token_hex(6).upper()
             if not Booking.objects.filter(booking_reference=reference).exists():
                 return reference
 
@@ -701,3 +700,26 @@ def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
     else:
         UserProfile.objects.create(user=instance)
+
+class BookingAccessChallenge(models.Model):
+    key = models.CharField(max_length=64, unique=True)
+    code_hash = models.CharField(max_length=64, blank=True)
+    expires_at = models.DateTimeField(null=True)
+    last_sent = models.DateTimeField(null=True)
+    window_started = models.DateTimeField(default=timezone.now)
+    attempts = models.PositiveIntegerField(default=0)
+    sends = models.PositiveIntegerField(default=0)
+
+
+class EmailDelivery(models.Model):
+    """Durable delivery status; retry failures with retry_email_deliveries."""
+    subject = models.CharField(max_length=255)
+    html_message = models.TextField()
+    from_email = models.CharField(max_length=254)
+    recipients = models.JSONField(default=list)
+    created_at = models.DateTimeField(auto_now_add=True)
+    sent_at = models.DateTimeField(null=True, blank=True)
+    attempts = models.PositiveIntegerField(default=0)
+    last_error = models.CharField(max_length=255, blank=True)
+    next_attempt_at = models.DateTimeField(default=timezone.now)
+    expires_at = models.DateTimeField(null=True, blank=True)

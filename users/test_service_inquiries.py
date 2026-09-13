@@ -5,7 +5,7 @@ from django.test import SimpleTestCase, RequestFactory, override_settings
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.contrib.messages import get_messages
 from users import views
-from users.tasks import send_email_via_mailtrap
+from users.tasks import _send_email_via_mailtrap as send_email_via_mailtrap
 from users.inquiry_email import send_service_inquiry_emails
 
 
@@ -58,7 +58,7 @@ class ServiceInquiryTests(SimpleTestCase):
         for failure in [requests.Timeout(), requests.HTTPError()]:
             with self.subTest(failure=type(failure).__name__), patch('users.tasks.requests.post', side_effect=failure) as post:
                 self.assertFalse(send_email_via_mailtrap('Test', '<p>Test</p>', 'info@example.com', ['qa@example.com']))
-                self.assertEqual(post.call_args.kwargs['timeout'], (3, 8))
+                self.assertEqual(post.call_args.kwargs['timeout'], (2, 4))
 
     def test_https_requires_explicit_provider_success(self):
         for accepted in [True, False]:

@@ -182,41 +182,41 @@
                     {% endif %}
 
                     <form class="mice-contact-form" method="POST">
-                        {% csrf_token %}
+                        {% csrf_token %}{% if form.non_field_errors %}<div role="alert">{{ form.non_field_errors }}</div>{% endif %}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.company_name }}
+                                    <label for="{{ form.company_name.id_for_label }}">{{ form.company_name.label }}</label>{{ form.company_name }}{% if form.company_name.errors %}<div class="form-errors" role="alert">{{ form.company_name.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.contact_person }}
+                                    <label for="{{ form.contact_person.id_for_label }}">{{ form.contact_person.label }}</label>{{ form.contact_person }}{% if form.contact_person.errors %}<div class="form-errors" role="alert">{{ form.contact_person.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.email }}
+                                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>{{ form.email }}{% if form.email.errors %}<div class="form-errors" role="alert">{{ form.email.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.phone_number }}
+                                    <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>{{ form.phone_number }}{% if form.phone_number.errors %}<div class="form-errors" role="alert">{{ form.phone_number.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                Event Type    {{ form.event_type }}
+                                <label for="{{ form.event_type.id_for_label }}">{{ form.event_type.label }}</label>{{ form.event_type }}{% if form.event_type.errors %}<div class="form-errors" role="alert">{{ form.event_type.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form.attendees }}
+                                    <label for="{{ form.attendees.id_for_label }}">{{ form.attendees.label }}</label>{{ form.attendees }}{% if form.attendees.errors %}<div class="form-errors" role="alert">{{ form.attendees.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    {{ form.event_details }}
+                                    <label for="{{ form.event_details.id_for_label }}">{{ form.event_details.label }}</label>{{ form.event_details }}{% if form.event_details.errors %}<div class="form-errors" role="alert">{{ form.event_details.errors }}</div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-12">

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from pyuploadcare.dj.models import ImageField
@@ -130,7 +130,10 @@ class Destination(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('destination_detail', kwargs={'slug': self.slug})
+        try:
+            return reverse('adminside:destination_detail', kwargs={'slug': self.slug})
+        except NoReverseMatch:
+            return reverse('adminside:destination_by_id', kwargs={'pk': self.pk})
 
     def get_all_children(self):
         """Get all descendant destinations recursively"""
@@ -244,7 +247,10 @@ class Accommodation(models.Model):
         return '/static/assets/images/about/accomodationdefault.png'
 
     def get_absolute_url(self):
-        return reverse('accommodation_detail', kwargs={'slug': self.slug})
+        try:
+            return reverse('adminside:accommodation_detail', kwargs={'slug': self.slug})
+        except NoReverseMatch:
+            return reverse('adminside:accommodation_by_id', kwargs={'pk': self.pk})
 
 
 class TravelMode(models.Model):
@@ -418,7 +424,10 @@ class Package(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('package_detail', kwargs={'slug': self.slug})
+        try:
+            return reverse('adminside:package_detail', kwargs={'slug': self.slug})
+        except NoReverseMatch:
+            return reverse('adminside:package_by_id', kwargs={'pk': self.pk})
 
     @property
     def is_published(self):

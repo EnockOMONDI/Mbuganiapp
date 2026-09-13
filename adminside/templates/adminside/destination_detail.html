@@ -326,9 +326,9 @@
             <li class="breadcrumb-item"><a href="{% url 'adminside:destination_list' %}"><i class="fas fa-globe"></i> Destinations</a></li>
             {% if destination.parent %}
                 {% if destination.parent.parent %}
-                    <li class="breadcrumb-item"><a href="{% url 'adminside:destination_detail' destination.parent.parent.slug %}">{{ destination.parent.parent.name }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ destination.parent.parent.get_absolute_url }}">{{ destination.parent.parent.name }}</a></li>
                 {% endif %}
-                <li class="breadcrumb-item"><a href="{% url 'adminside:destination_detail' destination.parent.slug %}">{{ destination.parent.name }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ destination.parent.get_absolute_url }}">{{ destination.parent.name }}</a></li>
             {% endif %}
             <li class="breadcrumb-item active" aria-current="page">{{ destination.name }}</li>
         </ol>
@@ -417,7 +417,7 @@
                 <div class="card-price">Starting from ${{ package.adult_price }}</div>
                 <div class="card-meta">
                     <span><i class="fas fa-calendar"></i> {{ package.duration_days }} Days</span>
-                    <a href="{% url 'adminside:package_detail' package.slug %}" class="btn-explore">
+                    <a href="{{ package.get_absolute_url }}" class="btn-explore">
                         <i class="fas fa-arrow-right"></i> Explore
                     </a>
                 </div>
@@ -446,7 +446,7 @@
                 <div class="card-price">${{ accommodation.price_per_room_per_night }}/night</div>
                 <div class="card-meta">
                     <span><i class="fas fa-users"></i> {{ accommodation.max_occupancy_per_room }} guests</span>
-                    <a href="{% url 'adminside:accommodation_detail' accommodation.slug %}" class="btn-explore">
+                    <a href="{{ accommodation.get_absolute_url }}" class="btn-explore">
                         <i class="fas fa-arrow-right"></i> View Details
                     </a>
                 </div>
@@ -479,7 +479,7 @@
                 {% endif %}
                 <div class="card-meta">
                     <span><i class="fas fa-map-marker-alt"></i> {{ child.get_destination_type_display }}</span>
-                    <a href="{% url 'adminside:destination_detail' child.slug %}" class="btn-explore">
+                    <a href="{{ child.get_absolute_url }}" class="btn-explore">
                         <i class="fas fa-arrow-right"></i> Explore
                     </a>
                 </div>

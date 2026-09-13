@@ -135,7 +135,7 @@
                         <div class="col-lg-6 col-md-6 mb-4">
                             <article class="modern-blog-card">
                                 <div class="post-image-wrapper">
-                                    <a href="{% url 'blog:blog-detail' slug=post.slug %}">
+                                    <a href="{{ post.get_absolute_url }}">
                                         {% load image_tags %}
                                         {% image_with_default post.image "blog_posts" "post-image" post.title %}
                                         <div class="image-overlay">
@@ -161,7 +161,7 @@
                                         </div>
                                     </div>
                                     <h3 class="post-title">
-                                        <a href="{% url 'blog:blog-detail' slug=post.slug %}">{{ post.title|truncatechars:80 }}</a>
+                                        <a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:80 }}</a>
                                     </h3>
                                     <div class="post-excerpt">
                                         {{ post.get_excerpt }}
@@ -177,7 +177,7 @@
                                                 {% endif %}
                                             </span>
                                         </div>
-                                        <a href="{% url 'blog:blog-detail' slug=post.slug %}" class="read-more-btn">
+                                        <a href="{{ post.get_absolute_url }}" class="read-more-btn">
                                             Read More <i class="fas fa-arrow-right ms-1"></i>
                                         </a>
                                     </div>

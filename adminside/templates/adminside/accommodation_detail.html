@@ -351,7 +351,7 @@
         <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="{% url 'adminside:accommodation_list' %}"><i class="fas fa-bed"></i> Accommodations</a></li>
             {% if accommodation.destination %}
-                <li class="breadcrumb-item"><a href="{% url 'adminside:destination_detail' accommodation.destination.slug %}">{{ accommodation.destination.name }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ accommodation.destination.get_absolute_url }}">{{ accommodation.destination.name }}</a></li>
             {% endif %}
             <li class="breadcrumb-item active" aria-current="page">{{ accommodation.name }}</li>
         </ol>
@@ -468,7 +468,7 @@
                 <div class="card-price">Starting from ${{ package.adult_price }}</div>
                 <div class="card-meta">
                     <span><i class="fas fa-calendar"></i> {{ package.duration_days }} Days</span>
-                    <a href="{% url 'adminside:package_detail' package.slug %}" class="btn-explore">
+                    <a href="{{ package.get_absolute_url }}" class="btn-explore">
                         <i class="fas fa-arrow-right"></i> View Package
                     </a>
                 </div>

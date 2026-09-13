@@ -740,7 +740,7 @@
                         <h4 class="accommodation-title">{{ accommodation.name }}</h4>
                         <p class="accommodation-description">{{ accommodation.description|truncatewords:15 }}</p>
                         <div class="accommodation-price">From ${{ accommodation.price_per_room_per_night }}/night</div>
-                        <a href="{% url 'adminside:accommodation_detail' accommodation.slug %}" class="accommodation-btn">
+                        <a href="{{ accommodation.get_absolute_url }}" class="accommodation-btn">
                             <i class="fas fa-arrow-right"></i> View Details
                         </a>
                     </div>

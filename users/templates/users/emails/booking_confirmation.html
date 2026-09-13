@@ -333,7 +333,7 @@
             <div class="details-section">
                 <div class="details-title">Special Requests</div>
                 <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; color: #666;">
-                    {{ booking.special_requests|safe }}
+                    {{ booking.special_requests|linebreaksbr }}
                 </div>
             </div>
             {% endif %}
@@ -343,7 +343,7 @@
                 <a href="{{ whatsapp_link }}" class="btn btn-whatsapp">
                     💬 Chat with Travel Manager
                 </a>
-                <a href="#" class="btn btn-primary">
+                <a href="{{ dashboard_url }}" class="btn btn-primary">
                     🌐 Manage Your Booking
                 </a>
             </div>

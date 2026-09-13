@@ -1,0 +1,27 @@
+{% load static %}
+<header class="mbg-header{% if request.path == '/' %} mbg-header-home{% endif %}">
+  <div class="mbg-nav-inner">
+    <a href="{% url 'users:users-home' %}" class="mbg-logo" aria-label="Mbugani Luxe Adventures home"><img src="{% static 'assets/images/logo/websitelogo.png' %}" width="1080" height="215" alt="Mbugani Luxe Adventures"></a>
+    <button class="mbg-menu-toggle" type="button" aria-expanded="false" aria-controls="mbg-navigation">Menu <span aria-hidden="true">☰</span></button>
+    <nav id="mbg-navigation" class="mbg-navigation" aria-label="Main navigation">
+      <a href="{% url 'adminside:package_list' %}">Packages</a>
+      <a href="{% url 'adminside:destination_list' %}">Destinations</a>
+      <details class="mbg-services"><summary>Services <span aria-hidden="true">⌄</span></summary>
+        <div class="mbg-service-menu">
+          <a href="{% url 'users:services' %}">All services</a>
+          <a href="{% url 'users:services' %}#air-ticketing">Air ticketing</a>
+          <a href="{% url 'users:services' %}#hotel-bookings">Hotel bookings</a>
+          <a href="{% url 'users:services' %}#tours-safaris">Tours and safaris</a>
+          <a href="{% url 'users:micepage' %}">Meetings and events</a>
+          <a href="{% url 'users:services' %}#group-travel">Group travel</a>
+          <a href="{% url 'users:services' %}#team-building">Team building</a>
+          <a href="{% url 'users:services' %}#travel-insurance">Travel insurance</a>
+          <a href="{% url 'users:services' %}#airport-transfers">Airport transfers</a>
+        </div>
+      </details>
+      <a href="{% url 'users:aboutus' %}">Our story</a>
+      <a href="{% url 'users:contactus' %}">Contact</a>
+      <a class="mbg-plan" href="{% url 'users:quote_request' %}">Plan my trip <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>

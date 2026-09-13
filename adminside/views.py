@@ -31,17 +31,32 @@ def destination_list(request):
         )
     ).order_by('display_order', 'name')
 
+    country_options = list(Destination.objects.filter(destination_type=Destination.COUNTRY,
+        is_active=True).order_by('display_order', 'name').values('name', 'slug'))
+    query = request.GET.get('search', '').strip()
+    selected_country = request.GET.get('country', '')
+    if selected_country:
+        countries = countries.filter(slug=selected_country)
+    if query:
+        countries = countries.filter(
+            Q(name__icontains=query) |
+            Q(children__name__icontains=query, children__is_active=True) |
+            Q(children__children__name__icontains=query, children__is_active=True,
+              children__children__is_active=True)).distinct()
     context = {
         'countries': countries,
+        'country_options': country_options,
+        'destination_query': query,
+        'selected_country': selected_country,
         'page_title': 'Destinations'
     }
     return render(request, 'adminside/destination_list.html', context)
 
-def destination_detail(request, slug):
+def destination_detail(request, slug=None, pk=None):
     """Detail view for a specific destination"""
     destination = get_object_or_404(
         Destination.objects.select_related('parent').prefetch_related('children'),
-        slug=slug,
+        **({'pk': pk} if pk is not None else {'slug': slug}),
         is_active=True
     )
 
@@ -69,7 +84,7 @@ def destination_detail(request, slug):
 # Package Views
 def package_list(request):
     """Enhanced package list with modern filtering and AJAX support"""
-    packages = Package.objects.filter(status=Package.PUBLISHED).select_related('main_destination', 'category')
+    packages = Package.objects.filter(status=Package.PUBLISHED).select_related('main_destination', 'category').order_by('-id')
 
     # Get filter parameters
     category_slug = request.GET.get('category', 'all')
@@ -86,7 +101,7 @@ def package_list(request):
             destination = Destination.objects.get(id=destination_id, is_active=True)
             destination_ids = [destination.id] + [child.id for child in destination.get_all_children()]
             packages = packages.filter(main_destination_id__in=destination_ids)
-        except Destination.DoesNotExist:
+        except (Destination.DoesNotExist, ValueError, TypeError):
             pass
 
     # Search functionality
@@ -153,7 +168,7 @@ def package_list(request):
     }
     return render(request, 'adminside/package_list.html', context)
 
-def package_detail(request, slug):
+def package_detail(request, slug=None, pk=None):
     """Detail view for a specific package"""
     package = get_object_or_404(
         Package.objects.select_related('main_destination').prefetch_related(
@@ -162,7 +177,7 @@ def package_detail(request, slug):
             'itinerary__days__destination',
             'itinerary__days__accommodation'
         ),
-        slug=slug,
+        **({'pk': pk} if pk is not None else {'slug': slug}),
         status=Package.PUBLISHED
     )
 
@@ -185,7 +200,7 @@ def accommodation_list(request):
             # Include accommodations from this destination and all its children
             destination_ids = [destination.id] + [child.id for child in destination.get_all_children()]
             accommodations = accommodations.filter(destination_id__in=destination_ids)
-        except Destination.DoesNotExist:
+        except (Destination.DoesNotExist, ValueError, TypeError):
             pass
 
     # Filter by accommodation type
@@ -234,11 +249,11 @@ def accommodation_list(request):
     }
     return render(request, 'adminside/accommodation_list.html', context)
 
-def accommodation_detail(request, slug):
+def accommodation_detail(request, slug=None, pk=None):
     """Detail view for a specific accommodation"""
     accommodation = get_object_or_404(
         Accommodation.objects.select_related('destination'),
-        slug=slug,
+        **({'pk': pk} if pk is not None else {'slug': slug}),
         is_active=True
     )
 
@@ -325,7 +340,7 @@ def get_packages_by_destination_ajax(request):
                 main_destination_id__in=destination_ids,
                 status=Package.PUBLISHED
             ).select_related('main_destination')[:20]
-        except Destination.DoesNotExist:
+        except (Destination.DoesNotExist, ValueError, TypeError):
             packages = Package.objects.none()
     else:
         packages = Package.objects.filter(status=Package.PUBLISHED).select_related('main_destination')[:20]
@@ -354,7 +369,7 @@ def get_accommodations_by_destination_ajax(request):
                 destination_id__in=destination_ids,
                 is_active=True
             ).select_related('destination')[:20]
-        except Destination.DoesNotExist:
+        except (Destination.DoesNotExist, ValueError, TypeError):
             accommodations = Accommodation.objects.none()
     else:
         accommodations = Accommodation.objects.filter(is_active=True).select_related('destination')[:20]
@@ -421,7 +436,7 @@ def user_package_list(request):
             packages = packages.filter(
                 main_destination_id__in=destination_ids
             ).distinct()
-        except Destination.DoesNotExist:
+        except (Destination.DoesNotExist, ValueError, TypeError):
             pass
 
     context = {

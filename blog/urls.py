@@ -4,6 +4,7 @@ from blog import views
 app_name = 'blog'
 
 urlpatterns = [
+    path('article/<str:pid>/', views.blog_detail, name='blog-by-pid'),
     # Blog list and search
     path('', views.blog_list, name="blog-list"),
     path('search/', views.blog_search, name="blog-search"),

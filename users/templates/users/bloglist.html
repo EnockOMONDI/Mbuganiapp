@@ -25,7 +25,7 @@
 <meta name="twitter:description" content="{{ meta_description|default:'Discover amazing travel stories, tips, and guides from Mbugani Luxe Adventures.' }}">
 
 <!-- Canonical URL -->
-<link rel="canonical" href="{{ request.build_absolute_uri }}">
+
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
@@ -70,7 +70,7 @@
                     <p class="hero-subtitle mb-4">Discover amazing destinations, travel tips, and inspiring stories from around the world</p>
                     <div class="hero-stats d-flex justify-content-center gap-4 flex-wrap">
                         <div class="stat-item">
-                            <span class="stat-number">{{ blog_count.count|default:0 }}+</span>
+                            <span class="stat-number">{{ blog_count|default:0 }}+</span>
                             <span class="stat-label">Articles</span>
                         </div>
                         <div class="stat-item">
@@ -142,7 +142,7 @@
                         <div class="col-lg-4 col-md-6 mb-4">
                             <article class="featured-post-card">
                                 <div class="post-image">
-                                    <a href="{% url 'blog:blog-detail' slug=fp.slug %}">
+                                    <a href="{{ fp.get_absolute_url }}">
                                         {% image_with_default fp.image "blog_posts" "img-fluid" fp.title %}
                                         <div class="post-overlay">
                                             <span class="featured-badge">Featured</span>
@@ -161,7 +161,7 @@
                                         <span class="read-time">{{ fp.get_read_time }} min read</span>
                                     </div>
                                     <h4 class="post-title">
-                                        <a href="{% url 'blog:blog-detail' slug=fp.slug %}">{{ fp.title|truncatechars:60 }}</a>
+                                        <a href="{{ fp.get_absolute_url }}">{{ fp.title|truncatechars:60 }}</a>
                                     </h4>
                                 </div>
                             </article>
@@ -182,7 +182,7 @@
                         <div class="col-lg-6 col-md-6 mb-4 blog-post-item">
                             <article class="modern-blog-card">
                                 <div class="post-image-wrapper">
-                                    <a href="{% url 'blog:blog-detail' slug=p.slug %}">
+                                    <a href="{{ p.get_absolute_url }}">
                                         {% image_with_default p.image "blog_posts" "post-image" p.title %}
                                         <div class="image-overlay">
                                             <div class="overlay-content">
@@ -210,7 +210,7 @@
                                         </div>
                                     </div>
                                     <h3 class="post-title">
-                                        <a href="{% url 'blog:blog-detail' slug=p.slug %}">{{ p.title|truncatechars:80 }}</a>
+                                        <a href="{{ p.get_absolute_url }}">{{ p.title|truncatechars:80 }}</a>
                                     </h3>
                                     <div class="post-excerpt">
                                         {{ p.get_excerpt|safe }}
@@ -226,7 +226,7 @@
                                                 {% endif %}
                                             </span>
                                         </div>
-                                        <a href="{% url 'blog:blog-detail' slug=p.slug %}" class="read-more-btn">
+                                        <a href="{{ p.get_absolute_url }}" class="read-more-btn">
                                             Read More <i class="fas fa-arrow-right ms-1"></i>
                                         </a>
                                     </div>
@@ -349,13 +349,13 @@
                             {% for rp in featured_blog|slice:":4" %}
                             <div class="recent-post-item">
                                 <div class="post-thumb">
-                                    <a href="{% url 'blog:blog-detail' slug=rp.slug %}">
+                                    <a href="{{ rp.get_absolute_url }}">
                                         {% image_with_default rp.image "blog_posts" "" rp.title %}
                                     </a>
                                 </div>
                                 <div class="post-info">
                                     <h6 class="post-title">
-                                        <a href="{% url 'blog:blog-detail' slug=rp.slug %}">{{ rp.title|truncatechars:50 }}</a>
+                                        <a href="{{ rp.get_absolute_url }}">{{ rp.title|truncatechars:50 }}</a>
                                     </h6>
                                     <div class="post-meta">
                                         <span class="post-date">{{ rp.date|date:"M d, Y" }}</span>

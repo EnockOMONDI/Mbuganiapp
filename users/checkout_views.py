@@ -1,3 +1,6 @@
+from django.utils import timezone
+from datetime import timedelta
+from django.views.decorators.cache import never_cache
 """
 Modern checkout views for Mbugani Luxe Adventures
 """
@@ -21,7 +24,7 @@ import string
 from adminside.models import Package, Accommodation, TravelMode
 from .models import Booking
 from .cart import Cart
-from .checkout_forms import CheckoutForm
+from .checkout_forms import CheckoutForm, TravelerDetailsForm
 from .form_persistence import get_form_manager
 
 
@@ -37,9 +40,13 @@ def add_to_cart(request, package_id):
     initial_data = form_manager.get_form_initial_data('package_selection')
 
     if request.method == 'POST':
-        adults = int(request.POST.get('adults', 1))
-        children = int(request.POST.get('children', 0))
-        rooms = int(request.POST.get('rooms', 1))
+        counts = TravelerDetailsForm(request.POST)
+        if not counts.is_valid():
+            messages.error(request, 'Enter valid traveller and room counts. Rooms cannot exceed travellers.')
+            return redirect('users:add_to_cart', package_id=package_id)
+        adults = counts.cleaned_data['adults']
+        children = counts.cleaned_data['children']
+        rooms = counts.cleaned_data['rooms']
 
         # Save form data for persistence
         form_data = {
@@ -99,8 +106,8 @@ def checkout_customize(request, package_id):
 
         # Handle accommodation selections
         selected_accommodations = request.POST.getlist('accommodations')
-        for acc_id in selected_accommodations:
-            cart.add_accommodation(package_id, int(acc_id))
+        for accommodation in accommodations.filter(pk__in=[v for v in selected_accommodations if v.isdigit()]):
+            cart.add_accommodation(package_id, accommodation.pk)
 
         # Handle custom accommodation
         custom_accommodation = request.POST.get('custom_accommodation', '').strip()
@@ -108,8 +115,8 @@ def checkout_customize(request, package_id):
 
         # Handle travel mode selections
         selected_travel_modes = request.POST.getlist('travel_modes')
-        for travel_id in selected_travel_modes:
-            cart.add_travel_mode(package_id, int(travel_id))
+        for travel in travel_modes.filter(pk__in=[v for v in selected_travel_modes if v.isdigit()]):
+            cart.add_travel_mode(package_id, travel.pk)
 
         # Handle self-drive option
         self_drive = request.POST.get('self_drive') == 'on'
@@ -154,7 +161,7 @@ def checkout_details(request):
 
     if not cart_items:
         messages.error(request, 'Your cart is empty. Please select a package first.')
-        return redirect('users:all_packages')
+        return redirect('adminside:package_list')
 
     # Get existing checkout data from both old session and new form persistence
     checkout_data = request.session.get('checkout_data', {})
@@ -235,7 +242,7 @@ def checkout_summary(request):
         elif action == 'confirm':
             try:
                 # Create the booking
-                booking = create_booking_from_cart(cart, checkout_data)
+                booking = create_booking_from_cart(cart, checkout_data, request.user)
 
                 # Send confirmation emails (with error handling)
                 try:
@@ -287,6 +294,7 @@ def clear_checkout_session(request):
     form_manager.clear_form_data()
 
 
+@require_POST
 def remove_from_cart(request, package_id):
     """
     Remove a package from the cart
@@ -299,7 +307,7 @@ def remove_from_cart(request, package_id):
     if not cart.get_cart_items():
         # Clear checkout data if cart is empty
         clear_checkout_session(request)
-        return redirect('users:all_packages')
+        return redirect('adminside:package_list')
 
     # Redirect back to summary if there are still items
     return redirect('users:checkout_summary')
@@ -313,9 +321,13 @@ def update_cart_item(request, package_id):
         cart = Cart(request)
         package = get_object_or_404(Package, id=package_id, status=Package.PUBLISHED)
 
-        adults = int(request.POST.get('adults', 1))
-        children = int(request.POST.get('children', 0))
-        rooms = int(request.POST.get('rooms', 1))
+        counts = TravelerDetailsForm(request.POST)
+        if not counts.is_valid():
+            messages.error(request, 'Enter valid traveller and room counts. Rooms cannot exceed travellers.')
+            return redirect('users:add_to_cart', package_id=package_id)
+        adults = counts.cleaned_data['adults']
+        children = counts.cleaned_data['children']
+        rooms = counts.cleaned_data['rooms']
 
         # Update the cart item
         cart.add_package(package, adults=adults, children=children, rooms=rooms, override_quantity=True)
@@ -326,15 +338,19 @@ def update_cart_item(request, package_id):
     return redirect('users:checkout_summary')
 
 
+@never_cache
 def booking_confirmation(request, booking_reference):
     """
     Booking confirmation page (Step 5)
     """
-    booking = get_object_or_404(Booking, booking_reference=booking_reference)
+    from .booking_access import confirmation_access
+    booking, response = confirmation_access(request, booking_reference)
+    if response is not None:
+        return response
     
     # Generate WhatsApp link
     whatsapp_message = f"Booking made for {booking.package.name} - Reference: {booking.booking_reference}"
-    whatsapp_link = f"https://api.whatsapp.com/send?phone=254798197430&text={whatsapp_message}"
+    whatsapp_link = f"https://api.whatsapp.com/send?phone=254701810167&text={whatsapp_message}"
     
     context = {
         'booking': booking,
@@ -344,7 +360,7 @@ def booking_confirmation(request, booking_reference):
     return render(request, 'users/checkout/confirmation.html', context)
 
 
-def create_booking_from_cart(cart, checkout_data):
+def create_booking_from_cart(cart, checkout_data, authenticated_user=None):
     """
     Create a booking from cart data
     """
@@ -370,61 +386,29 @@ def create_booking_from_cart(cart, checkout_data):
     
     total_amount = package_price + accommodation_price + travel_price
     
-    # Create or get user
+    # Only an authenticated customer can associate an existing account.
     user = None
     user_created = False
-
-    try:
-        # Get the most recent user with this email (in case of duplicates)
-        user = User.objects.filter(email=checkout_data['email']).order_by('-date_joined').first()
-    except Exception as e:
-        print(f"Error finding user: {e}")
-
-    if not user:
+    if authenticated_user and authenticated_user.is_authenticated and authenticated_user.email.casefold() == checkout_data['email'].casefold():
+        user = authenticated_user
+    elif not User.objects.filter(email__iexact=checkout_data['email']).exists():
+        import secrets
+        name_parts = checkout_data['full_name'].strip().split()
+        username = checkout_data['email'].casefold()[:140]
+        if User.objects.filter(username=username).exists():
+            username = 'traveller_' + secrets.token_hex(10)
+        user = User.objects.create_user(
+            username=username,
+            email=checkout_data['email'], password=None,
+            first_name=name_parts[0] if name_parts else '',
+            last_name=' '.join(name_parts[1:]))
+        user_created = True
         try:
-            # Create new user with secure generated password (12 chars: letters, numbers, symbols)
-            password_chars = string.ascii_letters + string.digits + "!@#$%^&*"
-            password = ''.join(random.choices(password_chars, k=12))
+            send_welcome_email(user)
+        except Exception:
+            import logging
+            logging.getLogger(__name__).exception('Account invitation delivery failed')
 
-            # Generate unique username based on email
-            base_username = checkout_data['email'].split('@')[0]
-            # Clean username to only contain valid characters
-            base_username = ''.join(c for c in base_username if c.isalnum() or c in '_-')
-            if not base_username:
-                base_username = 'user'
-
-            username = base_username
-            counter = 1
-            while User.objects.filter(username=username).exists():
-                username = f"{base_username}{counter}"
-                counter += 1
-
-            # Parse full name safely
-            name_parts = checkout_data['full_name'].strip().split()
-            first_name = name_parts[0] if name_parts else 'Guest'
-            last_name = ' '.join(name_parts[1:]) if len(name_parts) > 1 else ''
-
-            user = User.objects.create_user(
-                username=username,
-                email=checkout_data['email'],
-                first_name=first_name,
-                last_name=last_name,
-                password=password
-            )
-            user_created = True
-
-            # Send welcome email with password (only for new users)
-            try:
-                send_welcome_email(user, password)
-            except Exception as e:
-                print(f"Failed to send welcome email: {e}")
-
-        except Exception as e:
-            print(f"Error creating user: {e}")
-            # If user creation fails, we can still proceed with booking
-            # The booking will be created without a user association
-            pass
-    
     # Prepare special requests with custom options
     special_requests = checkout_data.get('special_requests', '')
 
@@ -460,12 +444,6 @@ def create_booking_from_cart(cart, checkout_data):
     booking.selected_accommodations.set(cart_item['accommodations'])
     booking.selected_travel_modes.set(cart_item['travel_modes'])
 
-    # Send booking confirmation email
-    try:
-        send_booking_confirmation_email(booking, is_new_user=user_created)
-    except Exception as e:
-        print(f"Failed to send booking confirmation email: {e}")
-
     return booking
 
 
@@ -476,15 +454,16 @@ def send_booking_confirmation_email(booking, is_new_user=False):
     try:
         from users.tasks import send_email_via_mailtrap
 
-        subject = f'Booking Confirmation - {booking.booking_reference}'
+        subject = f'Booking Request Received - {booking.booking_reference}'
 
         # URL encode the WhatsApp message
         from urllib.parse import quote
         whatsapp_message = f"Booking made for {booking.package.name} - Reference: {booking.booking_reference}"
-        whatsapp_link = f"https://api.whatsapp.com/send?phone=254798197430&text={quote(whatsapp_message)}"
+        whatsapp_link = f"https://api.whatsapp.com/send?phone=254701810167&text={quote(whatsapp_message)}"
 
         # Generate dashboard URL
-        dashboard_url = f"{getattr(settings, 'SITE_URL', 'https://mbuganiluxeadventures.com')}/profile/"
+        from django.urls import reverse
+        dashboard_url = settings.SITE_URL.rstrip('/') + reverse('users:booking_confirmation', kwargs={'booking_reference': booking.booking_reference})
 
         html_message = render_to_string('users/emails/booking_confirmation.html', {
             'booking': booking,
@@ -535,22 +514,18 @@ def send_admin_notification_email(booking):
         booking.save()
 
 
-def send_welcome_email(user, password):
-    """
-    Send welcome email to new user with login credentials using Mailtrap HTTP API
-    """
+def send_welcome_email(user):
+    """Invite the customer to choose a password; never generate/email one."""
+    from django.contrib.auth.tokens import default_token_generator
+    from django.utils.http import urlsafe_base64_encode
+    from django.utils.encoding import force_bytes
+    from django.urls import reverse
     from users.tasks import send_email_via_mailtrap
-
-    subject = 'Welcome to Mbugani Luxe Adventures'
-
-    html_message = render_to_string('users/emails/welcome.html', {
-        'user': user,
-        'password': password,
-    })
-
-    send_email_via_mailtrap(
-        subject=subject,
-        html_message=html_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[user.email],
-    )
+    url = settings.SITE_URL.rstrip('/') + reverse('users:set_password', kwargs={
+        'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': default_token_generator.make_token(user)})
+    return send_email_via_mailtrap(
+        subject='Set up your Mbugani account',
+        html_message=render_to_string('users/emails/welcome.html', {'user': user, 'invitation_url': url}),
+        from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=[user.email],
+        expires_at=timezone.now() + timedelta(seconds=settings.PASSWORD_RESET_TIMEOUT))

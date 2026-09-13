@@ -119,7 +119,7 @@
                                         {% else %}
                                             <div class="destination-price">Get Quote</div>
                                         {% endif %}
-                                        <a href="{% url 'adminside:destination_detail' destination.slug %}" class="destination-btn">
+                                        <a href="{{ destination.get_absolute_url }}" class="destination-btn">
                                             <i class="fas fa-arrow-right"></i> Explore
                                         </a>
                                     </div>

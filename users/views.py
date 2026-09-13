@@ -148,8 +148,18 @@ def holidays(request):
     return render(request, 'users/holidays.html')
 
 def contactus(request):
-
-    return render(request, 'users/contactus.html')
+    from .forms import ContactInquiryForm
+    from .tasks import send_quote_request_emails
+    form = ContactInquiryForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        inquiry = form.save()
+        result = send_quote_request_emails(inquiry.pk)
+        if result.get('success'):
+            messages.success(request, 'Thank you. Your enquiry has been received.')
+        else:
+            messages.warning(request, 'Your enquiry is saved. Email delivery is delayed; please do not resubmit.')
+        return redirect('users:contactus')
+    return render(request, 'users/contactus.html', {'form': form, 'page_title': 'Contact us'})
 
 
 def send_job_application_emails(job_application):
@@ -625,8 +635,9 @@ def send_booking_email(booking):
         print(f"Error sending booking email: {e}")
         return False
 
+@login_required
 def booking_success(request, booking_id):
-    booking = get_object_or_404(UserBookings, id=booking_id)
+    booking = get_object_or_404(UserBookings, id=booking_id, user=request.user)
     return render(request, 'users/booking_success.html', {'booking': booking})
 
 
@@ -1044,7 +1055,7 @@ def quote_request_view(request):
         try:
             package = Package.objects.get(id=package_id, status=Package.PUBLISHED)
             logger.info(f"Quote request for package: {package.name} (ID: {package.id})")
-        except Package.DoesNotExist:
+        except (Package.DoesNotExist, ValueError, TypeError):
             logger.warning(f"Invalid package ID provided: {package_id}")
             messages.warning(request, "The selected package is no longer available. You can still submit a general quote request.")
 
@@ -1079,7 +1090,7 @@ def quote_request_view(request):
                     # Don't fail the entire request if email sending fails - user still gets confirmation
 
                 # Show success message - simple pattern like Novustell
-                messages.success(request, "Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours with a personalized quote.")
+                messages.success(request, "Thank you. Your quote request has been saved and our team will contact you.")
                 logger.info(f"Quote request {quote_request.id} submitted successfully")
 
                 # Redirect to success page

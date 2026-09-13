@@ -52,6 +52,8 @@ class MICEInquiryForm(forms.ModelForm):
         fields = ['company_name', 'contact_person', 'email', 'phone_number',
                  'event_type', 'attendees', 'event_details']
 
+        widgets = {'event_details': forms.Textarea(attrs={'rows': 4})}
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Add classes and placeholders to form fields
@@ -67,6 +69,8 @@ class StudentTravelInquiryForm(forms.ModelForm):
         model = StudentTravelInquiry
         fields = ['school_name', 'contact_person', 'email', 'phone_number',
                  'program_stage', 'number_of_students', 'travel_details']
+
+        widgets = {'travel_details': forms.Textarea(attrs={'rows': 4})}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -84,6 +88,8 @@ class NGOTravelInquiryForm(forms.ModelForm):
         fields = ['organization_name', 'contact_person', 'email', 'phone_number',
                  'organization_type', 'travel_purpose', 'number_of_travelers',
                  'travel_details', 'sustainability_requirements']
+
+        widgets = {'travel_details': forms.Textarea(attrs={'rows': 4})}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -209,7 +215,43 @@ class JobApplicationForm(forms.ModelForm):
 
 
 class QuoteRequestForm(forms.ModelForm):
-    """Form for quote requests submitted through the website"""
+    """Calendar inputs map to the existing dates field for compatibility."""
+    start_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    end_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    flexible_dates = forms.BooleanField(required=False, label='My dates are flexible')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['preferred_travel_dates'].required = False
+        self.fields['preferred_travel_dates'].widget = forms.HiddenInput()
+        self.fields['number_of_travelers'].initial = 2
+        for field in self.fields.values():
+            field.help_text = ''
+        self.fields['start_date'].label = 'Departure date (or choose flexible)'
+        self.fields['end_date'].label = 'Return date'
+        self.fields['email'].widget.attrs['autocomplete'] = 'email'
+        self.fields['full_name'].widget.attrs['autocomplete'] = 'name'
+        self.fields['phone_number'].widget.attrs.update({'autocomplete': 'tel', 'inputmode': 'tel'})
+        self.order_fields(['full_name', 'email', 'phone_number', 'destination', 'start_date', 'end_date', 'flexible_dates', 'number_of_travelers', 'special_requests', 'preferred_travel_dates'])
+
+    def clean(self):
+        from django.utils import timezone
+        data = super().clean()
+        start, end = data.get('start_date'), data.get('end_date')
+        if not start and not data.get('flexible_dates'):
+            self.add_error('start_date', 'Choose a departure date or select flexible dates.')
+        if start and start < timezone.localdate():
+            self.add_error('start_date', 'Choose today or a future date.')
+        if end and (not start or end < start):
+            self.add_error('end_date', 'The return date must be on or after departure.')
+        dates = str(start) if start else 'Flexible dates'
+        if end:
+            dates += ' to ' + str(end)
+        if start and data.get('flexible_dates'):
+            dates += ' (flexible)'
+        data['preferred_travel_dates'] = dates
+        return data
+
 
     class Meta:
         model = QuoteRequest
@@ -354,3 +396,29 @@ class NewsletterSubscriptionSimpleForm(forms.Form):
                 raise forms.ValidationError('This email is already subscribed to our newsletter.')
 
         return email
+
+class ContactInquiryForm(forms.ModelForm):
+    class Meta:
+        model = QuoteRequest
+        fields = ['full_name', 'email', 'phone_number', 'special_requests']
+        labels = {'special_requests': 'How can we help?'}
+        widgets = {'special_requests': forms.Textarea(attrs={'rows': 5}),
+                   'full_name': forms.TextInput(attrs={'autocomplete': 'name'}),
+                   'email': forms.EmailInput(attrs={'autocomplete': 'email'}),
+                   'phone_number': forms.TextInput(attrs={'autocomplete': 'tel'})}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['special_requests'].required = True
+        self.fields['phone_number'].required = False
+        for field in self.fields.values():
+            field.help_text = ''
+
+    def save(self, commit=True):
+        inquiry = super().save(commit=False)
+        inquiry.destination = 'General enquiry'
+        inquiry.preferred_travel_dates = 'Not specified'
+        inquiry.number_of_travelers = 1
+        if commit:
+            inquiry.save()
+        return inquiry

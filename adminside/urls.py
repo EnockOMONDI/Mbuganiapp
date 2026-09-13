@@ -4,6 +4,9 @@ from . import views
 app_name = 'adminside'
 
 urlpatterns = [
+    path('packages/id/<int:pk>/', views.package_detail, name='package_by_id'),
+    path('destinations/id/<int:pk>/', views.destination_detail, name='destination_by_id'),
+    path('accommodations/id/<int:pk>/', views.accommodation_detail, name='accommodation_by_id'),
     # Destination URLs
     path('destinations/', views.destination_list, name='destination_list'),
     path('destinations/<slug:slug>/', views.destination_detail, name='destination_detail'),

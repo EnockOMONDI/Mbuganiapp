@@ -564,3 +564,21 @@ class JobListingAdmin(admin.ModelAdmin):
 # Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+from .models import EmailDelivery
+
+@admin.register(EmailDelivery)
+class EmailDeliveryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'subject', 'created_at', 'sent_at', 'attempts', 'last_error')
+    list_filter = ('sent_at',)
+    actions = ['retry_pending']
+
+    @admin.action(description='Retry eligible pending emails')
+    def retry_pending(self, request, queryset):
+        from .tasks import deliver_email
+        count = sum(deliver_email(pk) for pk in queryset.filter(sent_at__isnull=True).values_list('pk', flat=True)[:50])
+        self.message_user(request, f'{count} messages delivered. Retry limits and delays remain in effect.')
+    exclude = ('html_message',)
+    readonly_fields = ('subject', 'recipients', 'from_email', 'created_at', 'sent_at', 'attempts', 'last_error', 'next_attempt_at')
+
+    def has_add_permission(self, request):
+        return False

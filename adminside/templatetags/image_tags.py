@@ -4,10 +4,19 @@ Custom template tags for image handling with placeholder support and currency fo
 from django import template
 from django.templatetags.static import static
 from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 from decimal import Decimal
 import re
 
 register = template.Library()
+
+
+def safe_image_attribute(image_field, attribute):
+    try:
+        return getattr(image_field, attribute, None)
+    except (ValueError, TypeError, AttributeError):
+        return None
+
 
 def is_valid_uploadcare_url(url):
     """
@@ -63,14 +72,14 @@ def image_with_placeholder(image_field, css_class="", alt_text="", placeholder_p
     image_url = None
 
     # Try Uploadcare image first
-    if image_field and hasattr(image_field, 'cdn_url'):
-        cdn_url = getattr(image_field, 'cdn_url', None)
+    if image_field and safe_image_attribute(image_field, 'cdn_url'):
+        cdn_url = safe_image_attribute(image_field, 'cdn_url')
         if is_valid_uploadcare_url(cdn_url):
             image_url = cdn_url
 
     # Try regular Django image field if Uploadcare failed
-    if not image_url and image_field and hasattr(image_field, 'url'):
-        django_url = getattr(image_field, 'url', None)
+    if not image_url and image_field and safe_image_attribute(image_field, 'url'):
+        django_url = safe_image_attribute(image_field, 'url')
         if is_valid_django_url(django_url):
             image_url = django_url
 
@@ -82,8 +91,7 @@ def image_with_placeholder(image_field, css_class="", alt_text="", placeholder_p
     alt_attribute = f'alt="{alt_text}"' if alt_text else 'alt="Image"'
     loading_attribute = 'loading="lazy"' if lazy_load else ''
 
-    html = f'<img src="{image_url}" {css_classes} {alt_attribute} {loading_attribute}>'
-    return mark_safe(html)
+    return format_html('<img src="{}" class="{}" alt="{}" loading="{}" decoding="async">', image_url, css_class, alt_text, 'lazy' if lazy_load else 'eager')
 
 @register.simple_tag
 def image_with_default(image_field, content_type="default", css_class="", alt_text="", use_placeholder=False):
@@ -101,14 +109,14 @@ def image_with_default(image_field, content_type="default", css_class="", alt_te
     image_url = None
 
     # Try Uploadcare image first
-    if image_field and hasattr(image_field, 'cdn_url'):
-        cdn_url = getattr(image_field, 'cdn_url', None)
+    if image_field and safe_image_attribute(image_field, 'cdn_url'):
+        cdn_url = safe_image_attribute(image_field, 'cdn_url')
         if is_valid_uploadcare_url(cdn_url):
             image_url = cdn_url
 
     # Try regular Django image field if Uploadcare failed
-    if not image_url and image_field and hasattr(image_field, 'url'):
-        django_url = getattr(image_field, 'url', None)
+    if not image_url and image_field and safe_image_attribute(image_field, 'url'):
+        django_url = safe_image_attribute(image_field, 'url')
         if is_valid_django_url(django_url):
             image_url = django_url
 
@@ -155,8 +163,7 @@ def image_with_default(image_field, content_type="default", css_class="", alt_te
     css_classes = f'class="{css_class}"' if css_class else ''
     alt_attribute = f'alt="{alt_text}"' if alt_text else 'alt="Image"'
 
-    html = f'<img src="{image_url}" {css_classes} {alt_attribute}>'
-    return mark_safe(html)
+    return format_html('<img src="{}" class="{}" alt="{}" loading="lazy" decoding="async">', image_url, css_class, alt_text)
 
 @register.simple_tag
 def image_url_with_placeholder(image_field, placeholder_path="images/mbuganiluxeadventuresplaceholder.svg"):
@@ -168,14 +175,14 @@ def image_url_with_placeholder(image_field, placeholder_path="images/mbuganiluxe
     {% image_url_with_placeholder destination.image %}
     """
     # Try Uploadcare image first
-    if image_field and hasattr(image_field, 'cdn_url'):
-        cdn_url = getattr(image_field, 'cdn_url', None)
+    if image_field and safe_image_attribute(image_field, 'cdn_url'):
+        cdn_url = safe_image_attribute(image_field, 'cdn_url')
         if is_valid_uploadcare_url(cdn_url):
             return cdn_url
 
     # Try regular Django image field if Uploadcare failed
-    if image_field and hasattr(image_field, 'url'):
-        django_url = getattr(image_field, 'url', None)
+    if image_field and safe_image_attribute(image_field, 'url'):
+        django_url = safe_image_attribute(image_field, 'url')
         if is_valid_django_url(django_url):
             return django_url
 
@@ -195,14 +202,14 @@ def image_url_with_default(image_field, content_type="default", use_placeholder=
     from django.conf import settings
 
     # Try Uploadcare image first
-    if image_field and hasattr(image_field, 'cdn_url'):
-        cdn_url = getattr(image_field, 'cdn_url', None)
+    if image_field and safe_image_attribute(image_field, 'cdn_url'):
+        cdn_url = safe_image_attribute(image_field, 'cdn_url')
         if is_valid_uploadcare_url(cdn_url):
             return cdn_url
 
     # Try regular Django image field if Uploadcare failed
-    if image_field and hasattr(image_field, 'url'):
-        django_url = getattr(image_field, 'url', None)
+    if image_field and safe_image_attribute(image_field, 'url'):
+        django_url = safe_image_attribute(image_field, 'url')
         if is_valid_django_url(django_url):
             return django_url
 
@@ -259,14 +266,14 @@ def has_image(image_field):
     {% endif %}
     """
     # Check Uploadcare image first
-    if image_field and hasattr(image_field, 'cdn_url'):
-        cdn_url = getattr(image_field, 'cdn_url', None)
+    if image_field and safe_image_attribute(image_field, 'cdn_url'):
+        cdn_url = safe_image_attribute(image_field, 'cdn_url')
         if is_valid_uploadcare_url(cdn_url):
             return True
 
     # Check regular Django image field
-    if image_field and hasattr(image_field, 'url'):
-        django_url = getattr(image_field, 'url', None)
+    if image_field and safe_image_attribute(image_field, 'url'):
+        django_url = safe_image_attribute(image_field, 'url')
         if is_valid_django_url(django_url):
             return True
 
@@ -317,3 +324,14 @@ def split(value, delimiter=","):
         return [item.strip() for item in str(value).split(delimiter) if item.strip()]
     except (AttributeError, TypeError):
         return []
+
+
+@register.simple_tag(takes_context=True)
+def query_url(context, **changes):
+    query = context['request'].GET.copy()
+    for key, value in changes.items():
+        if value is None or value == '':
+            query.pop(key, None)
+        else:
+            query[key] = value
+    return '?' + query.urlencode()

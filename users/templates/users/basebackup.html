@@ -1,13 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
     
 <!-- Mbugani Luxe Adventures - Luxury Safari & Adventure Tourism -->
 <head>
         <!--====== Required meta tags ======-->
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="description" content="{% block meta_description %}Mbugani Luxe Adventures - Premier luxury safari and adventure tourism in Kenya. Experience untamed wilderness with unmatched comfort. Luxury safaris, cultural journeys, bespoke getaways, and exclusive services in Kenya's most iconic destinations.{% endblock %}">
+        <meta name="description" content="{% block meta_description %}{{ default_meta_description }}{% endblock %}">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!--====== Resource Hints for Performance ======-->
@@ -17,9 +17,11 @@
         <link rel="dns-prefetch" href="https://wati-integration-prod-service.clare.ai">
 
         <!--====== Title ======-->
-        <title>{% block title %}Mbugani Luxe Adventures | Luxury Safari & Adventure Tourism | Premium Kenya Safari Experiences{% endblock %}</title>
+        <title>{% block title %}{{ default_page_title }}{% endblock %}</title>
 
-        {% block extra_head %}{% endblock %}
+        <link rel="canonical" href="{{ canonical_url }}">
+<script type="application/ld+json">{{ organization_jsonld|safe }}</script>
+{% block extra_head %}{% endblock %}
         <!--====== Favicon Icon ======-->
 
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/favicon_io/apple-touch-icon.png' %}">
@@ -193,20 +195,16 @@
         <!--====== Style css ======-->
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
         <link rel="stylesheet" href="{% static 'assets/css/content-buttons.css' %}">
-    </head>
+    <link rel="stylesheet" href="{% static 'assets/css/website-quality.css' %}">
+<script defer src="{% static 'assets/js/website-quality.js' %}"></script>
+</head>
     <body style="background-color: #fcf8f4;">
        
-          <!--====== Start Preloader ======-->
-          <div class="preloader">
-            <div class="loader">
-                <div class="preloader-logo">
-                    <img src="{% static 'assets/images/logo/mbuganipreloader.svg' %}" alt="Mbugani Luxe Adventures" />
-                </div>
-            </div>
-        </div><!--====== End Preloader ======-->
+        <a class="skip-link" href="#main-content">Skip to content</a>
+        {% include 'users/fast_loader.html' %}
         {% include 'users/navbarbackup.html' %}
 
-        <main class="site-content">
+        <main class="site-content" id="main-content">
         {% block content %}
 
 

@@ -103,6 +103,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'tours_travels.context_processors.default_images',
                 'tours_travels.context_processors.site_settings',
+                'tours_travels.website_metadata.website_metadata',
             ],
         },
     },
@@ -507,3 +508,6 @@ elif DJANGO_ENV == 'development':
         print("🔄 Using base settings...")
 else:
     print(f"⚠️  Unknown environment '{DJANGO_ENV}', using base settings...")
+
+# Account invitation links expire after one hour and invalidate on password change.
+PASSWORD_RESET_TIMEOUT = 3600
