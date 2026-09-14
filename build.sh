@@ -1,15 +1,23 @@
 #!/bin/bash
 
-# Build the project
-# Build the project
 set -o errexit  # exit on error
-echo "Building the project JDA..."
 
-
-
+echo "🚀 Starting Mbugani Luxe Adventures build process..."
 
 pip install -r requirements.txt
+echo "📦 Dependencies installed successfully"
 
-python3 manage.py makemigrations --noinput
-python3 manage.py migrate --noinput
-python manage.py createsu 
+python manage.py collectstatic --noinput --settings=tours_travels.settings_prod
+echo "📁 Static files collected"
+
+python manage.py check_database_writable --settings=tours_travels.settings_prod
+echo "🗄️ Database write access verified"
+
+python manage.py migrate --noinput --settings=tours_travels.settings_prod
+echo "🗄️ Database migrations applied"
+
+python manage.py createcachetable --settings=tours_travels.settings_prod || true
+echo "💾 Cache table ready"
+
+python manage.py createsu --settings=tours_travels.settings_prod
+echo "✅ Build completed successfully"
