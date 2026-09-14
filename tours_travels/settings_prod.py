@@ -8,13 +8,26 @@ import os
 os.environ['DJANGO_ENV'] = 'production'
 
 from .settings import *
-import dj_database_url
 import logging
+from urllib.parse import urlparse
+
+import dj_database_url
+
+
+def _masked_database_label(database_url):
+    if not database_url:
+        return 'Not set'
+    parsed = urlparse(database_url)
+    if not parsed.scheme:
+        return 'Configured'
+    host = parsed.hostname or 'unknown-host'
+    database = parsed.path.lstrip('/') or 'unknown-db'
+    return f"{parsed.scheme}://***@{host}/{database}"
 
 # Production-specific settings
 print("🚀 Production settings loaded")
 print("📧 Production mode: Using Mailtrap HTTP API (synchronous)")
-print(f"🗄️ Database: {os.getenv('DATABASE_URL', 'Not set')[:50]}...")
+print(f"🗄️ Database: {_masked_database_label(os.getenv('DATABASE_URL'))}")
 print(f"🌐 Site URL: {os.getenv('SITE_URL', 'Not set')}")
 print(f"🔒 SSL redirect: True")
 print(f"📊 Debug mode: False")

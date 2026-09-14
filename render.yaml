@@ -13,6 +13,8 @@ services:
       echo "📦 Dependencies installed successfully"
       python manage.py collectstatic --noinput --settings=tours_travels.settings_prod
       echo "📁 Static files collected"
+      python manage.py check_database_writable --settings=tours_travels.settings_prod
+      echo "🗄️ Database write access verified"
       python manage.py migrate --settings=tours_travels.settings_prod
       echo "🗄️ Database migrations applied"
       python manage.py createcachetable --settings=tours_travels.settings_prod
