@@ -192,6 +192,7 @@
         <link rel="stylesheet" href="{% static 'assets/css/default.css' %}">
         <!--====== Style css ======-->
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/content-buttons.css' %}">
     </head>
     <body style="background-color: #fcf8f4;">
        
@@ -205,11 +206,13 @@
         </div><!--====== End Preloader ======-->
         {% include 'users/navbarbackup.html' %}
 
+        <main class="site-content">
         {% block content %}
 
 
 
         {% endblock %}
+        </main>
 
         <!--====== Start Footer ======-->
         {% include 'users/footer.html' %}

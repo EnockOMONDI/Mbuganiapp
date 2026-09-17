@@ -196,7 +196,7 @@ See **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** for comprehensive deployment 
 
 1. **Set up environment variables** in Render dashboard (see `.env.secrets`)
 2. **Connect GitHub repository** to Render
-3. **Select branch:** `mailltrapapi`
+3. **Select branch:** `mugani2026b`
 4. **Deploy** - Render will use `render.yaml` configuration
 
 **Critical Environment Variables for Production:**
@@ -227,22 +227,7 @@ See **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** for comprehensive deployment 
 4. **Enable 2FA** on all third-party services
 5. **Keep dependencies updated** regularly
 6. **Monitor logs** for suspicious activity
-7. **Backup database** regularly
 
-### Security Documentation
-
-- **[SECURITY_AUDIT_REPORT.md](SECURITY_AUDIT_REPORT.md)** - Comprehensive security audit
-- **[IMMEDIATE_ACTION_REQUIRED.md](IMMEDIATE_ACTION_REQUIRED.md)** - Emergency response guide
-- **`.env.secrets`** - Production credentials reference (not in version control)
-
-
----
-
-## 📚 Documentation
-
-### Project Documentation
-
-- **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Deployment instructions
 
 
 ### External Documentation
@@ -322,7 +307,7 @@ coverage report
 
 **Last Updated:** November 7, 2025  
 **Platform:** Render.com  
-**Branch:** mailltrapapi  
+**Branch:** mugani2026b
 **Python Version:** 3.12.0  
 **Django Version:** 5.0.14
 
@@ -420,7 +405,7 @@ These variables are automatically set from `render.yaml`:
 
 1. In Render dashboard, click **New** → **Web Service**
 2. Connect your GitHub repository
-3. Select branch: **mailltrapapi**
+3. Select branch: **mugani2026b**
 4. Service name: **Mbuganiapp**
 5. Region: **Frankfurt** (or closest to your users)
 6. Plan: **Starter** (or higher)
@@ -520,11 +505,11 @@ Use https://securityheaders.com to check:
    ```bash
    git add .
    git commit -m "Your commit message"
-   git push origin mailltrapapi
+   git push origin mugani2026b
    ```
 
 2. **Automatic Deployment:**
-   - Render automatically deploys when you push to the `mailltrapapi` branch
+   - Render automatically deploys when you push to the `mugani2026b` branch
    - Monitor deployment in Render dashboard
 
 3. **Manual Deployment:**
@@ -706,6 +691,6 @@ All rights reserved.
 
 ---
 
-**Built with ❤️ by the Mbugani Luxe Adventures Development Team**
+**Built with ❤️ by the Kipekee studio Team**
 
 **Last Updated:** November 7, 2025
